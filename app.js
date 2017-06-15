@@ -6,6 +6,7 @@ const Koa = require('koa'),
 	koaSession = require("koa-session2"),
 	koaNunjucks = require('koa-nunjucks-2'),
 	Router = require('koa-router'),
+	controller = require('./server/controller/controller'),
 	config = require('./config'),
 	app = new Koa(),
 	router = new Router(),
@@ -26,6 +27,8 @@ app.use(koaNunjucks({
 		trimBlocks: true
 	}
 }));
+//配置漏油控制器
+app.use(controller());
 //配置路由
 app.use(router.routes()).use(router.allowedMethods());
 
