@@ -1,0 +1,28 @@
+{
+  "name": "fa_koa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vyspace/fa_koa.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vyspace/fa_koa/issues"
+  },
+  "homepage": "https://github.com/vyspace/fa_koa#readme",
+  "dependencies": {
+    "koa": "^2.2.0",
+    "koa-bodyparser": "^3.2.0",
+    "koa-nunjucks-2": "^3.0.2",
+    "koa-router": "^7.2.0",
+    "koa-session2": "^2.2.4",
+    "koa-static": "^3.0.0"
+  }
+}
