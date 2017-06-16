@@ -5,5 +5,8 @@ exports.server = {
 };
 
 exports.mysql = {
-
+	host: 'localhost',
+	user: 'hello',
+	password: '123456',
+	database: '_fakoa'
 };
