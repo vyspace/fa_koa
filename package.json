@@ -18,7 +18,6 @@
   },
   "homepage": "https://github.com/vyspace/fa_koa#readme",
   "dependencies": {
-    "_user": "file:local_modules/_user",
     "koa": "^2.2.0",
     "koa-bodyparser": "^3.2.0",
     "koa-nunjucks-2": "^3.0.2",
