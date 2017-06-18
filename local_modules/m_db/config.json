@@ -1,6 +1,7 @@
 {
 	"host": "localhost",
 	"user": "hello",
+	"root": "root",
 	"password": "123456",
 	"database": "_fakoa"
 }

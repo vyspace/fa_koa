@@ -24,9 +24,12 @@
     "koa-router": "^7.2.0",
     "koa-session2": "^2.2.4",
     "koa-static": "^3.0.0",
+    "m_dao": "file:local_modules/m_db",
+    "m_db": "file:local_modules/m_db",
     "m_user": "file:local_modules/m_user",
     "m_util": "file:local_modules/m_util",
-    "mysql": "^2.13.0"
+    "mysql": "^2.13.0",
+    "mysql-pro": "^1.0.1"
   },
   "devDependencies": {
     "chai": "^4.0.2",

@@ -6,8 +6,9 @@ const Koa = require('koa'),
 	koaSession = require("koa-session2"),
 	koaNunjucks = require('koa-nunjucks-2'),
 	Router = require('koa-router'),
+    mdb = require('m_db'),
 	controller = require('./server/controller/controller'),
-	config = require('./config'),
+	serverConfig = require('./server-config'),
 	app = new Koa(),
 	router = new Router(),
 	webContent = './server/webContent';
@@ -32,5 +33,6 @@ app.use(controller());
 //配置路由
 app.use(router.routes()).use(router.allowedMethods());
 
-app.listen(config.server.port);
-console.log('start-quick is starting at port '+config.server.port);
+
+app.listen(serverConfig.port);
+console.log('start-quick is starting at port '+ serverConfig.port);
