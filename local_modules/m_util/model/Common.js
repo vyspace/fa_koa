@@ -1,6 +1,6 @@
 'use strict';
 
-const Fs = require('./Fs');
+const Fs = require('./SResource');
 
 class Common {
 	static strToJson(str) {

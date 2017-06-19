@@ -1,15 +1,15 @@
 'use strict';
 
-const fs = require('fs');
+const fs = require('local_modules/m_util/model/SResource');
 class SResource {
     constructor() {
         throw new Error('SResource is a static class.');
     }
-    /* 文件读取操作
-     * path文件路径
-     * encode 按某种编码读取文件，默认utf-8
-     * 返回字符串
-     */
+	/* 文件读取操作
+	 * path文件路径
+	 * encode 按某种编码读取文件，默认utf-8
+	 * 返回字符串
+	 */
     static readFile(path='', encode='utf-8') {
         if(path === '') {
             return;
@@ -29,12 +29,12 @@ class SResource {
                 reject(new Error('file is not exists'));
             }
         })
-        fs.readFile(path)
+        fs.readFile(path);
     }
-    /* 判断文件夹或文件是否存在
-     * path 文件，或文件夹路径
-     * 返回boolean值
-     */
+	/* 判断文件夹或文件是否存在
+	 * path 文件，或文件夹路径
+	 * 返回boolean值
+	 */
     static isExists(path='') {
         if(path === '') {
             return;
@@ -50,12 +50,12 @@ class SResource {
             });
         });
     }
-    /* 读取文件夹下所有内容
-     * path 文件夹路径
-     * etx 指定要读取的文件名后缀
-     * 如果ext未指定，则返回目标文件夹下的文件夹和文件名称数组
-     * 如果ext指定，则返回一组指定文件的路径
-     */
+	/* 读取文件夹下所有内容
+	 * path 文件夹路径
+	 * etx 指定要读取的文件名后缀
+	 * 如果ext未指定，则返回目标文件夹下的文件夹和文件名称数组
+	 * 如果ext指定，则返回一组指定文件的路径
+	 */
     static readDir(path='', ext) {
         if(path === '') {
             return;
@@ -88,20 +88,20 @@ class SResource {
             }
         });
     }
-    /* 字符串转JSON对象
-     * str 字符串参数
-     * 返回JSON对象
-     */
+	/* 字符串转JSON对象
+	 * str 字符串参数
+	 * 返回JSON对象
+	 */
     static strToJson(str='') {
         if(str === '') {
             return;
         }
         return JSON.parse(str);
     }
-    /* 获取配置文件
-     * path配置文件路径
-     * 范围所有配置项
-     */
+	/* 获取配置文件
+	 * path配置文件路径
+	 * 范围所有配置项
+	 */
     static async getConfig(path='') {
         if(path==='') {
             return;
@@ -110,11 +110,11 @@ class SResource {
             obj = SResource.strToJson(str);
         return obj;
     }
-    /* 获取配置文件的配置项
-     * path 配置文件路径
-     * key 配置项
-     * 返回配置项的值
-     */
+	/* 获取配置文件的配置项
+	 * path 配置文件路径
+	 * key 配置项
+	 * 返回配置项的值
+	 */
     static async getConfigItem(path='', key='') {
         if(path==='' || key === '') {
             return;

@@ -1,0 +1,11 @@
+{
+  "dataSource": {
+    "host":"localhost",
+    "username": "hello",
+    "password": "123456",
+    "database": "_fakoa"
+  },
+  "mappers": {
+    "User": "user_mapper.json"
+  }
+}

@@ -1,7 +1,6 @@
 'use strict';
-const nbatis = require('m_nbatis'),
-    SqlSessionFactory = nbatis.SqlSessionFactory,
-    SResource = nbatis.SResource,
+const SqlSessionFactory = require('m_nbatis'),
+    resource = require('../nbatis_config.json'),
     staticInit = Symbol('staticInit'),
     factory = Symbol('factory');
 class SNBatisUtil {
@@ -11,7 +10,6 @@ class SNBatisUtil {
     static async [staticInit]() {
         if(!this[factory]) {
             try {
-                const resource = await (SResource.getConfig('./nbatis_config.json'));
                 this[factory] = new SqlSessionFactory().build(resource);
             }
             catch (err) {
@@ -22,9 +20,14 @@ class SNBatisUtil {
     static createSession() {
         return this[factory].openSession();
     }
+    static releaseSession(session) {
+        if(!session) {
+            session.release();
+        }
+    }
     static closeSession(session) {
-        if(session != null) {
-            session.close();
+        if(!session) {
+            session.destroy();
         }
     }
 }

@@ -1,6 +1,6 @@
 {
   "add": {
-    "parameterType": "User",
-    "sql": "insert into user (username, password) value (#{Username}, #{Password})"
+    "parameterType": "Object",
+    "sql": "insert into user (username, password) values ({Username}, {Password})"
   }
 }

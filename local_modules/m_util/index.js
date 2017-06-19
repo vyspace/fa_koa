@@ -1,5 +1,5 @@
 'use strict';
-const Fs = require('./model/Fs'),
+const Fs = require('./model/SResource'),
 	Common = require('./model/Common');
 
 const Util = {

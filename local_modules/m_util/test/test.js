@@ -1,5 +1,5 @@
 'use strict';
-const Fs = require('../model/Fs'),
+const Fs = require('../model/SResource'),
 	expect = require('chai').expect;
 
 let docPath = '/Users/zh/work/nodejs_proj/fa_koa/local_modules/m_util/',

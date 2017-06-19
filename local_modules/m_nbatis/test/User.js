@@ -15,20 +15,17 @@ class User {
         return this[id];
     }
     set Username(value) {
-        this[id] = value;
+        this[username] = value;
     }
     get Username() {
-        return this[id];
+        return this[username];
     }
     set Password(value) {
-        this[id] = value;
+        this[password] = value;
     }
     get Password() {
-        return this[id];
+        return this[password];
     }
 }
 
-setTimeout(function () {
-    console.log('1111111')
-    module.exports = User;
-}, 3000)
+module.exports = User;

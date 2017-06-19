@@ -7,6 +7,6 @@
     "connectionLimit": 5
   },
   "mappers": {
-    "User": "./user_mapper.json"
+    "User": "user_mapper.json"
   }
 }
