@@ -1,7 +1,6 @@
 'use strict';
 const mysql = require('mysql'),
     path = require('path'),
-    Connection = require('./Connection'),
     PoolConnection = require('./PoolConnection'),
     pool = Symbol('pool'),
     shallowCopy = Symbol('shallowCopy'),
@@ -27,15 +26,18 @@ class SqlSessionFactory {
         }
         return this;
     }
-    createConnection(config) {
-        const connection = mysql.createConnection({
-            host: config.host,
-            user: config.user,
-            password: config.password
+    testConnection() {
+        return new Promise((resolve, reject) => {
+            this[pool].getConnection((err, connection) => {
+                if(err){
+                    throw err;
+                    resolve(false);
+                }
+                else{
+                    resolve(true);
+                }
+            });
         });
-        let conn = new Connection();
-        this[shallowCopy](connection, conn);
-        return connection;
     }
     openSession() {
         return new Promise((resolve, reject) => {

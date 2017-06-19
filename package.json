@@ -27,8 +27,7 @@
     "m_nbatis": "file:local_modules/m_nbatis",
     "m_user": "file:local_modules/m_user",
     "m_util": "file:local_modules/m_util",
-    "mysql": "^2.13.0",
-    "mysql-pro": "^1.0.1"
+    "mysql": "^2.13.0"
   },
   "devDependencies": {
     "chai": "^4.0.2",

@@ -25,8 +25,25 @@ const test = async () => {
     }
 }
 
-test();
-
+const test01 = async () => {
+    const configPath = path.join(__dirname, './nbatis_config.json')
+    const factory = new SqlSessionFactory().createPool(configPath);
+    let session = null;
+    try{
+        session = await factory.openSession();
+        let user = await session.selectOne('User.loadById', 1);
+        console.log(user);
+    }
+    catch(err){
+        throw err;
+    }
+    finally {
+        if(session){
+            await session.release();
+        }
+    }
+}
+test01();
 // describe('测试mysql数据库连接', ()=>{
 //     describe('SqlSessionFactory', ()=> {
 //         it('#testConnection', (done) => {
