@@ -1,5 +1,5 @@
-CREATE TABLE IF NOT EXISTS user (
-  id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  username varchar(50) DEFAULT '',
-  password varchar(50) DEFAULT ''
-) DEFAULT CHARSET=utf8;
+create table if not exists user (
+  id int(11) not null primary key auto_increment,
+  username varchar(50) not null default '',
+  password varchar(50) not null default ''
+) default charset=utf8;

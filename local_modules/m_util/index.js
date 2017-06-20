@@ -1,10 +1,12 @@
 'use strict';
-const Fs = require('./model/SResource'),
-	Common = require('./model/Common');
+const SResource = require('./lib/SResource'),
+	SCommon = require('./lib/SCommon'),
+    Pager = require('./lib/Pager');
 
 const Util = {
-	"Fs": Fs,
-	"Common": Common
+	"SResource": SResource,
+	"SCommon": SCommon,
+	"Pager": Pager,
 }
 
 module.exports = Util;

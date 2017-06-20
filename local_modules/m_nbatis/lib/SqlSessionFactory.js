@@ -2,21 +2,21 @@
 const mysql = require('mysql'),
     path = require('path'),
     PoolConnection = require('./PoolConnection'),
-    pool = Symbol('pool'),
-    shallowCopy = Symbol('shallowCopy'),
-    mappers = Symbol('mappers');
+    _pool = Symbol('pool'),
+    _shallowCopy = Symbol('shallowCopy'),
+    _mappers = Symbol('mappers');
 class SqlSessionFactory {
     constructor() {
-        this[pool] = null;
+        this[_pool] = null;
     }
-    createPool(_path) {
-        const config = require(_path),
-            configDocPath = path.dirname(_path);
-        if(!this[pool]) {
-            this[mappers] = config.mappers;
-            this[mappers].aPath = configDocPath;
+    createPool(apath) {
+        const config = require(apath),
+            configDir = path.dirname(apath);
+        if(!this[_pool]) {
+            this[_mappers] = config.mappers;
+            this[_mappers].aPath = configDir;
             const dataSource = config.dataSource;
-            this[pool] = mysql.createPool({
+            this[_pool] = mysql.createPool({
                 host: dataSource.host,
                 user: dataSource.user,
                 password: dataSource.password,
@@ -28,7 +28,7 @@ class SqlSessionFactory {
     }
     testConnection() {
         return new Promise((resolve, reject) => {
-            this[pool].getConnection((err, connection) => {
+            this[_pool].getConnection((err, connection) => {
                 if(err){
                     throw err;
                     resolve(false);
@@ -41,20 +41,20 @@ class SqlSessionFactory {
     }
     openSession() {
         return new Promise((resolve, reject) => {
-            this[pool].getConnection((err, connection) => {
+            this[_pool].getConnection((err, connection) => {
                 if(err){
                     reject(err);
                 }
                 else{
                     let session = new PoolConnection();
-                    connection.mappers = this[mappers];
-                    this[shallowCopy](connection, session);
+                    connection.mappers = this[_mappers];
+                    this[_shallowCopy](connection, session);
                     resolve(connection);
                 }
             });
         });
     }
-    [shallowCopy](obj, src) {
+    [_shallowCopy](obj, src) {
         for (let item of src) {
             obj.constructor.prototype[item] = src.constructor.prototype[item];
         }

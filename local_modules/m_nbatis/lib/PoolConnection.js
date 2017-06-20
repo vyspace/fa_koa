@@ -1,52 +1,43 @@
 'use strict';
 const SUtil = require('./SUtil'),
-    methods = Symbol('methods'),
-    mappers = Symbol('mappers');
+    _methods = Symbol('methods'),
+    _mappers = Symbol('mappers'),
+    _cget = Symbol('cget'),
+    _cset = Symbol('cset');
+let _this = null;
 class PoolConnection {
-    constructor(_mappers) {
-        this[mappers] = _mappers;
-        this[methods] = ['selectOne', 'insert', 'update', 'delete', 'commits', 'rollbacks'];
+    constructor(mappers) {
+        _this = this;
+        this[_mappers] = mappers;
+        this[_methods] = ['selectOne', 'selectList', 'insert', 'update', 'delete', 'commits', 'rollbacks'];
     }
     * [Symbol.iterator]() {
-        for (let item of this[methods]) {
+        for (let item of this[_methods]) {
             yield item;
         }
     }
-    selectOne(tag, param) {
-        if(!tag || !param) {
-            return;
-        }
-        let obj = SUtil.mapperHandler(this.mappers, tag, param);
+    [_cget](tag, param, conn) {
+        let obj = SUtil.mapperHandler(tag, param, conn.mappers);
         return new Promise((resolve, reject) => {
-            this.query(obj.sql, obj.paramArray, (err, rows) => {
+            conn.query(obj.sql, obj.paramArray, (err, rows) => {
                 if(err) {
                     reject(err);
                 }
                 else{
-                    if(this.mappers.resultType === 'cobject') {
-                        const c = require(this.mappers.classAPath);
-                            obj = new c();
-                        for(let item in rows[0]) {
-                            obj[item] = rows[0][item];
-                        }
-                    }
-                    resolve(obj);
+                    resolve(rows);
                 }
             });
         });
     }
-    insert(tag, param) {
-        if(!tag || !param) {
-            return;
-        }
-        let obj = SUtil.mapperHandler(this.mappers, tag, param);
+    [_cset](tag, param, conn) {
+        let obj = SUtil.mapperHandler(tag, param, conn.mappers);
         return new Promise((resolve, reject) => {
-            this.beginTransaction((err) => {
+            conn.beginTransaction((err) => {
                 if(err) {
                     reject(err);
                 }
                 else {
-                    this.query(obj.sql, obj.paramArray, (err, rows) => {
+                    conn.query(obj.sql, obj.paramArray, (err, rows) => {
                         if(err) {
                             reject(err);
                         }
@@ -58,11 +49,71 @@ class PoolConnection {
             });
         });
     }
-    update() {
-
+    async selectOne(tag, param) {
+        if(!tag || !param) {
+            return null;
+        }
+        let result = null;
+        try {
+            let rows = await _this[_cget](tag, param, this);
+            if(rows && rows.length >0){
+                result = rows[0];
+            }
+        }
+        catch(err) {
+            throw err;
+        }
+        return result;
     }
-    delete() {
+    async selectList(tag, param) {
+        if(!tag || !param) {
+            return null;
+        }
+        let result = null;
+        try {
+            let rows = await _this[_cget](tag, param, this);
+            if(rows && rows.length > 0){
+                result = rows;
+            }
+        }
+        catch(err) {
+            throw err;
+        }
+        return result;
+    }
 
+    async insert(tag, param) {
+        if(!tag || !param) {
+            return;
+        }
+        try {
+            await _this[_cset](tag, param, this);
+        }
+        catch(err) {
+            throw err;
+        }
+    }
+    async update(tag, param) {
+        if(!tag || !param) {
+            return;
+        }
+        try {
+            await _this[_cset](tag, param, this);
+        }
+        catch(err) {
+            throw err;
+        }
+    }
+    async delete(tag, param) {
+        if(!tag || !param) {
+            return;
+        }
+        try {
+            await _this[_cset](tag, param, this);
+        }
+        catch(err) {
+            throw err;
+        }
     }
     commits() {
         return new Promise((resolve, reject) => {

@@ -1,31 +1,31 @@
 'user strict';
-const id = Symbol('id'),
-    username = Symbol('username'),
-    password = Symbol('password');
+const _id = Symbol('id'),
+    _username = Symbol('username'),
+    _password = Symbol('password');
 class User {
-    constructor(_id=0, _username='', _password='') {
-        this[id] = _id;
-        this[username] = _username;
-        this[password] = _password;
-        this._password = _password;
+    constructor(id=0, username='', password='') {
+        this[_id] = id;
+        this[_username] = username;
+        this[_password] = password;
     }
-    set Id(value) {
-        this[id] = value;
+    set id(value) {
+        this[_id] = value;
     }
-    get Id() {
-        return this[id];
+    get id() {
+        return this[_id];
     }
-    set Username(value) {
-        this[id] = value;
+    set username(value) {
+        this[_username] = value;
     }
-    get Username() {
-        return this[id];
+    get username() {
+        return this[_username];
     }
-    set Password(value) {
-        this[id] = value;
+    set password(value) {
+        this[_password] = value;
     }
-    get Password() {
-        return this[id];
+    get password() {
+        return this[_password];
     }
-
 }
+
+module.exports = User;
