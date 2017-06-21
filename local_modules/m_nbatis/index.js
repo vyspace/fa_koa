@@ -1,4 +1,4 @@
 'use strict';
-const SqlSessionFactory = require('./lib/SqlSessionFactory')
+const SqlSessionFactory = require('./lib/SqlSessionFactory');
 
 module.exports = SqlSessionFactory;

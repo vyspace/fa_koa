@@ -26,6 +26,9 @@ class User {
     get password() {
         return this[_password];
     }
+    static getDirName() {
+        return __dirname;
+    }
 }
 
 module.exports = User;

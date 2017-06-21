@@ -45,3 +45,5 @@ class Pager {
     }
 }
 
+module.exports = Pager;
+

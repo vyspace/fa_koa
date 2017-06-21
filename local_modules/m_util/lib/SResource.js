@@ -1,6 +1,5 @@
 'use strict';
-
-const fs = require('local_modules/m_util/model/SResource');
+const fs = require('fs');
 class SResource {
     constructor() {
         throw new Error('SResource is a static class.');

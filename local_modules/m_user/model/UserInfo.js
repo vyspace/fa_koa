@@ -5,7 +5,7 @@ const _id = Symbol('id'),
     _phone = Symbol('phone'),
     _birthday = Symbol('birthday');
 class User {
-    constructor(id=0, name='', gender='1', phone='', birthday=631152000000) {
+    constructor(id=0, name='', gender='1', phone='', birthday='1990-01-01') {
         this[_id] = id;
         this[_name] = name;
         this[_gender] = gender;

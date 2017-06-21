@@ -1,5 +1,6 @@
 'use strict';
+const User = require('./model/User');
 
-module.exports = function() {
-	retrn 1;
+module.exports = {
+	"User": User
 }

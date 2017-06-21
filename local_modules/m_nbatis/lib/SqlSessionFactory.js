@@ -8,14 +8,14 @@ const mysql = require('mysql'),
 class SqlSessionFactory {
     constructor() {
         this[_pool] = null;
+        this[_mappers] = null;
     }
-    createPool(apath) {
-        const config = require(apath),
-            configDir = path.dirname(apath);
+    createPool(aPath) {
+        const config = require(aPath),
+            dataSource = config.dataSource;
         if(!this[_pool]) {
+            config.mappers.configAbsPath = path.dirname(aPath);
             this[_mappers] = config.mappers;
-            this[_mappers].aPath = configDir;
-            const dataSource = config.dataSource;
             this[_pool] = mysql.createPool({
                 host: dataSource.host,
                 user: dataSource.user,

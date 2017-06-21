@@ -6,7 +6,7 @@
     "database": "_fakoa"
   },
   "mappers": {
-    "User": "../model/user_mapper.json",
-    "UserInfo": "../model/userinfo_mapper.json"
+    "User": "../model/User.json",
+    "UserInfo": "../model/UserInfo.json"
   }
 }

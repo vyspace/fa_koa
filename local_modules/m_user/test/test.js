@@ -1,7 +1,7 @@
 'use strict';
 const path = require('path'),
     SqlSessionFactory = require('m_nbatis'),
-    Pager = require('m_util'),
+    Pager = require('m_util').Pager,
     User = require('../model/User'),
     _factory = Symbol('factory');
 class Test {
@@ -107,8 +107,11 @@ class Test {
             pager = new Pager();
         try{
             const obj = {
+                "username": '',
                 "pageSize": pageSize,
                 "pageOffset": pageOffset,
+                "sort": 'id',
+                "order": 'desc'
             }
             session = await (this[_factory].openSession());
             let list = await session.selectList('User.page', obj);
@@ -128,6 +131,10 @@ class Test {
             }
         }
     }
+    testGetPath() {
+        let xx = User.getDirPath();
+    }
+
 }
 
 const test = new Test();

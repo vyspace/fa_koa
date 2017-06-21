@@ -19,9 +19,10 @@
     "parameterType": "number",
     "sql": "delete from user where id={id}"
   },
-  "pageList": {
+  "page": {
     "parameterType": "object",
-    "sql": "select * from user limit {pageOffset}, {pageSize}"
+    "dynamic": true,
+    "sql": "select * from user <%if({{username}}) return 'where username like #{username}'%> <%if({{sort}}) return 'order by id ${order}'%> <%if({{pageSize}}) return 'limit #{pageOffset}, #{pageSize}'%>"
   },
   "listCount": {
     "parameterType": "",
