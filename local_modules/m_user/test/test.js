@@ -3,6 +3,7 @@ const path = require('path'),
     SqlSessionFactory = require('m_nbatis'),
     Pager = require('m_util').Pager,
     User = require('../model/User'),
+    UserService = require('../service/UserService'),
     _factory = Symbol('factory');
 class Test {
     constructor() {
@@ -131,11 +132,18 @@ class Test {
             }
         }
     }
-    testGetPath() {
-        let xx = User.getDirPath();
+    async testUserService() {
+        let userService = new UserService();
+        let user = await userService.login()
+        if(user) {
+            console.log(user);
+        }
+        else {
+            console.log('用户存在');
+        }
     }
 
 }
 
 const test = new Test();
-test.testSelectPager();
+test.testUserService();

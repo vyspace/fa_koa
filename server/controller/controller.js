@@ -1,12 +1,10 @@
 'use strict';
-const router = require('koa-router')(),
-	index = require('../action/index');
+const login = require('../action/login'),
+    home = require('../action/home');
 
-function controller() {
-	return async (ctx, next) => {
-	 	router.use('/', index.routes(), index.allowedMethods());
-		return next();
-	}
+function controller(router) {
+	router.use('/admin', login.routes(), login.allowedMethods());
+    router.use('/admin/home', home.routes(), home.allowedMethods());
 }
 
 module.exports = controller;

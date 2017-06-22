@@ -1,5 +1,5 @@
 'use strict';
-const Koa = require('koa'),	
+const Koa = require('koa'),
 	path = require('path'),
 	bodyParser = require('koa-bodyparser'),
 	koaStatic = require('koa-static'),
@@ -28,9 +28,9 @@ app.use(koaNunjucks({
 	}
 }));
 //配置漏油控制器
-app.use(controller());
+controller(router)
 //配置路由
 app.use(router.routes()).use(router.allowedMethods());
 
-app.listen(serverConfig.port);
+app.listen(3000);
 console.log('start-quick is starting at port '+ serverConfig.port);

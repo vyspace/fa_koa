@@ -1,6 +1,6 @@
 'use strict';
-const User = require('./model/User');
+const UserService = require('./service/UserService');
 
 module.exports = {
-	"User": User
+	"UserService": UserService
 }

@@ -1,10 +1,8 @@
 'use strict';
 const SResource = require('./lib/SResource'),
-	SCommon = require('./lib/SCommon'),
-    Pager = require('./lib/Pager');
+	SCommon = require('./lib/SCommon');
 
 module.exports =  {
 	"SResource": SResource,
-	"SCommon": SCommon,
-	"Pager": Pager,
+	"SCommon": SCommon
 };

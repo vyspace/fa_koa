@@ -31,13 +31,18 @@ class SUtil {
         }
         while(match = reg1.exec(sql)) {
             if(match && match.length > 0){
-                sql = sql.replace(match[0], param[match[1]]);
+                if(tagObj.parameterType === 'object') {
+                    sql = sql.replace(match[0], param[match[1]]);
+                }
+                else {
+                    sql = sql.replace(match[0], param);
+                }
             }
             else{
                 break;
             }
         }
-        while(match = reg1.exec(sql)) {
+        while(match = reg2.exec(sql)) {
             if(match && match.length > 0){
                 sql = sql.replace(match[0], '?');
                 if(tagObj.parameterType === 'object') {

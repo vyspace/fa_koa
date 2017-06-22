@@ -1,88 +1,32 @@
 'use strict';
-
-class UserDao {
-    add(user) {
-        let session = null;
-        const loadUser = this.loadByUsername(user.Username);
-        if(loadUser  != null) {
-            throw new Error(user.Username+' is exist');
+const BaseDao = require('m_dao');
+class UserDao extends BaseDao {
+    async loadByName(username) {
+        const user = await super.load('User.loadByName', username);
+        return user;
+    }
+    async add(user) {
+        const loadUser = await super.load('User.loadByName', user.username);
+        if(loadUser != null) {
+            throw new Error(user.username+' is exist');
             return;
         }
-        try {
-            session = SNBatisUtil.createSession();
-            session.insert('insert', user);
-            session.commit();
-        }
-        catch (err){
-            session.rollback();
-            throw err;
-        }
-        finally {
-            SNBatisUtil.closeSession(session);
-        }
+        await super.add('User.add', user);
     }
-    delete(id) {
-        let session = null;
-        try {
-            session = SNBatisUtil.createSession();
-            session.update('delete', id);
-            session.commit();
-        }
-        catch (err){
-            session.rollback();
-            throw err;
-        }
-        finally {
-            SNBatisUtil.closeSession(session);
-        }
+    async delete(id) {
+        await super.delete('User.delete', id);
     }
-    update(user) {
-        let session = null;
-        try {
-            session = SNBatisUtil.createSession();
-            session.update('update', user)
-            session.commit();
-        }
-        catch (err){
-            session.rollback();
-            throw err;
-        }
-        finally {
-            SNBatisUtil.closeSession(session);
-        }
+    async update(user) {
+        await super.update('User.update', user);
     }
-    loadById(id) {
-        let session = null,
-            user = null;
-        try {
-            session = SNBatisUtil.createSession();
-            user = session.selectOne('loadById', id);
-        }
-        catch (err){
-            throw err;
-        }
-        finally {
-            SNBatisUtil.closeSession(session);
-        }
-        return user;
+    async page() {
+        const params = {
+            pageOffset:0,
+            pageSize: 10
+        };
+        const page = await super.load('User.page', params);
+        return page;
     }
-    loadByUsername(username) {
-        let session = null,
-            user = null;
-        try {
-            session = SNBatisUtil.createSession();
-            user = session.selectOne('loadByUsername', username);
-        }
-        catch (err){
-            throw err;
-        }
-        finally {
-            SNBatisUtil.closeSession(session);
-        }
-        return user;
-    }
-    pageList() {
-
-    }
-
 }
+
+module.exports = UserDao;
