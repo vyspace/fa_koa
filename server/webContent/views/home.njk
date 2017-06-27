@@ -1,4 +1,17 @@
+
 {% extends "layout.njk" %}
 {% block body %}
-<h1>HOME</h1>
+<h1>后台登陆</h1>
+<form action="" method="post">
+<div>
+<label for="username">用户名：<input type="text" id="username" name="username" value="{{data.username}}" placeholder="请输入用户名" /></label>
+</div>
+<div>
+<label for="password">密码：<input type="password" id="password" name="password" placeholder="请输入密码"/></label>
+</div>
+<div>
+<input type="submit" value="登陆" />
+</div>
+</form>
+<div>{{errMessage}}</div>
 {% endblock %}
