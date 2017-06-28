@@ -1,6 +1,6 @@
 'use strict';
 const router = require('koa-router')(),
-    UserService = require('m_user').UserService,
+    UserService = require('m_user').UserAdminService,
     pageData = require('../util/pageData');
 
 pageData.title = '登陆';
@@ -8,6 +8,8 @@ pageData.data = {
     username: ''
 };
 router.get('/', async (ctx) => {
+    pageData.error.tag = '';
+    pageData.error.message = '';
     await ctx.render('login', pageData);
 }).post('/', async (ctx) => {
     let username = ctx.request.body.username,
@@ -21,21 +23,24 @@ router.get('/', async (ctx) => {
                 return;
             }
             else {
-                pageData.errMessage = '密码错误';
+                pageData.error.tag = 'password';
+                pageData.error.message = '密码错误';
             }
         }
         else {
-            pageData.errMessage = '用户名不存在';
+            pageData.error.tag = 'username';
+            pageData.error.message = '用户名不存在';
         }
     }
     else {
-        pageData.errMessage = '请输入用户名和密码';
+        pageData.error.tag = 'username';
+        pageData.error.message = '请输入用户名和密码';
     }
     if(!username) {
         username = '';
     }
     pageData.data.username = username;
-    await ctx.render('index', pageData);
+    await ctx.render('login', pageData);
 });
 
 module.exports = router;

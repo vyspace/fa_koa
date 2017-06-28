@@ -22,10 +22,10 @@
   "page": {
     "parameterType": "object",
     "dynamic": true,
-    "sql": "select * from user_admin <%if({{username}}) return 'where username like #{username}'%> <%if({{sort}}) return 'order by ${sort} ${order}'%> <%if({{pageSize}}) return 'limit #{pageOffset}, #{pageSize}'%>"
+    "sql": "select id,username,password,create_time as createTime from user_admin <%if({{username}}) return 'where username like #{username}'%> <%if({{sort}}) return 'order by ${sort} ${order}'%> <%if({{pageSize}}) return 'limit #{pageOffset}, #{pageSize}'%>"
   },
   "listCount": {
     "parameterType": "",
-    "sql": "select count(*) from user_admin"
+    "sql": "select count(*) as count from user_admin"
   }
 }

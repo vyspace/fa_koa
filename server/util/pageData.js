@@ -3,7 +3,10 @@
 const pageData = {
     title: '',
     data: null,
-    errMessage: '',
+    error: {
+        tag: '',
+        message: ''
+    },
 }
 
 module.exports = Object.seal(pageData);

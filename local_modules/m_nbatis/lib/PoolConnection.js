@@ -50,7 +50,7 @@ class PoolConnection {
         });
     }
     async selectOne(tag, param) {
-        if(!tag || !param) {
+        if(!tag) {
             return null;
         }
         let result = null;

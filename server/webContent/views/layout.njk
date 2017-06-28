@@ -3,8 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>{{title}}</title>
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" href="css/base.css" />
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="/css/base.css" />
 </head>
 <body>
 <nav class="navbar-default navbar-inverse header">
@@ -35,11 +35,17 @@
         </div>
     </div>
 </nav>
-{% block body %}
-{% endblock %}
-<div class="footer">
+<div class="row" id="mainBody">
+    <aside class="col-md-2 body-left">
+    {% include "left.njk" %}
+    </aside>
+    <div class="col-md-10 body-right">
+    {% block right %}
+    {% endblock %}
+    </div>
 </div>
-<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
 </body>
 </html>

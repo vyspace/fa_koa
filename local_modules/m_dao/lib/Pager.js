@@ -2,11 +2,13 @@
 const _dataList = Symbol('dataList'),
     _pageOffset = Symbol('pageOffset'),
     _pageSize = Symbol('pageSize'),
+    _pageIndex = Symbol('pageIndex'),
     _totalRecord = Symbol('totalRecord');
 
 class Pager {
     constructor() {
         this[_dataList] = null;
+        this[_pageIndex] = 0;
         this[_pageOffset] = 0;
         this[_pageSize] = 10;
         this[_totalRecord] = 0;
@@ -19,10 +21,14 @@ class Pager {
     get dataList() {
         return this[_dataList];
     }
-    set pageOffset(value) {
+    set pageIndex(value) {
         if(typeof value === 'number') {
-            this[_pageOffset] = value;
+            this[_pageIndex] = value;
+            this[_pageOffset] = ((value-1)*this[_pageSize]);
         }
+    }
+    get pageIndex() {
+        return this[_pageIndex];
     }
     get pageOffset() {
         return this[_pageOffset];

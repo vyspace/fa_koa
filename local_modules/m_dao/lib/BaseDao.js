@@ -84,22 +84,23 @@ class BaseDao {
         let session = null,
             list = null,
             params = {
-                "pageOffset": 0,
-                "pageSize": 5,
                 "sort": undefined,
                 "order": undefined
             },
             target = {};
         Object.assign(target, params, obj);
+        const pager = new Pager();
         try {
+            pager.pageIndex = target.pageIndex;
+            pager.pageSize = target.pageSize;
+            target.pageOffset = pager.pageOffset;
             session = await SNBatisUtil.createSession();
             list = await session.selectList(tag, target);
-            const totalRecord = await session.selectOne(cTag),
-                pager = new Pager();
+            const totalRecord = await session.selectOne(cTag);
             pager.dataList = list;
-            pager.pageOffset = target.pageOffset;
-            pager.pageSize = target.pageSize;
-            pager.totalRecord = totalRecord;
+            if(totalRecord) {
+                pager.totalRecord = totalRecord.count;
+            }
         }
         catch (err){
             throw err;

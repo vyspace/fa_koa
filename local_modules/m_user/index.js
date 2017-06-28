@@ -1,6 +1,8 @@
 'use strict';
-const UserService = require('./service/UserService');
+const UserService = require('./service/UserService'),
+    UserAdminService = require('./service/UserAdminService');
 
 module.exports = {
-	"UserService": UserService
+	"UserService": UserService,
+    "UserAdminService": UserAdminService
 }
