@@ -1,4 +1,5 @@
 'user strict';
+
 const _id = Symbol('id'),
     _username = Symbol('username'),
     _password = Symbol('password');

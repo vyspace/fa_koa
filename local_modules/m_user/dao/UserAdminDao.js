@@ -1,4 +1,5 @@
 'use strict';
+
 const BaseDao = require('m_dao');
 class UserDao extends BaseDao {
     async loadByName(username) {
@@ -8,8 +9,7 @@ class UserDao extends BaseDao {
     async add(user) {
         const loadUser = await super.load('UserAdmin.loadByName', user.username);
         if(loadUser != null) {
-            throw new Error(user.username+' is exist');
-            return;
+            throw new Error(`${user.username} is exist`);
         }
         await super.add('UserAdmin.add', user);
     }
@@ -21,9 +21,9 @@ class UserDao extends BaseDao {
     }
     async page(pageIndex) {
         const params = {
-            pageIndex: pageIndex,
+            pageIndex,
             pageOffset: 0,
-            pageSize: 10,
+            pageSize: 10
         };
         const page = await super.page('UserAdmin.page', 'UserAdmin.listCount', params);
         return page;

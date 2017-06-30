@@ -1,4 +1,5 @@
 'use strict';
+
 const SUtil = require('./SUtil'),
     _methods = Symbol('methods'),
     _mappers = Symbol('mappers'),
@@ -12,12 +13,12 @@ class PoolConnection {
         this[_methods] = ['selectOne', 'selectList', 'insert', 'update', 'delete', 'commits', 'rollbacks'];
     }
     * [Symbol.iterator]() {
-        for (let item of this[_methods]) {
+        for (const item of this[_methods]) {
             yield item;
         }
     }
     [_cget](tag, param, conn) {
-        let obj = SUtil.mapperHandler(tag, param, conn.mappers);
+        const obj = SUtil.mapperHandler(tag, param, conn.mappers);
         return new Promise((resolve, reject) => {
             conn.query(obj.sql, obj.paramArray, (err, rows) => {
                 if(err) {
@@ -30,7 +31,7 @@ class PoolConnection {
         });
     }
     [_cset](tag, param, conn) {
-        let obj = SUtil.mapperHandler(tag, param, conn.mappers);
+        const obj = SUtil.mapperHandler(tag, param, conn.mappers);
         return new Promise((resolve, reject) => {
             conn.beginTransaction((err) => {
                 if(err) {
@@ -55,8 +56,8 @@ class PoolConnection {
         }
         let result = null;
         try {
-            let rows = await _this[_cget](tag, param, this);
-            if(rows && rows.length >0){
+            const rows = await _this[_cget](tag, param, this);
+            if(rows && rows.length > 0) {
                 result = rows[0];
             }
         }
@@ -71,7 +72,7 @@ class PoolConnection {
         }
         let result = null;
         try {
-            let rows = await _this[_cget](tag, param, this);
+            const rows = await _this[_cget](tag, param, this);
             if(rows && rows.length > 0){
                 result = rows;
             }

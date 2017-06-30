@@ -1,6 +1,6 @@
 'use strict';
+
 const UserAdminDao = require('../dao/UserAdminDao'),
-    User = require('../model/User'),
     _userDao = Symbol('userDao');
 class UserService {
     constructor() {

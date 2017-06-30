@@ -1,4 +1,5 @@
 'use strict';
+
 const router = require('koa-router')(),
     UserService = require('m_user').UserAdminService,
     pageData = require('../util/pageData');
@@ -12,10 +13,10 @@ router.get('/', async (ctx) => {
     pageData.error.message = '';
     await ctx.render('login', pageData);
 }).post('/', async (ctx) => {
-    let username = ctx.request.body.username,
-        password = ctx.request.body.password;
+    let username = ctx.request.body.username;
+    const password = ctx.request.body.password;
     if(username && password) {
-        let userService = new UserService(),
+        const userService = new UserService(),
             user = await userService.login(username);
         if(user) {
             if(user.password === password) {

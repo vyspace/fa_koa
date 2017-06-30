@@ -6,7 +6,7 @@ const pageData = {
     error: {
         tag: '',
         message: ''
-    },
+    }
 }
 
 module.exports = Object.seal(pageData);

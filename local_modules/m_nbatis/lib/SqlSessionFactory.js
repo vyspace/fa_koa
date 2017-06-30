@@ -1,4 +1,5 @@
 'use strict';
+
 const mysql = require('mysql'),
     path = require('path'),
     PoolConnection = require('./PoolConnection'),
@@ -27,11 +28,11 @@ class SqlSessionFactory {
         return this;
     }
     testConnection() {
-        return new Promise((resolve, reject) => {
-            this[_pool].getConnection((err, connection) => {
-                if(err){
-                    throw err;
+        return new Promise((resolve) => {
+            this[_pool].getConnection((err) => {
+                if(err) {
                     resolve(false);
+                    throw err;
                 }
                 else{
                     resolve(true);
@@ -42,11 +43,11 @@ class SqlSessionFactory {
     openSession() {
         return new Promise((resolve, reject) => {
             this[_pool].getConnection((err, connection) => {
-                if(err){
+                if(err) {
                     reject(err);
                 }
                 else{
-                    let session = new PoolConnection();
+                    const session = new PoolConnection();
                     connection.mappers = this[_mappers];
                     this[_shallowCopy](connection, session);
                     resolve(connection);
@@ -55,7 +56,7 @@ class SqlSessionFactory {
         });
     }
     [_shallowCopy](obj, src) {
-        for (let item of src) {
+        for (const item of src) {
             obj.constructor.prototype[item] = src.constructor.prototype[item];
         }
     }

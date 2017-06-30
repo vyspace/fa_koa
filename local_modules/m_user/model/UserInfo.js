@@ -1,11 +1,12 @@
 'user strict';
+
 const _id = Symbol('id'),
     _name = Symbol('name'),
     _gender = Symbol('gender'),
     _phone = Symbol('phone'),
     _birthday = Symbol('birthday');
 class User {
-    constructor(id=0, name='', gender='1', phone='', birthday='1990-01-01') {
+    constructor(id = 0, name = '', gender = '1', phone = '', birthday = '1990-01-01') {
         this[_id] = id;
         this[_name] = name;
         this[_gender] = gender;

@@ -1,4 +1,5 @@
 'use strict';
+
 const _dataList = Symbol('dataList'),
     _pageOffset = Symbol('pageOffset'),
     _pageSize = Symbol('pageSize'),

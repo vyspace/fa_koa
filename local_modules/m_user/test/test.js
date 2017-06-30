@@ -1,4 +1,5 @@
 'use strict';
+
 const path = require('path'),
     SqlSessionFactory = require('m_nbatis'),
     Pager = require('m_util').Pager,
@@ -18,14 +19,14 @@ class Test {
             await session.insert('User.add', user1);
             await session.commits();
         }
-        catch(err){
-            if(session){
+        catch(err) {
+            if(session) {
                 await session.rollbacks();
             }
             throw err;
         }
         finally {
-            if(session){
+            if(session) {
                 await session.release();
             }
         }
@@ -38,14 +39,14 @@ class Test {
             await session.insert('User.update', user);
             await session.commits();
         }
-        catch(err){
-            if(session){
+        catch(err) {
+            if(session) {
                 await session.rollbacks();
             }
             throw err;
         }
         finally {
-            if(session){
+            if(session) {
                 await session.release();
             }
         }
@@ -57,14 +58,14 @@ class Test {
             await session.delete('User.delete', 4);
             await session.commits();
         }
-        catch(err){
-            if(session){
+        catch(err) {
+            if(session) {
                 await session.rollbacks();
             }
             throw err;
         }
         finally {
-            if(session){
+            if(session) {
                 await session.release();
             }
         }
@@ -73,14 +74,14 @@ class Test {
         let session = null;
         try{
             session = await (this[_factory].openSession());
-            let user = await session.selectOne('User.loadById', 1);
+            const user = await session.selectOne('User.loadById', 1);
             console.log(user);
         }
-        catch(err){
+        catch(err) {
             throw err;
         }
         finally {
-            if(session){
+            if(session) {
                 await session.release();
             }
         }
@@ -89,14 +90,14 @@ class Test {
         let session = null;
         try{
             session = await (this[_factory].openSession());
-            let user = await session.selectList('User.loadByName', '%test%');
+            const user = await session.selectList('User.loadByName', '%test%');
             console.log(user);
         }
-        catch(err){
+        catch(err) {
             throw err;
         }
         finally {
-            if(session){
+            if(session) {
                 await session.release();
             }
         }
@@ -108,33 +109,33 @@ class Test {
             pager = new Pager();
         try{
             const obj = {
-                "username": '',
-                "pageSize": pageSize,
-                "pageOffset": pageOffset,
-                "sort": 'id',
-                "order": 'desc'
-            }
+                username: '',
+                pageSize,
+                pageOffset,
+                sort: 'id',
+                order: 'desc'
+            };
             session = await (this[_factory].openSession());
-            let list = await session.selectList('User.page', obj);
-            let totalRecord = await session.selectOne('User.listCount');
+            const list = await session.selectList('User.page', obj);
+            const totalRecord = await session.selectOne('User.listCount');
             pager.dataList = list;
             pager.pageOffset = pageOffset;
             pager.pageSize = pageSize;
             pager.totalRecord = totalRecord;
             console.log(list);
         }
-        catch(err){
+        catch(err) {
             throw err;
         }
         finally {
-            if(session){
+            if(session) {
                 await session.release();
             }
         }
     }
     async testUserService() {
-        let userService = new UserService();
-        let user = await userService.login()
+        const userService = new UserService();
+        const user = await userService.login();
         if(user) {
             console.log(user);
         }

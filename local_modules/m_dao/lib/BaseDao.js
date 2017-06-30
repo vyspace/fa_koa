@@ -1,10 +1,8 @@
 'use strict';
+
 const SNBatisUtil = require('./SNBatisUtil'),
     Pager = require('./Pager');
 class BaseDao {
-    constructor() {
-
-    }
     async add(tag, obj) {
         let session = null;
         try {
@@ -12,7 +10,7 @@ class BaseDao {
             await session.insert(tag, obj);
             await session.commits();
         }
-        catch (err){
+        catch (err) {
             await SNBatisUtil.rollback(session);
             throw err;
         }
@@ -82,10 +80,10 @@ class BaseDao {
     }
     async page(tag, cTag, obj) {
         let session = null,
-            list = null,
-            params = {
-                "sort": undefined,
-                "order": undefined
+            list = null;
+        const params = {
+                sort: undefined,
+                order: undefined
             },
             target = {};
         Object.assign(target, params, obj);

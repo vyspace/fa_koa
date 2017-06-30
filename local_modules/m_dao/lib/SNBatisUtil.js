@@ -1,4 +1,5 @@
 'use strict';
+
 const path = require('path'),
     SqlSessionFactory = require('m_nbatis'),
     _static = Symbol('static');
