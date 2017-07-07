@@ -1,6 +1,7 @@
 'use strict';
 
 const path = require('path'),
+    webpack = require('webpack'),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
     ROOT_PATH = path.resolve(__dirname),
     APP_PATH = path.resolve(ROOT_PATH),
@@ -8,13 +9,12 @@ const path = require('path'),
 
 module.exports = {
     entry: {
-        app: path.resolve(APP_PATH, 'app.jsx')
+        app: path.resolve(APP_PATH, 'index.jsx')
     },
     output: {
         path: BUILD_PATH,
         filename: 'bundle.js'
     },
-    devtool: 'eval-source-map',
     devServer: {
         historyApiFallback: true,
         hot: true,
@@ -27,14 +27,15 @@ module.exports = {
         rules: [
             {
                 test: /\.jsx?$/,
-                use: ['eslint-loader']
-            },{
-                test: /\.jsx?$/,
                 use: ['babel-loader']
             }
         ]
     },
     plugins: [
-        new HtmlWebpackPlugin({title: 'react app'})
+        new webpack.DllReferencePlugin({
+            contest: ROOT_PATH,
+            manifest: require('./manifest.json')
+        }),
+        new HtmlWebpackPlugin({title: 'react app', template: 'index.ejs'})
     ]
 }
