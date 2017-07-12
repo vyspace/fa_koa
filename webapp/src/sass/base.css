@@ -1,0 +1,105 @@
+@charset "UTF-8";
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  height: 100%; }
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, hr, button, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  margin: 0;
+  padding: 0; }
+
+body, button, input, select, textarea {
+  font: 400 .7rem/1.5 -apple-system, Helvetica, STHeiTi, Arial,"Lucida Grande",Verdana,"Microsoft YaHei",hei; }
+
+.txt-right {
+  text-align: right; }
+
+.txt-center {
+  text-align: center; }
+
+.avator {
+  background-image: url("../img/avator.jpg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 2.51rem;
+  height: 2.51rem;
+  border-radius: 1.255rem; }
+
+.header-view {
+  height: 44px; }
+
+.header {
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  align-content: stretch;
+  width: 100%;
+  height: 44px;
+  z-index: 960;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: #fff; }
+  .header li {
+    list-style: none; }
+  .header .item {
+    width: 44px; }
+  .header .f-item {
+    flex: 1; }
+  .header .middle {
+    text-align: center;
+    line-height: 44px;
+    font-size: 18px; }
+
+.card-item li {
+  list-style: none; }
+.card-item .card-head {
+  display: flex; }
+  .card-item .card-head .pic {
+    width: 2.51rem; }
+  .card-item .card-head .txt {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    padding-left: 0.5rem; }
+.card-item .interaction {
+  display: flex; }
+  .card-item .interaction div {
+    flex: 1; }
+.card-item .ml-overflow {
+  position: relative;
+  max-height: 3.15rem;
+  overflow: hidden; }
+  .card-item .ml-overflow::after {
+    content: "更多";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding-left: 40px;
+    background: -webkit-linear-gradient(left, transparent, #fff 55%);
+    background: -o-linear-gradient(right, transparent, #fff 55%);
+    background: -moz-linear-gradient(right, transparent, #fff 55%);
+    background: linear-gradient(to right, transparent, #fff 55%); }
+
+.speed-dial li {
+  list-style: none;
+  display: flex; }
+.speed-dial div {
+  width: 6rem;
+  height: 6rem;
+  background: #efefef;
+  overflow: hidden; }
+  .speed-dial div img {
+    width: 100%; }
+.speed-dial .mar-rb {
+  margin: 0 0.12rem 0.12rem 0; }
+.speed-dial .mar-r {
+  margin-right: 0.12rem; }
+
+/*# sourceMappingURL=base.css.map */

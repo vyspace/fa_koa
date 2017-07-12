@@ -1,16 +1,19 @@
 'use strict';
 
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import Card from './Card';
 
 class Counter extends Component {
     render() {
         const {counter, increment, incrementAsync} = this.props;
         return (
-            <p>
+            <div>
                 clicked: {counter} times{'  '}
                 <input type="button" value="+" onClick={increment}/>{'  '}
                 <input type="button" value="+~" onClick={() => incrementAsync()}/>
-            </p>
+                <Card />
+            </div>
         );
     }
 }

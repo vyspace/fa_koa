@@ -1,0 +1,38 @@
+@import '_var.scss';
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+html, body {
+  height: 100%;
+}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, hr, button, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  margin: 0;
+  padding: 0;
+}
+body, button, input, select, textarea {
+  font: 400 .7rem/1.5 -apple-system, Helvetica, STHeiTi, Arial,"Lucida Grande",Verdana,"Microsoft YaHei",hei;
+}
+
+.txt-right {
+  text-align: right;
+}
+
+.txt-center {
+  text-align: center;
+}
+
+.avator {
+  background-image: url('../img/avator.jpg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 2.51rem;
+  height: 2.51rem;
+  border-radius: 1.255rem;
+}
+
+
+@import '_header.scss';
+@import '_home.scss';

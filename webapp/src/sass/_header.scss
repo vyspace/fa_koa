@@ -1,0 +1,33 @@
+$height: 44px;
+$zIndex: 960;
+.header-view {
+  height: $height;
+}
+.header {
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  align-content: stretch;
+  width: 100%;
+  height: $height;
+  z-index: $zIndex;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: #fff;
+  li {
+    list-style: none;
+  }
+  .item {
+    width: $height;
+  }
+  .f-item {
+    flex: 1;
+  }
+  .middle {
+    text-align: center;
+    line-height: $height;
+    font-size: 18px;
+  }
+}
