@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "server": "webpack-dev-server --hot"
+    "build": "NODE_ENV=development && echo $NODE_ENV && webpack",
+    "dll": "NODE_ENV=development && echo $NODE_ENV && webpack --config dll.config.js",
+    "server": "NODE_ENV=development && echo $NODE_ENV && webpack-dev-server --hot",
+    "build_pro": "NODE_ENV=production && echo $NODE_ENV && webpack -p --config dll.config.js && webpack -p"
   },
   "keywords": [],
   "author": "",

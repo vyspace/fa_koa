@@ -2,10 +2,11 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import SpeedDial from './SpeedDial';
 
 class Card extends Component {
     render() {
-        const {} = this.props;
+        const {photos} = this.props;
         return (
             <ul className="card-item">
                 <li className="card-head">
@@ -18,14 +19,7 @@ class Card extends Component {
                     </div>
                 </li>
                 <li>
-                    <ul className="speed-dial">
-                        <li>
-                            <div className="mar-rb"><img src="./img/test.jpg"/></div><div className="mar-rb"><img src="./img/test.jpg"/></div><div><img src="./img/test.jpg"/></div>
-                        </li>
-                        <li>
-                            <div className="mar-r"><img src="./img/test.jpg"/></div><div className="mar-r"><img src="./img/test.jpg"/></div><div>more</div>
-                        </li>
-                    </ul>
+                    <SpeedDial photos={photos}/>
                 </li>
                 <li className="interaction">
                     <div>
@@ -38,8 +32,8 @@ class Card extends Component {
                         111111
                     </div>
                 </li>
-                <li>
-                    <p className="ml-overflow">Christina Photo by @FransLanting Wonderful color ! To let tourists get a better view，the bus drove slowly.What a beautiful town！</p>
+                <li className="ml-of">
+                    Christina Photo by @FransLanting Wonderful color ! To let tourists get a better view，the bus drove slowly.What a beautiful town, let tourists get a better view，the bus drove tourists get a better view，the bus drove
                 </li>
             </ul>
         );

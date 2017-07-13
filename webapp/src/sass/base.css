@@ -21,6 +21,13 @@ body, button, input, select, textarea {
 .txt-center {
   text-align: center; }
 
+.clearfix {
+  overflow: hidden;
+  zoom: 1; }
+
+.body-view {
+  padding: 0 0.4rem; }
+
 .avator {
   background-image: url("../img/avator.jpg");
   background-repeat: no-repeat;

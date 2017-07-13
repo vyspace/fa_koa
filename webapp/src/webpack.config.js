@@ -4,17 +4,25 @@ const path = require('path'),
     webpack = require('webpack'),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
     ExtractTextPlugin = require("extract-text-webpack-plugin"),
+    env = process.env.NODE_ENV,
     ROOT_PATH = path.resolve(__dirname),
-    APP_PATH = path.resolve(ROOT_PATH),
-    BUILD_PATH = path.resolve(ROOT_PATH);
+    BUILD_PATH = path.resolve(ROOT_PATH, '../build');
+
+let dir = '';
+if(env === 'development') {
+    dir = ROOT_PATH
+}
+else{
+    dir = BUILD_PATH
+}
 
 module.exports = {
     entry: {
-        app: path.resolve(APP_PATH, './entry.js')
+        app: path.resolve(ROOT_PATH, './entry.js')
     },
     output: {
-        path: BUILD_PATH,
-        filename: 'bundle.js'
+        path: dir,
+        filename: './js/bundle.js'
     },
     devServer: {
         historyApiFallback: true,
@@ -51,7 +59,7 @@ module.exports = {
         new HtmlWebpackPlugin({title: 'react app', template: 'app.ejs'}),
         new ExtractTextPlugin({
             filename:  (getPath) => {
-                return getPath('css/base.css').replace('css/js', 'css');
+                return getPath('./css/base.css').replace('css/js', 'css');
             },
             allChunks: true
         })

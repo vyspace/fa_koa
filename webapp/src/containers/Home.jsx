@@ -7,7 +7,8 @@ import * as CounterActions from '../actions/counter';
 
 function mapStateToProp(state) {
     return {
-        counter: state.counter
+        counter: state.counter,
+        photos: ['./img/test.jpg','./img/test.jpg','./img/test.jpg','./img/test.jpg','./img/test.jpg','./img/test01.png']
     }
 }
 

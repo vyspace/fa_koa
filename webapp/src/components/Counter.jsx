@@ -6,13 +6,13 @@ import Card from './Card';
 
 class Counter extends Component {
     render() {
-        const {counter, increment, incrementAsync} = this.props;
+        const {counter, photos, increment, incrementAsync} = this.props;
         return (
             <div>
                 clicked: {counter} times{'  '}
                 <input type="button" value="+" onClick={increment}/>{'  '}
                 <input type="button" value="+~" onClick={() => incrementAsync()}/>
-                <Card />
+                <Card photos={photos}/>
             </div>
         );
     }
