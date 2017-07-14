@@ -16,6 +16,11 @@ body, button, input, select, textarea {
   font: 400 .7rem/1.5 -apple-system, Helvetica, STHeiTi, Arial,"Lucida Grande",Verdana,"Microsoft YaHei",hei;
 }
 
+body {
+  background-color: $bgColor;
+  color: #333;
+}
+
 .txt-right {
   text-align: right;
 }
@@ -29,19 +34,17 @@ body, button, input, select, textarea {
   zoom: 1;
 }
 
-.body-view {
-  padding: 0 0.4rem;
-}
-
 .avator {
-  background-image: url('../img/avator.jpg');
-  background-repeat: no-repeat;
-  background-size: contain;
+  background-color: $bgColor;
   width: 2.51rem;
   height: 2.51rem;
   border-radius: 1.255rem;
+  overflow: hidden;
+  img{
+    width: 2.51rem;
+  }
 }
 
 
-@import '_header.scss';
+@import '_header_footer.scss';
 @import '_home.scss';

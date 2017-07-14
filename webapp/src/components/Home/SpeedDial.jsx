@@ -8,7 +8,6 @@ const cols = 3,
 class SpeedDial extends Component {
     render() {
         const {photos} = this.props;
-       // const a = this.photosHandler(photos);
         return <ul className="speed-dial" dangerouslySetInnerHTML={this.photosHandler(photos)}></ul>;
     }
     photosHandler(photos) {
@@ -21,7 +20,10 @@ class SpeedDial extends Component {
         }
         const colArr = [],
             rowArr = [];
-        let i = 0, j = 0, index = 0, cn = '';
+        let i = 0,
+            j = 0,
+            index = 0,
+            cn = '';
         while(index < len) {
             switch(j) {
                 case 0:

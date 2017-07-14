@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "NODE_ENV=development && echo $NODE_ENV && webpack",
-    "dll": "NODE_ENV=development && echo $NODE_ENV && webpack --config dll.config.js",
-    "server": "NODE_ENV=development && echo $NODE_ENV && webpack-dev-server --hot",
-    "build_pro": "NODE_ENV=production && echo $NODE_ENV && webpack -p --config dll.config.js && webpack -p"
+    "build": "export NODE_ENV=development && webpack",
+    "dll": "export NODE_ENV=development && webpack --config dll.config.js",
+    "server": "export NODE_ENV=development && webpack-dev-server --hot",
+    "build_pro": "export NODE_ENV=production && webpack -p && webpack -p --config dll.config.js"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +20,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-react-hmre": "^1.1.1",
+    "clean-webpack-plugin": "^0.1.16",
     "css-loader": "^0.28.4",
     "eslint": "^4.1.1",
     "eslint-loader": "^1.8.0",

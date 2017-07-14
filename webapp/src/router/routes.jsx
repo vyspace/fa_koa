@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import Home from '../containers/Home';
+import Home from '../containers/home';
 import NotFound from '../components/NotFound';
 export default
     <Router>

@@ -1,10 +1,10 @@
 'use strict';
 
 import {combineReducers} from 'redux';
-import counter from './counter';
+import home from './home';
 
 const rootReducer = combineReducers({
-    counter
+    home
 });
 
 export default rootReducer;

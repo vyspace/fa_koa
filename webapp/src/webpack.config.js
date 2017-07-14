@@ -4,16 +4,32 @@ const path = require('path'),
     webpack = require('webpack'),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
     ExtractTextPlugin = require("extract-text-webpack-plugin"),
+    CleanWebpackPlugin = require('clean-webpack-plugin'),
     env = process.env.NODE_ENV,
     ROOT_PATH = path.resolve(__dirname),
     BUILD_PATH = path.resolve(ROOT_PATH, '../build');
 
-let dir = '';
-if(env === 'development') {
-    dir = ROOT_PATH
+let dir = '',
+    jfileName = '',
+    cfileName = '',
+    cssMin = false,
+    cleanArray = [];
+
+console.log('************ '+env+' start ************');
+
+if(env === 'production'){
+    dir = BUILD_PATH;
+    jfileName = './js/bundle.[chunkhash].js';
+    cfileName = './css/base.[chunkhash].css';
+    cssMin = true;
+    cleanArray = ['./css/*.css','./js/*.js'];
 }
-else{
-    dir = BUILD_PATH
+else {
+    dir = ROOT_PATH;
+    jfileName = './js/bundle.js';
+    cfileName = './css/base.css';
+    cssMin = false;
+    cleanArray.length = 0;
 }
 
 module.exports = {
@@ -22,7 +38,7 @@ module.exports = {
     },
     output: {
         path: dir,
-        filename: './js/bundle.js'
+        filename: jfileName
     },
     devServer: {
         historyApiFallback: true,
@@ -46,6 +62,18 @@ module.exports = {
                 })
             },
             {
+                test: /\.css$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [{
+                        loader: 'css-loader',
+                        options: {
+                            minimize: cssMin
+                        }
+                    }]
+                })
+            },
+            {
                 test: /\.jsx?$/,
                 use: ['babel-loader']
             }
@@ -56,10 +84,21 @@ module.exports = {
             contest: ROOT_PATH,
             manifest: require('./manifest.json')
         }),
-        new HtmlWebpackPlugin({title: 'react app', template: 'app.ejs'}),
+        new CleanWebpackPlugin(
+            cleanArray,
+            {
+                root: BUILD_PATH,
+                verbose: true,
+                dry: false
+            }
+        ),
+        new HtmlWebpackPlugin({
+            title: 'react app',
+            template: 'app.ejs'
+        }),
         new ExtractTextPlugin({
             filename:  (getPath) => {
-                return getPath('./css/base.css').replace('css/js', 'css');
+                return getPath(cfileName).replace('css/js', 'css');
             },
             allChunks: true
         })

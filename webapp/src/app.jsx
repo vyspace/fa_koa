@@ -6,6 +6,7 @@ import {Provider} from 'react-redux';
 import appStore from './store/appStore';
 import routes from './router/routes';
 import Header from './components/Header';
+import Footer from "./components/Footer";
 
 
 const store = appStore(),
@@ -13,10 +14,11 @@ const store = appStore(),
 render(
     <Provider store={store}>
         <div>
-        <Header/>
+            <Header/>
             <div className="body-view">
                 {routes}
             </div>
+            <Footer/>
         </div>
     </Provider>
     , rootElement

@@ -14117,7 +14117,7 @@ var cols = 3,
 var SpeedDial = _wrapComponent('SpeedDial')(function (_Component) {
     _inherits(SpeedDial, _Component);
 
-    function SpeedDial() {
+    function CardHeadSpeedDial() {
         _classCallCheck(this, SpeedDial);
 
         return _possibleConstructorReturn(this, (SpeedDial.__proto__ || Object.getPrototypeOf(SpeedDial)).apply(this, arguments));
