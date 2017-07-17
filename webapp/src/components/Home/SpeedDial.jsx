@@ -1,15 +1,10 @@
 'use strict';
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-const cols = 3,
-    photoLen = 6;
+const photoLen = 6;
 
 class SpeedDial extends Component {
-    render() {
-        const {photos} = this.props;
-        return <ul className="speed-dial" dangerouslySetInnerHTML={this.photosHandler(photos)}></ul>;
-    }
     photosHandler(photos) {
         let len = photos.length;
         if(photos.length === 0) {
@@ -18,42 +13,19 @@ class SpeedDial extends Component {
         if(photos.length > photoLen) {
             len = photoLen;
         }
-        const colArr = [],
-            rowArr = [];
-        let i = 0,
-            j = 0,
-            index = 0,
-            cn = '';
-        while(index < len) {
-            switch(j) {
-                case 0:
-                    cn = ' class="mar-rb"';
-                    break;
-                case 1:
-                    cn = ' class="mar-r"';
-                    break;
-                default:
-                    cn = '';
-                    break;
-            }
-            colArr.push('<div'+cn+'><img src="'+photos[index]+'" /></div>');
-            j++;
-            index = i * cols + j;
-            if(j%3 === 0){
-                rowArr.push('<li>'+ colArr.join('') +'</li>');
-                j = 0;
-                colArr.length = 0;
-                i++;
-            }
+        const liArr = [];
+        for(let index=0; index < len; index+=1) {
+            liArr.push(`<li><div><img src="${photos[index]}" /></div></li>`);
         }
-        if(colArr.length != 0) {
-            rowArr.push('<li>'+ colArr.join('') +'</li>');
-        }
-        return {__html: rowArr.join('')};
+        return { __html: liArr.join('') };
+    }
+    render() {
+        const { photos } = this.props;
+        return <ul className="speed-dial" dangerouslySetInnerHTML={this.photosHandler(photos)} />;
     }
 }
 
-SpeedDial.PropTypes = {
+SpeedDial.propTypes = {
     photos: PropTypes.array.isRequired
 };
 

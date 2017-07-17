@@ -7,14 +7,15 @@ const webpack = require('webpack'),
     env = process.env.NODE_ENV,
     venders = ['react', 'react-dom', 'prop-types', 'react-redux'];
 
-let dir = '', fileName = '';
-if(env === 'production'){
+let dir = '',
+    fileName = '';
+if(env === 'production') {
     dir = BUILD_PATH;
-    fileName =  './js/[name].[chunkhash].js'
+    fileName = './js/[name].[chunkhash].js';
 }
 else {
     dir = ROOT_PATH;
-    fileName = './js/[name].js'
+    fileName = './js/[name].js';
 }
 
 module.exports = {
@@ -33,5 +34,5 @@ module.exports = {
             context: __dirname
         })
     ]
-}
+};
 

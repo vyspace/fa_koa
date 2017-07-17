@@ -3,7 +3,7 @@
 const path = require('path'),
     webpack = require('webpack'),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
-    ExtractTextPlugin = require("extract-text-webpack-plugin"),
+    ExtractTextPlugin = require('extract-text-webpack-plugin'),
     CleanWebpackPlugin = require('clean-webpack-plugin'),
     env = process.env.NODE_ENV,
     ROOT_PATH = path.resolve(__dirname),
@@ -15,14 +15,14 @@ let dir = '',
     cssMin = false,
     cleanArray = [];
 
-console.log('************ '+env+' start ************');
+console.log(`************ ${env} start ************`);
 
-if(env === 'production'){
+if(env === 'production') {
     dir = BUILD_PATH;
     jfileName = './js/bundle.[chunkhash].js';
     cfileName = './css/base.[chunkhash].css';
     cssMin = true;
-    cleanArray = ['./css/*.css','./js/*.js'];
+    cleanArray = ['./css/*.css', './js/*.js'];
 }
 else {
     dir = ROOT_PATH;
@@ -97,10 +97,8 @@ module.exports = {
             template: 'app.ejs'
         }),
         new ExtractTextPlugin({
-            filename:  (getPath) => {
-                return getPath(cfileName).replace('css/js', 'css');
-            },
+            filename: getPath => getPath(cfileName).replace('css/js', 'css'),
             allChunks: true
         })
     ]
-}
+};

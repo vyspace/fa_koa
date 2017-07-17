@@ -1,12 +1,12 @@
 'use strict';
 
 import React from 'react';
-import {render} from 'react-dom';
-import {Provider} from 'react-redux';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
 import appStore from './store/appStore';
 import routes from './router/routes';
 import Header from './components/Header';
-import Footer from "./components/Footer";
+import Footer from './components/Footer';
 
 
 const store = appStore(),
@@ -14,14 +14,13 @@ const store = appStore(),
 render(
     <Provider store={store}>
         <div>
-            <Header/>
+            <Header />
             <div className="body-view">
                 {routes}
             </div>
-            <Footer/>
+            <Footer />
         </div>
     </Provider>
     , rootElement
 );
-
 
