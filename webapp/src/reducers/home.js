@@ -8,7 +8,33 @@ const data = [
         profile: '',
         nickname: '中华小当家',
         dateTime: '20小时前',
-        photos: ['./img/t1.jpg', './img/t2.jpg', './img/t3.jpg', './img/t4.jpg', './img/t5.jpg', './img/t6.jpg'],
+        photos: [
+            {
+                src: './img/t1.jpg',
+                w: 960,
+                h: 1362
+            }, {
+                src: './img/t2.jpg',
+                w: 1080,
+                h: 1920
+            }, {
+                src: './img/t3.jpg',
+                w: 667,
+                h: 1000
+            }, {
+                src: './img/t4.jpg',
+                w: 1000,
+                h: 667
+            }, {
+                src: './img/t5.jpg',
+                w: 1000,
+                h: 667
+            }, {
+                src: './img/t6.jpg',
+                w: 1000,
+                h: 667
+            }
+        ],
         numOfLikes: 200,
         numOfComments: 100,
         numOfForwards: 300,
@@ -19,7 +45,16 @@ const data = [
         profile: './img/profile.jpg',
         nickname: '魔鬼终结者',
         dateTime: '23小时前',
-        photos: ['./img/test.jpg', './img/test.jpg'],
+        photos: [
+            {
+                src: './img/test.jpg',
+                w: 740,
+                h: 1077
+            }, {
+                src: './img/test.jpg',
+                w: 740,
+                h: 1077
+            }],
         numOfLikes: 230,
         numOfComments: 102,
         numOfForwards: 200,
@@ -30,7 +65,33 @@ const data = [
         profile: '',
         nickname: '中华小当家',
         dateTime: '20小时前',
-        photos: ['./img/t1.jpg', './img/t2.jpg', './img/t3.jpg', './img/t4.jpg', './img/t5.jpg', './img/t6.jpg'],
+        photos: [
+            {
+                src: './img/t1.jpg',
+                w: 960,
+                h: 1362
+            }, {
+                src: './img/t2.jpg',
+                w: 1080,
+                h: 1920
+            }, {
+                src: './img/t3.jpg',
+                w: 667,
+                h: 1000
+            }, {
+                src: './img/t4.jpg',
+                w: 1000,
+                h: 667
+            }, {
+                src: './img/t5.jpg',
+                w: 1000,
+                h: 667
+            }, {
+                src: './img/t6.jpg',
+                w: 1000,
+                h: 667
+            }
+        ],
         numOfLikes: 200,
         numOfComments: 100,
         numOfForwards: 300,
@@ -41,7 +102,16 @@ const data = [
         profile: './img/profile.jpg',
         nickname: '魔鬼终结者',
         dateTime: '23小时前',
-        photos: ['./img/test.jpg', './img/test.jpg'],
+        photos: [
+            {
+                src: './img/test.jpg',
+                w: 740,
+                h: 1077
+            }, {
+                src: './img/test.jpg',
+                w: 740,
+                h: 1077
+            }],
         numOfLikes: 230,
         numOfComments: 102,
         numOfForwards: 200,
