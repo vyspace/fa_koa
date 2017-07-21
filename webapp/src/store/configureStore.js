@@ -2,11 +2,11 @@
 
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import reducer from '../reducers/combine';
+import rootReducer from '../reducers/combine';
 
 const createStoreWithMiddleware = applyMiddleware(thunkMiddleware)(createStore);
 
-export default function appStore(state) {
-    return createStoreWithMiddleware(reducer, state);
+export default function configureStore(state) {
+    return createStoreWithMiddleware(rootReducer, state);
 }
 

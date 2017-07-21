@@ -94,7 +94,7 @@ module.exports = {
         ),
         new HtmlWebpackPlugin({
             title: 'react app',
-            template: 'app.ejs'
+            template: 'index.ejs'
         }),
         new ExtractTextPlugin({
             filename: getPath => getPath(cfileName).replace('css/js', 'css'),

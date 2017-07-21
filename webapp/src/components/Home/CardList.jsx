@@ -1,13 +1,16 @@
 'use strict';
 
 import React, { Component } from 'react';
+import $ from 'zepto';
 import PropTypes from 'prop-types';
 import Card from './Card';
 import PhotoBrowser from '../PhotoBrowser';
-import $ from 'zepto';
 let photos = [];
-
 class CardList extends Component {
+    constructor() {
+        super();
+
+    }
     componentDidMount() {
         this.list.addEventListener('click', (e) => {
             photos = [
@@ -51,30 +54,31 @@ class CardList extends Component {
         }, false);
     }
     render() {
-        const { data } = this.props;
-        photos = data.photos;
-        let css = {};
-        return (
-            <div ref={(c) => {
-                this.list = c;
-            }}
-            >
-            {
-                data.map((cell, index) => {
-                    if(index + 1 >= data.length) {
-                        css = { marginBottom: 0 };
-                    }
-                    return <Card key={cell.id} data={cell} cssStyle={css} />;
-                })
-            }
-            <PhotoBrowser />
-            </div>
-        );
+        // const { data } = this.props;
+        // photos = data.photos;
+        // let css = {};
+        // return (
+        //     <div ref={(c) => {
+        //         this.list = c;
+        //     }}
+        //     >
+        //     {
+        //         data.map((cell, index) => {
+        //             if(index + 1 >= data.length) {
+        //                 css = { marginBottom: 0 };
+        //             }
+        //             return <Card key={cell.id} data={cell} cssStyle={css} />;
+        //         })
+        //     }
+        //     <PhotoBrowser />
+        //     </div>
+        // );
+        return <div></div>
     }
 }
 
 CardList.propTypes = {
-    data: PropTypes.array.isRequired
+    data: PropTypes.object.isRequired
 };
 
 export default CardList;

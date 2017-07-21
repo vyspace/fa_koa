@@ -12,6 +12,9 @@ function mapStateToProp(state) {
 }
 
 function mapDispatchToProps(dispatch) {
+    dispatch(HomeActions.getHome((json) => {
+        console.log(json);
+    }));
     return bindActionCreators(HomeActions, dispatch);
 }
 
