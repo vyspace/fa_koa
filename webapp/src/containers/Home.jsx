@@ -7,14 +7,11 @@ import * as HomeActions from '../actions/home';
 
 function mapStateToProp(state) {
     return {
-        data: state.home
+        state: state.home
     };
 }
 
 function mapDispatchToProps(dispatch) {
-    dispatch(HomeActions.getHome((json) => {
-        console.log(json);
-    }));
     return bindActionCreators(HomeActions, dispatch);
 }
 
