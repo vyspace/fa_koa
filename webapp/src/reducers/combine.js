@@ -1,11 +1,12 @@
 'use strict';
 
 import { combineReducers } from 'redux';
-import routing from './routing';
 import home from './home';
+import comment from './comment';
 
 const rootReducer = combineReducers({
-    home
+    home,
+    comment
 });
 
 export default rootReducer;

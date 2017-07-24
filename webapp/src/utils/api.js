@@ -11,3 +11,10 @@ export const getHomeList = (resolve, reject) => {
     request(params, resolve, reject);
 };
 
+export const getCommentList = (resolve, reject) => {
+    const params = {
+        url: `${URL_ROOT}/testdata/comment`
+    };
+    request(params, resolve, reject);
+};
+

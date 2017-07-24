@@ -10,26 +10,32 @@
         "photos": [
             {
                 "src": "./img/t1.jpg",
+                "msrc": "./img/ts1.jpg",
                 "w": 960,
                 "h": 1362
             }, {
                 "src": "./img/t2.jpg",
+                "msrc": "./img/ts2.jpg",
                 "w": 1080,
                 "h": 1920
             }, {
                 "src": "./img/t3.jpg",
+                "msrc": "./img/ts3.jpg",
                 "w": 667,
                 "h": 1000
             }, {
                 "src": "./img/t4.jpg",
+                "msrc": "./img/ts4.jpg",
                 "w": 1000,
                 "h": 667
             }, {
                 "src": "./img/t5.jpg",
+                "msrc": "./img/ts5.jpg",
                 "w": 1000,
                 "h": 667
             }, {
                 "src": "./img/t6.jpg",
+                "msrc": "./img/ts6.jpg",
                 "w": 1000,
                 "h": 667
             }
@@ -47,10 +53,12 @@
         "photos": [
             {
                 "src": "./img/test.jpg",
+                "msrc": "./img/tests.jpg",
                 "w": 740,
                 "h": 1077
             }, {
                 "src": "./img/test.jpg",
+                "msrc": "./img/tests.jpg",
                 "w": 740,
                 "h": 1077
             }],
@@ -67,26 +75,32 @@
             "photos": [
                 {
                     "src": "./img/t1.jpg",
+                    "msrc": "./img/ts1.jpg",
                     "w": 960,
                     "h": 1362
                 }, {
                     "src": "./img/t2.jpg",
+                    "msrc": "./img/ts2.jpg",
                     "w": 1080,
                     "h": 1920
                 }, {
                     "src": "./img/t3.jpg",
+                    "msrc": "./img/ts3.jpg",
                     "w": 667,
                     "h": 1000
                 }, {
                     "src": "./img/t4.jpg",
+                    "msrc": "./img/ts4.jpg",
                     "w": 1000,
                     "h": 667
                 }, {
                     "src": "./img/t5.jpg",
+                    "msrc": "./img/ts5.jpg",
                     "w": 1000,
                     "h": 667
                 }, {
                     "src": "./img/t6.jpg",
+                    "msrc": "./img/ts6.jpg",
                     "w": 1000,
                     "h": 667
                 }
@@ -104,10 +118,12 @@
             "photos": [
                 {
                     "src": "./img/test.jpg",
+                    "msrc": "./img/tests.jpg",
                     "w": 740,
                     "h": 1077
                 }, {
                     "src": "./img/test.jpg",
+                    "msrc": "./img/tests.jpg",
                     "w": 740,
                     "h": 1077
                 }],

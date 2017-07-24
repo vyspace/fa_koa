@@ -52,7 +52,7 @@ module.exports = {
         rules: [
             {
                 test: /\.(png|jpg)$/,
-                loader: 'url-loader?limit=8192'
+                use: ['url-loader?limit=8192']
             },
             {
                 test: /\.scss$/,

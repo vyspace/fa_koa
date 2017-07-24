@@ -18,7 +18,15 @@ body, button, input, select, textarea {
 
 body {
   background-color: $bgColor;
-  color: #333;
+  color: $txtColor;
+}
+
+a {
+  text-decoration: none;
+  color: $txtColor;
+  &:hover, &:focus {
+    color: $txtColor;
+  }
 }
 
 .txt-right {
@@ -47,4 +55,5 @@ body {
 
 
 @import '_header_footer.scss';
+@import '_pswp.scss';
 @import '_home.scss';

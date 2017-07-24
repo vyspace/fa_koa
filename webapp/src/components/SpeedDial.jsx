@@ -15,7 +15,7 @@ class SpeedDial extends Component {
         }
         const liArr = [];
         for(let index = 0; index < len; index += 1) {
-            liArr.push(`<li><div><img class="thumbnail" src="${photos[index].src}" data-tag="${index}" /></div></li>`);
+            liArr.push(`<li><div><img src="${photos[index].src}" data-tag="thumbnail" data-index="${index}" /></div></li>`);
         }
         return { __html: liArr.join('') };
     }
