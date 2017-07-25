@@ -5,7 +5,8 @@ import { getHomeList } from '../utils/api';
 export const GET_HOME = 'GET_HOME';
 export const GET_HOME_SUCCESS = 'GET_HOME_SUCCESS';
 export const GET_HOME_FAILURE = 'GET_HOME_FAILURE';
-export const SAVE_COMMENT_INDEX = 'SAVE_COMMENT_INDEX';
+export const SAVE_PARAMS = 'SAVE_PARAMS';
+export const SAVE_SCROLL_TOP = 'SAVE_SCROLL_TOP';
 
 function getHome() {
     return {
@@ -29,12 +30,19 @@ function getHomeFailure(err) {
 
 function saveci(payload) {
     return {
-        type: SAVE_COMMENT_INDEX,
+        type: SAVE_PARAMS,
         payload
     };
 }
 
-export function saveCommentIndex(payload) {
+function savest(payload) {
+    return {
+        type: SAVE_SCROLL_TOP,
+        payload
+    };
+}
+
+export function saveParams(payload) {
     return (dispatch) => {
         dispatch(saveci(payload));
     };
@@ -48,5 +56,12 @@ export function getHomeData() {
         }, (err) => {
             dispatch(getHomeFailure(err));
         });
+    };
+}
+
+
+export function saveScrollTop(payload) {
+    return (dispatch) => {
+        dispatch(savest(payload));
     };
 }

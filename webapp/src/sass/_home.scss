@@ -7,19 +7,6 @@
   li {
     list-style: none;
   }
-  .card-head {
-    display: flex;
-    .pic {
-      width: 2.51rem;
-    }
-    .txt {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-self: center;
-      padding-left: 0.5rem;
-    }
-  }
   .interaction {
     display: flex;
     div {

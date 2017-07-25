@@ -11,15 +11,18 @@ class CardHead extends Component {
             profileImg = profile;
         }
         return (
-            <li className="card-head">
-                <div className="pic">
-                  <div className="avator"><img src={profileImg} alt="" /></div>
+            <div className="comp-head">
+                <div className="left">
+                  <div className="via"><img src={profileImg} alt="" /></div>
                 </div>
-                <div className="txt">
+                <div className="middle">
                   <div>{nickname}</div>
                   <div>{dateTime}</div>
                 </div>
-            </li>
+                <div className="right">
+
+                </div>
+            </div>
         );
     }
 }

@@ -21,6 +21,12 @@ body {
   color: $txtColor;
 }
 
+ul {
+  li {
+    list-style: none;
+  }
+}
+
 a {
   text-decoration: none;
   color: $txtColor;
@@ -42,18 +48,38 @@ a {
   zoom: 1;
 }
 
-.avator {
-  background-color: $bgColor;
-  width: 2.51rem;
-  height: 2.51rem;
-  border-radius: 1.255rem;
-  overflow: hidden;
-  img{
+.comp-head {
+  display: flex;
+  .left {
+    width: 2.51rem;
+    .via {
+      background-color: $bgColor;
+      width: 2.51rem;
+      height: 2.51rem;
+      border-radius: 1.255rem;
+      overflow: hidden;
+      img {
+        width: 2.51rem;
+      }
+    }
+  }
+  .middle {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    padding-left: 0.5rem;
+  }
+  .right {
     width: 2.51rem;
   }
 }
 
+.mar-b {
+  margin-bottom: 0.4rem;
+}
 
 @import '_header_footer.scss';
 @import '_pswp.scss';
 @import '_home.scss';
+@import '_comment.scss';

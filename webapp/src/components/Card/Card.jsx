@@ -2,22 +2,37 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import CardHead from './CardHead';
+import CompHead from '../CompHead';
 import SpeedDial from '../SpeedDial';
 import CardAction from './CardAction';
 import CardText from './CardText';
 
 class Card extends Component {
+    componentDidMount() {
+        const { animation } = this.props;
+        if(animation) {
+            animation(this.ul);
+        }
+    }
     render() {
-        const { data, cssStyle, index } = this.props;
+        const { data, cssStyle, index, commentOps } = this.props;
         return (
-            <ul className="card-item" style={cssStyle} data-index={index}>
-                <CardHead profile={data.profile} nickname={data.nickname} dateTime={data.dateTime} />
-                <li>
+            <ul
+              ref={(c) => {
+                  this.ul = c;
+              }}
+              className="card-item"
+              style={cssStyle}
+              data-index={index}
+            >
+                <li className="mar-b">
+                    <CompHead profile={data.profile} nickname={data.nickname} dateTime={data.dateTime} />
+                </li>
+                <li className="mar-b">
                   <SpeedDial photos={data.photos} />
                 </li>
                 <CardText text={data.text} />
-                <CardAction numOfLikes={data.numOfLikes} numOfComments={data.numOfComments} numOfForwards={data.numOfForwards} />
+                <CardAction numOfLikes={data.numOfLikes} numOfComments={data.numOfComments} numOfForwards={data.numOfForwards} commentOps={commentOps} />
             </ul>
         );
     }
@@ -26,7 +41,9 @@ class Card extends Component {
 Card.propTypes = {
     data: PropTypes.object.isRequired,
     cssStyle: PropTypes.object.isRequired,
-    index: PropTypes.number.isRequired
+    index: PropTypes.number.isRequired,
+    animation: PropTypes.func.isRequired,
+    commentOps: PropTypes.string.isRequired
 };
 
 export default Card;

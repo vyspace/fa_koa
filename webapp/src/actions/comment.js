@@ -27,15 +27,13 @@ function getCommentFailure(err) {
 }
 
 export function getCommentData() {
-    return (dispatch, getState) => {
-        const xx = getState();
-        const a = 1;
-        // dispatch(getComment());
-        // getCommentList((json) => {
-        //     dispatch(getCommentSuccess(json));
-        // }, (err) => {
-        //     dispatch(getCommentFailure(err));
-        // });
+    return (dispatch) => {
+        dispatch(getComment());
+        getCommentList((json) => {
+            dispatch(getCommentSuccess(json));
+        }, (err) => {
+            dispatch(getCommentFailure(err));
+        });
     };
 }
 

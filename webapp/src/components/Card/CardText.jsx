@@ -7,7 +7,7 @@ class CardHead extends Component {
     render() {
         const { text } = this.props;
         return (
-            <li className="ml-of">{text}</li>
+            <li className="ml-of mar-b">{text}</li>
         );
     }
 }

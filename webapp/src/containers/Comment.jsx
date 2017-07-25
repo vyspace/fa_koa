@@ -5,9 +5,10 @@ import { connect } from 'react-redux';
 import CommentList from '../components/CommentList';
 import * as CommentActions from '../actions/comment';
 
-function mapStateToProps(state) {
+function mapStateToProps(store) {
     return {
-        state: state.comment
+        home: store.home,
+        state: store.comment
     };
 }
 

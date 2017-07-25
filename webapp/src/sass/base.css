@@ -19,6 +19,9 @@ body {
   background-color: #F0F0F0;
   color: #333; }
 
+ul li {
+  list-style: none; }
+
 a {
   text-decoration: none;
   color: #333; }
@@ -35,14 +38,29 @@ a {
   overflow: hidden;
   zoom: 1; }
 
-.avator {
-  background-color: #F0F0F0;
-  width: 2.51rem;
-  height: 2.51rem;
-  border-radius: 1.255rem;
-  overflow: hidden; }
-  .avator img {
+.comp-head {
+  display: flex; }
+  .comp-head .left {
     width: 2.51rem; }
+    .comp-head .left .via {
+      background-color: #F0F0F0;
+      width: 2.51rem;
+      height: 2.51rem;
+      border-radius: 1.255rem;
+      overflow: hidden; }
+      .comp-head .left .via img {
+        width: 2.51rem; }
+  .comp-head .middle {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    padding-left: 0.5rem; }
+  .comp-head .right {
+    width: 2.51rem; }
+
+.mar-b {
+  margin-bottom: 0.4rem; }
 
 .header-view {
   height: 44px;
@@ -502,7 +520,7 @@ a {
     opacity: 1; }
 
   .pswp__preloader--active .pswp__preloader__icn {
-    /* We use .gif in browsers that don't support CSS animation */ }
+    background: url(../img/loader.gif) 0 0 no-repeat; }
 
   .pswp--css_animation .pswp__preloader--active {
     opacity: 1; }
@@ -644,16 +662,6 @@ a {
   margin-bottom: .4rem; }
   .card-item li {
     list-style: none; }
-  .card-item .card-head {
-    display: flex; }
-    .card-item .card-head .pic {
-      width: 2.51rem; }
-    .card-item .card-head .txt {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-self: center;
-      padding-left: 0.5rem; }
   .card-item .interaction {
     display: flex; }
     .card-item .interaction div {
@@ -695,5 +703,19 @@ a {
       width: 100%;
       height: 100%;
       object-fit: cover; }
+
+.comment-list {
+  background-color: #fff;
+  margin-top: 8px; }
+  .comment-list .comment {
+    padding: .4rem;
+    border-bottom: 1px solid #F0F0F0; }
+  .comment-list .content {
+    padding-left: 2.9rem; }
+  .comment-list a {
+    color: #2caef1;
+    padding-right: 4px; }
+    .comment-list a a:hover, .comment-list a a:focus {
+      color: #2caef1; }
 
 /*# sourceMappingURL=base.css.map */
