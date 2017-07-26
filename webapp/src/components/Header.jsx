@@ -1,6 +1,9 @@
 'use strict';
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import EventEmitter from '../utils/event';
+
 const range = 10;
 let flag = true;
 
@@ -20,7 +23,15 @@ class Header extends Component {
             }
         }, false);
     }
+    componentDidUpdate() {
+        // EventEmitter.publish('HEADER_UPDATE');
+    }
     render() {
+        const { header } = this.props.store;
+        let backBtn = null;
+        if(header.isBack) {
+            backBtn = <i className="icon-back" />;
+        }
         return (
             <div className="header-view">
                 <ul
@@ -29,13 +40,19 @@ class Header extends Component {
                       this.header = c;
                   }}
                 >
-                    <li className="item left" />
-                    <li className="f-item middle">Header</li>
+                    <li className="item left">
+                        {backBtn}
+                    </li>
+                    <li className="f-item middle">{header.title}</li>
                     <li className="item right" />
                 </ul>
             </div>
         );
     }
+}
+
+Header.propTypes = {
+    store: PropTypes.object.isRequired
 }
 
 export default Header;

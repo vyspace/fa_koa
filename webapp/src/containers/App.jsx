@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import routes from '../router/routes';
-import Header from '../components/Header';
+import Header from '../containers/Header';
 import Footer from '../components/Footer';
 import PhotoBrowser from '../components/PhotoBrowser';
 

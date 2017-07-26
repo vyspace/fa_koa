@@ -13,7 +13,8 @@ body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fiel
   padding: 0; }
 
 body, button, input, select, textarea {
-  font: 400 .7rem/1.5 -apple-system, Helvetica, STHeiTi, Arial,"Lucida Grande",Verdana,"Microsoft YaHei",hei; }
+  font: 400 .7rem/1.5 -apple-system, Helvetica, STHeiTi, Arial,"Lucida Grande",Verdana,"Microsoft YaHei",hei;
+  outline: none; }
 
 body {
   background-color: #F0F0F0;
@@ -37,6 +38,26 @@ a {
 .clearfix {
   overflow: hidden;
   zoom: 1; }
+
+#root {
+  height: 100%; }
+
+.icon-back {
+  width: 2.2rem;
+  height: 2.2rem;
+  line-height: 2.2rem; }
+  .icon-back::before {
+    content: "";
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    vertical-align: middle;
+    border-left: 2px solid #000;
+    border-bottom: 2px solid #000;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box; }
 
 .comp-head {
   display: flex; }
@@ -88,7 +109,8 @@ a {
 .header {
   top: 0; }
   .header .item {
-    width: 44px; }
+    width: 44px;
+    text-align: center; }
   .header .middle {
     text-align: center;
     line-height: 44px;
@@ -717,5 +739,20 @@ a {
     padding-right: 4px; }
     .comment-list a a:hover, .comment-list a a:focus {
       color: #2caef1; }
+
+.create {
+  background-color: #fff;
+  padding: .8rem .4rem 0 .4rem;
+  position: relative; }
+  .create textarea {
+    width: 100%;
+    resize: none;
+    height: 6.3rem; }
+  .create .edit-tip {
+    position: absolute;
+    bottom: 0;
+    right: .4rem;
+    font-size: .6rem;
+    color: #999; }
 
 /*# sourceMappingURL=base.css.map */

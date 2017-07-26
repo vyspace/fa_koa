@@ -8,7 +8,7 @@ import App from '../containers/App';
 
 class Root extends Component {
     render() {
-        const { store, history } = this.props;
+        const { history, store } = this.props;
         return (
             <Provider store={store}>
                 <Router history={history}>

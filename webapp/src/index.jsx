@@ -4,10 +4,13 @@ import React from 'react';
 import { render } from 'react-dom';
 import createHistory from 'history/createBrowserHistory';
 import configureStore from './store/configureStore';
+import { saveStore } from './store/persistence';
 import Root from './containers/Root';
 
-const store = configureStore();
-const browserHistory = createHistory();
+const browserHistory = createHistory(),
+    store = configureStore();
+
+store.subscribe(() => saveStore(store.getState()));
 
 render(
     <Root store={store} history={browserHistory} />,

@@ -14,6 +14,7 @@ body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fiel
 }
 body, button, input, select, textarea {
   font: 400 .7rem/1.5 -apple-system, Helvetica, STHeiTi, Arial,"Lucida Grande",Verdana,"Microsoft YaHei",hei;
+  outline: none;
 }
 
 body {
@@ -46,6 +47,29 @@ a {
 .clearfix{
   overflow: hidden;
   zoom: 1;
+}
+
+#root {
+  height: 100%;
+}
+
+.icon-back {
+  width: 2.2rem;
+  height: 2.2rem;
+  line-height: 2.2rem;
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    vertical-align: middle;
+    border-left: 2px solid #000;
+    border-bottom: 2px solid #000;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
 }
 
 .comp-head {
@@ -83,3 +107,4 @@ a {
 @import '_pswp.scss';
 @import '_home.scss';
 @import '_comment.scss';
+@import '_create.scss';

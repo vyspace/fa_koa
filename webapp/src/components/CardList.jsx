@@ -8,43 +8,55 @@ import PhotoBrowser from './PhotoBrowser';
 
 class CardList extends Component {
     componentWillMount() {
-        const { getHomeData } = this.props;
+        const { getHomeData } = this.props.homeAction,
+            { updateHeader } = this.props.headerAction;
+        updateHeader({
+            title: 'Header',
+            isBack: false,
+            rBtn: []
+        });
         getHomeData();
     }
     componentDidUpdate() {
-        const { data, scrollTop } = this.props.state;
-        const { history, saveParams } = this.props;
+        const { data, scrollTop } = this.props.store.home,
+            { history } = this.props,
+            { saveParams } = this.props.homeAction;
         document.body.scrollTop = scrollTop;
-        this.list.addEventListener('click', (e) => {
-            const t = $(e.target);
-            if(e.target.tagName === 'IMG' && t.data('tag') === 'thumbnail') {
-                e.stopPropagation();
-                const ul = t.parents('.card-item'),
-                    rows = ul.data('index'),
-                    imgs = ul.find('img'),
-                    index = t.data('index'),
-                    photos = data[rows].photos;
-                photos.map((cell, i) => {
-                    cell.el = imgs[i];
-                    return cell;
-                });
-                PhotoBrowser.init(photos, index);
-            }
-            if(e.target.tagName === 'DIV' && t.data('tag') === 'comment') {
-                e.stopPropagation();
-                const ul = t.parents('.card-item'),
-                    rows = ul.data('index'),
-                    cTop = this.topCalc(ul.offset().top);
-                const param = {
-                    rows, cTop
-                };
-                saveParams(param);
-                history.push('/comment');
-            }
-        }, false);
+        if(this.list) {
+            this.list.addEventListener('click', (e) => {
+                const t = $(e.target);
+                if (e.target.tagName === 'IMG' && t.data('tag') === 'thumbnail') {
+                    e.stopPropagation();
+                    const ul = t.parents('.card-item'),
+                        rows = ul.data('index'),
+                        imgs = ul.find('img'),
+                        index = t.data('index'),
+                        photos = data[rows].photos,
+                        photoArr = [];
+                    for (let i = 0; i < photos.length; i += 1) {
+                        const cell = Object.assign({}, photos[i]);
+                        cell.el = imgs[i];
+                        photoArr.push(cell);
+                    }
+                    PhotoBrowser.init(photoArr, index);
+                }
+                if (e.target.tagName === 'DIV' && t.data('tag') === 'comment') {
+                    e.stopPropagation();
+                    const ul = t.parents('.card-item'),
+                        rows = ul.data('index'),
+                        cTop = this.topCalc(ul.offset().top);
+                    const param = {
+                        rows, cTop
+                    };
+                    saveParams(param);
+                    history.push('/comment');
+                }
+            }, false);
+        }
     }
     componentWillUnmount() {
-        this.props.saveScrollTop(document.body.scrollTop);
+        const { saveScrollTop } = this.props.homeAction;
+        saveScrollTop(document.body.scrollTop);
     }
     topCalc(oTop) {
         let cTop = 0;
@@ -58,7 +70,7 @@ class CardList extends Component {
         return cTop;
     }
     render() {
-        const { isFetching, data } = this.props.state;
+        const { isFetching, data } = this.props.store.home;
         if (isFetching) {
             return <div>loadding</div>;
         }
@@ -85,11 +97,10 @@ class CardList extends Component {
 }
 
 CardList.propTypes = {
-    state: PropTypes.object.isRequired,
-    getHomeData: PropTypes.func.isRequired,
-    history: PropTypes.object.isRequired,
-    saveParams: PropTypes.func.isRequired,
-    saveScrollTop: PropTypes.func.isRequired
+    store: PropTypes.object.isRequired,
+    homeAction: PropTypes.object.isRequired,
+    headerAction: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
 };
 
 export default CardList;

@@ -6,7 +6,9 @@ import rootReducer from '../reducers/combine';
 
 const createStoreWithMiddleware = applyMiddleware(thunkMiddleware)(createStore);
 
-export default function configureStore(state) {
-    return createStoreWithMiddleware(rootReducer, state);
+function configureStore() {
+    return createStoreWithMiddleware(rootReducer);
 }
+
+export default configureStore;
 
