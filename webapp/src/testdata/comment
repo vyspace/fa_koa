@@ -4,16 +4,19 @@
     "data": [{
         "id": 1,
         "profile": "./img/profile.jpg",
+        "userId": 1,
         "nickname": "中华小当家",
         "dateTime": "20小时前",
         "comment": "it's nice",
         "commentReply": [{
+            "userId": 4,
             "nickname": "aaa",
             "reply": "hahhahahha"
         }]
     }, {
        "id": 2,
        "profile": "",
+       "userId": 2,
        "nickname": "中华小",
        "dateTime": "21小时前",
        "comment": "it's nice",
@@ -21,19 +24,23 @@
    }, {
       "id": 3,
       "profile": "./img/profile.jpg",
+      "userId": 5,
       "nickname": "社会姐",
       "dateTime": "24小时前",
       "comment": "大家好，我是来打酱油的，哈哈哈哈",
       "commentReply": [{
+          "userId": 10,
           "nickname": "为什么啊",
           "reply": "嗯嗯嗯 不是啊 哈哈哈"
       },{
+          "userId": 11,
           "nickname": "会飞的zhu",
           "reply": "看你说的太棒了，格式化,xml转json 工具，编辑器以及Json与XML相互转换"
       }]
   },{
        "id": 4,
        "profile": "",
+       "userId": 2,
        "nickname": "中华小",
        "dateTime": "21小时前",
        "comment": "it's nice",

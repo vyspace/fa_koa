@@ -115,6 +115,9 @@ a {
     text-align: center;
     line-height: 44px;
     font-size: 18px; }
+  .header .right {
+    display: flex;
+    align-items: center; }
 
 .footer {
   bottom: 0;
@@ -125,6 +128,8 @@ a {
   .footer li {
     text-align: center;
     line-height: 44px; }
+  .footer .active {
+    font-weight: 800; }
 
 .footer-hidden {
   transition-duration: .1s;

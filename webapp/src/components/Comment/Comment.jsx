@@ -19,7 +19,7 @@ class Comment extends Component {
             reply = <ul>{lis}</ul>;
         }
         return (
-            <div className="comment">
+            <div className="comment" data-nickname={data.nickname} data-uid={data.userId} data-id={data.id} >
                 <CompHead profile={data.profile} nickname={data.nickname} dateTime={data.dateTime} />
                 <div className="content">
                     <div>{data.comment}</div>

@@ -2,10 +2,15 @@
 
 import { UPDATE } from '../actions/header';
 
-export default function comment(state = {
+export default function header(state = {
     title: 'Header',
     isBack: false,
-    rBtn: []
+    backHandler: null,
+    rBtn: {
+        type: 'txt',
+        content: '',
+        handler: null
+    }
 }, action) {
     switch(action.type) {
     case UPDATE:

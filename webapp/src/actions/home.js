@@ -50,7 +50,6 @@ export function saveParams(payload) {
 
 export function getHomeData() {
     return (dispatch) => {
-        dispatch(getHome());
         getHomeList((json) => {
             dispatch(getHomeSuccess(json));
         }, (err) => {

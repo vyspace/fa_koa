@@ -12,6 +12,10 @@ const browserHistory = createHistory(),
 
 store.subscribe(() => saveStore(store.getState()));
 
+window.FaKoa = Object.seal({
+    history: browserHistory
+});
+
 render(
     <Root store={store} history={browserHistory} />,
     document.getElementById('root')

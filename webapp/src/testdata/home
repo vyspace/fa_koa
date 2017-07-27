@@ -5,6 +5,7 @@
     "data": [{
         "id": 1,
         "profile": "",
+        "userId": 1,
         "nickname": "中华小当家",
         "dateTime": "20小时前",
         "photos": [
@@ -48,6 +49,7 @@
     {
         "id": 2,
         "profile": "./img/profile.jpg",
+        "userId": 2,
         "nickname": "魔鬼终结者",
         "dateTime": "23小时前",
         "photos": [
@@ -70,6 +72,7 @@
     {
             "id": 3,
             "profile": "",
+            "userId": 1,
             "nickname": "中华小当家",
             "dateTime": "20小时前",
             "photos": [
@@ -113,7 +116,8 @@
         {
             "id": 4,
             "profile": "./img/profile.jpg",
-            "nickname": "魔鬼终结者",
+            "userId": 3,
+            "nickname": "魔鬼终结者2",
             "dateTime": "23小时前",
             "photos": [
                 {

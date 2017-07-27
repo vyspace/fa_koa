@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import routes from '../router/routes';
 import Header from '../containers/Header';
-import Footer from '../components/Footer';
+import Footer from '../containers/Footer';
 import PhotoBrowser from '../components/PhotoBrowser';
 
 class App extends Component {
@@ -11,7 +11,7 @@ class App extends Component {
         return (
         <div>
             <Header />
-                <div className="body-view">
+                <div className="body-view" id="bodyView">
                     {routes}
                 </div>
             <PhotoBrowser />
