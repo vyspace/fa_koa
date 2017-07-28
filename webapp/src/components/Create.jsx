@@ -20,6 +20,7 @@ class CreateComment extends Component {
             tip = `回复@${pageParams.nickname}…`;
         }
         updateHeader({
+            type: 'base',
             title: tit,
             isBack: true,
             rBtn: {

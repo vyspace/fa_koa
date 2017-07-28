@@ -2,27 +2,35 @@
 
 import { getCommentList } from '../utils/api';
 
-export const GET_COMMENT = 'GET_COMMENT';
-export const GET_COMMENT_SUCCESS = 'GET_COMMENT_SUCCESS';
-export const GET_COMMENT_FAILURE = 'GET_COMMENT_FAILURE';
+export const COMMENT_GET = 'GET_COMMENT';
+export const COMMENT_GET_SUCCESS = 'GET_COMMENT_SUCCESS';
+export const COMMENT_GET_FAILURE = 'GET_COMMENT_FAILURE';
+export const COMMENT_SCROLL_TOP = 'COMMENT_SCROLL_TOP'
 
 function getComment() {
     return {
-        type: GET_COMMENT
+        type: COMMENT_GET
     };
 }
 
 function getCommentSuccess(json) {
     return {
-        type: GET_COMMENT_SUCCESS,
+        type: COMMENT_GET_SUCCESS,
         payload: json
     };
 }
 
 function getCommentFailure(err) {
     return {
-        type: GET_COMMENT_FAILURE,
+        type: COMMENT_GET_FAILURE,
         payload: err
+    };
+}
+
+function savest(payload) {
+    return {
+        type: COMMENT_SCROLL_TOP,
+        payload
     };
 }
 
@@ -34,6 +42,12 @@ export function getCommentData() {
         }, (err) => {
             dispatch(getCommentFailure(err));
         });
+    };
+}
+
+export function saveScrollTop(payload) {
+    return (dispatch) => {
+        dispatch(savest(payload));
     };
 }
 

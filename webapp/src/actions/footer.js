@@ -1,10 +1,10 @@
 'use strict';
 
-export const UPDATE = 'UPDATE';
+export const FOOTER_UPDATE = 'FOOTER_UPDATE';
 
 function uFooter(payload) {
     return {
-        type: UPDATE,
+        type: FOOTER_UPDATE,
         payload
     };
 }

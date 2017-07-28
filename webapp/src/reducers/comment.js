@@ -1,17 +1,17 @@
 'use strict';
 
-import { GET_COMMENT, GET_COMMENT_SUCCESS, GET_COMMENT_FAILURE } from '../actions/comment';
+import { COMMENT_GET, COMMENT_GET_SUCCESS, COMMENT_GET_FAILURE, COMMENT_SCROLL_TOP } from '../actions/comment';
 
-export default function comment(state = { isFetching: true }, action) {
+export default function comment(state = { isFetching: true, scrollTop: 0 }, action) {
     switch(action.type) {
-    case GET_COMMENT:
-        state.isFetching = true;
+    case COMMENT_GET_SUCCESS:
+        return Object.assign({}, state, { isFetching: false }, action.payload);
+    case COMMENT_GET_FAILURE:
+        return Object.assign({}, state, { isFetching: false }, action.payload);
+    case COMMENT_SCROLL_TOP:
+        state.scrollTop = action.payload;
         return state;
-    case GET_COMMENT_SUCCESS:
-        return Object.assign({}, state, { isFetching: false }, action.payload);
-    case GET_COMMENT_FAILURE:
-        return Object.assign({}, state, { isFetching: false }, action.payload);
-    case GET_COMMENT:
+    case COMMENT_GET:
     default:
         return state;
     }

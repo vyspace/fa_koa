@@ -1,5 +1,3 @@
-@import "_var.scss";
-
 .card-item {
   background-color: #fff;
   padding: .4rem;
@@ -11,23 +9,6 @@
     display: flex;
     div {
       flex: 1;
-    }
-  }
-  .ml-overflow {
-    position: relative;
-    max-height: 3 * $fontSize * 1.5;
-
-    overflow: hidden;
-    &::after{
-      content: "更多";
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      padding-left: 40px;
-      background: -webkit-linear-gradient(left, transparent, #fff 55%);
-      background: -o-linear-gradient(right, transparent, #fff 55%);
-      background: -moz-linear-gradient(right, transparent, #fff 55%);
-      background: linear-gradient(to right, transparent, #fff 55%);
     }
   }
 }
@@ -57,5 +38,45 @@ $sdWidth: 6rem;
       height: 100%;
       object-fit: cover;
     }
+  }
+}
+
+.shimmer {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+  display: inline;
+  color: rgba(0, 0, 0, .1);
+  background:-webkit-linear-gradient(-45deg,#000,#000,#aaa, #000, #aaa,#000, #000);
+  -webkit-background-size: 300px 100%;
+  background-size: 300px 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-animation-name: shimmer;
+  animation-name: shimmer;
+  -webkit-animation-delay: 5s;
+  animation-delay: 5s;
+  -webkit-animation-duration: 7s;
+  animation-duration: 7s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+}
+@-webkit-keyframes shimmer {
+  0% {
+    background-position: top right;
+  }
+  100% {
+    background-position: top left;
+  }
+}
+@keyframes shimmer {
+  0% {
+    background-position: top right;
+  }
+  100% {
+    background-position: top left;
   }
 }

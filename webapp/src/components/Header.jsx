@@ -62,7 +62,8 @@ class Header extends Component {
     render() {
         const { header } = this.props.store;
         let backBtn = <li className="item" />,
-            optBtn = <li className="item right" />;
+            optBtn = <li className="item right" />,
+            middle = <li className="f-item middle">{header.title}</li>;
         if(header.isBack) {
             backBtn = (<li className="item left" data-tag="back">
                         <i className="icon-back" data-tag="back" />
@@ -78,6 +79,9 @@ class Header extends Component {
             }
             optBtn = (<li className="item right" data-tag="rbtn">{cont}</li>);
         }
+        if(header.type === 'home') {
+            middle = <li className="f-item middle"><h1 className="shimmer">{header.title}</h1></li>;
+        }
         return (
             <div className="header-view">
                 <ul
@@ -87,7 +91,7 @@ class Header extends Component {
                   }}
                 >
                     {backBtn}
-                    <li className="f-item middle">{header.title}</li>
+                    {middle}
                     {optBtn}
                 </ul>
             </div>

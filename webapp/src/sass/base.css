@@ -1,4 +1,3 @@
-@charset "UTF-8";
 * {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -38,6 +37,9 @@ a {
 .clearfix {
   overflow: hidden;
   zoom: 1; }
+
+.article {
+  color: #555; }
 
 #root {
   height: 100%; }
@@ -693,20 +695,6 @@ a {
     display: flex; }
     .card-item .interaction div {
       flex: 1; }
-  .card-item .ml-overflow {
-    position: relative;
-    max-height: 3.15rem;
-    overflow: hidden; }
-    .card-item .ml-overflow::after {
-      content: "更多";
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      padding-left: 40px;
-      background: -webkit-linear-gradient(left, transparent, #fff 55%);
-      background: -o-linear-gradient(right, transparent, #fff 55%);
-      background: -moz-linear-gradient(right, transparent, #fff 55%);
-      background: linear-gradient(to right, transparent, #fff 55%); }
 
 .speed-dial {
   font-size: 0;
@@ -730,6 +718,79 @@ a {
       width: 100%;
       height: 100%;
       object-fit: cover; }
+
+.shimmer {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+  display: inline;
+  color: rgba(0, 0, 0, 0.1);
+  background: -webkit-linear-gradient(-45deg, #000, #000, #aaa, #000, #aaa, #000, #000);
+  -webkit-background-size: 300px 100%;
+  background-size: 300px 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-animation-name: shimmer;
+  animation-name: shimmer;
+  -webkit-animation-delay: 5s;
+  animation-delay: 5s;
+  -webkit-animation-duration: 7s;
+  animation-duration: 7s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  background-repeat: no-repeat;
+  background-position: 0 0; }
+
+@-webkit-keyframes shimmer {
+  0% {
+    background-position: top right; }
+  100% {
+    background-position: top left; } }
+@keyframes shimmer {
+  0% {
+    background-position: top right; }
+  100% {
+    background-position: top left; } }
+.pop-layer {
+  display: none;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 999;
+  -ms-touch-action: none;
+  touch-action: none;
+  background-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  -webkit-backface-visibility: hidden;
+  outline: none;
+  opacity: 1;
+  transition-property: background-color;
+  transition-duration: .3s;
+  transition-timing-function: ease-in-out; }
+  .pop-layer ul {
+    padding: 0 .4rem;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    transition-duration: .2s;
+    transition-timing-function: ease-in-out;
+    transform: translate3d(0, 10.6rem, 0); }
+  .pop-layer li {
+    background-color: #fff;
+    width: 100%;
+    margin-bottom: .7rem;
+    border-radius: .2rem;
+    padding: .45rem 0;
+    text-align: center; }
+
+.pop-show {
+  background-color: rgba(0, 0, 0, 0.9); }
+  .pop-show ul {
+    transform: translate3d(0, 0, 0); }
 
 .comment-list {
   background-color: #fff;

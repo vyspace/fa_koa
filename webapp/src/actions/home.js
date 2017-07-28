@@ -2,49 +2,49 @@
 
 import { getHomeList } from '../utils/api';
 
-export const GET_HOME = 'GET_HOME';
-export const GET_HOME_SUCCESS = 'GET_HOME_SUCCESS';
-export const GET_HOME_FAILURE = 'GET_HOME_FAILURE';
-export const SAVE_PARAMS = 'SAVE_PARAMS';
-export const SAVE_SCROLL_TOP = 'SAVE_SCROLL_TOP';
+export const HOME_GET = 'HOME_GET';
+export const HOME_GET_SUCCESS = 'HOME_GET_SUCCESS';
+export const HOME_GET_FAILURE = 'HOME_GET_FAILURE';
+export const HOME_PARAMS = 'HOME_PARAMS';
+export const HOME_SCROLL_TOP = 'HOME_SCROLL_TOP';
 
 function getHome() {
     return {
-        type: GET_HOME
+        type: HOME_GET
     };
 }
 
 function getHomeSuccess(json) {
     return {
-        type: GET_HOME_SUCCESS,
+        type: HOME_GET_SUCCESS,
         payload: json
     };
 }
 
 function getHomeFailure(err) {
     return {
-        type: GET_HOME_FAILURE,
+        type: HOME_GET_FAILURE,
         payload: err
     };
 }
 
-function saveci(payload) {
+function savepa(payload) {
     return {
-        type: SAVE_PARAMS,
+        type: HOME_PARAMS,
         payload
     };
 }
 
 function savest(payload) {
     return {
-        type: SAVE_SCROLL_TOP,
+        type: HOME_SCROLL_TOP,
         payload
     };
 }
 
 export function saveParams(payload) {
     return (dispatch) => {
-        dispatch(saveci(payload));
+        dispatch(savepa(payload));
     };
 }
 

@@ -1,8 +1,9 @@
 'use strict';
 
-import { UPDATE } from '../actions/header';
+import { HEADER_UPDATE } from '../actions/header';
 
 export default function header(state = {
+    type: 'base',
     title: 'Header',
     isBack: false,
     backHandler: null,
@@ -13,7 +14,7 @@ export default function header(state = {
     }
 }, action) {
     switch(action.type) {
-    case UPDATE:
+    case HEADER_UPDATE:
         return Object.assign({}, state, action.payload);
     default:
         return state;

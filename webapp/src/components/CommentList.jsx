@@ -7,6 +7,7 @@ import PhotoBrowser from './PhotoBrowser';
 import Comment from './Comment/Comment';
 import { restore, savePageParams } from '../store/persistence';
 
+const PageTag = 'comment';
 let showTimer = 0;
 let tData;
 
@@ -18,6 +19,7 @@ class CommentList extends Component {
             { updateFooter } = this.props.footerAction;
         restore(store);
         updateHeader({
+            type: 'base',
             title: '评论列表',
             isBack: true,
             rBtn: null
@@ -29,10 +31,16 @@ class CommentList extends Component {
         this.eventLayer.addEventListener('click', this.eventHandler.bind(this), false);
     }
     componentDidUpdate() {
+        const { scrollTop } = this.props.store.comment;
         this.showList();
+        setTimeout(() => {
+            document.body.scrollTop = scrollTop;
+        }, 100);
     }
     componentWillUnmount() {
+        const { saveScrollTop } = this.props.commentAction;
         clearTimeout(showTimer);
+        saveScrollTop(document.body.scrollTop);
     }
     eventHandler(e) {
         e.stopPropagation();
@@ -90,10 +98,12 @@ class CommentList extends Component {
         }, 100);
     }
     render() {
-        const { home, comment } = this.props.store;
+        const { history } = this.props,
+            { home, comment } = this.props.store;
         tData = home.data[home.params.rows];
         let css = { marginBottom: 0 },
-            vDom = null;
+            vDom = null,
+            cTop = 0;
         if(comment.isFetching) {
             vDom = <div>loading</div>;
         }
@@ -114,8 +124,11 @@ class CommentList extends Component {
                 }
             </div>);
         }
+        if(history.action === 'PUSH') {
+            cTop = home.params.cTop;
+        }
         if(home.params.cTop !== 0) {
-            css = Object.assign(css, { transitionDuration: '.1s', transitionTimingFunction: 'ease-in-out', transform: `translate3d(0, ${home.params.cTop}px, 0)` });
+            css = Object.assign(css, { transitionDuration: '.1s', transitionTimingFunction: 'ease-in-out', transform: `translate3d(0, ${cTop}px, 0)` });
         }
         return (
             <div ref={(c) => {

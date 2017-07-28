@@ -5,6 +5,7 @@ import routes from '../router/routes';
 import Header from '../containers/Header';
 import Footer from '../containers/Footer';
 import PhotoBrowser from '../components/PhotoBrowser';
+import Popup from '../containers/Popup';
 
 class App extends Component {
     render() {
@@ -14,8 +15,9 @@ class App extends Component {
                 <div className="body-view" id="bodyView">
                     {routes}
                 </div>
-            <PhotoBrowser />
             <Footer />
+            <PhotoBrowser />
+            <Popup />
         </div>
         );
     }

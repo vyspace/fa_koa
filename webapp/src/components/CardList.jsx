@@ -12,6 +12,7 @@ class CardList extends Component {
             { updateHeader } = this.props.headerAction,
             { updateFooter } = this.props.footerAction;
         updateHeader({
+            type: 'home',
             title: 'FAKOA',
             isBack: false,
             rBtn: null

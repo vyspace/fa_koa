@@ -1,10 +1,10 @@
 'use strict';
 
-export const UPDATE = 'UPDATE';
+export const HEADER_UPDATE = 'HEADER_UPDATE';
 
 function uHeader(payload) {
     return {
-        type: UPDATE,
+        type: HEADER_UPDATE,
         payload
     };
 }
