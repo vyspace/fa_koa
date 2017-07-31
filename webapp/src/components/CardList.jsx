@@ -10,7 +10,9 @@ class CardList extends Component {
     componentWillMount() {
         const { getHomeData } = this.props.homeAction,
             { updateHeader } = this.props.headerAction,
-            { updateFooter } = this.props.footerAction;
+            { updateFooter } = this.props.footerAction,
+            { history } = this.props;
+        window.FaKoa.history = history;
         updateHeader({
             type: 'home',
             title: 'FAKOA',
@@ -60,6 +62,16 @@ class CardList extends Component {
             };
             saveParams(param);
             history.push('/comment');
+        }
+        if (t.data('tag') === 'article') {
+            const ul = t.parents('.card-item'),
+                aid = t.data('aid'),
+                cTop = this.topCalc(ul.offset().top);
+            const param = {
+                aid, cTop
+            };
+            saveParams(param);
+            history.push('/article');
         }
     }
     topCalc(oTop) {

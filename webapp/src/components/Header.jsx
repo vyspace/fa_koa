@@ -82,6 +82,15 @@ class Header extends Component {
         if(header.type === 'home') {
             middle = <li className="f-item middle"><h1 className="shimmer">{header.title}</h1></li>;
         }
+        if(header.type === 'search') {
+            middle = (<li className="f-item middle flx">
+                <div className="search-box">
+                    <div className="icon-box" />
+                    <div className="input-box"><input type="text" placeholder="请输入..." /></div>
+                    <div className="fill" />
+                </div>
+            </li>);
+        }
         return (
             <div className="header-view">
                 <ul

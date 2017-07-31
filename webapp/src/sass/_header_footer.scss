@@ -37,9 +37,13 @@ $border: 1px solid #eee;
     line-height: $hfHeight;
     font-size: 18px;
   }
-  .right {
+  .flx {
     display: flex;
     align-items: center;
+  }
+  .right {
+    line-height: $hfHeight;
+    text-align: center;
   }
 }
 

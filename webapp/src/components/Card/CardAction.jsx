@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-class CardHead extends Component {
+class CardAction extends Component {
     render() {
         const { numOfLikes, numOfComments, numOfForwards, commentOps } = this.props;
         let comment = `评论${numOfComments}`;
@@ -27,11 +27,11 @@ class CardHead extends Component {
     }
 }
 
-CardHead.propTypes = {
+CardAction.propTypes = {
     numOfLikes: PropTypes.number.isRequired,
     numOfComments: PropTypes.number.isRequired,
     numOfForwards: PropTypes.number.isRequired,
     commentOps: PropTypes.string.isRequired
 };
 
-export default CardHead;
+export default CardAction;

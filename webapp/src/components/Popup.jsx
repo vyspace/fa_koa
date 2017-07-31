@@ -61,7 +61,8 @@ class Popup extends Component {
 }
 
 Popup.propTypes = {
-
+    store: PropTypes.object.isRequired,
+    toggle: PropTypes.func.isRequired
 };
 
 export default Popup;

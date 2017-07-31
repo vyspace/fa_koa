@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class CardHead extends Component {
+class CardText extends Component {
     render() {
         const { text } = this.props;
         return (
@@ -12,8 +12,8 @@ class CardHead extends Component {
     }
 }
 
-CardHead.propTypes = {
+CardText.propTypes = {
     text: PropTypes.string.isRequired
 };
 
-export default CardHead;
+export default CardText;

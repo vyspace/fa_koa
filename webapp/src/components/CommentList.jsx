@@ -7,7 +7,6 @@ import PhotoBrowser from './PhotoBrowser';
 import Comment from './Comment/Comment';
 import { restore, savePageParams } from '../store/persistence';
 
-const PageTag = 'comment';
 let showTimer = 0;
 let tData;
 

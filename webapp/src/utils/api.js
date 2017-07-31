@@ -18,3 +18,10 @@ export const getCommentList = (resolve, reject) => {
     request(params, resolve, reject);
 };
 
+export const getArticleData = (aid, resolve, reject) => {
+    const params = {
+        url: `${URL_ROOT}/testdata/article`
+    };
+    request(params, resolve, reject);
+};
+

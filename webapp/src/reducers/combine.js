@@ -6,13 +6,17 @@ import footer from './footer';
 import home from './home';
 import popup from './popup';
 import comment from './comment';
+import search from './search';
+import article from './article';
 
 const rootReducer = combineReducers({
     header,
     footer,
     home,
     popup,
-    comment
+    comment,
+    search,
+    article
 });
 
 export default rootReducer;

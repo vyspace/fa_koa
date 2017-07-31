@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import { PhotoSwipe, PhotoSwipeUI } from 'photoswipe';
+
 const _gallery = Symbol('gallery'),
     _options = Symbol('options'),
     _pswp = Symbol('pswp');

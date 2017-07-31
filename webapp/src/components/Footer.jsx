@@ -5,9 +5,13 @@ import PropTypes from 'prop-types';
 import $ from 'zepto';
 
 const range = 1;
-let flag = true;
+let flag = true,
+    g;
 
 class Footer extends Component {
+    componentWillMount() {
+        g = window.FaKoa;
+    }
     componentDidMount() {
         window.addEventListener('scroll', this.footerScroll.bind(this), false);
         this.footer.addEventListener('click', this.eventHandler.bind(this), false);
@@ -34,7 +38,10 @@ class Footer extends Component {
         case 'home':
             break;
         case 'create':
-            toggle({toggle:true});
+            toggle({ toggle: true });
+            break;
+        case 'search':
+            g.history.push('search');
             break;
         default:
             break;
@@ -44,6 +51,8 @@ class Footer extends Component {
         const { footer } = this.props.store;
         let html;
         switch(footer.type) {
+        case 'none':
+            break;
         case 'create':
             html = <ul className="footer"><li className="f-item">图片</li><li className="f-item">表情</li></ul>;
             break;
@@ -67,7 +76,8 @@ class Footer extends Component {
 }
 
 Footer.propTypes = {
-    store: PropTypes.object.isRequired
+    store: PropTypes.object.isRequired,
+    popupAction: PropTypes.object.isRequired
 };
 
 export default Footer;

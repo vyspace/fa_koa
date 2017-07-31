@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class CardHead extends Component {
+class CompHead extends Component {
     render() {
         let profileImg = './img/avator.jpg';
         const { profile, nickname, dateTime } = this.props;
@@ -19,18 +19,16 @@ class CardHead extends Component {
                   <div>{nickname}</div>
                   <div>{dateTime}</div>
                 </div>
-                <div className="right">
-
-                </div>
+                <div className="right" />
             </div>
         );
     }
 }
 
-CardHead.propTypes = {
+CompHead.propTypes = {
     profile: PropTypes.string.isRequired,
     nickname: PropTypes.string.isRequired,
     dateTime: PropTypes.string.isRequired
 };
 
-export default CardHead;
+export default CompHead;

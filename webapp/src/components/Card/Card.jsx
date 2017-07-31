@@ -6,6 +6,7 @@ import CompHead from '../CompHead';
 import SpeedDial from '../SpeedDial';
 import CardAction from './CardAction';
 import CardText from './CardText';
+import SinglePhoto from '../SinglePhoto';
 
 class Card extends Component {
     componentDidMount() {
@@ -15,9 +16,10 @@ class Card extends Component {
         }
     }
     render() {
-        const { data, cssStyle, index, commentOps } = this.props;
-        return (
-            <ul
+        const { data, cssStyle, index, commentOps, dataArr } = this.props;
+        let html;
+        if(data.typeId === 1) {
+            html = (<ul
               ref={(c) => {
                   this.ul = c;
               }}
@@ -29,12 +31,37 @@ class Card extends Component {
                     <CompHead profile={data.profile} nickname={data.nickname} dateTime={data.dateTime} />
                 </li>
                 <li className="mar-b">
-                  <SpeedDial photos={data.photos} />
+                    <SpeedDial photos={data.photos} />
                 </li>
                 <CardText text={data.text} />
+                <CardAction
+                  numOfLikes={data.numOfLikes}
+                  numOfComments={data.numOfComments}
+                  numOfForwards={data.numOfForwards}
+                  commentOps={commentOps}
+                />
+            </ul>);
+        }
+        if(data.typeId === 2) {
+            html = (<ul
+              ref={(c) => {
+                  this.ul = c;
+              }}
+              className="card-item"
+              style={cssStyle}
+              data-index={index}
+            >
+                <li className="mar-b">
+                    <CompHead profile={data.profile} nickname={data.nickname} dateTime={data.dateTime} />
+                </li>
+                <li className="mar-b title" data-tag="article" data-aid={data.articleId}>
+                    {data.title}
+                </li>
+                <li className="mar-b"><SinglePhoto photo={data.photo} aid={data.articleId} browser={false} /></li>
                 <CardAction numOfLikes={data.numOfLikes} numOfComments={data.numOfComments} numOfForwards={data.numOfForwards} commentOps={commentOps} />
-            </ul>
-        );
+            </ul>);
+        }
+        return html;
     }
 }
 
@@ -43,7 +70,12 @@ Card.propTypes = {
     cssStyle: PropTypes.object.isRequired,
     index: PropTypes.number.isRequired,
     animation: PropTypes.func.isRequired,
-    commentOps: PropTypes.string.isRequired
+    commentOps: PropTypes.string.isRequired,
+    dataArr: PropTypes.array
 };
+
+Card.defaultProps = {
+    dataArr: []
+}
 
 export default Card;
