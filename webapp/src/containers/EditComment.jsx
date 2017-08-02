@@ -2,7 +2,7 @@
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Create from '../components/Create';
+import EditComment from '../components/EditComment';
 import * as EditActions from '../actions/editcomment';
 import * as HeaderActions from '../actions/header';
 import * as FooterActions from '../actions/footer';
@@ -24,4 +24,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Create);
+export default connect(mapStateToProps, mapDispatchToProps)(EditComment);

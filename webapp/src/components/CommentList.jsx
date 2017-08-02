@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Card from './Card/Card';
 import PhotoBrowser from './PhotoBrowser';
 import Comment from './Comment/Comment';
-import { restore, savePageParams } from '../store/persistence';
+import { restore } from '../store/persistence';
 
 let showTimer = 0;
 let tData;
@@ -37,18 +37,21 @@ class CommentList extends Component {
         }, 100);
     }
     componentWillUnmount() {
-        const { saveScrollTop } = this.props.commentAction;
+        const { saveScrollTop } = this.props.commentAction,
+            { recordOriginal } = this.props.recordAction;
         clearTimeout(showTimer);
         saveScrollTop(document.body.scrollTop);
+        recordOriginal('comment');
     }
     eventHandler(e) {
         e.stopPropagation();
         const { history } = this.props,
             { home } = this.props.store,
+            { saveParams } = this.props.commentAction,
             t = $(e.target);
         if(e.target.tagName === 'IMG' && t.data('tag') === 'thumbnail') {
             const ul = t.parents('.card-item'),
-                rows = ul.data('index'),
+                rows = home.params.rows,
                 imgs = ul.find('img'),
                 index = t.data('index'),
                 photos = home.data[rows].photos,
@@ -66,7 +69,7 @@ class CommentList extends Component {
                 userId: tData.userId,
                 workId: tData.id
             };
-            savePageParams(params);
+            saveParams(params);
             history.push('/editcomment');
         }
         if(e.target.className === 'comment' || t.parents('.comment').length > 0) {
@@ -80,8 +83,17 @@ class CommentList extends Component {
                 workId: el.data('id'),
                 nickname: el.data('nickname')
             };
-            savePageParams(params);
+            saveParams(params);
             history.push('/editcomment');
+        }
+        if (t.data('tag') === 'article') {
+            const aid = t.data('aid'),
+                cTop = 0;
+            const param = {
+                aid, cTop
+            };
+            saveParams(param);
+            history.push('/article');
         }
     }
     cardMove(t) {
@@ -144,6 +156,7 @@ CommentList.propTypes = {
     commentAction: PropTypes.object.isRequired,
     headerAction: PropTypes.object.isRequired,
     footerAction: PropTypes.object.isRequired,
+    recordAction: PropTypes.object.isRequired,
     store: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };

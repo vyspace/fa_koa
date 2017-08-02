@@ -28,23 +28,17 @@ function getHomeFailure(err) {
     };
 }
 
-function savepa(payload) {
+export function saveParams(payload) {
     return {
         type: HOME_PARAMS,
         payload
     };
 }
 
-function savest(payload) {
+export function saveScrollTop(payload) {
     return {
         type: HOME_SCROLL_TOP,
         payload
-    };
-}
-
-export function saveParams(payload) {
-    return (dispatch) => {
-        dispatch(savepa(payload));
     };
 }
 
@@ -55,12 +49,5 @@ export function getHomeData() {
         }, (err) => {
             dispatch(getHomeFailure(err));
         });
-    };
-}
-
-
-export function saveScrollTop(payload) {
-    return (dispatch) => {
-        dispatch(savest(payload));
     };
 }

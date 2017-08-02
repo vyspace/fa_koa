@@ -4,7 +4,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import $ from 'zepto';
 
+let g;
+
 class Popup extends Component {
+    componentWillMount() {
+        g = window.FaKoa;
+    }
     componentDidMount() {
         this.layer.addEventListener('click', this.eventHandler.bind(this), false);
     }
@@ -13,7 +18,11 @@ class Popup extends Component {
         if(popup.toggle) {
             setTimeout(() => {
                 this.layer.classList.add('pop-show');
+                document.body.style.overflow = 'hidden';
             }, 100);
+        }
+        else {
+            document.body.style.overflow = '';
         }
     }
     eventHandler(e) {
@@ -23,6 +32,9 @@ class Popup extends Component {
             tag = t.data('tag');
         switch(tag) {
         case 'photo':
+            break;
+        case 'article':
+            g.history.push('editarticle');
             break;
         case 'cancel':
             this.layer.classList.remove('pop-show');

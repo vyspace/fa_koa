@@ -30,8 +30,10 @@ class CardList extends Component {
         document.body.scrollTop = scrollTop;
     }
     componentWillUnmount() {
-        const { saveScrollTop } = this.props.homeAction;
+        const { saveScrollTop } = this.props.homeAction,
+            { recordOriginal } = this.props.recordAction;
         saveScrollTop(document.body.scrollTop);
+        recordOriginal('home');
     }
     eventHandler(e) {
         e.stopPropagation();
@@ -97,7 +99,7 @@ class CardList extends Component {
                 if (index + 1 >= data.length) {
                     css = { marginBottom: 0 };
                 }
-                return <Card key={cell.id} data={cell} cssStyle={css} index={index} animation={function () {}} commentOps={''} />;
+                return <Card key={cell.id} data={cell} cssStyle={css} index={index} />;
             });
         }
         return (<div ref={(c) => {
@@ -112,6 +114,7 @@ CardList.propTypes = {
     homeAction: PropTypes.object.isRequired,
     headerAction: PropTypes.object.isRequired,
     footerAction: PropTypes.object.isRequired,
+    recordAction: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };
 

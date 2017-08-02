@@ -2,11 +2,10 @@
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import CardList from '../components/CardList';
-import * as HomeActions from '../actions/home';
-import * as FooterActions from '../actions/footer';
-import * as RecordActions from '../actions/record';
+import EditArticle from '../components/EditArticle';
 import * as HeaderActions from '../actions/header';
+import * as FooterActions from '../actions/footer';
+import * as EditActions from '../actions/editarticle';
 
 function mapStateToProps(store) {
     return {
@@ -17,14 +16,12 @@ function mapStateToProps(store) {
 function mapDispatchToProps(dispatch) {
     const headerAction = bindActionCreators(HeaderActions, dispatch),
         footerAction = bindActionCreators(FooterActions, dispatch),
-        recordAction = bindActionCreators(RecordActions, dispatch),
-        homeAction = bindActionCreators(HomeActions, dispatch);
+        editAction = bindActionCreators(EditActions, dispatch);
     return {
         headerAction,
         footerAction,
-        recordAction,
-        homeAction
+        editAction
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CardList);
+export default connect(mapStateToProps, mapDispatchToProps)(EditArticle);

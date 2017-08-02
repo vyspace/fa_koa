@@ -12,9 +12,7 @@ const browserHistory = createHistory(),
 
 store.subscribe(() => saveStore(store.getState()));
 
-window.FaKoa = Object.seal({
-    history: browserHistory
-});
+window.FaKoa.history = browserHistory;
 
 render(
     <Root store={store} history={browserHistory} />,

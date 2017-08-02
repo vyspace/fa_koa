@@ -7,6 +7,7 @@ import Comment from '../containers/Comment';
 import EidtComment from '../containers/EditComment';
 import Article from '../containers/Article';
 import Search from '../containers/Search';
+import EditArticle from '../containers/EditArticle';
 import NotFound from '../components/NotFound';
 
 export default
@@ -16,5 +17,6 @@ export default
         <Route exact path="/editcomment" component={EidtComment} />
         <Route exact path="/article" component={Article} />
         <Route exact path="/search" component={Search} />
+        <Route exact path="/editarticle" component={EditArticle} />
         <Route component={NotFound} />
     </Switch>;

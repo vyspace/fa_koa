@@ -11,21 +11,25 @@
     <meta name="full-screen" content="yes">
     <meta name="x5-fullscreen" content="true">
   </head>
-  <body onselectstart="return false">
+  <body onselectstart="return true">
   <div id="root"></div>
   <script type="text/javascript">
       (function (doc, win) {
           var docEl = doc.documentElement,
               resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+              fSize = 0,
               recalc = function () {
                   var clientWidth = docEl.clientWidth;
                   if (!clientWidth) return;
-                  var fontSize = 17 * (clientWidth / 320);
-                  fontSize = (fontSize > 27) ? 27: fontSize;
-                  docEl.style.fontSize = fontSize + 'px';
+                  fSize = Math.round(17 * (clientWidth / 320));
+                  fSize = (fSize > 27) ? 27: fSize;
+                  docEl.style.fontSize = fSize + 'px';
               };
           win.addEventListener(resizeEvt, recalc, false);
           recalc();
+          window.FaKoa = Object.seal({
+              history, fontSize:fSize
+          });
       })(document, window);
   </script>
   <script type="text/javascript" src="./js/lib.js"></script>

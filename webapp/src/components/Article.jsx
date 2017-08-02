@@ -11,7 +11,8 @@ class Article extends Component {
     componentWillMount() {
         const { store } = this.props;
         restore(store);
-        const { aid } = this.props.store.home.params,
+        const action = this.props.store.record.original;
+        const { aid } = this.props.store[action].params,
             { getArtData } = this.props.articleAction,
             { updateHeader } = this.props.headerAction,
             { updateFooter } = this.props.footerAction;

@@ -53,8 +53,13 @@ class Footer extends Component {
         switch(footer.type) {
         case 'none':
             break;
-        case 'create':
-            html = <ul className="footer"><li className="f-item">图片</li><li className="f-item">表情</li></ul>;
+        case 'editaricle':
+            html = (<ul className="footer">
+                <li className="f-item">拍照</li>
+                <li className="f-item">相册</li>
+                <li className="f-item">表情</li>
+                <li className="f-item">预览</li>
+            </ul>);
             break;
         case 'home':
         default:

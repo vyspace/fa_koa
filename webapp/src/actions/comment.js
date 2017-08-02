@@ -5,7 +5,8 @@ import { getCommentList } from '../utils/api';
 export const COMMENT_GET = 'GET_COMMENT';
 export const COMMENT_GET_SUCCESS = 'GET_COMMENT_SUCCESS';
 export const COMMENT_GET_FAILURE = 'GET_COMMENT_FAILURE';
-export const COMMENT_SCROLL_TOP = 'COMMENT_SCROLL_TOP'
+export const COMMENT_SCROLL_TOP = 'COMMENT_SCROLL_TOP';
+export const COMMENT_PARAMS = 'COMMENT_PARAMS';
 
 function getComment() {
     return {
@@ -27,9 +28,16 @@ function getCommentFailure(err) {
     };
 }
 
-function savest(payload) {
+export function saveScrollTop(payload) {
     return {
         type: COMMENT_SCROLL_TOP,
+        payload
+    };
+}
+
+export function saveParams(payload) {
+    return {
+        type: COMMENT_PARAMS,
         payload
     };
 }
@@ -42,12 +50,6 @@ export function getCommentData() {
         }, (err) => {
             dispatch(getCommentFailure(err));
         });
-    };
-}
-
-export function saveScrollTop(payload) {
-    return (dispatch) => {
-        dispatch(savest(payload));
     };
 }
 

@@ -3,9 +3,10 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import CommentList from '../components/CommentList';
-import * as CommentActions from '../actions/comment';
 import * as HeaderActions from '../actions/header';
 import * as FooterActions from '../actions/footer';
+import * as RecordActions from '../actions/record';
+import * as CommentActions from '../actions/comment';
 
 function mapStateToProps(store) {
     return {
@@ -14,12 +15,14 @@ function mapStateToProps(store) {
 }
 
 function mapDispatchToProps(dispatch) {
-    const commentAction = bindActionCreators(CommentActions, dispatch),
-        headerAction = bindActionCreators(HeaderActions, dispatch),
-        footerAction = bindActionCreators(FooterActions, dispatch);
+    const headerAction = bindActionCreators(HeaderActions, dispatch),
+        footerAction = bindActionCreators(FooterActions, dispatch),
+        recordAction = bindActionCreators(RecordActions, dispatch),
+        commentAction = bindActionCreators(CommentActions, dispatch);
     return {
         headerAction,
         footerAction,
+        recordAction,
         commentAction
     };
 }

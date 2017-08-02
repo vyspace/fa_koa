@@ -69,13 +69,15 @@ Card.propTypes = {
     data: PropTypes.object.isRequired,
     cssStyle: PropTypes.object.isRequired,
     index: PropTypes.number.isRequired,
-    animation: PropTypes.func.isRequired,
-    commentOps: PropTypes.string.isRequired,
+    commentOps: PropTypes.string,
+    animation: PropTypes.func,
     dataArr: PropTypes.array
 };
 
 Card.defaultProps = {
-    dataArr: []
+    dataArr: [],
+    animation: null,
+    commentOps: ''
 }
 
 export default Card;

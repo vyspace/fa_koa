@@ -2,9 +2,11 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
 const photoLen = 6;
 
 class SpeedDial extends Component {
+
     photosHandler(photos) {
         let len = photos.length;
         if(photos.length === 0) {
@@ -21,7 +23,13 @@ class SpeedDial extends Component {
     }
     render() {
         const { photos } = this.props;
-        return <ul className="speed-dial" dangerouslySetInnerHTML={this.photosHandler(photos)} />;
+        return (<ul
+          ref={(c) => {
+              this.eventLayer = c;
+          }}
+          className="speed-dial"
+          dangerouslySetInnerHTML={this.photosHandler(photos)}
+        />);
     }
 }
 

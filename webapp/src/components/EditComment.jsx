@@ -2,22 +2,24 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getPageParams } from '../store/persistence';
+import { restore } from '../store/persistence';
 
 let createDiv = null,
     tip = '写评论…';
 const tb = 87;
 
-class CreateComment extends Component {
+class EditComment extends Component {
     componentWillMount() {
+        const { store } = this.props;
+        restore(store);
         const { updateHeader } = this.props.headerAction,
             { updateFooter } = this.props.footerAction,
-            pageParams = getPageParams();
+            { type, nickname } = this.props.store.comment.params;
         let tit = '评论';
         tip = '写评论…';
-        if(pageParams.type === 'reply') {
+        if(type === 'reply') {
             tit = '回复';
-            tip = `回复@${pageParams.nickname}…`;
+            tip = `回复@${nickname}…`;
         }
         updateHeader({
             type: 'base',
@@ -64,7 +66,7 @@ class CreateComment extends Component {
               ref={(c) => {
                   this.create = c;
               }}
-              className="create"
+              className="edit-comment"
               style={{ height: `${cHeight}px` }}
             >
                 <textarea
@@ -81,10 +83,11 @@ class CreateComment extends Component {
     }
 }
 
-CreateComment.propTypes = {
+EditComment.propTypes = {
     headerAction: PropTypes.object.isRequired,
     footerAction: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+    store: PropTypes.object.isRequired
 };
 
-export default CreateComment;
+export default EditComment;

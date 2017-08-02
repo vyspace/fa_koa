@@ -18,6 +18,8 @@ export default function home(state = {
         state.scrollTop = action.payload;
         return state;
     case HOME_GET:
+        state.isFetching = true;
+        return state;
     default:
         return state;
     }

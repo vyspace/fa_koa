@@ -772,7 +772,7 @@ a {
 .pop-layer {
   display: none;
   overflow: hidden;
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
   left: 0;
@@ -823,20 +823,49 @@ a {
     .comment-list a a:hover, .comment-list a a:focus {
       color: #2caef1; }
 
-.create {
+.edit-comment {
   background-color: #fff;
   padding: .8rem .4rem 0 .4rem;
   position: relative; }
-  .create textarea {
+  .edit-comment textarea {
     width: 100%;
     resize: none;
     height: 6.3rem; }
-  .create .edit-tip {
+  .edit-comment .edit-tip {
     position: absolute;
     bottom: 0;
     right: .4rem;
     font-size: .6rem;
     color: #999; }
+
+.edit-article {
+  background-color: #fff;
+  padding: .4rem;
+  overflow: hidden; }
+  .edit-article .content-box {
+    position: relative; }
+  .edit-article .title-box {
+    width: 100%;
+    height: 1.6rem;
+    border-bottom: 1px solid #F0F0F0;
+    margin-bottom: .4rem; }
+    .edit-article .title-box input {
+      width: 100%;
+      height: 100%;
+      border: none; }
+  .edit-article .tip-input {
+    width: 100%;
+    border: none; }
+  .edit-article .edit {
+    position: absolute;
+    width: 100%;
+    min-height: 1.6rem;
+    outline: none;
+    user-select: text;
+    overflow-y: auto;
+    cursor: text;
+    background: transparent;
+    top: 2rem; }
 
 .search-box {
   display: flex;
