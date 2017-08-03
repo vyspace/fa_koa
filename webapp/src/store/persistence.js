@@ -2,7 +2,8 @@
 
 const storeTag = 'FA_PERSIST';
 const isStore = 'FA_IS_PERSIST';
-const pageParams = 'FA_PAGE_PARAMS'
+const pageParams = 'FA_PAGE_PARAMS';
+const editArticle = 'FA_EDIT_ARTICLE';
 
 export function saveStore(obj) {
     const str = JSON.stringify(obj);
@@ -30,5 +31,13 @@ export function savePageParams(obj) {
 
 export function getPageParams() {
     return JSON.parse(sessionStorage.getItem(pageParams));
+}
+
+export function saveEditArticle(obj) {
+    localStorage.setItem(editArticle, JSON.stringify(obj));
+}
+
+export function getEditArticle() {
+    return JSON.parse(localStorage.getItem(editArticle));
 }
 

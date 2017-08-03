@@ -93,16 +93,20 @@ class Header extends Component {
         }
         return (
             <div className="header-view">
-                <ul
-                  className="header"
+                <div
                   ref={(c) => {
                       this.header = c;
                   }}
+                  className="header-box"
                 >
-                    {backBtn}
-                    {middle}
-                    {optBtn}
-                </ul>
+                    <ul className="header">
+                        {backBtn}
+                        {middle}
+                        {optBtn}
+                    </ul>
+                    <div className="toast"><div className="cont">这是一条提示信息！</div></div>
+                </div>
+
             </div>
         );
     }

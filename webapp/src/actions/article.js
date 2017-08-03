@@ -5,8 +5,9 @@ import { getArticleData } from '../utils/api';
 export const ARTICLE_GET = 'GET_COMMENT';
 export const ARTICLE_GET_SUCCESS = 'GET_COMMENT_SUCCESS';
 export const ARTICLE_GET_FAILURE = 'GET_COMMENT_FAILURE';
+export const PREVIEW_GET = 'PREVIEW_GET';
 
-function getArticle() {
+export function getArticle() {
     return {
         type: ARTICLE_GET
     };
@@ -34,6 +35,12 @@ export function getArtData(aid) {
         }, (err) => {
             dispatch(getArticleFailure(err));
         });
+    };
+}
+
+export function getPreviewData() {
+    return {
+        type: PREVIEW_GET
     };
 }
 

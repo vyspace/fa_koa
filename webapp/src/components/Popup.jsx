@@ -25,8 +25,17 @@ class Popup extends Component {
             document.body.style.overflow = '';
         }
     }
-    eventHandler(e) {
+    closePopup(callback) {
         const { toggle } = this.props;
+        this.layer.classList.remove('pop-show');
+        setTimeout(() => {
+            toggle({ toggle: false });
+            if(callback) {
+                callback();
+            }
+        }, 300);
+    }
+    eventHandler(e) {
         e.stopPropagation();
         const t = $(e.target),
             tag = t.data('tag');
@@ -34,13 +43,12 @@ class Popup extends Component {
         case 'photo':
             break;
         case 'article':
-            g.history.push('editarticle');
+            this.closePopup(() => {
+                g.history.push('editarticle');
+            });
             break;
         case 'cancel':
-            this.layer.classList.remove('pop-show');
-            setTimeout(() => {
-                toggle({ toggle: false });
-            }, 300);
+            this.closePopup();
             break;
         default:
             break;

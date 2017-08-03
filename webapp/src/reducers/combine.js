@@ -9,6 +9,7 @@ import popup from './popup';
 import comment from './comment';
 import search from './search';
 import article from './article';
+import editarticle from './editarticle';
 
 const rootReducer = combineReducers({
     header,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
     popup,
     comment,
     search,
-    article
+    article,
+    editarticle
 });
 
 export default rootReducer;

@@ -7,13 +7,16 @@ import SinglePhoto from './SinglePhoto';
 import PhotoBrowser from './PhotoBrowser';
 import { restore } from '../store/persistence';
 
+const tb = 87;
+let cHeight = 0,
+    action = '';
+
 class Article extends Component {
     componentWillMount() {
         const { store } = this.props;
         restore(store);
-        const action = this.props.store.record.original;
-        const { aid } = this.props.store[action].params,
-            { getArtData } = this.props.articleAction,
+        action = this.props.store.record.original;
+        const { getArtData, getPreviewData } = this.props.articleAction,
             { updateHeader } = this.props.headerAction,
             { updateFooter } = this.props.footerAction;
         updateHeader({
@@ -23,7 +26,14 @@ class Article extends Component {
             rBtn: null
         });
         updateFooter({ type: 'home' });
-        getArtData(aid);
+        if(action === 'editarticle') {
+            getPreviewData();
+        }
+        else {
+            const { aid } = this.props.store[action].params;
+            getArtData(aid);
+        }
+        cHeight = window.innerHeight - tb;
     }
     componentDidMount() {
         this.eventLayer.addEventListener('click', this.eventHandler.bind(this), false);
@@ -31,8 +41,19 @@ class Article extends Component {
     componentDidUpdate() {
         document.body.scrollTop = 0;
     }
+    getData() {
+        let data;
+        if(action === 'editarticle') {
+            data = this.props.store.editarticle.data;
+        }
+        else {
+            data = this.props.store.article.data;
+        }
+        return data;
+    }
     eventHandler(e) {
-        const { photos } = this.props.store.article.data;
+        const data = this.getData();
+        const { photos } = data;
         e.stopPropagation();
         const t = $(e.target);
         if (e.target.tagName === 'IMG' && t.data('tag') === 'thumbnail') {
@@ -48,8 +69,9 @@ class Article extends Component {
         }
     }
     render() {
-        const { isFetching, data } = this.props.store.article;
-        const html = [];
+        const html = [],
+            { isFetching } = this.props.store.article,
+            data = this.getData();
         if(isFetching) {
             html.push('loading');
         }
@@ -72,6 +94,7 @@ class Article extends Component {
               this.eventLayer = c;
           }}
           className="article-box"
+          style={{ minHeight: `${cHeight}px` }}
         >{html}</div>);
     }
 }

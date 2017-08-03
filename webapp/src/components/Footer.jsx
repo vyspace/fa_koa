@@ -6,7 +6,9 @@ import $ from 'zepto';
 
 const range = 1;
 let flag = true,
-    g;
+    g,
+    fileUpload,
+    editBox;
 
 class Footer extends Component {
     componentWillMount() {
@@ -15,6 +17,17 @@ class Footer extends Component {
     componentDidMount() {
         window.addEventListener('scroll', this.footerScroll.bind(this), false);
         this.footer.addEventListener('click', this.eventHandler.bind(this), false);
+    }
+    componentDidUpdate() {
+        const { footer } = this.props.store;
+        switch(footer.type) {
+        case 'editaricle':
+            fileUpload = $('#fileUpload');
+            editBox = $('#editBox');
+            break;
+        default:
+            break;
+        }
     }
     footerScroll(e) {
         e.stopPropagation();
@@ -43,6 +56,16 @@ class Footer extends Component {
         case 'search':
             g.history.push('search');
             break;
+        case 'album':
+            if(fileUpload && fileUpload.length > 0) {
+                fileUpload.trigger('click');
+            }
+            break;
+        case 'preview':
+            if(editBox && editBox.length > 0) {
+                editBox.triggerHandler('savePreviewData');
+            }
+            break;
         default:
             break;
         }
@@ -56,9 +79,9 @@ class Footer extends Component {
         case 'editaricle':
             html = (<ul className="footer">
                 <li className="f-item">拍照</li>
-                <li className="f-item">相册</li>
+                <li className="f-item" data-tag="album">相册</li>
                 <li className="f-item">表情</li>
-                <li className="f-item">预览</li>
+                <li className="f-item" data-tag="preview">预览</li>
             </ul>);
             break;
         case 'home':
