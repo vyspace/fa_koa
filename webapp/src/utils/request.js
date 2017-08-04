@@ -1,5 +1,7 @@
 'use strict';
 
+import fetch from 'isomorphic-fetch';
+
 function checkStatus(res) {
     if (res.status >= 200 && res.status < 300) {
         return res;

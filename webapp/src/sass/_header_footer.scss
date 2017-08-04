@@ -1,19 +1,66 @@
-$border: 1px solid #eee;
 .header-view{
   height: $hfHeight;
-  color: #000;
-  .bb {
+  .bdb {
     border-bottom: $border;
   }
+  user-focus: none;
+  @include prefix(user-select, none);
 }
-.header-box, .footer {
+.header-container, .footer-container {
   position: fixed;
   width: 100%;
   height: $hfHeight;
-  left: 0;
+  min-width: $minWidth;
+  max-width: $maxWidth;
   background-color: #fff;
+  color: #000;
   z-index: $zIndex1;
+  left: 50%;
+  transform: translateX(-50%);
 }
+
+.header, .footer {
+  width: 100%;
+  height: $hfHeight;
+  line-height: $hfHeight;
+  display: flex;
+  text-align: center;
+}
+
+.header {
+  .item {
+    width: $hfHeight;
+    height: $hfHeight;
+  }
+  .middle {
+    flex: 1;
+    font-size: 18px;
+    font-weight: 500;
+  }
+}
+
+.footer {
+  li {
+    flex: 1;
+  }
+}
+
+.footer-container {
+  border-top: $border;
+  bottom: 0;
+  transition-timing-function: ease-in-out;
+  transition-duration: 0s;
+  .active {
+    font-weight: 600;
+  }
+}
+
+.footer-hidden {
+  transition-duration: .1s;
+  transform: translate3d(-50%, $hfHeight, 0);
+}
+
+
 .toast {
   position: absolute;
   top: 0;
@@ -38,60 +85,4 @@ $border: 1px solid #eee;
     line-height: 40px;
   }
 }
-.header, .footer {
-  display: -webkit-flex;
-  display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-  align-content: stretch;
-  width: 100%;
-  height: $hfHeight;
-  li {
-    list-style: none;
-  }
-  .f-item {
-    flex: 1;
-  }
-}
 
-.header {
-  top: 0;
-  .item {
-    width: $hfHeight;
-    text-align: center;
-  }
-  .middle {
-    text-align: center;
-    line-height: $hfHeight;
-    font-size: 18px;
-  }
-  .flx {
-    display: flex;
-    align-items: center;
-  }
-  .right {
-    line-height: $hfHeight;
-    text-align: center;
-  }
-}
-
-.footer {
-  position: fixed;
-  bottom: 0;
-  border-top: $border;
-  transform: translate3d(0, 0, 0);
-  transition-timing-function: ease-in-out;
-  transition-duration: 0s;
-  li {
-    text-align: center;
-    line-height: $hfHeight;
-  }
-  .active {
-    font-weight: 800;
-  }
-}
-
-.footer-hidden {
-  transition-duration: .1s;
-  transform: translate3d(0, $hfHeight, 0);
-}

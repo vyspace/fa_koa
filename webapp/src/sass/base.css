@@ -1,8 +1,9 @@
 * {
-  -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent; }
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: none;
+  -webkit-font-smoothing: antialiased; }
 
 html, body {
   height: 100%; }
@@ -16,8 +17,16 @@ body, button, input, select, textarea {
   outline: none; }
 
 body {
-  background-color: #F0F0F0;
-  color: #333; }
+  background-color: #f0f0f0;
+  color: #333;
+  min-width: 320px;
+  max-width: 1024px;
+  overflow-x: hidden;
+  margin: 0 auto; }
+
+*:not(input, textarea) {
+  -webkit-user-select: none;
+  user-select: none; }
 
 ul li {
   list-style: none; }
@@ -27,6 +36,12 @@ a {
   color: #333; }
   a:hover, a:focus {
     color: #333; }
+
+.fl {
+  float: left; }
+
+.fr {
+  float: right; }
 
 .txt-right {
   text-align: right; }
@@ -66,7 +81,7 @@ a {
   .comp-head .left {
     width: 2.51rem; }
     .comp-head .left .via {
-      background-color: #F0F0F0;
+      background-color: #f0f0f0;
       width: 2.51rem;
       height: 2.51rem;
       border-radius: 1.255rem;
@@ -98,17 +113,53 @@ a {
 
 .header-view {
   height: 44px;
-  color: #000; }
-  .header-view .bb {
+  user-focus: none;
+  -webkit-user-select: none;
+  user-select: none; }
+  .header-view .bdb {
     border-bottom: 1px solid #eee; }
 
-.header-box, .footer {
+.header-container, .footer-container {
   position: fixed;
   width: 100%;
   height: 44px;
-  left: 0;
+  min-width: 320px;
+  max-width: 1024px;
   background-color: #fff;
-  z-index: 960; }
+  color: #000;
+  z-index: 960;
+  left: 50%;
+  transform: translateX(-50%); }
+
+.header, .footer {
+  width: 100%;
+  height: 44px;
+  line-height: 44px;
+  display: flex;
+  text-align: center; }
+
+.header .item {
+  width: 44px;
+  height: 44px; }
+.header .middle {
+  flex: 1;
+  font-size: 18px;
+  font-weight: 500; }
+
+.footer li {
+  flex: 1; }
+
+.footer-container {
+  border-top: 1px solid #eee;
+  bottom: 0;
+  transition-timing-function: ease-in-out;
+  transition-duration: 0s; }
+  .footer-container .active {
+    font-weight: 600; }
+
+.footer-hidden {
+  transition-duration: .1s;
+  transform: translate3d(-50%, 44px, 0); }
 
 .toast {
   position: absolute;
@@ -132,52 +183,6 @@ a {
     color: #fff;
     text-align: center;
     line-height: 40px; }
-
-.header, .footer {
-  display: -webkit-flex;
-  display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-  align-content: stretch;
-  width: 100%;
-  height: 44px; }
-  .header li, .footer li {
-    list-style: none; }
-  .header .f-item, .footer .f-item {
-    flex: 1; }
-
-.header {
-  top: 0; }
-  .header .item {
-    width: 44px;
-    text-align: center; }
-  .header .middle {
-    text-align: center;
-    line-height: 44px;
-    font-size: 18px; }
-  .header .flx {
-    display: flex;
-    align-items: center; }
-  .header .right {
-    line-height: 44px;
-    text-align: center; }
-
-.footer {
-  position: fixed;
-  bottom: 0;
-  border-top: 1px solid #eee;
-  transform: translate3d(0, 0, 0);
-  transition-timing-function: ease-in-out;
-  transition-duration: 0s; }
-  .footer li {
-    text-align: center;
-    line-height: 44px; }
-  .footer .active {
-    font-weight: 800; }
-
-.footer-hidden {
-  transition-duration: .1s;
-  transform: translate3d(0, 44px, 0); }
 
 .pswp {
   display: none;
@@ -842,7 +847,7 @@ a {
   margin-top: 8px; }
   .comment-list .comment {
     padding: .4rem;
-    border-bottom: 1px solid #F0F0F0; }
+    border-bottom: 1px solid #f0f0f0; }
   .comment-list .content {
     padding-left: 2.9rem; }
   .comment-list a {
@@ -858,7 +863,8 @@ a {
   .edit-comment textarea {
     width: 100%;
     resize: none;
-    height: 6.3rem; }
+    height: 6.3rem;
+    border: none; }
   .edit-comment .edit-tip {
     position: absolute;
     bottom: 0;
@@ -875,7 +881,7 @@ a {
   .edit-article .title-box {
     width: 100%;
     height: 1.6rem;
-    border-bottom: 1px solid #F0F0F0;
+    border-bottom: 1px solid #f0f0f0;
     margin-bottom: .4rem; }
     .edit-article .title-box input {
       width: 100%;
@@ -894,15 +900,20 @@ a {
     overflow-y: auto;
     cursor: text;
     background: transparent;
-    top: 2rem; }
+    top: 2rem;
+    -webkit-user-select: text;
+    user-select: text; }
     .edit-article .edit .mar {
       margin: .2rem 0; }
+    .edit-article .edit * {
+      -webkit-user-select: text;
+      user-select: text; }
 
 .search-box {
   display: flex;
   height: 30px;
   width: 100%;
-  border: 1px solid #F0F0F0;
+  border: 1px solid #f0f0f0;
   border-radius: 15px; }
   .search-box .icon-box {
     width: 28px; }

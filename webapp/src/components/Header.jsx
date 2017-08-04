@@ -50,20 +50,20 @@ class Header extends Component {
         e.stopPropagation();
         if(document.body.scrollTop >= range) {
             if(flag) {
-                this.header.classList.add('bb');
+                this.header.classList.add('bdb');
                 flag = false;
             }
         }
         else if(!flag) {
-            this.header.classList.remove('bb');
+            this.header.classList.remove('bdb');
             flag = true;
         }
     }
     render() {
         const { header } = this.props.store;
         let backBtn = <li className="item" />,
-            optBtn = <li className="item right" />,
-            middle = <li className="f-item middle">{header.title}</li>;
+            optBtn = <li className="item" />,
+            middle = <li className="middle">{header.title}</li>;
         if(header.isBack) {
             backBtn = (<li className="item left" data-tag="back">
                         <i className="icon-back" data-tag="back" />
@@ -97,14 +97,14 @@ class Header extends Component {
                   ref={(c) => {
                       this.header = c;
                   }}
-                  className="header-box"
+                  className="header-container"
                 >
                     <ul className="header">
                         {backBtn}
                         {middle}
                         {optBtn}
                     </ul>
-                    <div className="toast"><div className="cont">这是一条提示信息！</div></div>
+                    <div className="toast" style={{ display: 'none' }}><div className="cont">这是一条提示信息！</div></div>
                 </div>
 
             </div>

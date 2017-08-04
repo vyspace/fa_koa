@@ -113,6 +113,7 @@ class EditArticle extends Component {
         const t = $(e.target);
         contDiv.style.height = `${contHeight}px`;
         setTimeout(() => {
+            document.body.scrollTop = 44;
             if(!edit.range) {
                 this.getsr();
             }
@@ -121,7 +122,7 @@ class EditArticle extends Component {
             }
         }, 20);
         if($.trim(t.text()) === '') {
-            tip.value = ' ';
+            tip.placeholder = '';
         }
         if(edit.mY > contBTop) {
             const h = edit.mY - contBTop;
@@ -135,7 +136,7 @@ class EditArticle extends Component {
         e.stopPropagation();
         const t = $(e.target);
         if (!$.trim(t.text()) && !edit.imgReg.test(t.html())) {
-            tip.value = '';
+            tip.placeholder = '正文...';
         }
         contDiv.style.height = `${contMHeight}px`;
     }

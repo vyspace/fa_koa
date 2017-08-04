@@ -6,6 +6,7 @@
     width: 100%;
     resize: none;
     height: $fontSize * 1.5 * 6;
+    border: none;
   }
   .edit-tip {
     position: absolute;
@@ -49,8 +50,12 @@
     cursor: text;
     background: transparent;
     top: 2rem;
+    @include prefix(user-select, text);
     .mar {
       margin: .2rem 0;
+    }
+    * {
+      @include prefix(user-select, text);
     }
   }
 }

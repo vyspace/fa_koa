@@ -78,25 +78,26 @@ class Footer extends Component {
             break;
         case 'editaricle':
             html = (<ul className="footer">
-                <li className="f-item">拍照</li>
-                <li className="f-item" data-tag="album">相册</li>
-                <li className="f-item">表情</li>
-                <li className="f-item" data-tag="preview">预览</li>
+                <li className="item-base">拍照</li>
+                <li className="item-base" data-tag="album">相册</li>
+                <li className="item-base">表情</li>
+                <li className="item-base" data-tag="preview">预览</li>
             </ul>);
             break;
         case 'home':
         default:
-            html = (<ul className="footer">
-                <li className="f-item active" data-tag="home">主页</li>
-                <li className="f-item" data-tag="create">创建</li>
-                <li className="f-item" data-tag="search">搜索</li>
-                <li className="f-item" data-tag="my">我的</li></ul>);
+            html = (<ul className="footer footer-base">
+                <li className="active" data-tag="home">主页</li>
+                <li data-tag="create">创建</li>
+                <li data-tag="search">搜索</li>
+                <li data-tag="my">我的</li></ul>);
             break;
         }
         return (<div
           ref={(c) => {
               this.footer = c;
           }}
+          className="footer-container"
         >
             {html}
         </div>);
