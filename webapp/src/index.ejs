@@ -35,6 +35,7 @@
                   e.preventDefault();
               }
           }, true);
+
           document.addEventListener('touchend',function (e) {
               var now=(new Date()).getTime();
               if(now-lastTouchEnd<=300){
@@ -42,8 +43,9 @@
               }
               lastTouchEnd=now;
           }, true);
-          window.FaKoa = Object.seal({
-              history, fontSize:fSize
+          win.FaKoa = Object.seal({
+              history: null,
+              fontSize: fSize
           });
       })(document, window);
   </script>

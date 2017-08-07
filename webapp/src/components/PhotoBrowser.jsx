@@ -3,9 +3,22 @@
 import React, { Component } from 'react';
 import { PhotoSwipe, PhotoSwipeUI } from 'photoswipe';
 
-const _gallery = Symbol('gallery'),
-    _options = Symbol('options'),
-    _pswp = Symbol('pswp');
+const options = {
+    index: 0,
+    getThumbBoundsFn: null,
+    showHideOpacity: true,
+    allowPanToNext: false,
+    loop: false,
+    escKey: false,
+    arrowKeys: false,
+    shareEl: false,
+    arrowEl: false,
+    fullscreenEl: false,
+    preloaderEl: false,
+    history: false,
+    focus: false,
+    clickToCloseNonZoomable: false
+};
 
 class PhotoBrowser extends Component {
     static init(items, i) {
@@ -17,28 +30,12 @@ class PhotoBrowser extends Component {
                 x: rect.left, y: rect.top + pageYScroll, w: rect.width
             };
         };
-        this[_options] = {
-            index: i,
-            getThumbBoundsFn: thunbBound,
-            showHideOpacity: true,
-            allowPanToNext: false,
-            loop: false,
-            escKey: false,
-            arrowKeys: false,
-            shareEl: false,
-            arrowEl: false,
-            fullscreenEl: false,
-            preloaderEl: false,
-            history: false,
-            focus: false,
-            clickToCloseNonZoomable: false
-        };
-
-        this[_gallery] = new PhotoSwipe(document.getElementById('pswp'), PhotoSwipeUI, items, this[_options]);
-        this[_gallery].init();
+        options.index = i;
+        options.getThumbBoundsFn = thunbBound;
+        const gallery = new PhotoSwipe(document.getElementById('pswp'), PhotoSwipeUI, items, options);
+        gallery.init();
     }
     render() {
-        /* const {  } = this.props;*/
         return (<div className="pswp" tabIndex="-1" role="dialog" aria-hidden="true" id="pswp">
             <div className="pswp__bg" />
             <div className="pswp__scroll-wrap">

@@ -127,9 +127,7 @@ a {
   max-width: 1024px;
   background-color: #fff;
   color: #000;
-  z-index: 960;
-  left: 50%;
-  transform: translateX(-50%); }
+  z-index: 960; }
 
 .header, .footer {
   width: 100%;

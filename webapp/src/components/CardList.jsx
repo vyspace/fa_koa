@@ -14,7 +14,7 @@ class CardList extends Component {
             { history } = this.props;
         window.FaKoa.history = history;
         updateHeader({
-            type: 'home',
+            type: 'base',
             title: 'FAKOA',
             isBack: false,
             rBtn: null

@@ -80,7 +80,7 @@ class Header extends Component {
             optBtn = (<li className="item right" data-tag="rbtn">{cont}</li>);
         }
         if(header.type === 'home') {
-            middle = <li className="f-item middle"><h1 className="shimmer">{header.title}</h1></li>;
+            middle = <li className="middle"><h1 className="shimmer">{header.title}</h1></li>;
         }
         if(header.type === 'search') {
             middle = (<li className="f-item middle flx">

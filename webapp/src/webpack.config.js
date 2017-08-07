@@ -43,7 +43,12 @@ module.exports = {
     devServer: {
         historyApiFallback: true,
         hot: true,
-        inline: true
+        inline: true,
+        contentBase: __dirname,
+        compress: true,
+        port: 8080,
+        host: '0.0.0.0',
+        disableHostCheck: true
     },
     resolve: {
         extensions: ['.js', '.jsx']

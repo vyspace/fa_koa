@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=320.1, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>react app</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
@@ -10,22 +10,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="full-screen" content="yes">
     <meta name="x5-fullscreen" content="true">
+    <meta content="yes" name="apple-touch-fullscreen">
   <link href="./css/base.css" rel="stylesheet"></head>
-  <body onselectstart="return false">
+  <body onselectstart="return true">
   <div id="root"></div>
   <script type="text/javascript">
       (function (doc, win) {
           var docEl = doc.documentElement,
               resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+              fSize = 0,
               recalc = function () {
                   var clientWidth = docEl.clientWidth;
                   if (!clientWidth) return;
-                  var fontSize = 17 * (clientWidth / 320);
-                  fontSize = (fontSize > 27) ? 27: fontSize;
-                  docEl.style.fontSize = fontSize + 'px';
+                  fSize = Math.round(17 * (clientWidth / 320));
+                  fSize = (fSize > 27) ? 27: fSize;
+                  docEl.style.fontSize = fSize + 'px';
               };
           win.addEventListener(resizeEvt, recalc, false);
           recalc();
+
+          var lastTouchEnd=0;
+          document.addEventListener('touchstart',function (e) {
+              if(e.touches.length > 1){
+                  e.preventDefault();
+              }
+          }, true);
+
+          document.addEventListener('touchend',function (e) {
+              var now=(new Date()).getTime();
+              if(now-lastTouchEnd<=300){
+                  e.preventDefault();
+              }
+              lastTouchEnd=now;
+          }, true);
+          win.FaKoa = Object.seal({
+              history: null,
+              fontSize: fSize
+          });
       })(document, window);
   </script>
   <script type="text/javascript" src="./js/lib.js"></script>
