@@ -83,7 +83,7 @@ class Header extends Component {
             middle = <li className="middle"><h1 className="shimmer">{header.title}</h1></li>;
         }
         if(header.type === 'search') {
-            middle = (<li className="f-item middle flx">
+            middle = (<li className="f-item middle search">
                 <div className="search-box">
                     <div className="icon-box" />
                     <div className="input-box"><input type="text" placeholder="请输入..." /></div>

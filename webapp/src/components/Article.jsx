@@ -25,7 +25,7 @@ class Article extends Component {
             isBack: true,
             rBtn: null
         });
-        updateFooter({ type: 'home' });
+        updateFooter({ type: 'base' });
         if(action === 'editarticle') {
             getPreviewData();
         }

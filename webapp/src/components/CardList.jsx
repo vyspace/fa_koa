@@ -19,7 +19,7 @@ class CardList extends Component {
             isBack: false,
             rBtn: null
         });
-        updateFooter({ type: 'home' });
+        updateFooter({ type: 'base' });
         getHomeData();
     }
     componentDidMount() {

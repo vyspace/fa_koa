@@ -15,8 +15,11 @@ class Footer extends Component {
         g = window.FaKoa;
     }
     componentDidMount() {
-        window.addEventListener('scroll', this.footerScroll.bind(this), false);
-        this.footer.addEventListener('click', this.eventHandler.bind(this), false);
+        const { footer } = this.props.store;
+        if(footer.type !== 'none') {
+            window.addEventListener('scroll', this.footerScroll.bind(this), false);
+            this.footer.addEventListener('click', this.eventHandler.bind(this), false);
+        }
     }
     componentDidUpdate() {
         const { footer } = this.props.store;
@@ -56,6 +59,9 @@ class Footer extends Component {
         case 'search':
             g.history.push('search');
             break;
+        case 'my':
+            g.history.push('my');
+            break;
         case 'album':
             if(fileUpload && fileUpload.length > 0) {
                 fileUpload.trigger('click');
@@ -75,6 +81,7 @@ class Footer extends Component {
         let html;
         switch(footer.type) {
         case 'none':
+            html = null;
             break;
         case 'editaricle':
             html = (<ul className="footer">
@@ -84,7 +91,7 @@ class Footer extends Component {
                 <li className="item-base" data-tag="preview">预览</li>
             </ul>);
             break;
-        case 'home':
+        case 'base':
         default:
             html = (<ul className="footer footer-base">
                 <li className="active" data-tag="home">主页</li>
@@ -93,14 +100,19 @@ class Footer extends Component {
                 <li data-tag="my">我的</li></ul>);
             break;
         }
-        return (<div
-          ref={(c) => {
-              this.footer = c;
-          }}
-          className="footer-container"
-        >
-            {html}
-        </div>);
+        if(html) {
+            return (<div
+              ref={(c) => {
+                  this.footer = c;
+              }}
+              className="footer-container"
+            >
+                {html}
+            </div>);
+        }
+        else {
+            return <div />;
+        }
     }
 }
 

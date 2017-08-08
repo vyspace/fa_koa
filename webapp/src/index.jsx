@@ -3,9 +3,11 @@
 import React from 'react';
 import { render } from 'react-dom';
 import createHistory from 'history/createBrowserHistory';
+import FastClick from 'fastclick';
 import configureStore from './store/configureStore';
 import { saveStore } from './store/persistence';
 import Root from './containers/Root';
+import { isMobileBrowser } from './utils/tools';
 
 const browserHistory = createHistory(),
     store = configureStore();
@@ -14,6 +16,7 @@ store.subscribe(() => saveStore(store.getState()));
 
 window.FaKoa.history = browserHistory;
 
+// 添加assign方法
 if (typeof Object.assign !== 'function') {
     Object.assign = function (target, ...args) {
         if (target === null) {
@@ -33,6 +36,28 @@ if (typeof Object.assign !== 'function') {
         return target;
     };
 }
+
+// 移动端阻止双击变焦
+if(isMobileBrowser()) {
+    window.FaKoa.isMobile = true;
+    let lastTouchEnd = 0;
+    document.addEventListener('touchstart', (e) => {
+        if(e.touches.length > 1) {
+            e.preventDefault();
+        }
+    }, true);
+
+    document.addEventListener('touchend', (e) => {
+        const now = (new Date()).getTime();
+        if(now - lastTouchEnd <= 300) {
+            e.preventDefault();
+        }
+        lastTouchEnd = now;
+    }, true);
+}
+
+// 初始化FastClick事件
+FastClick.attach(document.body);
 
 render(
     <Root store={store} history={browserHistory} />,

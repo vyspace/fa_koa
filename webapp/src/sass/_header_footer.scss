@@ -35,6 +35,30 @@
     font-size: 18px;
     font-weight: 500;
   }
+  .search{
+    display: flex;
+    align-items: center;
+  }
+  .search-box {
+    display: flex;
+    height: 30px;
+    width: 100%;
+    border: 1px solid $bgColor;
+    border-radius: 15px;
+    .icon-box {
+      width: 28px;
+    }
+    .input-box {
+      flex: 1;
+      display: flex;
+    }
+    input {
+      width: 100%
+    }
+    .fill {
+      width: 15px;
+    }
+  }
 }
 
 .footer {

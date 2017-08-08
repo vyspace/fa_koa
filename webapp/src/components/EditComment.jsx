@@ -34,7 +34,7 @@ class EditComment extends Component {
             }
         });
         updateFooter({
-            type: 'create'
+            type: 'none'
         });
     }
     componentDidMount() {

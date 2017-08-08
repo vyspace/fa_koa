@@ -23,7 +23,7 @@ class CommentList extends Component {
             isBack: true,
             rBtn: null
         });
-        updateFooter({ type: 'home' });
+        updateFooter({ type: 'base' });
         getCommentData();
     }
     componentDidMount() {
