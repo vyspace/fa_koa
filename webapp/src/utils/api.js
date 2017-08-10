@@ -25,3 +25,10 @@ export const getArticleData = (aid, resolve, reject) => {
     request(params, resolve, reject);
 };
 
+export const getReplyList = (uid, resolve, reject) => {
+    const params = {
+        url: `${URL_ROOT}/testdata/replylist`
+    };
+    request(params, resolve, reject);
+};
+

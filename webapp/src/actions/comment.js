@@ -2,9 +2,9 @@
 
 import { getCommentList } from '../utils/api';
 
-export const COMMENT_GET = 'GET_COMMENT';
-export const COMMENT_GET_SUCCESS = 'GET_COMMENT_SUCCESS';
-export const COMMENT_GET_FAILURE = 'GET_COMMENT_FAILURE';
+export const COMMENT_GET = 'COMMENT_GET';
+export const COMMENT_GET_SUCCESS = 'COMMENT_GET_SUCCESS';
+export const COMMENT_GET_FAILURE = 'COMMENT_GET_FAILURE';
 export const COMMENT_SCROLL_TOP = 'COMMENT_SCROLL_TOP';
 export const COMMENT_PARAMS = 'COMMENT_PARAMS';
 

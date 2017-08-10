@@ -94,8 +94,13 @@ a {
     flex-direction: column;
     align-self: center;
     padding-left: 0.5rem; }
-  .comp-head .right {
-    width: 2.51rem; }
+  .comp-head .cp-right {
+    width: 2.51rem;
+    display: flex;
+    align-items: center; }
+  .comp-head .r-btn {
+    text-align: center;
+    width: 100%; }
 
 .mar-b {
   margin-bottom: 0.4rem; }
@@ -872,6 +877,53 @@ a {
     .comment-list a a:hover, .comment-list a a:focus {
       color: #2caef1; }
 
+.reply-card {
+  background-color: #fff;
+  padding: .4rem;
+  margin-bottom: .4rem; }
+  .reply-card .text {
+    margin: .4rem 0; }
+    .reply-card .text .rp {
+      padding-right: .4rem; }
+    .reply-card .text .new-flag {
+      background: #f00;
+      color: #fff;
+      padding: 0px 6px 1px 4px;
+      border-radius: 4px;
+      font-size: .6rem;
+      display: inline-block;
+      line-height: .6rem;
+      margin-right: .2rem; }
+  .reply-card .content {
+    display: flex; }
+    .reply-card .content .left {
+      width: 3rem;
+      height: 3rem; }
+    .reply-card .content .rp-right {
+      flex: 1;
+      padding-left: .5rem;
+      overflow: hidden;
+      height: 3rem;
+      color: #777;
+      font-size: .6rem;
+      display: flex;
+      align-items: center; }
+      .reply-card .content .rp-right .m-ellipsis {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden; }
+    .reply-card .content .via {
+      width: 100%;
+      padding-bottom: 100%;
+      position: relative;
+      margin: 0 2px 2px 2px; }
+      .reply-card .content .via img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover; }
+
 .edit-comment {
   background-color: #fff;
   padding: .8rem .4rem 0 .4rem;
@@ -933,5 +985,42 @@ a {
   .article-box p {
     color: #555;
     padding: .4rem 0; }
+
+.my-head {
+  display: flex;
+  padding: .5rem;
+  background-color: #fff; }
+  .my-head .left {
+    width: 3.5rem; }
+  .my-head .via {
+    background-color: #f0f0f0;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 1.75rem;
+    overflow: hidden; }
+    .my-head .via img {
+      width: 3.5rem; }
+  .my-head .right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    padding-left: 0.5rem; }
+
+.my-list {
+  background: #fff;
+  padding-left: .5rem; }
+  .my-list li {
+    padding: .5rem 0; }
+  .my-list .bb {
+    border-bottom: 1px solid #eee; }
+
+.my-btn {
+  padding: .5rem 0;
+  background-color: #fff;
+  text-align: center; }
+
+.my-mar {
+  margin-bottom: .4rem; }
 
 /*# sourceMappingURL=base.css.map */

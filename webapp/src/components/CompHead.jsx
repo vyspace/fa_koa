@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 class CompHead extends Component {
     render() {
         let profileImg = './img/avator.jpg';
-        const { profile, nickname, dateTime } = this.props;
+        const { profile, nickname, dateTime, rCont } = this.props;
         if(profile !== '') {
             profileImg = profile;
         }
@@ -19,7 +19,7 @@ class CompHead extends Component {
                   <div>{nickname}</div>
                   <div>{dateTime}</div>
                 </div>
-                <div className="right" />
+                <div className="cp-right" data-nickname={nickname}><div className="r-btn">{rCont}</div></div>
             </div>
         );
     }
@@ -28,7 +28,12 @@ class CompHead extends Component {
 CompHead.propTypes = {
     profile: PropTypes.string.isRequired,
     nickname: PropTypes.string.isRequired,
-    dateTime: PropTypes.string.isRequired
+    dateTime: PropTypes.string,
+    rCont: PropTypes.string
 };
 
+CompHead.defaultProps = {
+    rCont: '',
+    dataTime: ''
+}
 export default CompHead;

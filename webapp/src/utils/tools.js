@@ -5,3 +5,15 @@ export function isMobileBrowser() {
     return /(iphone|ios|android|mini|mobile|mobi|Nokia|Symbian|iPod|iPad|Windows\s+Phone|MQQBrowser|wp7|wp8|UCBrowser7|UCWEB|360\s+Aphone\s+Browser|AppleWebKit)/i.test(ua);
 }
 
+export function pageRedirect(record, history) {
+    let flag = false;
+    if(!record) {
+        flag = true;
+        history.push('/');
+    }
+    else if(record.original === '') {
+        flag = true;
+        history.push('/');
+    }
+    return flag;
+}

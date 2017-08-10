@@ -6,15 +6,16 @@ import { restore } from '../store/persistence';
 
 let createDiv = null,
     tip = '写评论…';
-const tb = 87;
+const tb = 44;
 
 class EditComment extends Component {
     componentWillMount() {
-        const { store } = this.props;
+        const { store } = this.props,
+            action = this.props.store.record.original;
         restore(store);
         const { updateHeader } = this.props.headerAction,
             { updateFooter } = this.props.footerAction,
-            { type, nickname } = this.props.store.comment.params;
+            { type, nickname } = this.props.store[action].params;
         let tit = '评论';
         tip = '写评论…';
         if(type === 'reply') {

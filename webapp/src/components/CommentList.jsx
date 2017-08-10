@@ -6,17 +6,21 @@ import Card from './Card/Card';
 import PhotoBrowser from './PhotoBrowser';
 import Comment from './Comment/Comment';
 import { restore } from '../store/persistence';
+import { pageRedirect } from '../utils/tools';
 
 let showTimer = 0;
 let tData;
 
 class CommentList extends Component {
     componentWillMount() {
-        const { store } = this.props,
-            { getCommentData } = this.props.commentAction,
+        const { history, store } = this.props;
+        restore(store);
+        if(pageRedirect(store, history)) {
+            return;
+        }
+        const { getCommentData } = this.props.commentAction,
             { updateHeader } = this.props.headerAction,
             { updateFooter } = this.props.footerAction;
-        restore(store);
         updateHeader({
             type: 'base',
             title: '评论列表',
@@ -27,7 +31,9 @@ class CommentList extends Component {
         getCommentData();
     }
     componentDidMount() {
-        this.eventLayer.addEventListener('click', this.eventHandler.bind(this), false);
+        if(this.eventLayer) {
+            this.eventLayer.addEventListener('click', this.eventHandler.bind(this), false);
+        }
     }
     componentDidUpdate() {
         const { scrollTop } = this.props.store.comment;
@@ -109,8 +115,12 @@ class CommentList extends Component {
         }, 100);
     }
     render() {
-        const { history } = this.props,
-            { home, comment } = this.props.store;
+        const { history, store } = this.props;
+        if(store.record.original === '') {
+            return null;
+        }
+        const home = store.home,
+            comment = store.comment;
         tData = home.data[home.params.rows];
         let css = { marginBottom: 0 },
             vDom = null,

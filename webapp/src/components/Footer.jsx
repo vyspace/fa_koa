@@ -4,7 +4,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import $ from 'zepto';
 
-const range = 1;
+const range = 1,
+    activeArr = ['active'];
 let flag = true,
     g,
     fileUpload,
@@ -52,15 +53,16 @@ class Footer extends Component {
             tag = t.data('tag');
         switch(tag) {
         case 'home':
+            this.baseActive(0, '/');
             break;
         case 'create':
             toggle({ toggle: true });
             break;
-        case 'search':
-            g.history.push('search');
+        case 'reply':
+            this.baseActive(2, 'reply');
             break;
         case 'my':
-            g.history.push('my');
+            this.baseActive(3, 'my');
             break;
         case 'album':
             if(fileUpload && fileUpload.length > 0) {
@@ -74,6 +76,13 @@ class Footer extends Component {
             break;
         default:
             break;
+        }
+    }
+    baseActive(index, action) {
+        if(!activeArr[index]) {
+            activeArr.length = 0;
+            activeArr[index] = 'active';
+            g.history.push(action);
         }
     }
     render() {
@@ -94,10 +103,11 @@ class Footer extends Component {
         case 'base':
         default:
             html = (<ul className="footer footer-base">
-                <li className="active" data-tag="home">主页</li>
+                <li className={activeArr[0] ? 'active' : ''} data-tag="home">主页</li>
                 <li data-tag="create">创建</li>
-                <li data-tag="search">搜索</li>
-                <li data-tag="my">我的</li></ul>);
+                <li className={activeArr[2] ? 'active' : ''} data-tag="reply">评论</li>
+                <li className={activeArr[3] ? 'active' : ''} data-tag="my">我的</li>
+                </ul>);
             break;
         }
         if(html) {

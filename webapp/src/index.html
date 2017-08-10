@@ -12,7 +12,7 @@
     <meta name="x5-fullscreen" content="true">
     <meta content="yes" name="apple-touch-fullscreen">
   <link href="./css/base.css" rel="stylesheet"></head>
-  <body onselectstart="return true">
+  <body>
   <div id="root"></div>
   <script type="text/javascript">
       (function (doc, win) {
@@ -29,23 +29,11 @@
           win.addEventListener(resizeEvt, recalc, false);
           recalc();
 
-          var lastTouchEnd=0;
-          document.addEventListener('touchstart',function (e) {
-              if(e.touches.length > 1){
-                  e.preventDefault();
-              }
-          }, true);
-
-          document.addEventListener('touchend',function (e) {
-              var now=(new Date()).getTime();
-              if(now-lastTouchEnd<=300){
-                  e.preventDefault();
-              }
-              lastTouchEnd=now;
-          }, true);
+          // 全局对象声明
           win.FaKoa = Object.seal({
               history: null,
-              fontSize: fSize
+              fontSize: fSize,
+              isMobile: false
           });
       })(document, window);
   </script>

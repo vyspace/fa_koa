@@ -2,9 +2,9 @@
 
 import { getArticleData } from '../utils/api';
 
-export const ARTICLE_GET = 'GET_COMMENT';
-export const ARTICLE_GET_SUCCESS = 'GET_COMMENT_SUCCESS';
-export const ARTICLE_GET_FAILURE = 'GET_COMMENT_FAILURE';
+export const ARTICLE_GET = 'ARTICLE_GET';
+export const ARTICLE_GET_SUCCESS = 'ARTICLE_GET_SUCCESS';
+export const ARTICLE_GET_FAILURE = 'ARTICLE_GET_FAILURE';
 export const PREVIEW_GET = 'PREVIEW_GET';
 
 export function getArticle() {

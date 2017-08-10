@@ -7,7 +7,7 @@ import record from './record';
 import home from './home';
 import popup from './popup';
 import comment from './comment';
-import search from './search';
+import reply from './reply';
 import article from './article';
 import editarticle from './editarticle';
 
@@ -18,7 +18,7 @@ const rootReducer = combineReducers({
     home,
     popup,
     comment,
-    search,
+    reply,
     article,
     editarticle
 });

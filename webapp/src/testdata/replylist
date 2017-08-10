@@ -1,0 +1,41 @@
+{
+    "statusCode": 200,
+    "msg": "OK",
+    "data": [{
+        "userId": 1,
+        "profile": "",
+        "nickname": "中华小当家",
+        "dateTime": "20小时前",
+        "toMe": "模块旨在提供一个更加有效的方式制定、调整和分布一个容器里的项目布局",
+        "infoId": 33,
+        "photo": "./img/t1.jpg",
+        "text": "Christina Photo by @FransLanting Wonderful color ! To let tourists get a better view，the bus drove slowly.What a beautiful town, let tourists get a better view，the bus drove tourists get a better view，the bus drove"
+    }, {
+        "userId": 2,
+        "profile": "./img/profile.jpg",
+        "nickname": "魔鬼终结者",
+        "dateTime": "20小时前",
+        "toMe": "由于ie6-7不显示content内容，所以要添加标签兼容ie6-7（如：<span>…<span/>）；兼容ie8需要将::after替换成:after",
+        "infoId": 33,
+        "photo": "./img/t4.jpg",
+        "text": "To leve tourists get a better view，the bus drove"
+    }, {
+       "userId": 1,
+       "profile": "",
+       "nickname": "中华小当家",
+       "dateTime": "20小时前",
+       "toMe": "模块旨在提供一个更加有效的方式制定、调整和分布一个容器里的项目布局",
+       "infoId": 33,
+       "photo": "./img/t1.jpg",
+       "text": "Christina Photo by @FransLanting Wonderful color ! To let tourists get a better view，the bus drove slowly.What a beautiful town, let tourists get a better view，the bus drove tourists get a better view，the bus drove"
+   }, {
+       "userId": 2,
+       "profile": "./img/profile.jpg",
+       "nickname": "魔鬼终结者",
+       "dateTime": "20小时前",
+       "toMe": "由于ie6-7不显示content内容，所以要添加标签兼容ie6-7（如：<span>…<span/>）；兼容ie8需要将::after替换成:after",
+       "infoId": 33,
+       "photo": "./img/t4.jpg",
+       "text": "To leve tourists get a better view，the bus drove"
+   }]
+}
