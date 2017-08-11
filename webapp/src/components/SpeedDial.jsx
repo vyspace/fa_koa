@@ -22,19 +22,28 @@ class SpeedDial extends Component {
         return { __html: liArr.join('') };
     }
     render() {
-        const { photos } = this.props;
+        const { photos, type } = this.props;
+        let cn = 'speed-dial';
+        if(type === 'photoalbum') {
+            cn = 'speed-dial pa-card';
+        }
         return (<ul
           ref={(c) => {
               this.eventLayer = c;
           }}
-          className="speed-dial"
+          className={cn}
           dangerouslySetInnerHTML={this.photosHandler(photos)}
         />);
     }
 }
 
 SpeedDial.propTypes = {
-    photos: PropTypes.array.isRequired
+    photos: PropTypes.array.isRequired,
+    type: PropTypes.string
+};
+
+SpeedDial.defaultProps = {
+    type: ''
 };
 
 export default SpeedDial;

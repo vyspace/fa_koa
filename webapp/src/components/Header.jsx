@@ -3,35 +3,48 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import $ from 'zepto';
+import Tab from './Tab';
 
 const range = 10;
 let flag = true,
-    g;
+    g,
+    tempTag = '',
+    tabLis = null;
 
 class Header extends Component {
     componentWillMount() {
         g = window.FaKoa;
     }
     componentDidMount() {
-        this.header.addEventListener('click', this.eventHandler.bind(this), false);
-        window.addEventListener('scroll', this.scrollHandler.bind(this), false);
+        this.eventLayer.addEventListener('click', this.eventHandler.bind(this), true);
+        window.addEventListener('scroll', this.scrollHandler.bind(this), true);
+    }
+    componentDidUpdate() {
+        const { header } = this.props.store;
+        if(header.type === 'photoalbum') {
+            tabLis = $(this.eventLayer).find('.middle').find('li');
+        }
     }
     eventHandler(e) {
         e.stopPropagation();
-        let target = e.target,
-            t = $(target);
-        if(target.tagName === 'I') {
-            target = e.target.parentElement;
-            t = $(target);
-        }
-        if (target.tagName === 'LI' && t.data('tag') === 'back') {
-            this.back();
-        }
-        if (target.tagName === 'LI' && t.data('tag') === 'rbtn') {
-            this.opt();
+        const t = $(e.target),
+            tag = t.data('tag');
+        switch (tag) {
+        case 'back':
+            this.backHandler();
+            break;
+        case 'rbtn':
+            this.rBtnHandler();
+            break;
+        case 'album':
+        case 'profile':
+            this.tabHandler(t, tag);
+            break;
+        default:
+            break;
         }
     }
-    back() {
+    backHandler() {
         const { backHandler } = this.props.store.header;
         if(backHandler) {
             backHandler();
@@ -40,10 +53,25 @@ class Header extends Component {
             g.history.goBack();
         }
     }
-    opt() {
+    rBtnHandler() {
         const { rBtn } = this.props.store.header;
         if(rBtn && rBtn.handler) {
             rBtn.handler();
+        }
+    }
+    tabHandler(t, tag) {
+        if(tempTag !== tag) {
+            tempTag = tag;
+            tabLis.removeClass('active');
+            t.addClass('active');
+            switch (tag) {
+            case 'album':
+                break;
+            case 'profile':
+                break;
+            default:
+                break;
+            }
         }
     }
     scrollHandler(e) {
@@ -63,7 +91,8 @@ class Header extends Component {
         const { header } = this.props.store;
         let backBtn = <li className="item" />,
             optBtn = <li className="item" />,
-            middle = <li className="middle">{header.title}</li>;
+            middle,
+            tabArr;
         if(header.isBack) {
             backBtn = (<li className="item left" data-tag="back">
                         <i className="icon-back" data-tag="back" />
@@ -79,10 +108,23 @@ class Header extends Component {
             }
             optBtn = (<li className="item right" data-tag="rbtn">{cont}</li>);
         }
-        if(header.type === 'home') {
+        switch (header.type) {
+        case 'home':
             middle = <li className="middle"><h1 className="shimmer">{header.title}</h1></li>;
-        }
-        if(header.type === 'search') {
+            break;
+        case 'photoalbum':
+            tabArr = [{
+                tag: 'album',
+                value: '相册'
+            }, {
+                tag: 'profile',
+                value: '头像'
+            }];
+            middle = (<li className="middle">
+                <Tab data={tabArr} />
+            </li>);
+            break;
+        case 'search':
             middle = (<li className="f-item middle search">
                 <div className="search-box">
                     <div className="icon-box" />
@@ -90,12 +132,17 @@ class Header extends Component {
                     <div className="fill" />
                 </div>
             </li>);
+            break;
+        case 'base':
+        default:
+            middle = <li className="middle">{header.title}</li>;
+            break;
         }
         return (
             <div className="header-view">
                 <div
                   ref={(c) => {
-                      this.header = c;
+                      this.eventLayer = c;
                   }}
                   className="header-container"
                 >

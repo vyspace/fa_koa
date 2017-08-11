@@ -34,6 +34,7 @@ CompHead.propTypes = {
 
 CompHead.defaultProps = {
     rCont: '',
-    dataTime: ''
-}
+    dateTime: ''
+};
+
 export default CompHead;

@@ -9,6 +9,7 @@ import Article from '../containers/Article';
 import Reply from '../containers/Reply';
 import My from '../containers/My';
 import EditArticle from '../containers/EditArticle';
+import PhotoAlbum from '../containers/PhotoAlbum';
 import NotFound from '../components/NotFound';
 
 export default
@@ -20,5 +21,6 @@ export default
         <Route exact path="/reply" component={Reply} />
         <Route exact path="/my" component={My} />
         <Route exact path="/editarticle" component={EditArticle} />
+        <Route exact path="/photoalbum" component={PhotoAlbum} />
         <Route component={NotFound} />
     </Switch>;
