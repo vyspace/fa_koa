@@ -128,12 +128,6 @@ a {
       height: 100%;
       object-fit: cover; }
 
-.photo-album .time {
-  color: #999;
-  padding: .4rem; }
-.photo-album .pa-card li {
-  width: 20%; }
-
 .single-img {
   width: 100%;
   max-width: 488px;
@@ -172,7 +166,10 @@ a {
 
 .header .item {
   width: 44px;
-  height: 44px; }
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
 .header .middle {
   flex: 1;
   font-size: 18px;
@@ -1058,5 +1055,86 @@ a {
 
 .my-mar {
   margin-bottom: .4rem; }
+
+.pa-container {
+  background-color: #fff; }
+
+.photo-album .time {
+  color: #999;
+  padding: .4rem; }
+.photo-album .pa-card li {
+  width: 20%; }
+
+.admin-box {
+  background-color: #fff;
+  padding: .5rem; }
+  .admin-box li {
+    padding: .4rem 0; }
+  .admin-box input {
+    width: 100%;
+    height: 1.8rem; }
+  .admin-box .btn {
+    border: 1px solid #333;
+    border-radius: .9rem;
+    background-color: #fff; }
+  .admin-box .disabled {
+    border-color: #999;
+    color: #999; }
+
+.profile {
+  background-color: #000;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; }
+  .profile .overlay {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -100px;
+    margin-top: -100px;
+    z-index: 999;
+    width: 200px;
+    height: 200px;
+    border: solid 2px rgba(118, 222, 138, 0.9);
+    box-sizing: content-box;
+    pointer-events: none; }
+    .profile .overlay:before, .profile .overlay:after {
+      content: '';
+      position: absolute;
+      display: block;
+      width: 200px;
+      height: 10px;
+      border-left: solid 2px rgba(118, 222, 138, 0.9);
+      border-right: solid 2px rgba(118, 222, 138, 0.9); }
+    .profile .overlay:before {
+      top: 0;
+      margin-left: -2px;
+      margin-top: -10px; }
+    .profile .overlay:after {
+      bottom: 0;
+      margin-left: -2px;
+      margin-bottom: -10px; }
+  .profile .overlay-inner:before, .profile .overlay-inner:after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 10px;
+    height: 200px;
+    border-top: solid 2px rgba(118, 222, 138, 0.9);
+    border-bottom: solid 2px rgba(118, 222, 138, 0.9); }
+  .profile .overlay-inner:before {
+    left: 0;
+    margin-left: -10px;
+    margin-top: -2px; }
+  .profile .overlay-inner:after {
+    right: 0;
+    margin-right: -10px;
+    margin-top: -2px; }
+  .profile .resize-container img {
+    width: 100%;
+    -webkit-transform: translate3D(0, 0, 0) scale(1);
+    transform: translate3D(0, 0, 0) scale(1); }
 
 /*# sourceMappingURL=base.css.map */

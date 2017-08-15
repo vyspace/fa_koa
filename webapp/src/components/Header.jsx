@@ -6,13 +6,16 @@ import $ from 'zepto';
 import Tab from './Tab';
 
 const range = 10;
-let flag = true,
+let _this = null,
+    flag = true,
     g,
     tempTag = '',
-    tabLis = null;
+    tabLis = null,
+    paContainer = null;
 
 class Header extends Component {
     componentWillMount() {
+        _this = this;
         g = window.FaKoa;
     }
     componentDidMount() {
@@ -23,6 +26,7 @@ class Header extends Component {
         const { header } = this.props.store;
         if(header.type === 'photoalbum') {
             tabLis = $(this.eventLayer).find('.middle').find('li');
+            paContainer = $('#paContainer');
         }
     }
     eventHandler(e) {
@@ -66,8 +70,14 @@ class Header extends Component {
             t.addClass('active');
             switch (tag) {
             case 'album':
+                if(paContainer) {
+                    paContainer.trigger('pa1');
+                }
                 break;
             case 'profile':
+                if(paContainer) {
+                    paContainer.trigger('pa2');
+                }
                 break;
             default:
                 break;
@@ -78,12 +88,12 @@ class Header extends Component {
         e.stopPropagation();
         if(document.body.scrollTop >= range) {
             if(flag) {
-                this.header.classList.add('bdb');
+                _this.eventLayer.classList.add('bdb');
                 flag = false;
             }
         }
         else if(!flag) {
-            this.header.classList.remove('bdb');
+            _this.eventLayer.classList.remove('bdb');
             flag = true;
         }
     }
@@ -94,7 +104,7 @@ class Header extends Component {
             middle,
             tabArr;
         if(header.isBack) {
-            backBtn = (<li className="item left" data-tag="back">
+            backBtn = (<li className="item" data-tag="back">
                         <i className="icon-back" data-tag="back" />
                     </li>);
         }
@@ -106,7 +116,7 @@ class Header extends Component {
             if(header.rBtn.type === 'img') {
                 cont = <img src={header.rBtn.content} alt="" />;
             }
-            optBtn = (<li className="item right" data-tag="rbtn">{cont}</li>);
+            optBtn = (<li className="item" data-tag="rbtn">{cont}</li>);
         }
         switch (header.type) {
         case 'home':

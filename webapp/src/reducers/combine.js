@@ -10,6 +10,7 @@ import comment from './comment';
 import reply from './reply';
 import article from './article';
 import editarticle from './editarticle';
+import photoalbum from './photoalbum';
 
 const rootReducer = combineReducers({
     header,
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
     comment,
     reply,
     article,
-    editarticle
+    editarticle,
+    photoalbum
 });
 
 export default rootReducer;

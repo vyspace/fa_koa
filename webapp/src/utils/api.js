@@ -32,3 +32,17 @@ export const getReplyList = (uid, resolve, reject) => {
     request(params, resolve, reject);
 };
 
+export const getPhotoAlbumData = (uid, resolve, reject) => {
+    const params = {
+        url: `${URL_ROOT}/testdata/photoalbum`
+    };
+    request(params, resolve, reject);
+};
+
+export const getProfileAlbumData = (uid, resolve, reject) => {
+    const params = {
+        url: `${URL_ROOT}/testdata/profilealbum`
+    };
+    request(params, resolve, reject);
+};
+

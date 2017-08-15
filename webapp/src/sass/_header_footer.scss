@@ -29,6 +29,9 @@
   .item {
     width: $hfHeight;
     height: $hfHeight;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .middle {
     flex: 1;

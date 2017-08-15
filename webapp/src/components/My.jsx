@@ -23,7 +23,7 @@ class My extends Component {
         updateFooter({ type: 'base' });
     }
     componentDidMount() {
-       this.eventLayer.addEventListener('click', this.eventHandler.bind(this), true);
+        this.eventLayer.addEventListener('click', this.eventHandler.bind(this), true);
     }
     eventHandler(e) {
         e.stopPropagation();
@@ -32,13 +32,19 @@ class My extends Component {
             tag = t.data('tag');
         switch(tag) {
         case 'myProfile':
-            alert('myProfile');
+            history.push('profile');
             break;
         case 'myInfo':
             alert('myInfo');
             break;
         case 'myPhotoAlbum':
             history.push('photoalbum');
+            break;
+        case 'myAdmin':
+            history.push('admin');
+            break;
+        case 'myAbout':
+            history.push('about');
             break;
         default:
             break;
@@ -67,7 +73,7 @@ class My extends Component {
                     <li data-tag="myInterest">关注</li>
                 </ul>
                 <ul className="my-list my-mar">
-                    <li className="bb" data-tag="myAccount">账户管理</li>
+                    <li className="bb" data-tag="myAdmin">账户管理</li>
                     <li className="bb" data-tag="mySuggest">意见反馈</li>
                     <li data-tag="myAbout">关于</li>
                 </ul>

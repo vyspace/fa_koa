@@ -2,11 +2,10 @@
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import PhotoAlbum from '../components/PhotoAlbum';
-import * as HeaderActions from '../actions/header';
+import Profile from '../components/Profile';
 import * as FooterActions from '../actions/footer';
+import * as HeaderActions from '../actions/header';
 import * as RecordActions from '../actions/record';
-import * as PAlbumActions from '../actions/photoalbum';
 
 function mapStateToProps(store) {
     return {
@@ -17,14 +16,12 @@ function mapStateToProps(store) {
 function mapDispatchToProps(dispatch) {
     const headerAction = bindActionCreators(HeaderActions, dispatch),
         footerAction = bindActionCreators(FooterActions, dispatch),
-        recordAction = bindActionCreators(RecordActions, dispatch),
-        palbumAction = bindActionCreators(PAlbumActions, dispatch);
+        recordAction = bindActionCreators(RecordActions, dispatch);
     return {
         headerAction,
         footerAction,
-        recordAction,
-        palbumAction
+        recordAction
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PhotoAlbum);
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
