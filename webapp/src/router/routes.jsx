@@ -13,6 +13,7 @@ import Profile from '../containers/Profile';
 import PhotoAlbum from '../containers/PhotoAlbum';
 import Admin from '../containers/Admin';
 import About from '../containers/About';
+import UserInfo from '../containers/UserInfo';
 import NotFound from '../components/NotFound';
 
 export default
@@ -28,5 +29,6 @@ export default
         <Route exact path="/photoalbum" component={PhotoAlbum} />
         <Route exact path="/admin" component={Admin} />
         <Route exact path="/about" component={About} />
+        <Route exact path="/userinfo" component={UserInfo} />
         <Route component={NotFound} />
     </Switch>;

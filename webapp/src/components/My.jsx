@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { pageRedirect } from '../utils/tools';
 import { restore } from '../store/persistence';
+import PhotoBrowser from './PhotoBrowser';
 
 class My extends Component {
     componentWillMount() {
@@ -32,10 +33,17 @@ class My extends Component {
             tag = t.data('tag');
         switch(tag) {
         case 'myProfile':
-            history.push('profile');
+            const arr = [{
+                el: e.target,
+                msrc: './img/avator.jpg',
+                src: './img/avator.jpg',
+                w: 200,
+                h: 200
+            }];
+            PhotoBrowser.init(arr, 0);
             break;
         case 'myInfo':
-            alert('myInfo');
+            history.push('userinfo');
             break;
         case 'myPhotoAlbum':
             history.push('photoalbum');

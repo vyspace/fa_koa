@@ -5,7 +5,6 @@ import header from './header';
 import footer from './footer';
 import record from './record';
 import home from './home';
-import popup from './popup';
 import comment from './comment';
 import reply from './reply';
 import article from './article';
@@ -17,7 +16,6 @@ const rootReducer = combineReducers({
     footer,
     record,
     home,
-    popup,
     comment,
     reply,
     article,

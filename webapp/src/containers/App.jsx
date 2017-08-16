@@ -5,7 +5,7 @@ import routes from '../router/routes';
 import Header from '../containers/Header';
 import Footer from '../containers/Footer';
 import PhotoBrowser from '../components/PhotoBrowser';
-import Popup from '../containers/Popup';
+import Popup from '../components/Popup';
 
 class App extends Component {
     render() {
@@ -17,7 +17,7 @@ class App extends Component {
                 </div>
             <Footer />
             <PhotoBrowser />
-            <Popup />
+            <Popup type="create" />
         </div>
         );
     }

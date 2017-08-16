@@ -4,32 +4,52 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import $ from 'zepto';
 
-let g;
+let g,
+    _this,
+    ulType = '';
 
 class Popup extends Component {
     componentWillMount() {
         g = window.FaKoa;
+        _this = this;
     }
     componentDidMount() {
-        this.layer.addEventListener('click', this.eventHandler.bind(this), false);
+        this.eventLayer.addEventListener('click', this.eventHandler.bind(this), false);
+        $(this.eventLayer).on('show', this.showPopup);
+        $(this.eventLayer).on('close', this.closePopup);
     }
-    componentDidUpdate() {
-        const { popup } = this.props.store;
-        if(popup.toggle) {
-            setTimeout(() => {
-                this.layer.classList.add('pop-show');
-                document.body.style.overflow = 'hidden';
-            }, 100);
+    showPopup() {
+        if(ulType !== g.popupType) {
+            ulType = g.popupType;
+            let html = '';
+            if(ulType === 'create') {
+                html = `<ul>
+                    <li data-tag="photo">拍&nbsp;&nbsp;照</li>
+                    <li data-tag="album">相&nbsp;&nbsp;册</li>
+                    <li data-tag="article">文&nbsp;&nbsp;章</li>
+                    <li data-tag="cancel">取&nbsp;&nbsp;消</li>
+                </ul>`;
+            }
+            if(ulType === 'profile') {
+                html = `<ul>
+                    <li data-tag="photo">拍&nbsp;&nbsp;照</li>
+                    <li data-tag="album">相&nbsp;&nbsp;册</li>
+                    <li data-tag="cancel">取&nbsp;&nbsp;消</li>
+                </ul>`;
+            }
+            _this.eventLayer.innerHTML = html;
         }
-        else {
-            document.body.style.overflow = '';
-        }
+        _this.eventLayer.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => {
+            _this.eventLayer.classList.add('pop-show');
+        }, 100);
     }
     closePopup(callback) {
-        const { toggle } = this.props;
-        this.layer.classList.remove('pop-show');
+        _this.eventLayer.classList.remove('pop-show');
         setTimeout(() => {
-            toggle({ toggle: false });
+            _this.eventLayer.style.display = 'none';
+            document.body.style.overflow = '';
             if(callback) {
                 callback();
             }
@@ -54,35 +74,30 @@ class Popup extends Component {
             break;
         }
     }
+    updateRender() {
+        _this.envetLayer.innerHTML = `<ul>
+                <li data-tag="photo">拍&nbsp;&nbsp;照</li>
+                <li data-tag="album">相&nbsp;&nbsp;册</li>
+                <li data-tag="article">文&nbsp;&nbsp;章</li>
+                <li data-tag="cancel">取&nbsp;&nbsp;消</li>
+            </ul>`;
+    }
     render() {
-        const { popup } = this.props.store;
-        let css = { display: 'none' };
-        if(popup.toggle) {
-            css = { display: 'block' };
-        }
         return (
             <div
               ref={(c) => {
-                  this.layer = c;
+                  this.eventLayer = c;
               }}
               className="pop-layer"
               id="popupLayer"
-              style={css}
-            >
-                <ul className="">
-                    <li data-tag="photo">拍&nbsp;&nbsp;照</li>
-                    <li data-tag="album">相&nbsp;&nbsp;册</li>
-                    <li data-tag="article">文&nbsp;&nbsp;章</li>
-                    <li data-tag="cancel">取&nbsp;&nbsp;消</li>
-                </ul>
-            </div>
+              style={{ display: 'none' }}
+            />
         );
     }
 }
 
 Popup.propTypes = {
-    store: PropTypes.object.isRequired,
-    toggle: PropTypes.func.isRequired
+    type: PropTypes.string.isRequired
 };
 
 export default Popup;

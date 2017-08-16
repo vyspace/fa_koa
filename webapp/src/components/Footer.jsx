@@ -47,7 +47,6 @@ class Footer extends Component {
         }
     }
     eventHandler(e) {
-        const { toggle } = this.props.popupAction;
         e.stopPropagation();
         const t = $(e.target),
             tag = t.data('tag');
@@ -56,7 +55,8 @@ class Footer extends Component {
             this.baseActive(0, '/');
             break;
         case 'create':
-            toggle({ toggle: true });
+            g.popupType = 'create';
+            $('#popupLayer').trigger('show');
             break;
         case 'reply':
             this.baseActive(2, 'reply');
@@ -127,8 +127,7 @@ class Footer extends Component {
 }
 
 Footer.propTypes = {
-    store: PropTypes.object.isRequired,
-    popupAction: PropTypes.object.isRequired
+    store: PropTypes.object.isRequired
 };
 
 export default Footer;

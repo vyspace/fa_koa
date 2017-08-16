@@ -4,28 +4,42 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 let g,
-    _this,
-    eventObj = null;
-const moveState = {
-        top: 0,
+    _this;
+const img = {
+        el: null,
+        imgRatio: 1,
+        width: 0,
+        height: 0
+    },
+    moveState = {
         sumX: 0,
         sumY: 0,
         x: 0,
         y: 0,
         isMove: false,
         tempX: 0,
-        tempY: 0
+        tempY: 5,
+        halfWidth: 0,
+        halfHeight: 0,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0
     },
     zoomState = {
         minZoom: 1,
         isZoom: false,
         sumZoom: 1,
         tempZoom: 1,
-        width: 0,
-        height: 0
+        zoomRatio: 1
     },
     overlay = {
-        el: null
+        width: 200,
+        left: -100,
+        top: -100,
+        right: 100,
+        bottom: 100,
+        bw: 2
     };
 
 class Profile extends Component {
@@ -43,23 +57,33 @@ class Profile extends Component {
         _this = this;
     }
     componentDidMount() {
-        overlay.el = $(this.overLayer);
-        const ofs = overlay.el.offset();
-        overlay.left = ofs.left;
-        overlay.top = ofs.top;
-        overlay.right = ofs.left + 200;
-        overlay.bottom = ofs.top + 200;
         this.eventLayer.addEventListener('touchstart', this.touchStart, true);
         this.eventLayer.addEventListener('touchmove', this.touchMove, true);
         this.eventLayer.addEventListener('touchend', this.touchEnd, true);
         setTimeout(() => {
-            eventObj = $(_this.eventLayer);
+            img.el = $(_this.eventLayer);
             const minVal = Math.min(_this.eventLayer.clientWidth, _this.eventLayer.clientHeight);
             zoomState.minZoom = Math.sqrt(40000 + 40000) / Math.sqrt((minVal * minVal) + (minVal * minVal));
-            zoomState.width = _this.eventLayer.clientWidth;
-            zoomState.height = _this.eventLayer.clientHeight;
-            zoomState.top = eventObj.offset().top;
+            img.imgRatio = 1000 / _this.eventLayer.clientWidth;
+            _this.calcZoom();
         }, 100);
+    }
+    calcZoom() {
+        const halfWidth = img.width / 2,
+            halfHeight = img.height / 2;
+        moveState.top = 5 - halfHeight;
+        moveState.left = -halfWidth;
+        moveState.right = halfWidth;
+        moveState.bottom = 5 + halfHeight;
+        moveState.halfWidth = halfWidth;
+        moveState.halfHeight = halfHeight;
+        zoomState.zoomRatio = img.imgRatio / zoomState.sumZoom;
+    }
+    calcMove() {
+        moveState.left = (-moveState.halfWidth + moveState.tempX) - overlay.bw;
+        moveState.right = (moveState.halfWidth + moveState.tempX) - overlay.bw;
+        moveState.top = (-moveState.halfHeight + moveState.tempY) - overlay.bw;
+        moveState.bottom = (moveState.halfHeight + moveState.tempY) - overlay.bw;
     }
     touchStart(e) {
         e.preventDefault();
@@ -113,22 +137,26 @@ class Profile extends Component {
         e.stopPropagation();
         let flag = false;
         if(moveState.isMove) {
-            // if(moveState.tempX > overlay.left) {
-            //     moveState.tempX = overlay.left + 2;
-            //     flag = true;
-            // }
-            // if(moveState.tempX + zoomState.width < overlay.right) {
-            //     moveState.tempX = (overlay.right - zoomState.width) + 2;
-            //     flag = true;
-            // }
-            // if(moveState.tempY + zoomState.top > overlay.top) {
-            //     moveState.tempY = (overlay.top - zoomState.top) + 2;
-            //     flag = true;
-            // }
-            // if(moveState.tempY + zoomState.top + zoomState.height < overlay.bottom) {
-            //     moveState.tempY = (overlay.bottom - zoomState.top - zoomState.height) + 2;
-            //     flag = true;
-            // }
+            _this.calcMove();
+            if(moveState.left > overlay.left) {
+                moveState.tempX = moveState.halfWidth + overlay.left + overlay.bw;
+                flag = true;
+            }
+            if(moveState.right < overlay.right) {
+                moveState.tempX = -(moveState.halfWidth - overlay.right - overlay.bw);
+                flag = true;
+            }
+            if(moveState.top > overlay.top) {
+                moveState.tempY = moveState.halfHeight + overlay.top + 5;
+                flag = true;
+            }
+            if(moveState.bottom < overlay.bottom) {
+                moveState.tempY = -(moveState.halfHeight - overlay.bottom - 5);
+                flag = true;
+            }
+            if(flag) {
+                _this.eventLayer.style.transform = `translate3D(${moveState.tempX}px, ${moveState.tempY}px, 0) scale(${zoomState.sumZoom})`;
+            }
             moveState.sumX = moveState.tempX;
             moveState.sumY = moveState.tempY;
             moveState.isMove = false;
@@ -136,44 +164,48 @@ class Profile extends Component {
         if(zoomState.isZoom) {
             if(zoomState.tempZoom > 8) {
                 zoomState.tempZoom = 8;
-                flag = true;
             }
             if(zoomState.tempZoom < zoomState.minZoom) {
                 zoomState.tempZoom = zoomState.minZoom;
-                flag = true;
             }
-            zoomState.width = eventObj.width();
-            zoomState.height = eventObj.height();
-            zoomState.top = eventObj.offset().top;
-            // if(moveState.sumX > overlay.left) {
-            //     moveState.sumX = overlay.left + 2;
-            //     flag = true;
-            // }
-            // if(moveState.sumX + zoomState.width < overlay.right) {
-            //     moveState.sumX = (overlay.right - zoomState.width) + 2;
-            //     flag = true;
-            // }
-            // if(moveState.sumY + zoomState.top > overlay.top) {
-            //     moveState.sumY = (overlay.top - zoomState.top) + 2;
-            //     flag = true;
-            // }
-            setTimeout(() => {
-                if(moveState.sumY + zoomState.top + zoomState.height < overlay.bottom) {
-                    moveState.sumY = (overlay.bottom - zoomState.top - zoomState.height) + 2;
-                    flag = true;
-                }
-                alert((overlay.bottom - zoomState.top - zoomState.height));
-            }, 160);
-
-            if(flag) {
-                _this.eventLayer.style.transform = `translate3D(${moveState.sumX}px, ${moveState.sumY}px, 0) scale(${zoomState.tempZoom})`;
-            }
+            _this.eventLayer.style.transform = `translate3D(0, 5px, 0) scale(${zoomState.tempZoom})`;
+            moveState.tempX = 0;
+            moveState.tempY = 5;
+            moveState.sumX = 0;
+            moveState.sumY = 5;
             zoomState.sumZoom = zoomState.tempZoom;
             zoomState.isZoom = false;
-
+            _this.calcZoom();
         }
-
     }
+    crop() {
+        const oLayer = $(_this.overLayer),
+            width = Math.round(overlay.width * zoomState.zoomRatio),
+            cvs = document.createElement('canvas');
+        let tl = ((oLayer.offset().left - img.el.offset().left) + 2) * zoomState.zoomRatio,
+            tt = ((oLayer.offset().top - img.el.offset().top) + 2) * zoomState.zoomRatio,
+            left = 0,
+            top = 0;
+        if(tl < 0) {
+            tl = 0;
+        }
+        if(tt < 0) {
+            tt = 0;
+        }
+        left = Math.round(tl);
+        top = Math.round(tt);
+        if(left + width > img.width) {
+            left = img.width - width;
+        }
+        if(top + width > img.height) {
+            top = img.height - width;
+        }
+        cvs.width = overlay.width;
+        cvs.height = overlay.width;
+        cvs.getContext('2d').drawImage(_this.eventLayer, left, top, width, width, 0, 0, overlay.width, overlay.width);
+        return cvs.toDataURL('image/jpeg');
+    }
+
     render() {
         return (
             <div
