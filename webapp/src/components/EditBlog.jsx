@@ -11,9 +11,15 @@ class About extends Component {
             { updateFooter } = this.props.footerAction;
         updateHeader({
             type: 'base',
-            title: '关于',
+            title: '编辑',
             isBack: true,
-            rBtn: null
+            rBtn: {
+                type: 'txt',
+                content: '发布',
+                handler: () => {
+                    this.send();
+                }
+            }
         });
         updateFooter({ type: 'none' });
         this.init();
@@ -27,15 +33,22 @@ class About extends Component {
               ref={(c) => {
                   this.eventLayer = c;
               }}
-              className="about"
+              className="edit-blog"
               style={{ minHeight: g.bodyMinHeight }}
             >
-                <ul>
+                 <textarea
+                   ref={(c) => {
+                       this.text = c;
+                   }}
+                   maxLength="150"
+                   placeholder="请输入..."
+                 />
+                <div className="tip">字数限制：150</div>
+                <ul className="speed-dial">
                     <li>
-                        关于
-                    </li>
-                    <li>
-                        0.0.1
+                        <div>
+                            <span className="icon-add" />
+                        </div>
                     </li>
                 </ul>
             </div>

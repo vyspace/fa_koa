@@ -4,57 +4,36 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 let g,
-    _this;
-const img = {
-        el: null,
-        imgRatio: 1,
-        width: 0,
-        height: 0
-    },
-    moveState = {
-        sumX: 0,
-        sumY: 0,
-        x: 0,
-        y: 0,
-        isMove: false,
-        tempX: 0,
-        tempY: 5,
-        halfWidth: 0,
-        halfHeight: 0,
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0
-    },
-    zoomState = {
-        minZoom: 1,
-        isZoom: false,
-        sumZoom: 1,
-        tempZoom: 1,
-        zoomRatio: 1
-    },
-    overlay = {
-        width: 200,
-        left: -100,
-        top: -100,
-        right: 100,
-        bottom: 100,
-        bw: 2
-    };
+    _this,
+    img,
+    moveState,
+    zoomState,
+    overlay;
 
 class Profile extends Component {
     componentWillMount() {
         const { updateHeader } = this.props.headerAction,
-            { updateFooter } = this.props.footerAction;
+            { updateFooter } = this.props.footerAction,
+            { data } = this.props.store.userinfo;
         updateHeader({
             type: 'base',
             title: '头像上传',
             isBack: true,
-            rBtn: null
+            rBtn: {
+                type: 'txt',
+                content: '完成',
+                handler: () => {
+                    _this.upload();
+                }
+            }
         });
         updateFooter({ type: 'none' });
-        g = window.FaKoa;
-        _this = this;
+        this.init(data);
+        if(data) {
+            img.w = data.w;
+            img.h = data.h;
+            img.type = data.type;
+        }
     }
     componentDidMount() {
         this.eventLayer.addEventListener('touchstart', this.touchStart, true);
@@ -64,17 +43,66 @@ class Profile extends Component {
             img.el = $(_this.eventLayer);
             const minVal = Math.min(_this.eventLayer.clientWidth, _this.eventLayer.clientHeight);
             zoomState.minZoom = Math.sqrt(40000 + 40000) / Math.sqrt((minVal * minVal) + (minVal * minVal));
-            img.imgRatio = 1000 / _this.eventLayer.clientWidth;
+            img.imgRatio = img.w / _this.eventLayer.clientWidth;
+            img.width = _this.eventLayer.clientWidth;
+            img.height = _this.eventLayer.clientHeight;
             _this.calcZoom();
         }, 100);
+        overlay.el = $(this.overLayer);
+    }
+    init() {
+        g = window.FaKoa;
+        _this = this;
+        img = {
+            el: null,
+            imgRatio: 1,
+            width: 0,
+            height: 0,
+            w: 0,
+            h: 0,
+            type: 'image/jpeg'
+        };
+        moveState = {
+            sumX: 0,
+            sumY: 0,
+            x: 0,
+            y: 0,
+            isMove: false,
+            tempX: 0,
+            tempY: 0,
+            halfWidth: 0,
+            halfHeight: 0,
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0
+        };
+        zoomState = {
+            minZoom: 1,
+            isZoom: false,
+            sumZoom: 1,
+            tempZoom: 1,
+            zoomRatio: 1
+        };
+        overlay = {
+            le: null,
+            width: 200,
+            left: -100,
+            top: -100,
+            right: 100,
+            bottom: 100,
+            bw: 2
+        };
     }
     calcZoom() {
-        const halfWidth = img.width / 2,
-            halfHeight = img.height / 2;
-        moveState.top = 5 - halfHeight;
+        const width = img.width * zoomState.tempZoom,
+            height = img.height * zoomState.tempZoom,
+            halfWidth = width / 2,
+            halfHeight = height / 2;
+        moveState.top = -halfHeight;
         moveState.left = -halfWidth;
         moveState.right = halfWidth;
-        moveState.bottom = 5 + halfHeight;
+        moveState.bottom = halfHeight;
         moveState.halfWidth = halfWidth;
         moveState.halfHeight = halfHeight;
         zoomState.zoomRatio = img.imgRatio / zoomState.sumZoom;
@@ -127,6 +155,7 @@ class Profile extends Component {
                 else {
                     zoomState.tempZoom = Number(zoomState.sumZoom) - ((1 - half) * 2);
                 }
+                _this.calcZoom();
             }
             zoomState.isZoom = true;
         }
@@ -139,19 +168,19 @@ class Profile extends Component {
         if(moveState.isMove) {
             _this.calcMove();
             if(moveState.left > overlay.left) {
-                moveState.tempX = moveState.halfWidth + overlay.left + overlay.bw;
+                moveState.tempX = moveState.halfWidth + overlay.left;
                 flag = true;
             }
             if(moveState.right < overlay.right) {
-                moveState.tempX = -(moveState.halfWidth - overlay.right - overlay.bw);
+                moveState.tempX = -(moveState.halfWidth - overlay.right);
                 flag = true;
             }
             if(moveState.top > overlay.top) {
-                moveState.tempY = moveState.halfHeight + overlay.top + 5;
+                moveState.tempY = moveState.halfHeight + overlay.top;
                 flag = true;
             }
             if(moveState.bottom < overlay.bottom) {
-                moveState.tempY = -(moveState.halfHeight - overlay.bottom - 5);
+                moveState.tempY = -(moveState.halfHeight - overlay.bottom);
                 flag = true;
             }
             if(flag) {
@@ -168,11 +197,11 @@ class Profile extends Component {
             if(zoomState.tempZoom < zoomState.minZoom) {
                 zoomState.tempZoom = zoomState.minZoom;
             }
-            _this.eventLayer.style.transform = `translate3D(0, 5px, 0) scale(${zoomState.tempZoom})`;
+            _this.eventLayer.style.transform = `translate3D(0, 0, 0) scale(${zoomState.tempZoom})`;
             moveState.tempX = 0;
-            moveState.tempY = 5;
+            moveState.tempY = 0;
             moveState.sumX = 0;
-            moveState.sumY = 5;
+            moveState.sumY = 0;
             zoomState.sumZoom = zoomState.tempZoom;
             zoomState.isZoom = false;
             _this.calcZoom();
@@ -194,19 +223,30 @@ class Profile extends Component {
         }
         left = Math.round(tl);
         top = Math.round(tt);
-        if(left + width > img.width) {
+        if(left + width > img.w) {
             left = img.width - width;
         }
-        if(top + width > img.height) {
+        if(top + width > img.h) {
             top = img.height - width;
         }
         cvs.width = overlay.width;
         cvs.height = overlay.width;
         cvs.getContext('2d').drawImage(_this.eventLayer, left, top, width, width, 0, 0, overlay.width, overlay.width);
-        return cvs.toDataURL('image/jpeg');
+        return cvs.toDataURL(img.type);
     }
-
+    upload() {
+        const src = _this.crop();
+        const im = document.createElement('img');
+        im.src = src;
+        document.body.innerHTML = '';
+        document.body.appendChild(im);
+    }
     render() {
+        const { data } = this.props.store.userinfo;
+        let photo = '';
+        if(data && data.src) {
+            photo = data.src;
+        }
         return (
             <div
               className="profile"
@@ -223,7 +263,7 @@ class Profile extends Component {
                       ref={(c) => {
                           this.eventLayer = c;
                       }}
-                      src="../img/t4.jpg"
+                      src={photo}
                       alt=""
                       style={{ transform: `translate3D(${moveState.tempX}px, ${moveState.tempY}px, 0) scale(${zoomState.tempZoom})` }}
                     />
@@ -235,7 +275,8 @@ class Profile extends Component {
 
 Profile.propTypes = {
     headerAction: PropTypes.object.isRequired,
-    footerAction: PropTypes.object.isRequired
+    footerAction: PropTypes.object.isRequired,
+    store: PropTypes.object.isRequired
 };
 
 export default Profile;

@@ -18,6 +18,7 @@ class App extends Component {
             <Footer />
             <PhotoBrowser />
             <Popup type="create" />
+            <input type="file" className="m-file" id="multiFile" multiple="multiple" />
         </div>
         );
     }

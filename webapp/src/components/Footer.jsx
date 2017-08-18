@@ -8,6 +8,7 @@ const range = 1,
     activeArr = ['active'];
 let flag = true,
     g,
+    popupLayer,
     fileUpload,
     editBox;
 
@@ -25,6 +26,9 @@ class Footer extends Component {
     componentDidUpdate() {
         const { footer } = this.props.store;
         switch(footer.type) {
+        case 'base':
+            popupLayer = $('#popupLayer');
+            break;
         case 'editaricle':
             fileUpload = $('#fileUpload');
             editBox = $('#editBox');
@@ -55,8 +59,7 @@ class Footer extends Component {
             this.baseActive(0, '/');
             break;
         case 'create':
-            g.popupType = 'create';
-            $('#popupLayer').trigger('show');
+            popupLayer.trigger('show', 'create');
             break;
         case 'reply':
             this.baseActive(2, 'reply');

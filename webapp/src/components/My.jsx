@@ -48,6 +48,9 @@ class My extends Component {
         case 'myPhotoAlbum':
             history.push('photoalbum');
             break;
+        case 'myFollow':
+            history.push('follow');
+            break;
         case 'myAdmin':
             history.push('admin');
             break;
@@ -78,7 +81,7 @@ class My extends Component {
                 <ul className="my-list my-mar">
                     <li className="bb" data-tag="myHome">主页</li>
                     <li className="bb" data-tag="myPhotoAlbum">相册</li>
-                    <li data-tag="myInterest">关注</li>
+                    <li data-tag="myFollow">关注</li>
                 </ul>
                 <ul className="my-list my-mar">
                     <li className="bb" data-tag="myAdmin">账户管理</li>

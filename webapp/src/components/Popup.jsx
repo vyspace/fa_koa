@@ -6,7 +6,7 @@ import $ from 'zepto';
 
 let g,
     _this,
-    ulType = '';
+    popType = '';
 
 class Popup extends Component {
     componentWillMount() {
@@ -16,21 +16,20 @@ class Popup extends Component {
     componentDidMount() {
         this.eventLayer.addEventListener('click', this.eventHandler.bind(this), false);
         $(this.eventLayer).on('show', this.showPopup);
-        $(this.eventLayer).on('close', this.closePopup);
     }
-    showPopup() {
-        if(ulType !== g.popupType) {
-            ulType = g.popupType;
+    showPopup(e, type) {
+        e.stopPropagation();
+        if(popType !== type) {
+            popType = type;
             let html = '';
-            if(ulType === 'create') {
+            if(popType === 'create') {
                 html = `<ul>
-                    <li data-tag="photo">拍&nbsp;&nbsp;照</li>
-                    <li data-tag="album">相&nbsp;&nbsp;册</li>
+                    <li data-tag="blog">图&nbsp;&nbsp;片</li>
                     <li data-tag="article">文&nbsp;&nbsp;章</li>
                     <li data-tag="cancel">取&nbsp;&nbsp;消</li>
                 </ul>`;
             }
-            if(ulType === 'profile') {
+            if(popType === 'profile') {
                 html = `<ul>
                     <li data-tag="photo">拍&nbsp;&nbsp;照</li>
                     <li data-tag="album">相&nbsp;&nbsp;册</li>
@@ -60,15 +59,18 @@ class Popup extends Component {
         const t = $(e.target),
             tag = t.data('tag');
         switch(tag) {
-        case 'photo':
+        case 'blog':
+            _this.closePopup(() => {
+                g.history.push('editblog');
+            });
             break;
         case 'article':
-            this.closePopup(() => {
+            _this.closePopup(() => {
                 g.history.push('editarticle');
             });
             break;
         case 'cancel':
-            this.closePopup();
+            _this.closePopup();
             break;
         default:
             break;

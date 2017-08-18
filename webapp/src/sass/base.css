@@ -16,6 +16,9 @@ body, button, input, select, textarea {
   font: 400 .7rem/1.5 -apple-system, Helvetica, STHeiTi, Arial,"Lucida Grande",Verdana,"Microsoft YaHei",hei;
   outline: none; }
 
+input, select, textarea {
+  border: none; }
+
 body {
   background-color: #f0f0f0;
   color: #333;
@@ -58,6 +61,11 @@ a {
 
 #root {
   height: 100%; }
+
+.m-file {
+  width: 0;
+  height: 0;
+  display: none; }
 
 .icon-back {
   width: 2.2rem;
@@ -138,6 +146,26 @@ a {
     width: 100%;
     height: 100%;
     object-fit: cover; }
+
+.icon-add {
+  height: 40px;
+  width: 40px;
+  display: block;
+  position: relative; }
+  .icon-add::before, .icon-add::after {
+    content: '';
+    height: 8px;
+    width: 40px;
+    display: block;
+    background: #999;
+    position: absolute;
+    top: 16px;
+    left: 0; }
+  .icon-add::after {
+    height: 40px;
+    width: 8px;
+    top: 0;
+    left: 16px; }
 
 .header-view {
   height: 44px;
@@ -1010,6 +1038,20 @@ a {
       -webkit-user-select: text;
       user-select: text; }
 
+.edit-blog {
+  background-color: #fff;
+  padding: .8rem .4rem 0 .4rem;
+  position: relative; }
+  .edit-blog textarea {
+    width: 100%;
+    resize: none;
+    height: 6.3rem;
+    border: none; }
+  .edit-blog .tip {
+    text-align: right;
+    font-size: .6rem;
+    color: #999; }
+
 .article-box {
   padding: 0 .4rem;
   background-color: #fff; }
@@ -1092,8 +1134,8 @@ a {
     position: absolute;
     left: 50%;
     top: 50%;
-    margin-left: -100px;
-    margin-top: -100px;
+    margin-left: -102px;
+    margin-top: -105px;
     z-index: 999;
     width: 200px;
     height: 200px;
@@ -1139,9 +1181,47 @@ a {
   background-color: #fff;
   padding: .5rem; }
   .user-info li {
+    display: flex;
     padding: .4rem 0; }
-  .user-info input {
+  .user-info input, .user-info select {
     width: 100%;
     height: 1.8rem; }
+  .user-info select {
+    background-color: #fff;
+    -webkit-appearance: none;
+    appearance: none; }
+  .user-info .left {
+    width: 5em;
+    display: flex;
+    align-items: center;
+    color: #999; }
+  .user-info .right {
+    flex: 1;
+    border-bottom: 1px solid #eee; }
+  .user-info .box {
+    height: 1.8rem;
+    display: flex;
+    align-items: center; }
+  .user-info .profile-box {
+    height: 2.51rem;
+    border: none;
+    position: relative; }
+  .user-info .profile {
+    width: 2.51rem; }
+  .user-info .s-file {
+    position: absolute;
+    width: 2.51rem;
+    height: 2.51rem;
+    opacity: 0;
+    left: 0;
+    top: 0; }
+
+.follow {
+  background-color: #fff; }
+  .follow ul {
+    padding-left: .5rem; }
+  .follow li {
+    padding: .4rem 0;
+    border-bottom: 1px solid #eee; }
 
 /*# sourceMappingURL=base.css.map */

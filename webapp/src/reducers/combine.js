@@ -10,6 +10,8 @@ import reply from './reply';
 import article from './article';
 import editarticle from './editarticle';
 import photoalbum from './photoalbum';
+import userinfo from './userinfo';
+import follow from './follow';
 
 const rootReducer = combineReducers({
     header,
@@ -20,7 +22,9 @@ const rootReducer = combineReducers({
     reply,
     article,
     editarticle,
-    photoalbum
+    photoalbum,
+    userinfo,
+    follow
 });
 
 export default rootReducer;

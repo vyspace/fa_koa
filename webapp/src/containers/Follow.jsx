@@ -2,11 +2,11 @@
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import UserInfo from '../components/UserInfo';
+import Follow from '../components/Follow';
 import * as FooterActions from '../actions/footer';
 import * as HeaderActions from '../actions/header';
 import * as RecordActions from '../actions/record';
-import * as UserInfoActions from '../actions/userinfo';
+import * as FollowActions from '../actions/follow';
 
 function mapStateToProps(store) {
     return {
@@ -18,13 +18,13 @@ function mapDispatchToProps(dispatch) {
     const headerAction = bindActionCreators(HeaderActions, dispatch),
         footerAction = bindActionCreators(FooterActions, dispatch),
         recordAction = bindActionCreators(RecordActions, dispatch),
-        userInfoAction = bindActionCreators(UserInfoActions, dispatch);
+        followAction = bindActionCreators(FollowActions, dispatch);
     return {
         headerAction,
         footerAction,
         recordAction,
-        userInfoAction
+        followAction
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserInfo);
+export default connect(mapStateToProps, mapDispatchToProps)(Follow);

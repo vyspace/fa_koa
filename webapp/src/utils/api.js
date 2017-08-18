@@ -46,3 +46,10 @@ export const getProfileAlbumData = (uid, resolve, reject) => {
     request(params, resolve, reject);
 };
 
+export const getFollowList = (uid, resolve, reject) => {
+    const params = {
+        url: `${URL_ROOT}/testdata/follow`
+    };
+    request(params, resolve, reject);
+}
+
