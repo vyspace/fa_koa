@@ -2,19 +2,6 @@
   background-color: #fff;
   padding: .8rem .4rem 0 .4rem;
   position: relative;
-  textarea {
-    width: 100%;
-    resize: none;
-    height: $fontSize * 1.5 * 6;
-    border: none;
-  }
-  .edit-tip {
-    position: absolute;
-    bottom: 0;
-    right: .4rem;
-    font-size: .6rem;
-    color: $tipColor;
-  }
 }
 
 .edit-article {
@@ -64,15 +51,45 @@
   background-color: #fff;
   padding: .8rem .4rem 0 .4rem;
   position: relative;
-  textarea {
+  .bdr {
+    border: 1px solid $tipColor;
+  }
+  .icon {
+    position: absolute;
+    top: 50%;
+    transform: translate3D(-53%, -50%, 0);
+    left: 50%;
+  }
+  .bdr {
+    border: 1px solid #bbb;
+  }
+  .m-file {
     width: 100%;
-    resize: none;
-    height: $fontSize * 1.5 * 6;
-    border: none;
+    height: 100%;
+    position: absolute;
+    opacity: 0;
   }
-  .tip {
-    text-align: right;
-    font-size: .6rem;
-    color: $tipColor;
+  .del {
+    position: absolute;
+    background-color: #f00;
+    z-index: 999;
+    right: 0;
+    top: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+    margin: 0;
   }
+}
+
+.edit-ta {
+  width: 100%;
+  resize: none;
+  height: $fontSize * 1.5 * 6;
+  border: none;
+}
+.edit-tip {
+  text-align: right;
+  font-size: .6rem;
+  color: $tipColor;
 }

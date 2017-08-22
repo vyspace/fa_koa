@@ -53,3 +53,10 @@ export const getFollowList = (uid, resolve, reject) => {
     request(params, resolve, reject);
 }
 
+export const getShortUrl = (long, resolve, reject) => {
+    const params = {
+        url: `http://api.t.sina.com.cn/short_url/shorten.json?source=1052239900&url_long=${long}`
+    };
+    request(params, resolve, reject);
+}
+

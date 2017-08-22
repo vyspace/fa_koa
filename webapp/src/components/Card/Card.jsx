@@ -57,7 +57,26 @@ class Card extends Component {
                 <li className="mar-b title" data-tag="article" data-aid={data.articleId}>
                     {data.title}
                 </li>
-                <li className="mar-b"><SinglePhoto photo={data.photo} aid={data.articleId} browser={false} /></li>
+                <li className="mar-b"><SinglePhoto photo={data.photo} aid={data.articleId} browser={false} tag="article" /></li>
+                <CardAction numOfLikes={data.numOfLikes} numOfComments={data.numOfComments} numOfForwards={data.numOfForwards} commentOps={commentOps} />
+            </ul>);
+        }
+        if(data.typeId === 3) {
+            html = (<ul
+              ref={(c) => {
+                  this.ul = c;
+              }}
+              className="card-item"
+              style={cssStyle}
+              data-index={index}
+            >
+                <li className="mar-b">
+                    <CompHead profile={data.profile} nickname={data.nickname} dateTime={data.dateTime} />
+                </li>
+                <li className="mar-b title" data-tag="link" data-aid={data.articleId} data-link={data.link}>
+                    {data.title}
+                </li>
+                <li className="mar-b"><SinglePhoto photo={data.photo} aid={data.articleId} browser={false} tag="link" link={data.link} /></li>
                 <CardAction numOfLikes={data.numOfLikes} numOfComments={data.numOfComments} numOfForwards={data.numOfForwards} commentOps={commentOps} />
             </ul>);
         }
@@ -78,6 +97,6 @@ Card.defaultProps = {
     dataArr: [],
     animation: null,
     commentOps: ''
-}
+};
 
 export default Card;

@@ -16,7 +16,7 @@ class Reply extends Component {
             isBack: true,
             rBtn: null
         });
-        updateFooter({ type: 'base' });
+        updateFooter({ type: 'base', action: 'reply' });
         getReplyData(1);
     }
     componentDidMount() {

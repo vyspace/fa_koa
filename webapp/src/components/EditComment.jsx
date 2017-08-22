@@ -74,6 +74,7 @@ class EditComment extends Component {
                   ref={(c) => {
                       this.text = c;
                   }}
+                  className="edit-ta"
                   maxLength="150"
                   placeholder={tip}
                 />

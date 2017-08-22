@@ -4,8 +4,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import $ from 'zepto';
 
-const range = 1,
-    activeArr = ['active'];
+const range = 1;
+
 let flag = true,
     g,
     popupLayer,
@@ -56,16 +56,16 @@ class Footer extends Component {
             tag = t.data('tag');
         switch(tag) {
         case 'home':
-            this.baseActive(0, '/');
+            g.history.push('/');
             break;
         case 'create':
             popupLayer.trigger('show', 'create');
             break;
         case 'reply':
-            this.baseActive(2, 'reply');
+            g.history.push('reply');
             break;
         case 'my':
-            this.baseActive(3, 'my');
+            g.history.push('my');
             break;
         case 'album':
             if(fileUpload && fileUpload.length > 0) {
@@ -81,15 +81,9 @@ class Footer extends Component {
             break;
         }
     }
-    baseActive(index, action) {
-        if(!activeArr[index]) {
-            activeArr.length = 0;
-            activeArr[index] = 'active';
-            g.history.push(action);
-        }
-    }
     render() {
-        const { footer } = this.props.store;
+        const { footer } = this.props.store,
+            activeArr = [];
         let html;
         switch(footer.type) {
         case 'none':
@@ -105,6 +99,19 @@ class Footer extends Component {
             break;
         case 'base':
         default:
+            switch (footer.action) {
+            case 'home':
+                activeArr[0] = true;
+                break;
+            case 'reply':
+                activeArr[2] = true;
+                break;
+            case 'my':
+                activeArr[3] = true;
+                break;
+            default:
+                break;
+            }
             html = (<ul className="footer footer-base">
                 <li className={activeArr[0] ? 'active' : ''} data-tag="home">主页</li>
                 <li data-tag="create">创建</li>

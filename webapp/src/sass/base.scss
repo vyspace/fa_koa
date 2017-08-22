@@ -81,12 +81,6 @@ a {
 
 }
 
-.m-file {
-  width: 0;
-  height: 0;
-  display: none;
-}
-
 .icon-back {
   width: 2.2rem;
   height: 2.2rem;
@@ -156,7 +150,7 @@ a {
     overflow: hidden;
     width: 33.33%;
     div {
-      width: 100%;
+      width: 98%;
       padding-bottom: 100%;
       position: relative;
       margin: 0 2px 2px 2px;
@@ -193,7 +187,7 @@ a {
     height: 8px;
     width: 40px;
     display: block;
-    background: $tipColor;
+    background: #bbb;
     position: absolute;
     top: 16px;
     left: 0;
@@ -204,6 +198,11 @@ a {
     top: 0;
     left: 16px;
   }
+}
+
+.frame {
+  width: 100%;
+  border: 0;
 }
 
 @import '_header_footer.scss';

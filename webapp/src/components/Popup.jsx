@@ -26,6 +26,7 @@ class Popup extends Component {
                 html = `<ul>
                     <li data-tag="blog">图&nbsp;&nbsp;片</li>
                     <li data-tag="article">文&nbsp;&nbsp;章</li>
+                    <li data-tag="link">外&nbsp;&nbsp;链</li>
                     <li data-tag="cancel">取&nbsp;&nbsp;消</li>
                 </ul>`;
             }
@@ -67,6 +68,11 @@ class Popup extends Component {
         case 'article':
             _this.closePopup(() => {
                 g.history.push('editarticle');
+            });
+            break;
+        case 'link':
+            _this.closePopup(() => {
+                g.history.push('editlink');
             });
             break;
         case 'cancel':

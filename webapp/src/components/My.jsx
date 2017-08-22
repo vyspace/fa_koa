@@ -21,7 +21,7 @@ class My extends Component {
             isBack: true,
             rBtn: null
         });
-        updateFooter({ type: 'base' });
+        updateFooter({ type: 'base', action: 'my' });
     }
     componentDidMount() {
         this.eventLayer.addEventListener('click', this.eventHandler.bind(this), true);

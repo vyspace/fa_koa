@@ -31,9 +31,13 @@ class Follow extends Component {
             html = 'loadding';
         }
         else {
-            const lis = follow.data.map((cell) => (<li>
-                    <CompHead profile={cell.profile} nickname={cell.nickname} dateTime={cell.dateTime} />
-                </li>));
+            let _key = '';
+            const lis = follow.data.map((cell, index) => {
+                _key = `fl${index}`;
+                return (<li key={_key} >
+                    <CompHead profile={cell.profile} nickname={cell.nickname} dateTime={cell.dateTime}/>
+                </li>);
+            });
             html = <ul>{lis}</ul>;
         }
         return (

@@ -19,7 +19,7 @@ class CardList extends Component {
             isBack: false,
             rBtn: null
         });
-        updateFooter({ type: 'base' });
+        updateFooter({ type: 'base', action: 'home' });
         getHomeData();
     }
     componentDidMount() {
@@ -74,6 +74,12 @@ class CardList extends Component {
             };
             saveParams(param);
             history.push('/article');
+        }
+        if (t.data('tag') === 'link') {
+            const link = t.data('link'),
+                param = { link };
+            saveParams(param);
+            history.push('frame');
         }
     }
     topCalc(oTop) {

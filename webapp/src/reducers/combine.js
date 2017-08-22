@@ -12,6 +12,7 @@ import editarticle from './editarticle';
 import photoalbum from './photoalbum';
 import userinfo from './userinfo';
 import follow from './follow';
+import editlink from './editlink'
 
 const rootReducer = combineReducers({
     header,
@@ -24,7 +25,8 @@ const rootReducer = combineReducers({
     editarticle,
     photoalbum,
     userinfo,
-    follow
+    follow,
+    editlink
 });
 
 export default rootReducer;

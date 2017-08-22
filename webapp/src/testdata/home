@@ -153,6 +153,21 @@
             "numOfComments": 102,
             "numOfForwards": 200,
             "text": "全局（公有）配置，bash shell执行时，不管是何种方式，都会读取此文件。"
+        },
+        {
+            "id": 6,
+            "typeId": 3,
+            "profile": "",
+            "userId": 1,
+            "nickname": "中华小当家",
+            "dateTime": "2天前",
+            "articleId": 16,
+            "title": "每日穿搭｜有一种时尚叫“穿成知名企业员工”_潮流_GQ男士网",
+            "link": "http://www.gq.com.cn/fashion/news/news_19359c6facb4c91d.html",
+            "photo": "http://img1.selfimg.com.cn/gq24640x/2017/08/18/1503020439_NC72wd.gif",
+            "numOfLikes": 200,
+            "numOfComments": 100,
+            "numOfForwards": 300
         }
     ]
  }

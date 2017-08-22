@@ -62,11 +62,6 @@ a {
 #root {
   height: 100%; }
 
-.m-file {
-  width: 0;
-  height: 0;
-  display: none; }
-
 .icon-back {
   width: 2.2rem;
   height: 2.2rem;
@@ -126,7 +121,7 @@ a {
     overflow: hidden;
     width: 33.33%; }
     .speed-dial li div {
-      width: 100%;
+      width: 98%;
       padding-bottom: 100%;
       position: relative;
       margin: 0 2px 2px 2px; }
@@ -157,7 +152,7 @@ a {
     height: 8px;
     width: 40px;
     display: block;
-    background: #999;
+    background: #bbb;
     position: absolute;
     top: 16px;
     left: 0; }
@@ -166,6 +161,10 @@ a {
     width: 8px;
     top: 0;
     left: 16px; }
+
+.frame {
+  width: 100%;
+  border: 0; }
 
 .header-view {
   height: 44px;
@@ -989,17 +988,6 @@ a {
   background-color: #fff;
   padding: .8rem .4rem 0 .4rem;
   position: relative; }
-  .edit-comment textarea {
-    width: 100%;
-    resize: none;
-    height: 6.3rem;
-    border: none; }
-  .edit-comment .edit-tip {
-    position: absolute;
-    bottom: 0;
-    right: .4rem;
-    font-size: .6rem;
-    color: #999; }
 
 .edit-article {
   background-color: #fff;
@@ -1042,15 +1030,41 @@ a {
   background-color: #fff;
   padding: .8rem .4rem 0 .4rem;
   position: relative; }
-  .edit-blog textarea {
+  .edit-blog .bdr {
+    border: 1px solid #999; }
+  .edit-blog .icon {
+    position: absolute;
+    top: 50%;
+    transform: translate3D(-53%, -50%, 0);
+    left: 50%; }
+  .edit-blog .bdr {
+    border: 1px solid #bbb; }
+  .edit-blog .m-file {
     width: 100%;
-    resize: none;
-    height: 6.3rem;
-    border: none; }
-  .edit-blog .tip {
-    text-align: right;
-    font-size: .6rem;
-    color: #999; }
+    height: 100%;
+    position: absolute;
+    opacity: 0; }
+  .edit-blog .del {
+    position: absolute;
+    background-color: #f00;
+    z-index: 999;
+    right: 0;
+    top: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+    margin: 0; }
+
+.edit-ta {
+  width: 100%;
+  resize: none;
+  height: 6.3rem;
+  border: none; }
+
+.edit-tip {
+  text-align: right;
+  font-size: .6rem;
+  color: #999; }
 
 .article-box {
   padding: 0 .4rem;
