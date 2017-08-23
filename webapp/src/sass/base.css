@@ -166,6 +166,23 @@ a {
   width: 100%;
   border: 0; }
 
+.input-group {
+  width: 100%; }
+  .input-group li {
+    padding: .4rem 0; }
+  .input-group input {
+    width: 100%;
+    height: 1.8rem; }
+  .input-group .func-btn {
+    border: 1px solid #333;
+    border-radius: .9rem;
+    background-color: #fff; }
+  .input-group .btn-disabled {
+    border-color: #999;
+    color: #999; }
+  .input-group .bdr-b {
+    border-bottom: 1px solid #eee; }
+
 .header-view {
   height: 44px;
   user-focus: none;
@@ -1237,5 +1254,26 @@ a {
   .follow li {
     padding: .4rem 0;
     border-bottom: 1px solid #eee; }
+
+.login {
+  background-color: #fff;
+  padding: .5rem; }
+  .login .login-can .password {
+    display: flex; }
+    .login .login-can .password input {
+      width: 75%; }
+    .login .login-can .password .find-pwd {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      color: #2caef1; }
+  .login .login-other {
+    display: flex; }
+    .login .login-other li {
+      width: 33.33%;
+      display: flex;
+      align-items: center;
+      justify-content: center; }
 
 /*# sourceMappingURL=base.css.map */

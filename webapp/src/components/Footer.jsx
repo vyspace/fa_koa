@@ -6,8 +6,9 @@ import $ from 'zepto';
 
 const range = 1;
 
-let flag = true,
-    g,
+let g,
+    _this,
+    scrollFlag,
     popupLayer,
     fileUpload,
     editBox;
@@ -15,13 +16,12 @@ let flag = true,
 class Footer extends Component {
     componentWillMount() {
         g = window.FaKoa;
+        _this = this;
+        scrollFlag = true;
     }
     componentDidMount() {
-        const { footer } = this.props.store;
-        if(footer.type !== 'none') {
-            window.addEventListener('scroll', this.footerScroll.bind(this), false);
-            this.footer.addEventListener('click', this.eventHandler.bind(this), false);
-        }
+        window.addEventListener('scroll', this.footerScroll, false);
+        this.eventLayer.addEventListener('click', this.eventHandler, false);
     }
     componentDidUpdate() {
         const { footer } = this.props.store;
@@ -40,32 +40,33 @@ class Footer extends Component {
     footerScroll(e) {
         e.stopPropagation();
         if(document.body.scrollTop >= range) {
-            if(flag) {
-                this.footer.classList.add('footer-hidden');
-                flag = false;
+            if(scrollFlag) {
+                _this.footer.classList.add('footer-hidden');
+                scrollFlag = false;
             }
         }
-        else if(!flag) {
-            this.footer.classList.remove('footer-hidden');
-            flag = true;
+        else if(!scrollFlag) {
+            _this.footer.classList.remove('footer-hidden');
+            scrollFlag = true;
         }
     }
     eventHandler(e) {
         e.stopPropagation();
-        const t = $(e.target),
+        const { tHistory } = _this.props.store.footer,
+            t = $(e.target),
             tag = t.data('tag');
         switch(tag) {
         case 'home':
-            g.history.push('/');
+            tHistory.push('/');
             break;
         case 'create':
-            popupLayer.trigger('show', 'create');
+            popupLayer.trigger('show', ['create', tHistory]);
             break;
         case 'reply':
-            g.history.push('reply');
+            tHistory.push('reply');
             break;
         case 'my':
-            g.history.push('my');
+            tHistory.push('my');
             break;
         case 'album':
             if(fileUpload && fileUpload.length > 0) {
@@ -123,7 +124,7 @@ class Footer extends Component {
         if(html) {
             return (<div
               ref={(c) => {
-                  this.footer = c;
+                  this.eventLayer = c;
               }}
               className="footer-container"
             >
@@ -131,7 +132,10 @@ class Footer extends Component {
             </div>);
         }
         else {
-            return <div />;
+            return (<div ref={(c) => {
+                this.eventLayer = c;
+            }}
+            />);
         }
     }
 }

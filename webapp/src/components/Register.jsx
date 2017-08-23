@@ -5,16 +5,14 @@ import PropTypes from 'prop-types';
 
 let g;
 
-class About extends Component {
+class Register extends Component {
     componentWillMount() {
         const { updateHeader } = this.props.headerAction,
-            { updateFooter } = this.props.footerAction,
-            { history } = this.props;
+            { updateFooter } = this.props.footerAction;
         updateHeader({
             type: 'base',
-            title: '关于',
+            title: '注册',
             isBack: true,
-            tHistory: history,
             rBtn: null
         });
         updateFooter({ type: 'none' });
@@ -29,15 +27,18 @@ class About extends Component {
               ref={(c) => {
                   this.eventLayer = c;
               }}
-              className="about"
+              className="login"
               style={{ minHeight: g.bodyMinHeight }}
             >
-                <ul>
-                    <li>
-                        关于
+                <ul className="input-group login-can">
+                    <li className="bdr-b">
+                        <input type="text" placeholder="手机号" />
+                    </li>
+                    <li className="password bdr-b">
+                        <input type="password" placeholder="密码" />
                     </li>
                     <li>
-                        0.0.1
+                        <input type="button" className="func-btn" defaultValue="注册" />
                     </li>
                 </ul>
             </div>
@@ -45,10 +46,9 @@ class About extends Component {
     }
 }
 
-About.propTypes = {
+Register.propTypes = {
     headerAction: PropTypes.object.isRequired,
-    footerAction: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired
+    footerAction: PropTypes.object.isRequired
 };
 
-export default About;
+export default Register;

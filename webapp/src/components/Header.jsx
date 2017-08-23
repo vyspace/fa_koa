@@ -6,21 +6,23 @@ import $ from 'zepto';
 import Tab from './Tab';
 
 const range = 10;
-let _this = null,
-    flag = true,
-    g,
-    tempTag = '',
-    tabLis = null,
-    paContainer = null;
+let _this,
+    scrollFlag,
+    tempTag,
+    tabLis,
+    paContainer;
 
 class Header extends Component {
     componentWillMount() {
         _this = this;
-        g = window.FaKoa;
+        scrollFlag = true;
+        tempTag = '';
+        tabLis = null;
+        paContainer = null;
     }
     componentDidMount() {
-        this.eventLayer.addEventListener('click', this.eventHandler.bind(this), true);
-        window.addEventListener('scroll', this.scrollHandler.bind(this), true);
+        this.eventLayer.addEventListener('click', this.eventHandler, true);
+        window.addEventListener('scroll', this.scrollHandler, true);
     }
     componentDidUpdate() {
         const { header } = this.props.store;
@@ -35,26 +37,26 @@ class Header extends Component {
             tag = t.data('tag');
         switch (tag) {
         case 'back':
-            this.backHandler();
+            _this.backHandler();
             break;
         case 'rbtn':
-            this.rBtnHandler();
+            _this.rBtnHandler();
             break;
         case 'album':
         case 'profile':
-            this.tabHandler(t, tag);
+            _this.tabHandler(t, tag);
             break;
         default:
             break;
         }
     }
     backHandler() {
-        const { backHandler } = this.props.store.header;
+        const { backHandler, tHistory } = this.props.store.header;
         if(backHandler) {
             backHandler();
         }
         else {
-            g.history.goBack();
+            tHistory.goBack();
         }
     }
     rBtnHandler() {
@@ -87,14 +89,14 @@ class Header extends Component {
     scrollHandler(e) {
         e.stopPropagation();
         if(document.body.scrollTop >= range) {
-            if(flag) {
+            if(scrollFlag) {
                 _this.eventLayer.classList.add('bdb');
-                flag = false;
+                scrollFlag = false;
             }
         }
-        else if(!flag) {
+        else if(!scrollFlag) {
             _this.eventLayer.classList.remove('bdb');
-            flag = true;
+            scrollFlag = true;
         }
     }
     render() {

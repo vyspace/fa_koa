@@ -4,20 +4,20 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import $ from 'zepto';
 
-let g,
-    _this,
-    popType = '';
+let _this,
+    history,
+    popType;
 
 class Popup extends Component {
     componentWillMount() {
-        g = window.FaKoa;
         _this = this;
+        popType = '';
     }
     componentDidMount() {
-        this.eventLayer.addEventListener('click', this.eventHandler.bind(this), false);
+        this.eventLayer.addEventListener('click', this.eventHandler, false);
         $(this.eventLayer).on('show', this.showPopup);
     }
-    showPopup(e, type) {
+    showPopup(e, type, tHistory) {
         e.stopPropagation();
         if(popType !== type) {
             popType = type;
@@ -41,6 +41,7 @@ class Popup extends Component {
         }
         _this.eventLayer.style.display = 'block';
         document.body.style.overflow = 'hidden';
+        history = tHistory;
         setTimeout(() => {
             _this.eventLayer.classList.add('pop-show');
         }, 100);
@@ -62,17 +63,17 @@ class Popup extends Component {
         switch(tag) {
         case 'blog':
             _this.closePopup(() => {
-                g.history.push('editblog');
+                history.push('editblog');
             });
             break;
         case 'article':
             _this.closePopup(() => {
-                g.history.push('editarticle');
+                history.push('editarticle');
             });
             break;
         case 'link':
             _this.closePopup(() => {
-                g.history.push('editlink');
+                history.push('editlink');
             });
             break;
         case 'cancel':
@@ -81,14 +82,6 @@ class Popup extends Component {
         default:
             break;
         }
-    }
-    updateRender() {
-        _this.envetLayer.innerHTML = `<ul>
-                <li data-tag="photo">拍&nbsp;&nbsp;照</li>
-                <li data-tag="album">相&nbsp;&nbsp;册</li>
-                <li data-tag="article">文&nbsp;&nbsp;章</li>
-                <li data-tag="cancel">取&nbsp;&nbsp;消</li>
-            </ul>`;
     }
     render() {
         return (

@@ -3,8 +3,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import $ from 'zepto';
-import Card from './Card/Card';
+import Card from './Card';
 import PhotoBrowser from './PhotoBrowser';
+
+let g,
+    _this;
 
 class CardList extends Component {
     componentWillMount() {
@@ -12,15 +15,21 @@ class CardList extends Component {
             { updateHeader } = this.props.headerAction,
             { updateFooter } = this.props.footerAction,
             { history } = this.props;
-        window.FaKoa.history = history;
         updateHeader({
             type: 'base',
             title: 'FAKOA',
             isBack: false,
-            rBtn: null
+            rBtn: {
+                type: 'txt',
+                content: '登陆',
+                handler: () => {
+                    history.push('login');
+                }
+            }
         });
-        updateFooter({ type: 'base', action: 'home' });
+        updateFooter({ type: 'base', action: 'home', tHistory: history });
         getHomeData();
+        this.init();
     }
     componentDidMount() {
         this.eventLayer.addEventListener('click', this.eventHandler.bind(this), false);
@@ -35,52 +44,73 @@ class CardList extends Component {
         saveScrollTop(document.body.scrollTop);
         recordOriginal('home');
     }
+    init() {
+        g = window.FaKoa;
+        _this = this;
+    }
     eventHandler(e) {
         e.stopPropagation();
         const { data } = this.props.store.home,
             { history } = this.props,
             { saveParams } = this.props.homeAction,
-            t = $(e.target);
-        if (e.target.tagName === 'IMG' && t.data('tag') === 'thumbnail') {
-            const ul = t.parents('.card-item'),
-                rows = ul.data('index'),
-                imgs = ul.find('img'),
-                index = t.data('index'),
-                photos = data[rows].photos,
-                photoArr = [];
-            for (let i = 0; i < photos.length; i += 1) {
-                const cell = Object.assign({}, photos[i]);
-                cell.el = imgs[i];
-                photoArr.push(cell);
-            }
-            PhotoBrowser.init(photoArr, index);
+            t = $(e.target),
+            tag = t.data('tag');
+        switch (tag) {
+        case 'thumbnail':
+            _this.thumbnail(t, data);
+            break;
+        case 'comment':
+            _this.comment(t, saveParams, history);
+            break;
+        case 'article':
+            _this.article(t, saveParams, history);
+            break;
+        case 'link':
+            _this.link(t, saveParams, history);
+            break;
+        default:
+            break;
         }
-        if (e.target.tagName === 'DIV' && t.data('tag') === 'comment') {
-            const ul = t.parents('.card-item'),
-                rows = ul.data('index'),
-                cTop = this.topCalc(ul.offset().top);
-            const param = {
-                rows, cTop
-            };
-            saveParams(param);
-            history.push('/comment');
+    }
+    thumbnail(t, data) {
+        const ul = t.parents('.card-item'),
+            rows = ul.data('index'),
+            imgs = ul.find('img'),
+            index = t.data('index'),
+            photos = data[rows].photos,
+            photoArr = [];
+        for (let i = 0; i < photos.length; i += 1) {
+            const cell = Object.assign({}, photos[i]);
+            cell.el = imgs[i];
+            photoArr.push(cell);
         }
-        if (t.data('tag') === 'article') {
-            const ul = t.parents('.card-item'),
-                aid = t.data('aid'),
-                cTop = this.topCalc(ul.offset().top);
-            const param = {
-                aid, cTop
-            };
-            saveParams(param);
-            history.push('/article');
-        }
-        if (t.data('tag') === 'link') {
-            const link = t.data('link'),
-                param = { link };
-            saveParams(param);
-            history.push('frame');
-        }
+        PhotoBrowser.init(photoArr, index);
+    }
+    comment(t, saveParams, history) {
+        const ul = t.parents('.card-item'),
+            rows = ul.data('index'),
+            cTop = this.topCalc(ul.offset().top);
+        const param = {
+            rows, cTop
+        };
+        saveParams(param);
+        history.push('/comment');
+    }
+    article(t, saveParams, history) {
+        const ul = t.parents('.card-item'),
+            aid = t.data('aid'),
+            cTop = this.topCalc(ul.offset().top);
+        const param = {
+            aid, cTop
+        };
+        saveParams(param);
+        history.push('/article');
+    }
+    link(t, saveParams, history) {
+        const link = t.data('link'),
+            param = { link };
+        saveParams(param);
+        history.push('frame');
     }
     topCalc(oTop) {
         let cTop = 0;

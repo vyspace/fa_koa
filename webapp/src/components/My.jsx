@@ -19,9 +19,10 @@ class My extends Component {
             type: 'base',
             title: '我的',
             isBack: true,
+            tHistory: history,
             rBtn: null
         });
-        updateFooter({ type: 'base', action: 'my' });
+        updateFooter({ type: 'base', action: 'my', tHistory: history });
     }
     componentDidMount() {
         this.eventLayer.addEventListener('click', this.eventHandler.bind(this), true);

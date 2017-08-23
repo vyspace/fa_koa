@@ -12,11 +12,13 @@ class PhotoAlbum extends Component {
     componentWillMount() {
         const { updateHeader } = this.props.headerAction,
             { updateFooter } = this.props.footerAction,
-            { getPhotoData } = this.props.palbumAction;
+            { getPhotoData } = this.props.palbumAction,
+            { history } = this.props;
         updateHeader({
             type: 'base',
             title: '相册',
             isBack: true,
+            tHistory: history,
             rBtn: null
         });
         updateFooter({ type: 'none' });
@@ -106,7 +108,8 @@ PhotoAlbum.propTypes = {
     headerAction: PropTypes.object.isRequired,
     footerAction: PropTypes.object.isRequired,
     palbumAction: PropTypes.object.isRequired,
-    store: PropTypes.object.isRequired
+    store: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
 };
 
 export default PhotoAlbum;

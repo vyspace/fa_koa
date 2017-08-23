@@ -8,11 +8,13 @@ let g;
 class Admin extends Component {
     componentWillMount() {
         const { updateHeader } = this.props.headerAction,
-            { updateFooter } = this.props.footerAction;
+            { updateFooter } = this.props.footerAction,
+            { history } = this.props;
         updateHeader({
             type: 'base',
             title: '修改密码',
             isBack: true,
+            tHistory: history,
             rBtn: null
         });
         updateFooter({ type: 'none' });
@@ -48,7 +50,8 @@ class Admin extends Component {
 
 Admin.propTypes = {
     headerAction: PropTypes.object.isRequired,
-    footerAction: PropTypes.object.isRequired
+    footerAction: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
 };
 
 export default Admin;

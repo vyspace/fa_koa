@@ -2,9 +2,9 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Card from './Card/Card';
+import Card from './Card';
 import PhotoBrowser from './PhotoBrowser';
-import Comment from './Comment/Comment';
+import Comment from './Comment';
 import { restore } from '../store/persistence';
 import { pageRedirect } from '../utils/tools';
 
@@ -25,6 +25,7 @@ class CommentList extends Component {
             type: 'base',
             title: '评论列表',
             isBack: true,
+            tHistory: history,
             rBtn: null
         });
         updateFooter({ type: 'none' });

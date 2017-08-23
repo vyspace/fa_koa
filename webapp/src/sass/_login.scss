@@ -1,0 +1,28 @@
+.login {
+  background-color: #fff;
+  padding: .5rem;
+  .login-can {
+    .password {
+      display: flex;
+      input {
+        width: 75%;
+      }
+      .find-pwd {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        color: $refColor;
+      }
+    }
+  }
+  .login-other {
+    display: flex;
+    li {
+      width: 33.33%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

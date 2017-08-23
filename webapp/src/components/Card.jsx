@@ -2,11 +2,11 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import CompHead from '../CompHead';
-import SpeedDial from '../SpeedDial';
+import CompHead from './CompHead';
+import SpeedDial from './SpeedDial';
 import CardAction from './CardAction';
 import CardText from './CardText';
-import SinglePhoto from '../SinglePhoto';
+import SinglePhoto from './SinglePhoto';
 
 class Card extends Component {
     componentDidMount() {

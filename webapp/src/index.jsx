@@ -57,8 +57,7 @@
 
 // 初始化FastClick事件
  FastClick.attach(document.body);
-// 初始化全局history
- g.history = browserHistory;
+
 // 初始化bodyMinHeight
  g.bodyMinHeight = `${window.innerHeight - 44}px`;
 

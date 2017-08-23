@@ -10,11 +10,13 @@ let g,
 class About extends Component {
     componentWillMount() {
         const { updateHeader } = this.props.headerAction,
-            { updateFooter } = this.props.footerAction;
+            { updateFooter } = this.props.footerAction,
+            { history } = this.props;
         updateHeader({
             type: 'base',
             title: '个人信息',
             isBack: true,
+            tHistory: history,
             rBtn: null
         });
         updateFooter({ type: 'none' });
@@ -115,8 +117,7 @@ class About extends Component {
 About.propTypes = {
     headerAction: PropTypes.object.isRequired,
     footerAction: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired,
-    userInfoAction: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired
 };
 
 export default About;

@@ -17,25 +17,26 @@ let createDiv,
     contDiv,
     tip,
     g,
-    titleHeight = 0,
-    cHeight = 0,
-    contHeight = 0,
-    contBTop = 0,
-    contMHeight = 0,
+    titleHeight,
+    cHeight,
+    contHeight,
+    contBTop,
+    contMHeight,
     _this,
     preData;
 
 class EditArticle extends Component {
     componentWillMount() {
-        g = window.FaKoa;
         const { store } = this.props;
         restore(store);
         const { updateHeader } = this.props.headerAction,
-            { updateFooter } = this.props.footerAction;
+            { updateFooter } = this.props.footerAction,
+            { history } = this.props;
         updateHeader({
             type: 'base',
             title: '编辑',
             isBack: true,
+            tHistory: history,
             rBtn: {
                 type: 'txt',
                 content: '发布',
@@ -47,17 +48,7 @@ class EditArticle extends Component {
         updateFooter({
             type: 'editaricle'
         });
-        titleHeight = 2.8 * g.fontSize;
-        cHeight = window.innerHeight - tb;
-        contHeight = (window.innerHeight / 2) - (2 * g.fontSize);
-        contBTop = (44 + contHeight) - (1.8 * g.fontSize);
-        contMHeight = cHeight - titleHeight;
-        preData = {
-            title: '',
-            photos: [],
-            article: []
-        };
-        _this = this;
+        this.init();
     }
     componentDidMount() {
         const { data } = this.props.store.editarticle;
@@ -84,6 +75,20 @@ class EditArticle extends Component {
         const { recordOriginal } = this.props.recordAction;
         window.removeEventListener('resize', this.reSize, false);
         recordOriginal('editarticle');
+    }
+    init() {
+        g = window.FaKoa;
+        _this = this;
+        titleHeight = 2.8 * g.fontSize;
+        cHeight = window.innerHeight - tb;
+        contHeight = (window.innerHeight / 2) - (2 * g.fontSize);
+        contBTop = (44 + contHeight) - (1.8 * g.fontSize);
+        contMHeight = cHeight - titleHeight;
+        preData = {
+            title: '',
+            photos: [],
+            article: []
+        };
     }
     getCursor(e) {
         e.stopPropagation();
@@ -294,7 +299,8 @@ EditArticle.propTypes = {
     headerAction: PropTypes.object.isRequired,
     footerAction: PropTypes.object.isRequired,
     recordAction: PropTypes.object.isRequired,
-    store: PropTypes.object.isRequired
+    store: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
 };
 
 export default EditArticle;

@@ -5,22 +5,27 @@ import PropTypes from 'prop-types';
 import $ from 'zepto';
 import ReplyCard from './ReplyCard';
 
+let _this;
+
 class Reply extends Component {
     componentWillMount() {
         const { updateHeader } = this.props.headerAction,
             { updateFooter } = this.props.footerAction,
-            { getReplyData } = this.props.replyAction;
+            { getReplyData } = this.props.replyAction,
+            { history } = this.props;
         updateHeader({
             type: 'base',
             title: '评论回复',
             isBack: true,
+            tHistory: history,
             rBtn: null
         });
-        updateFooter({ type: 'base', action: 'reply' });
+        updateFooter({ type: 'base', action: 'reply', tHistory: history });
         getReplyData(1);
+        this.init();
     }
     componentDidMount() {
-        this.eventLayer.addEventListener('click', this.eventHandler.bind(this), false);
+        this.eventLayer.addEventListener('click', this.eventHandler, false);
     }
     componentWillUnmount() {
         const { saveScrollTop } = this.props.replyAction,
@@ -28,9 +33,12 @@ class Reply extends Component {
         saveScrollTop(document.body.scrollTop);
         recordOriginal('reply');
     }
+    init() {
+        _this = this;
+    }
     eventHandler(e) {
-        const { history } = this.props,
-            { saveParams } = this.props.replyAction;
+        const { history } = _this.props,
+            { saveParams } = _this.props.replyAction;
         e.stopPropagation();
         const t = $(e.target);
         if(e.target.className === 'cp-right' || t.parents('.cp-right').length > 0) {

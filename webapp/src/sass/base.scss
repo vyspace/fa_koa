@@ -205,6 +205,29 @@ a {
   border: 0;
 }
 
+.input-group {
+  width: 100%;
+  li {
+    padding: .4rem 0;
+  }
+  input {
+    width: 100%;
+    height: 1.8rem;
+  }
+  .func-btn {
+    border: 1px solid #333;
+    border-radius: .9rem;
+    background-color: #fff;
+  }
+  .btn-disabled {
+    border-color: $tipColor;
+    color: $tipColor;
+  }
+  .bdr-b {
+    border-bottom: $border;
+  }
+}
+
 @import '_header_footer.scss';
 @import '_tab.scss';
 @import '_pswp.scss';
@@ -216,3 +239,4 @@ a {
 @import "_search.scss";
 @import "_article.scss";
 @import "_my.scss";
+@import "_login.scss";

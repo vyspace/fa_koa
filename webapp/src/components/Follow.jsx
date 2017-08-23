@@ -10,11 +10,13 @@ class Follow extends Component {
     componentWillMount() {
         const { updateHeader } = this.props.headerAction,
             { updateFooter } = this.props.footerAction,
-            { getFollowData } = this.props.followAction;
+            { getFollowData } = this.props.followAction,
+            { history } = this.props;
         updateHeader({
             type: 'base',
             title: '关注',
             isBack: true,
+            tHistory: history,
             rBtn: null
         });
         updateFooter({ type: 'none' });
@@ -58,7 +60,8 @@ Follow.propTypes = {
     headerAction: PropTypes.object.isRequired,
     footerAction: PropTypes.object.isRequired,
     followAction: PropTypes.object.isRequired,
-    store: PropTypes.object.isRequired
+    store: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
 };
 
 export default Follow;

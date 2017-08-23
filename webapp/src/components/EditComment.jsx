@@ -10,7 +10,7 @@ const tb = 44;
 
 class EditComment extends Component {
     componentWillMount() {
-        const { store } = this.props,
+        const { store, history } = this.props,
             action = this.props.store.record.original;
         restore(store);
         const { updateHeader } = this.props.headerAction,
@@ -26,6 +26,7 @@ class EditComment extends Component {
             type: 'base',
             title: tit,
             isBack: true,
+            tHistory: history,
             rBtn: {
                 type: 'txt',
                 content: '发送',

@@ -9,16 +9,18 @@ const insertLimit = 6;
 let g,
     _this,
     addObj,
-    state = null;
+    state;
 
 class About extends Component {
     componentWillMount() {
         const { updateHeader } = this.props.headerAction,
-            { updateFooter } = this.props.footerAction;
+            { updateFooter } = this.props.footerAction,
+            { history } = this.props;
         updateHeader({
             type: 'base',
             title: '编辑',
             isBack: true,
+            tHistory: history,
             rBtn: {
                 type: 'txt',
                 content: '发布',
@@ -129,7 +131,8 @@ class About extends Component {
 
 About.propTypes = {
     headerAction: PropTypes.object.isRequired,
-    footerAction: PropTypes.object.isRequired
+    footerAction: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
 };
 
 export default About;

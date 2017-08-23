@@ -10,11 +10,13 @@ let g,
 class EditLink extends Component {
     componentWillMount() {
         const { updateHeader } = this.props.headerAction,
-            { updateFooter } = this.props.footerAction;
+            { updateFooter } = this.props.footerAction,
+            { history } = this.props;
         updateHeader({
             type: 'base',
             title: '外链',
             isBack: true,
+            tHistory: history,
             rBtn: {
                 type: 'txt',
                 content: '发送',
@@ -40,8 +42,6 @@ class EditLink extends Component {
         this.text.focus();
     }
     send() {
-        // const { history } = this.props;
-        // history.goBack(0);
         const val = _this.text.value;
         if(val !== '') {
             if(isUrl(val)) {
@@ -90,7 +90,8 @@ class EditLink extends Component {
 
 EditLink.propTypes = {
     headerAction: PropTypes.object.isRequired,
-    footerAction: PropTypes.object.isRequired
+    footerAction: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
 };
 
 export default EditLink;

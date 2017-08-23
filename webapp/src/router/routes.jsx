@@ -18,6 +18,8 @@ import About from '../containers/About';
 import UserInfo from '../containers/UserInfo';
 import Follow from '../containers/Follow';
 import Frame from '../containers/Frame';
+import Login from '../containers/Login';
+import Register from '../containers/Register';
 import NotFound from '../components/NotFound';
 
 export default
@@ -38,5 +40,7 @@ export default
         <Route exact path="/userinfo" component={UserInfo} />
         <Route exact path="/follow" component={Follow} />
         <Route exact path="/frame" component={Frame} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/register" component={Register} />
         <Route component={NotFound} />
     </Switch>;

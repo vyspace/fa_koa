@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import CompHead from '../CompHead';
+import CompHead from './CompHead';
 
 class Comment extends Component {
     componentDidMount() {
