@@ -115,8 +115,9 @@ class Header extends Component {
             if(header.rBtn.type === 'txt') {
                 cont = header.rBtn.content;
             }
-            if(header.rBtn.type === 'img') {
-                cont = <img src={header.rBtn.content} alt="" />;
+            if(header.rBtn.type === 'icon') {
+                const cln = `icon ${header.rBtn.content}`;
+                cont = <i className={cln} data-tag="rbtn" />;
             }
             optBtn = (<li className="item" data-tag="rbtn">{cont}</li>);
         }

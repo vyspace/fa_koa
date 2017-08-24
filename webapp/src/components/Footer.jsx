@@ -4,10 +4,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import $ from 'zepto';
 
-const range = 1;
-
-let g,
-    _this,
+let _this,
+    eventLayer,
+    startX,
+    startY,
     scrollFlag,
     popupLayer,
     fileUpload,
@@ -15,13 +15,15 @@ let g,
 
 class Footer extends Component {
     componentWillMount() {
-        g = window.FaKoa;
         _this = this;
         scrollFlag = true;
     }
     componentDidMount() {
-        window.addEventListener('scroll', this.footerScroll, false);
-        this.eventLayer.addEventListener('click', this.eventHandler, false);
+        document.body.addEventListener('touchstart', this.startHandler, true);
+        document.body.addEventListener('touchmove', this.moveHandler, true);
+        document.body.addEventListener('touchend', this.endHandler, true);
+        this.eventLayer.addEventListener('click', this.eventHandler, true);
+        eventLayer = $(this.eventLayer);
     }
     componentDidUpdate() {
         const { footer } = this.props.store;
@@ -37,18 +39,35 @@ class Footer extends Component {
             break;
         }
     }
-    footerScroll(e) {
+    startHandler(e) {
         e.stopPropagation();
-        if(document.body.scrollTop >= range) {
+        startY = e.touches[0].clientY;
+        startX = e.touches[0].clientX;
+    }
+    moveHandler(e) {
+        e.stopPropagation();
+        const ty = e.touches[0].clientY - startY,
+            tx = e.touches[0].clientX - startX;
+        if(Math.abs(ty) > Math.abs(tx) && ty > 0) {
             if(scrollFlag) {
-                _this.footer.classList.add('footer-hidden');
+                if(eventLayer.hasClass('footer-hidden')) {
+                    eventLayer.removeClass('footer-hidden');
+                }
                 scrollFlag = false;
             }
         }
-        else if(!scrollFlag) {
-            _this.footer.classList.remove('footer-hidden');
-            scrollFlag = true;
+        if(Math.abs(ty) > Math.abs(tx) && ty < 0) {
+            if(scrollFlag && document.body.scrollTop > 10) {
+                if(!eventLayer.hasClass('footer-hidden')) {
+                    eventLayer.addClass('footer-hidden');
+                }
+                scrollFlag = false;
+            }
         }
+    }
+    endHandler(e) {
+        e.stopPropagation();
+        scrollFlag = true;
     }
     eventHandler(e) {
         e.stopPropagation();
@@ -114,8 +133,12 @@ class Footer extends Component {
                 break;
             }
             html = (<ul className="footer footer-base">
-                <li className={activeArr[0] ? 'active' : ''} data-tag="home">主页</li>
-                <li data-tag="create">创建</li>
+                <li className={activeArr[0] ? 'active' : ''} data-tag="home">
+                    <i className="icon icon-home" data-tag="home" />
+                </li>
+                <li data-tag="create">
+                    <i className="icon icon-edit" />
+                </li>
                 <li className={activeArr[2] ? 'active' : ''} data-tag="reply">评论</li>
                 <li className={activeArr[3] ? 'active' : ''} data-tag="my">我的</li>
                 </ul>);

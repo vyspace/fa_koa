@@ -64,22 +64,6 @@
 .admin-box {
   background-color: #fff;
   padding: .5rem;
-  li {
-    padding: .4rem 0;
-  }
-  input {
-    width: 100%;
-    height: 1.8rem;
-  }
-  .btn {
-    border: 1px solid #333;
-    border-radius: .9rem;
-    background-color: #fff;
-  }
-  .disabled {
-    border-color: $tipColor;
-    color: $tipColor;
-  }
 }
 
 $bdColor: solid 2px rgba(118, 222, 138, 0.9);
@@ -204,7 +188,23 @@ $bdColor: solid 2px rgba(118, 222, 138, 0.9);
     padding-left: .5rem;
   }
   li {
-    padding: .4rem 0;
+    padding: .6rem 0;
     border-bottom: $border;
+  }
+}
+
+.about-version {
+  padding: 2rem 0 .4rem 0;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  align-items: center;
+}
+
+.about-list {
+  li {
+    background-color: #fff;
+    margin: .4rem 0;
+    padding: .4rem;
   }
 }

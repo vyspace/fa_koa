@@ -70,6 +70,9 @@
 .footer {
   li {
     flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
@@ -78,14 +81,11 @@
   bottom: 0;
   transition-timing-function: ease-in-out;
   transition-duration: 0s;
-  .active {
-    font-weight: 600;
-  }
 }
 
 .footer-hidden {
   transition-duration: .1s;
-  transform: translate3d(-50%, $hfHeight, 0);
+  transform: translate3d(0, $hfHeight, 0);
 }
 
 

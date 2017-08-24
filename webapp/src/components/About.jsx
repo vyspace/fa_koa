@@ -29,15 +29,15 @@ class About extends Component {
               ref={(c) => {
                   this.eventLayer = c;
               }}
-              className="about"
               style={{ minHeight: g.bodyMinHeight }}
             >
-                <ul>
+                <div className="about-version">
+                    <div>FAKOA</div>
+                    <div>Version: 0.0.1</div>
+                </div>
+                <ul className="about-list">
                     <li>
-                        关于
-                    </li>
-                    <li>
-                        0.0.1
+                        条款
                     </li>
                 </ul>
             </div>

@@ -61,10 +61,10 @@ class EditArticle extends Component {
                 this.tip.value = ' ';
             }
         }
-        this.content.addEventListener('focus', this.focusHandler.bind(this), false);
+        this.content.addEventListener('focus', this.focusHandler, false);
         this.content.addEventListener('blur', this.blurHandler, false);
         $(this.content).on('savePreviewData', this.saveData);
-        this.file.addEventListener('change', this.fileChange.bind(this), false);
+        this.file.addEventListener('change', this.fileChange, false);
         window.addEventListener('resize', this.reSize, false);
         window.addEventListener('touchstart', this.getCursor, false);
         createDiv = this.eventLayer;
@@ -75,6 +75,17 @@ class EditArticle extends Component {
         const { recordOriginal } = this.props.recordAction;
         window.removeEventListener('resize', this.reSize, false);
         recordOriginal('editarticle');
+    }
+    getsr() {
+        const selection = window.getSelection ? window.getSelection() : document.selection;
+        edit.range = selection.createRange ? selection.createRange() : selection.getRangeAt(0);
+        edit.selection = selection;
+    }
+    getCursor(e) {
+        e.stopPropagation();
+        if(e.touches.length > 0) {
+            edit.mY = e.touches[0].clientY;
+        }
     }
     init() {
         g = window.FaKoa;
@@ -89,17 +100,6 @@ class EditArticle extends Component {
             photos: [],
             article: []
         };
-    }
-    getCursor(e) {
-        e.stopPropagation();
-        if(e.touches.length > 0) {
-            edit.mY = e.touches[0].clientY;
-        }
-    }
-    getsr() {
-        const selection = window.getSelection ? window.getSelection() : document.selection;
-        edit.range = selection.createRange ? selection.createRange() : selection.getRangeAt(0);
-        edit.selection = selection;
     }
     reSize() {
         cHeight = window.innerHeight - tb;
@@ -120,10 +120,10 @@ class EditArticle extends Component {
         setTimeout(() => {
             document.body.scrollTop = 44;
             if(!edit.range) {
-                this.getsr();
+                _this.getsr();
             }
             if ($.trim(t.text()) === '' && t.children().length === 0) {
-                this.insertDiv();
+                _this.insertDiv();
             }
         }, 20);
         if($.trim(t.text()) === '') {
@@ -147,7 +147,7 @@ class EditArticle extends Component {
     }
     fileChange(e) {
         e.stopPropagation();
-        const t = this,
+        const t = _this,
             file = e.target.files[0];
         if(!/^image/.test(file.type)) {
             alert('请添加图片文件！');
@@ -250,7 +250,7 @@ class EditArticle extends Component {
               ref={(c) => {
                   this.eventLayer = c;
               }}
-              className="edit-article"
+              className="edit-box edit-article"
               style={{ height: `${cHeight}px` }}
             >
                 <div className="content-box">

@@ -18,11 +18,13 @@ class Article extends Component {
         action = this.props.store.record.original;
         const { getArtData, getPreviewData } = this.props.articleAction,
             { updateHeader } = this.props.headerAction,
-            { updateFooter } = this.props.footerAction;
+            { updateFooter } = this.props.footerAction,
+            { history } = this.props;
         updateHeader({
             type: 'base',
             title: '文章',
             isBack: true,
+            tHistory: history,
             rBtn: null
         });
         updateFooter({ type: 'none' });
@@ -103,7 +105,8 @@ Article.propTypes = {
     articleAction: PropTypes.object.isRequired,
     headerAction: PropTypes.object.isRequired,
     footerAction: PropTypes.object.isRequired,
-    store: PropTypes.object.isRequired
+    store: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
 };
 
 export default Article;

@@ -20,8 +20,9 @@ class CardList extends Component {
             title: 'FAKOA',
             isBack: false,
             rBtn: {
-                type: 'txt',
-                content: '登陆',
+                type: 'icon',
+                content: 'icon-login',
+                tag: '',
                 handler: () => {
                     history.push('login');
                 }
@@ -130,12 +131,8 @@ class CardList extends Component {
             html = 'loadding';
         }
         else {
-            let css = {};
             html = data.map((cell, index) => {
-                if (index + 1 >= data.length) {
-                    css = { marginBottom: 0 };
-                }
-                return <Card key={cell.id} data={cell} cssStyle={css} index={index} />;
+                return <Card key={cell.id} data={cell} index={index} />;
             });
         }
         return (<div ref={(c) => {

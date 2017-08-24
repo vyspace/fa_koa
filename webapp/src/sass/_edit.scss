@@ -1,13 +1,25 @@
-.edit-comment {
+.edit-box {
   background-color: #fff;
   padding: .8rem .4rem 0 .4rem;
   position: relative;
+  overflow: hidden;
+}
+
+.edit-ta {
+  width: 100%;
+  resize: none;
+  height: $fontSize * 1.5 * 6;
+  border: none;
+  background-color: $bgColor;
+}
+.edit-tip {
+  text-align: right;
+  font-size: .6rem;
+  color: $tipColor;
 }
 
 .edit-article {
-  background-color: #fff;
-  padding: .4rem;
-  overflow: hidden;
+  padding-top: .4rem;
   .content-box {
     position: relative;
   }
@@ -48,9 +60,6 @@
 }
 
 .edit-blog {
-  background-color: #fff;
-  padding: .8rem .4rem 0 .4rem;
-  position: relative;
   .bdr {
     border: 1px solid $tipColor;
   }
@@ -80,16 +89,4 @@
     padding: 0;
     margin: 0;
   }
-}
-
-.edit-ta {
-  width: 100%;
-  resize: none;
-  height: $fontSize * 1.5 * 6;
-  border: none;
-}
-.edit-tip {
-  text-align: right;
-  font-size: .6rem;
-  color: $tipColor;
 }

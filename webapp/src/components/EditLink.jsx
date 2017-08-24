@@ -70,7 +70,7 @@ class EditLink extends Component {
               ref={(c) => {
                   this.eventLayer = c;
               }}
-              className="edit-comment"
+              className="edit-box"
               style={{ minHeight: g.bodyMinHeight }}
             >
                 <textarea

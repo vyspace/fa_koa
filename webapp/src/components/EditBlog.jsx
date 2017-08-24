@@ -93,7 +93,7 @@ class About extends Component {
               ref={(c) => {
                   this.eventLayer = c;
               }}
-              className="edit-blog"
+              className="edit-box edit-blog"
               style={{ minHeight: g.bodyMinHeight }}
             >
                  <textarea

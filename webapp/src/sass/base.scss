@@ -121,6 +121,27 @@ a {
     flex-direction: column;
     align-self: center;
     padding-left: 0.5rem;
+    .first {
+      display: flex;
+      align-items: center;
+      img {
+        height: .5rem;
+        display: block;
+        margin-left: .4rem;
+      }
+      .v-text {
+        position: relative;
+        font-size: .5rem;
+        top: 1px;
+        left: -2px;
+        line-height: 1;
+        color: #ff9300;
+      }
+    }
+    .second {
+      font-size: .6rem;
+      color: $tipColor;
+    }
   }
   .cp-right {
     width: 2.51rem;
@@ -225,6 +246,33 @@ a {
   }
   .bdr-b {
     border-bottom: $border;
+  }
+  .pd-t {
+    padding-top: 2rem;
+  }
+}
+
+.icon {
+  display: block;
+  width: 22px;
+  height: 22px;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.icon-login {
+  background-image: url(../img/login2.png);
+}
+.icon-home {
+  background-image: url(../img/home.png);
+}
+.icon-edit {
+  background-image: url(../img/edit.png);
+}
+
+.active {
+  .icon-home {
+    background-image: url(../img/home_a.png);
   }
 }
 

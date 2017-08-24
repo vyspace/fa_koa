@@ -5,10 +5,14 @@ import PropTypes from 'prop-types';
 
 class CompHead extends Component {
     render() {
-        let profileImg = './img/avator.jpg';
+        let profileImg = './img/avator.jpg',
+            rDiv = null;
         const { profile, nickname, dateTime, rCont } = this.props;
         if(profile !== '') {
             profileImg = profile;
+        }
+        if(rCont !== '') {
+            rDiv = <div className="cp-right" data-nickname={nickname}><div className="r-btn">{rCont}</div></div>
         }
         return (
             <div className="comp-head">
@@ -16,10 +20,14 @@ class CompHead extends Component {
                   <div className="via"><img src={profileImg} alt="" /></div>
                 </div>
                 <div className="middle">
-                  <div>{nickname}</div>
-                  <div>{dateTime}</div>
+                    <div className="first">
+                        <span>{nickname}</span>
+                        <img src="../img/lv2.png" alt="" />
+                        <span className="v-text">1</span>
+                    </div>
+                  <div className="second">{dateTime}</div>
                 </div>
-                <div className="cp-right" data-nickname={nickname}><div className="r-btn">{rCont}</div></div>
+                {rDiv}
             </div>
         );
     }

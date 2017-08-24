@@ -2,8 +2,10 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import $ from 'zepto';
 
-let g;
+let g,
+    _this;
 
 class Login extends Component {
     componentWillMount() {
@@ -26,8 +28,25 @@ class Login extends Component {
         updateFooter({ type: 'none' });
         this.init();
     }
+    componentDidMount() {
+        this.eventLayer.addEventListener('click', this.eventHandler, true);
+    }
     init() {
         g = window.FaKoa;
+        _this = this;
+    }
+    eventHandler(e) {
+        e.stopPropagation();
+        const { history } = _this.props,
+            t = $(e.target),
+            tag = t.data('tag');
+        switch (tag) {
+        case 'find':
+            history.push('findpassword');
+            break;
+        default:
+            break;
+        }
     }
     render() {
         return (
@@ -40,13 +59,13 @@ class Login extends Component {
             >
                 <ul className="input-group login-can">
                     <li className="bdr-b">
-                        <input type="text" placeholder="用户名/手机号" />
+                        <input type="text" placeholder="邮箱地址" />
                     </li>
                     <li className="password bdr-b">
                         <input type="password" placeholder="密码" />
-                        <div className="find-pwd">找回密码</div>
+                        <div className="find-pwd" data-tag="find">找回密码</div>
                     </li>
-                    <li>
+                    <li className="pd-t">
                         <input type="button" className="func-btn" defaultValue="登陆" />
                     </li>
                 </ul>

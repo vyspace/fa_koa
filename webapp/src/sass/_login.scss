@@ -2,6 +2,7 @@
   background-color: #fff;
   padding: .5rem;
   .login-can {
+    padding-top: 1rem;
     .password {
       display: flex;
       input {
@@ -18,8 +19,10 @@
   }
   .login-other {
     display: flex;
+    padding-top: 1rem;
     li {
       width: 33.33%;
+      height: 2rem;
       display: flex;
       align-items: center;
       justify-content: center;

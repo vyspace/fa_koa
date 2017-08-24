@@ -5,19 +5,22 @@ import PropTypes from 'prop-types';
 
 let g;
 
-class Admin extends Component {
+class FindPassword extends Component {
     componentWillMount() {
         const { updateHeader } = this.props.headerAction,
             { updateFooter } = this.props.footerAction,
             { history } = this.props;
         updateHeader({
             type: 'base',
-            title: '修改密码',
+            title: '找回密码',
             isBack: true,
             tHistory: history,
             rBtn: null
         });
         updateFooter({ type: 'none' });
+        this.init();
+    }
+    init() {
         g = window.FaKoa;
     }
     render() {
@@ -26,21 +29,15 @@ class Admin extends Component {
               ref={(c) => {
                   this.eventLayer = c;
               }}
-              className="input-group admin-box"
+              className="login"
               style={{ minHeight: g.bodyMinHeight }}
             >
-                <ul>
+                <ul className="input-group login-can">
                     <li className="bdr-b">
-                        <input type="password" placeholder="旧密码..." />
-                    </li>
-                    <li className="bdr-b">
-                        <input type="password" placeholder="新密码..." />
-                    </li>
-                    <li className="bdr-b">
-                        <input type="password" placeholder="确认密码..." />
+                        <input type="text" placeholder="邮箱地址" />
                     </li>
                     <li className="pd-t">
-                        <input className="func-btn btn-disabled" type="button" value="确定" disabled="disabled" />
+                        <input type="button" className="func-btn" defaultValue="发送" />
                     </li>
                 </ul>
             </div>
@@ -48,10 +45,10 @@ class Admin extends Component {
     }
 }
 
-Admin.propTypes = {
+FindPassword.propTypes = {
     headerAction: PropTypes.object.isRequired,
     footerAction: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };
 
-export default Admin;
+export default FindPassword;

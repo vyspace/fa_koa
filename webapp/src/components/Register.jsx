@@ -8,11 +8,13 @@ let g;
 class Register extends Component {
     componentWillMount() {
         const { updateHeader } = this.props.headerAction,
-            { updateFooter } = this.props.footerAction;
+            { updateFooter } = this.props.footerAction,
+            { history } = this.props;
         updateHeader({
             type: 'base',
             title: '注册',
             isBack: true,
+            tHistory: history,
             rBtn: null
         });
         updateFooter({ type: 'none' });
@@ -32,12 +34,12 @@ class Register extends Component {
             >
                 <ul className="input-group login-can">
                     <li className="bdr-b">
-                        <input type="text" placeholder="手机号" />
+                        <input type="text" placeholder="邮箱" />
                     </li>
                     <li className="password bdr-b">
                         <input type="password" placeholder="密码" />
                     </li>
-                    <li>
+                    <li className="pd-t">
                         <input type="button" className="func-btn" defaultValue="注册" />
                     </li>
                 </ul>
@@ -48,7 +50,8 @@ class Register extends Component {
 
 Register.propTypes = {
     headerAction: PropTypes.object.isRequired,
-    footerAction: PropTypes.object.isRequired
+    footerAction: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
 };
 
 export default Register;

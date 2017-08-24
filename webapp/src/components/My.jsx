@@ -55,6 +55,9 @@ class My extends Component {
         case 'myAdmin':
             history.push('admin');
             break;
+        case 'myFeedback':
+            history.push('feedback');
+            break;
         case 'myAbout':
             history.push('about');
             break;
@@ -86,7 +89,7 @@ class My extends Component {
                 </ul>
                 <ul className="my-list my-mar">
                     <li className="bb" data-tag="myAdmin">账户管理</li>
-                    <li className="bb" data-tag="mySuggest">意见反馈</li>
+                    <li className="bb" data-tag="myFeedback">意见反馈</li>
                     <li data-tag="myAbout">关于</li>
                 </ul>
                 <div className="my-btn" data-tag="mySignOut">退出</div>
