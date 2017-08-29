@@ -40,7 +40,7 @@ class Register extends Component {
                         <input type="password" placeholder="密码" />
                     </li>
                     <li className="pd-t">
-                        <input type="button" className="func-btn" defaultValue="注册" />
+                        <input type="button" className="func-btn btn-disabled" disabled="disabled" defaultValue="注册" />
                     </li>
                 </ul>
             </div>

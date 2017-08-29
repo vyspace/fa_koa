@@ -40,12 +40,10 @@ class Footer extends Component {
         }
     }
     startHandler(e) {
-        e.stopPropagation();
         startY = e.touches[0].clientY;
         startX = e.touches[0].clientX;
     }
     moveHandler(e) {
-        e.stopPropagation();
         const ty = e.touches[0].clientY - startY,
             tx = e.touches[0].clientX - startX;
         if(Math.abs(ty) > Math.abs(tx) && ty > 0) {
@@ -65,8 +63,7 @@ class Footer extends Component {
             }
         }
     }
-    endHandler(e) {
-        e.stopPropagation();
+    endHandler() {
         scrollFlag = true;
     }
     eventHandler(e) {
@@ -137,10 +134,14 @@ class Footer extends Component {
                     <i className="icon icon-home" data-tag="home" />
                 </li>
                 <li data-tag="create">
-                    <i className="icon icon-edit" />
+                    <i className="icon icon-create" data-tag="create" />
                 </li>
-                <li className={activeArr[2] ? 'active' : ''} data-tag="reply">评论</li>
-                <li className={activeArr[3] ? 'active' : ''} data-tag="my">我的</li>
+                <li className={activeArr[2] ? 'active' : ''} data-tag="reply">
+                    <i className="icon icon-reply" data-tag="reply" />
+                </li>
+                <li className={activeArr[3] ? 'active' : ''} data-tag="my">
+                    <i className="icon icon-my" data-tag="my" />
+                </li>
                 </ul>);
             break;
         }

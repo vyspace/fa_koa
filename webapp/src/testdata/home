@@ -8,6 +8,7 @@
         "profile": "",
         "userId": 1,
         "nickname": "中华小当家",
+        "level": 1,
         "dateTime": "20小时前",
         "photos": [
             {
@@ -53,6 +54,7 @@
         "profile": "./img/profile.jpg",
         "userId": 2,
         "nickname": "魔鬼终结者",
+        "level": 15,
         "dateTime": "23小时前",
         "photos": [
             {
@@ -77,6 +79,7 @@
         "profile": "",
         "userId": 1,
         "nickname": "中华小当家",
+        "level": 4,
         "dateTime": "20小时前",
         "articleId": 11,
         "title": "从埃及法老到摇摆的迪斯科 袜子到底经历了什么？",
@@ -91,6 +94,7 @@
             "profile": "",
             "userId": 1,
             "nickname": "中华小当家",
+            "level": 8,
             "dateTime": "20小时前",
             "photos": [
                 {
@@ -136,6 +140,7 @@
             "profile": "./img/profile.jpg",
             "userId": 3,
             "nickname": "魔鬼终结者2",
+            "level": 20,
             "dateTime": "23小时前",
             "photos": [
                 {
@@ -160,6 +165,7 @@
             "profile": "",
             "userId": 1,
             "nickname": "中华小当家",
+            "level": 11,
             "dateTime": "2天前",
             "articleId": 16,
             "title": "每日穿搭｜有一种时尚叫“穿成知名企业员工”_潮流_GQ男士网",

@@ -5,11 +5,13 @@ import PropTypes from 'prop-types';
 import $ from 'zepto';
 import SinglePhoto from './SinglePhoto';
 import PhotoBrowser from './PhotoBrowser';
+import CardAction from './CardAction';
+import Comment from './Comment';
 import { restore } from '../store/persistence';
 
-const tb = 87;
-let cHeight = 0,
-    action = '';
+let g,
+    _this,
+    action;
 
 class Article extends Component {
     componentWillMount() {
@@ -35,7 +37,7 @@ class Article extends Component {
             const { aid } = this.props.store[action].params;
             getArtData(aid);
         }
-        cHeight = window.innerHeight - tb;
+        this.init();
     }
     componentDidMount() {
         this.eventLayer.addEventListener('click', this.eventHandler.bind(this), false);
@@ -52,6 +54,11 @@ class Article extends Component {
             data = this.props.store.article.data;
         }
         return data;
+    }
+    init() {
+        g = window.FaKoa;
+        _this = this;
+        action = '';
     }
     eventHandler(e) {
         const data = this.getData();
@@ -71,32 +78,51 @@ class Article extends Component {
         }
     }
     render() {
-        const html = [],
-            { isFetching } = this.props.store.article,
+        let html;
+        const { isFetching } = this.props.store.article,
             data = this.getData();
         if(isFetching) {
-            html.push('loading');
+            html = 'loading';
         }
         else {
             let index = 0;
-            html.push(<h1 key={data.article.length} className="title">{data.title}</h1>);
+            html = [];
+            const article = [];
+            article.push(<h1 key={data.article.length} className="title">{data.title}</h1>);
             for(let i = 0; i < data.article.length; i += 1) {
                 const cell = data.article[i];
                 if(cell === '[img]') {
-                    html.push(<SinglePhoto key={i} browser photo={data.photos[index].msrc} index={index} />);
+                    article.push(<SinglePhoto key={i} browser photo={data.photos[index].msrc} index={index} />);
                     index += 1;
                 }
                 else {
-                    html.push(<p key={i}>{cell}</p>);
+                    article.push(<p key={i}>{cell}</p>);
                 }
             }
+            const comments = (<div
+              ref={(c) => {
+                  this.commentList = c;
+              }}
+              className="comment-list"
+              key="a2"
+            >
+                {
+                    data.comments.map((cell, ix) => (<Comment key={cell.id} data={cell} index={ix} />))
+                }
+            </div>);
+            html = (<div>
+                <div className="article-box">{article}</div>
+                <div className="article-action"><CardAction numOfLikes={1000} numOfComments={1000} numOfForwards={1000} commentOps="评论" />
+                </div>
+                {comments}
+            </div>);
         }
         return (<div
           ref={(c) => {
               this.eventLayer = c;
           }}
-          className="article-box"
-          style={{ minHeight: `${cHeight}px` }}
+          className="article"
+          style={{ minHeight: g.bodyMinHeight }}
         >{html}</div>);
     }
 }

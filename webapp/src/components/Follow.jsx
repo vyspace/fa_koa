@@ -37,7 +37,7 @@ class Follow extends Component {
             const lis = follow.data.map((cell, index) => {
                 _key = `fl${index}`;
                 return (<li key={_key} >
-                    <CompHead profile={cell.profile} nickname={cell.nickname} dateTime={cell.dateTime}/>
+                    <CompHead profile={cell.profile} nickname={cell.nickname} dateTime={cell.dateTime} />
                 </li>);
             });
             html = <ul>{lis}</ul>;

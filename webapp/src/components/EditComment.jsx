@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { restore } from '../store/persistence';
 
 let g,
-    createDiv = null,
     tip;
 
 class EditComment extends Component {

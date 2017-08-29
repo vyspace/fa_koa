@@ -55,8 +55,9 @@ class CommentList extends Component {
         const { history } = this.props,
             { home } = this.props.store,
             { saveParams } = this.props.commentAction,
-            t = $(e.target);
-        if(e.target.tagName === 'IMG' && t.data('tag') === 'thumbnail') {
+            t = $(e.target),
+            tag = t.data('tag');
+        if(tag === 'thumbnail') {
             const ul = t.parents('.card-item'),
                 rows = home.params.rows,
                 imgs = ul.find('img'),
@@ -70,7 +71,7 @@ class CommentList extends Component {
             }
             PhotoBrowser.init(photoArr, index);
         }
-        if(e.target.tagName === 'DIV' && t.data('tag') === 'comment') {
+        if(tag === 'comment') {
             const params = {
                 type: 'comment',
                 userId: tData.userId,
@@ -93,7 +94,7 @@ class CommentList extends Component {
             saveParams(params);
             history.push('/editcomment');
         }
-        if (t.data('tag') === 'article') {
+        if (tag === 'article') {
             const aid = t.data('aid'),
                 cTop = 0;
             const param = {
@@ -138,11 +139,7 @@ class CommentList extends Component {
               style={{ display: 'none' }}
             >
                 {
-                    comment.data.map((cell, index) => (<Comment
-                      key={cell.id}
-                      data={cell}
-                      index={index}
-                    />))
+                    comment.data.map((cell, index) => (<Comment key={cell.id} data={cell} index={index} />))
                 }
             </div>);
         }
@@ -157,7 +154,7 @@ class CommentList extends Component {
                 this.eventLayer = c;
             }}
             >
-                <Card data={tData} cssStyle={css} index={0} animation={this.cardMove} commentOps={'发表评论'} />
+                <Card data={tData} cssStyle={css} index={0} animation={this.cardMove} commentOps={'评论'} />
                 {vDom}
             </div>);
     }

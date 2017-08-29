@@ -21,23 +21,14 @@ class Card extends Component {
         if(data.typeId === 1) {
             html.push(<li key="c1" className="mar-b"><SpeedDial photos={data.photos} /></li>);
             html.push(<CardText key="c2" text={data.text} />);
-            html.push(<CardAction
-              key="c3"
-              numOfLikes={data.numOfLikes}
-              numOfComments={data.numOfComments}
-              numOfForwards={data.numOfForwards}
-              commentOps={commentOps}
-            />);
         }
         if(data.typeId === 2) {
             html.push(<li key="c1" className="mar-b title" data-tag="article" data-aid={data.articleId}>{data.title}</li>);
             html.push(<li key="c2" className="mar-b"><SinglePhoto photo={data.photo} aid={data.articleId} browser={false} tag="article" /></li>);
-            html.push(<CardAction key="c3" numOfLikes={data.numOfLikes} numOfComments={data.numOfComments} numOfForwards={data.numOfForwards} commentOps={commentOps} />);
         }
         if(data.typeId === 3) {
             html.push(<li key="c1" className="mar-b title" data-tag="link" data-aid={data.articleId} data-link={data.link}>{data.title}</li>);
             html.push(<li key="c2" className="mar-b"><SinglePhoto photo={data.photo} aid={data.articleId} browser={false} tag="link" link={data.link} /></li>);
-            html.push(<CardAction key="c3" numOfLikes={data.numOfLikes} numOfComments={data.numOfComments} numOfForwards={data.numOfForwards} commentOps={commentOps} />);
         }
         return (<ul
           ref={(c) => {
@@ -47,9 +38,10 @@ class Card extends Component {
           data-index={index}
         >
             <li className="mar-b">
-                <CompHead profile={data.profile} nickname={data.nickname} dateTime={data.dateTime} />
+                <CompHead profile={data.profile} nickname={data.nickname} level={data.level} subContent={data.dateTime} />
             </li>
             {html}
+            <li key="c3"><CardAction numOfLikes={data.numOfLikes} numOfComments={data.numOfComments} numOfForwards={data.numOfForwards} commentOps={commentOps} /></li>
         </ul>);
     }
 }

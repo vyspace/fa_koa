@@ -5,15 +5,29 @@
   li {
     list-style: none;
   }
-  .interaction {
-    display: flex;
-    div {
-      flex: 1;
-    }
-  }
   .title {
     font-size: 16px;
     font-weight: 600;
+  }
+}
+
+.interaction {
+  display: flex;
+  background-color: #fff;
+  div {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    line-height: 1;
+  }
+  .center {
+    justify-content: center;
+  }
+  .end {
+    justify-content: flex-end;
+  }
+  .mar-l {
+    margin-left: 4px;
   }
 }
 

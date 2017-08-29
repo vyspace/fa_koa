@@ -1,6 +1,12 @@
+.article {
+  .comment-list {
+    margin: 0;
+  }
+}
 .article-box {
-  padding: .4rem;
   background-color: #fff;
+  padding: .4rem;
+  margin-bottom: .4rem;
   .title {
     font-size: 20px;
   }
@@ -11,4 +17,8 @@
   .single-img {
     margin: .4rem 0;
   }
+}
+.article-action{
+  padding: .4rem;
+  background-color: #fff;
 }

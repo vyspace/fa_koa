@@ -33,6 +33,51 @@
             "[img]",
             "在欧洲男士一度迷恋那些能将自己勒出静脉曲张的紧身袜的几百年中，其中的16世纪让袜子正式成为了时尚单品。那时的贵族们谱出了一曲“生命诚可贵，时尚价更高”的赞歌。想想看，这些“要命”的袜子可能还不如这双12世纪的埃及人织造的“Statement Socks”。",
             "[img]"
-        ]
+        ],
+        "comments": [{
+            "id": 1,
+            "profile": "./img/profile.jpg",
+            "userId": 1,
+            "nickname": "中华小当家",
+            "dateTime": "20小时前",
+            "comment": "it's nice",
+            "commentReply": [{
+                "userId": 4,
+                "nickname": "aaa",
+                "reply": "hahhahahha"
+            }]
+        }, {
+           "id": 2,
+           "profile": "",
+           "userId": 2,
+           "nickname": "中华小",
+           "dateTime": "21小时前",
+           "comment": "it's nice",
+           "commentReply": []
+        }, {
+          "id": 3,
+          "profile": "./img/profile.jpg",
+          "userId": 5,
+          "nickname": "社会姐",
+          "dateTime": "24小时前",
+          "comment": "大家好，我是来打酱油的，哈哈哈哈",
+          "commentReply": [{
+              "userId": 10,
+              "nickname": "为什么啊",
+              "reply": "嗯嗯嗯 不是啊 哈哈哈"
+          },{
+              "userId": 11,
+              "nickname": "会飞的zhu",
+              "reply": "看你说的太棒了，格式化,xml转json 工具，编辑器以及Json与XML相互转换"
+          }]
+        }, {
+           "id": 4,
+           "profile": "",
+           "userId": 2,
+           "nickname": "中华小",
+           "dateTime": "21小时前",
+           "comment": "it's nice",
+           "commentReply": []
+        }]
     }
 }

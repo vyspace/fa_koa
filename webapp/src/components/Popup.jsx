@@ -24,9 +24,17 @@ class Popup extends Component {
             let html = '';
             if(popType === 'create') {
                 html = `<ul>
-                    <li data-tag="blog">图&nbsp;&nbsp;片</li>
-                    <li data-tag="article">文&nbsp;&nbsp;章</li>
-                    <li data-tag="link">外&nbsp;&nbsp;链</li>
+                    <li data-tag="blog">
+                        <i class="icon icon-photo mar-r" data-tag="blog"></i>
+                        <span data-tag="blog">图片</span>
+                    </li>
+                    <li data-tag="article">
+                        <i class="icon icon-article mar-r" data-tag="article"></i>
+                        <span data-tag="article">文章</span>
+                    <li data-tag="link">
+                        <i class="icon icon-link mar-r" data-tag="link"></i>
+                        <span data-tag="link">外链</span>
+                    </li>
                     <li data-tag="cancel">取&nbsp;&nbsp;消</li>
                 </ul>`;
             }

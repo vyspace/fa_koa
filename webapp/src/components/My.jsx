@@ -78,19 +78,34 @@ class My extends Component {
                         <div className="via"><img src="./img/avator.jpg" alt="" data-tag="myProfile" /></div>
                     </div>
                     <div className="right" data-tag="myInfo">
-                        <div data-tag="myInfo">nickname</div>
-                        <div data-tag="myInfo">设计师</div>
+                        <div className="first" data-tag="myInfo">
+                            <span>nickname</span>
+                            <div className="icon icon-level level">2</div>
+                        </div>
+                        <div className="second" data-tag="myInfo">全球最大的中文搜索引擎</div>
                     </div>
                 </div>
                 <ul className="my-list my-mar">
-                    <li className="bb" data-tag="myHome">主页</li>
-                    <li className="bb" data-tag="myPhotoAlbum">相册</li>
-                    <li data-tag="myFollow">关注</li>
+                    <li className="bd-b" data-tag="myHome">
+                        <i className="icon icon-myhome" data-tag="myHome" />
+                        主页</li>
+                    <li className="bd-b" data-tag="myPhotoAlbum">
+                        <i className="icon icon-camera" data-tag="myPhotoAlbum" />
+                        相册</li>
+                    <li data-tag="myFollow">
+                        <i className="icon icon-follow" data-tag="myFollow" />
+                        关注</li>
                 </ul>
                 <ul className="my-list my-mar">
-                    <li className="bb" data-tag="myAdmin">账户管理</li>
-                    <li className="bb" data-tag="myFeedback">意见反馈</li>
-                    <li data-tag="myAbout">关于</li>
+                    <li className="bd-b" data-tag="myAdmin">
+                        <i className="icon icon-admin" data-tag="myAdmin" />
+                        账户管理</li>
+                    <li className="bd-b" data-tag="myFeedback">
+                        <i className="icon icon-feedback" data-tag="myFeedback" />
+                        意见反馈</li>
+                    <li data-tag="myAbout">
+                        <i className="icon icon-about" data-tag="myAbout" />
+                        关于</li>
                 </ul>
                 <div className="my-btn" data-tag="mySignOut">退出</div>
             </div>

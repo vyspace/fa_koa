@@ -66,13 +66,13 @@ class Login extends Component {
                         <div className="find-pwd" data-tag="find">找回密码</div>
                     </li>
                     <li className="pd-t">
-                        <input type="button" className="func-btn" defaultValue="登陆" />
+                        <input type="button" className="func-btn btn-disabled" disabled="disabled" defaultValue="登陆" />
                     </li>
                 </ul>
                 <ul className="login-other">
-                    <li>微博</li>
-                    <li>微信</li>
-                    <li>百度</li>
+                    <li><img src="../img/sina.png" alt="" /></li>
+                    <li><img src="../img/wechat.png" alt="" /></li>
+                    <li><img src="../img/baidu.png" alt="" /></li>
                 </ul>
             </div>
         );

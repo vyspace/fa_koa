@@ -129,14 +129,6 @@ a {
         display: block;
         margin-left: .4rem;
       }
-      .v-text {
-        position: relative;
-        font-size: .5rem;
-        top: 1px;
-        left: -2px;
-        line-height: 1;
-        color: #ff9300;
-      }
     }
     .second {
       font-size: .6rem;
@@ -152,6 +144,18 @@ a {
     text-align: center;
     width: 100%;
   }
+}
+
+.level {
+  display: flex;
+  min-width: 1rem;
+  height: .9rem!important;
+  padding-left: .6rem;
+  padding-top: .2rem;
+  font-size: .6rem;
+  margin-left: 4px;
+  font-weight: 200;
+  font-style: italic;
 }
 
 .mar-b {
@@ -254,25 +258,92 @@ a {
 
 .icon {
   display: block;
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   background-repeat: no-repeat;
   background-size: contain;
 }
 
 .icon-login {
-  background-image: url(../img/login2.png);
+  background-image: url(../img/login.png);
 }
 .icon-home {
   background-image: url(../img/home.png);
 }
+.icon-create {
+  background-image: url(../img/create.png);
+}
+.icon-reply {
+  background-image: url(../img/reply.png);
+}
+.icon-my {
+  background-image: url(../img/my.png);
+}
+.icon-level-0 {
+  background-image: url(../img/level0.png);
+  color: #4ca36c;
+}
+.icon-level-1 {
+  background-image: url(../img/level1.png);
+  color: #1296db;
+}
+.icon-level-2 {
+  background-image: url(../img/level2.png);
+  color: #ffa829;
+}
+.icon-level-3 {
+  background-image: url(../img/level3.png);
+  color: #f00;
+}
+.icon-comment {
+  background-image: url(../img/comment.png);
+}
+.icon-share {
+  background-image: url(../img/share.png);
+}
+.icon-like {
+  background-image: url(../img/like.png);
+}
+.icon-photo {
+  background-image: url(../img/photo.png);
+}
+.icon-article {
+  background-image: url(../img/article.png);
+}
+.icon-link {
+  background-image: url(../img/link.png);
+}
 .icon-edit {
   background-image: url(../img/edit.png);
+}
+.icon-myhome {
+  background-image: url(../img/myhome.png);
+}
+.icon-camera {
+  background-image: url(../img/camera.png);
+}
+.icon-follow {
+  background-image: url(../img/follow.png);
+}
+.icon-admin {
+  background-image: url(../img/admin.png);
+}
+.icon-feedback {
+  background-image: url(../img/feedback.png);
+}
+.icon-about {
+  background-image: url(../img/about.png);
 }
 
 .active {
   .icon-home {
-    background-image: url(../img/home_a.png);
+    background-image: url(../img/home_fill.png);
+  }
+  .icon-reply {
+    background-image: url(../img/reply_fill.png);
+  }
+  .icon-my {
+    background-image: url(../img/my_fill.png);
   }
 }
 

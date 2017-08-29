@@ -19,13 +19,17 @@
   }
   .login-other {
     display: flex;
-    padding-top: 1rem;
+    padding-top: 2rem;
     li {
       width: 33.33%;
-      height: 2rem;
+      min-height: 2rem;
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+    img {
+      width: 48px;
+      height: 48px;
     }
   }
 }

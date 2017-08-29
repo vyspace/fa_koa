@@ -7,22 +7,24 @@ import PropTypes from 'prop-types';
 class CardAction extends Component {
     render() {
         const { numOfLikes, numOfComments, numOfForwards, commentOps } = this.props;
-        let comment = `评论${numOfComments}`;
+        let comment = [<i className="icon icon-comment" key="ca0" data-tag="comment" />, <span key="ca1" className="mar-l" data-tag="comment">{numOfComments}</span>];
         if(commentOps !== '') {
-            comment = commentOps;
+            comment = [<i className="icon icon-edit" key="ca0" data-tag="comment" />, <span key="ca1" className="mar-l" data-tag="comment">{commentOps}</span>];
         }
         return (
-            <li className="interaction">
-                <div data-tag="forward">
-                    转发{numOfForwards}
+            <div className="interaction">
+                <div data-tag="share">
+                    <i className="icon icon-share" data-tag="share" />
+                    <span className="mar-l">{numOfForwards}</span>
                 </div>
-                <div className="txt-center" data-tag="comment">
+                <div className="center" data-tag="comment">
                     {comment}
                 </div>
-                <div className="txt-right" data-tag="like">
-                    喜欢{numOfLikes}
+                <div className="end" data-tag="like">
+                    <i className="icon icon-like" data-tag="like" />
+                    <span className="mar-l">{numOfLikes}</span>
                 </div>
-            </li>
+            </div>
         );
     }
 }
