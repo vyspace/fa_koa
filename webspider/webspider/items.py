@@ -10,5 +10,7 @@ import scrapy
 
 class WebspiderItem(scrapy.Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
     title = scrapy.Field()
+    content = scrapy.Field()
+    pub_date = scrapy.Field()
+    url_origin = scrapy.Field()
