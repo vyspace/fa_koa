@@ -13,7 +13,7 @@ class PhotoAlbum extends Component {
         const { updateHeader } = this.props.headerAction,
             { updateFooter } = this.props.footerAction,
             { getPhotoData } = this.props.palbumAction,
-            { history } = this.props;
+            { history, store } = this.props;
         updateHeader({
             type: 'base',
             title: '相册',
@@ -27,6 +27,10 @@ class PhotoAlbum extends Component {
     }
     componentDidMount() {
         this.eventLayer.addEventListener('click', this.eventHandler, true);
+    }
+    componentWillUnmount() {
+        const { recordOrigin } = this.props.recordAction;
+        recordOrigin('photoalbum');
     }
     init() {
         g = window.FaKoa;
@@ -108,6 +112,7 @@ PhotoAlbum.propTypes = {
     headerAction: PropTypes.object.isRequired,
     footerAction: PropTypes.object.isRequired,
     palbumAction: PropTypes.object.isRequired,
+    recordAction: PropTypes.object.isRequired,
     store: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };

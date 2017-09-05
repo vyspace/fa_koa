@@ -37,6 +37,10 @@ class About extends Component {
         this.multiple.addEventListener('change', this.changeHandler, true);
         this.eventLayer.addEventListener('click', this.eventHandler, true);
     }
+    componentWillUnmount() {
+        const { recordOrigin } = this.props.recordAction;
+        recordOrigin('ecitblog');
+    }
     init() {
         g = window.FaKoa;
         _this = this;
@@ -132,6 +136,7 @@ class About extends Component {
 About.propTypes = {
     headerAction: PropTypes.object.isRequired,
     footerAction: PropTypes.object.isRequired,
+    recordAction: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };
 

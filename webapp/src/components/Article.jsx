@@ -10,15 +10,14 @@ import Comment from './Comment';
 import { restore } from '../store/persistence';
 
 let g,
-    _this,
     action;
 
 class Article extends Component {
     componentWillMount() {
         const { store } = this.props;
         restore(store);
-        action = this.props.store.record.original;
-        const { getArtData, getPreviewData } = this.props.articleAction,
+        const oa = store.record.origin,
+            { getArtData, getPreviewData } = this.props.articleAction,
             { updateHeader } = this.props.headerAction,
             { updateFooter } = this.props.footerAction,
             { history } = this.props;
@@ -34,7 +33,7 @@ class Article extends Component {
             getPreviewData();
         }
         else {
-            const { aid } = this.props.store[action].params;
+            const { aid } = this.props.store[oa].params;
             getArtData(aid);
         }
         this.init();
@@ -44,6 +43,10 @@ class Article extends Component {
     }
     componentDidUpdate() {
         document.body.scrollTop = 0;
+    }
+    componentWillUnmount() {
+        const { recordOrigin } = this.props.recordAction;
+        recordOrigin('article');
     }
     getData() {
         let data;
@@ -57,7 +60,6 @@ class Article extends Component {
     }
     init() {
         g = window.FaKoa;
-        _this = this;
         action = '';
     }
     eventHandler(e) {
@@ -131,6 +133,7 @@ Article.propTypes = {
     articleAction: PropTypes.object.isRequired,
     headerAction: PropTypes.object.isRequired,
     footerAction: PropTypes.object.isRequired,
+    recordAction: PropTypes.object.isRequired,
     store: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };

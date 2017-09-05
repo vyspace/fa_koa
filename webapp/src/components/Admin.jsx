@@ -20,6 +20,10 @@ class Admin extends Component {
         updateFooter({ type: 'none' });
         g = window.FaKoa;
     }
+    componentWillUnmount() {
+        const { recordOrigin } = this.props.recordAction;
+        recordOrigin('admin');
+    }
     render() {
         return (
             <div
@@ -51,6 +55,7 @@ class Admin extends Component {
 Admin.propTypes = {
     headerAction: PropTypes.object.isRequired,
     footerAction: PropTypes.object.isRequired,
+    recordAction: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };
 

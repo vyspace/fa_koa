@@ -1,11 +1,11 @@
 'use strict';
 
-import { RECORD_ORIGINAL } from '../actions/record';
+import { RECORD_ORIGIN } from '../actions/record';
 
-export default function article(state = { original: '' }, action) {
+export default function article(state = { origin: '' }, action) {
     switch(action.type) {
-    case RECORD_ORIGINAL:
-        state.original = action.payload;
+    case RECORD_ORIGIN:
+        state.origin = action.payload;
         return state;
     default:
         return state;

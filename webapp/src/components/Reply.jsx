@@ -29,9 +29,9 @@ class Reply extends Component {
     }
     componentWillUnmount() {
         const { saveScrollTop } = this.props.replyAction,
-            { recordOriginal } = this.props.recordAction;
+            { recordOrigin } = this.props.recordAction;
         saveScrollTop(document.body.scrollTop);
-        recordOriginal('reply');
+        recordOrigin('reply');
     }
     init() {
         _this = this;

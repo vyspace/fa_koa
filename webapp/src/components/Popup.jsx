@@ -35,14 +35,14 @@ class Popup extends Component {
                         <i class="icon icon-link mar-r" data-tag="link"></i>
                         <span data-tag="link">外链</span>
                     </li>
-                    <li data-tag="cancel">取&nbsp;&nbsp;消</li>
+                    <li class="c-ref" data-tag="cancel">取&nbsp;&nbsp;消</li>
                 </ul>`;
             }
             if(popType === 'profile') {
                 html = `<ul>
                     <li data-tag="photo">拍&nbsp;&nbsp;照</li>
                     <li data-tag="album">相&nbsp;&nbsp;册</li>
-                    <li data-tag="cancel">取&nbsp;&nbsp;消</li>
+                    <li class="ref" data-tag="cancel">取&nbsp;&nbsp;消</li>
                 </ul>`;
             }
             _this.eventLayer.innerHTML = html;

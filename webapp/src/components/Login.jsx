@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 import $ from 'zepto';
 
 let g,
-    _this;
+    _this,
+    $submit;
 
 class Login extends Component {
     componentWillMount() {
@@ -30,6 +31,13 @@ class Login extends Component {
     }
     componentDidMount() {
         this.eventLayer.addEventListener('click', this.eventHandler, true);
+        this.username.addEventListener('input', this.changeHandler, true);
+        this.password.addEventListener('input', this.changeHandler, true);
+        $submit = $(_this.submit);
+    }
+    componentWillUnmount() {
+        const { recordOrigin } = this.props.recordAction;
+        recordOrigin('login');
     }
     init() {
         g = window.FaKoa;
@@ -44,8 +52,24 @@ class Login extends Component {
         case 'find':
             history.push('findpassword');
             break;
+        case 'submit':
+            alert('ok');
+            break;
         default:
             break;
+        }
+    }
+    isNotEmpty() {
+        return _this.username.value !== '' && _this.password.value !== '';
+    }
+    changeHandler() {
+        if(_this.isNotEmpty()) {
+            $submit.removeClass('btn-disabled');
+            $submit.removeAttr('disabled');
+        }
+        else {
+            $submit.addClass('btn-disabled');
+            $submit.attr('disabled', true);
         }
     }
     render() {
@@ -59,14 +83,35 @@ class Login extends Component {
             >
                 <ul className="input-group login-can">
                     <li className="bdr-b">
-                        <input type="text" placeholder="邮箱地址" />
+                        <input
+                          ref={(c) => {
+                              this.username = c;
+                          }}
+                          type="text"
+                          placeholder="邮箱地址"
+                        />
                     </li>
                     <li className="password bdr-b">
-                        <input type="password" placeholder="密码" />
+                        <input
+                          ref={(c) => {
+                              this.password = c;
+                          }}
+                          type="password"
+                          placeholder="密码"
+                        />
                         <div className="find-pwd" data-tag="find">找回密码</div>
                     </li>
                     <li className="pd-t">
-                        <input type="button" className="func-btn btn-disabled" disabled="disabled" defaultValue="登陆" />
+                        <input
+                          ref={(c) => {
+                              this.submit = c;
+                          }}
+                          type="button"
+                          className="func-btn btn-disabled"
+                          disabled="disabled"
+                          defaultValue="登陆"
+                          data-tag="submit"
+                        />
                     </li>
                 </ul>
                 <ul className="login-other">
@@ -82,6 +127,7 @@ class Login extends Component {
 Login.propTypes = {
     headerAction: PropTypes.object.isRequired,
     footerAction: PropTypes.object.isRequired,
+    recordAction: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };
 

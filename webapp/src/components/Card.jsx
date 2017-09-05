@@ -38,7 +38,7 @@ class Card extends Component {
           data-index={index}
         >
             <li className="mar-b">
-                <CompHead profile={data.profile} nickname={data.nickname} level={data.level} subContent={data.dateTime} />
+                <CompHead profile={data.profile} nickname={data.nickname} subContent={data.dateTime} />
             </li>
             {html}
             <li key="c3"><CardAction numOfLikes={data.numOfLikes} numOfComments={data.numOfComments} numOfForwards={data.numOfForwards} commentOps={commentOps} /></li>

@@ -30,8 +30,9 @@ class EditLink extends Component {
         });
         this.init();
     }
-    componentDidMount() {
-
+    componentWillUnmount() {
+        const { recordOrigin } = this.props.recordAction;
+        recordOrigin('editlink');
     }
     init() {
         g = window.FaKoa;
@@ -91,6 +92,7 @@ class EditLink extends Component {
 EditLink.propTypes = {
     headerAction: PropTypes.object.isRequired,
     footerAction: PropTypes.object.isRequired,
+    recordAction: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };
 

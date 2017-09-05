@@ -27,6 +27,10 @@ class My extends Component {
     componentDidMount() {
         this.eventLayer.addEventListener('click', this.eventHandler.bind(this), true);
     }
+    componentWillUnmount() {
+        const { recordOrigin } = this.props.recordAction;
+        recordOrigin('my');
+    }
     eventHandler(e) {
         e.stopPropagation();
         const { history } = this.props;
@@ -79,7 +83,7 @@ class My extends Component {
                     </div>
                     <div className="right" data-tag="myInfo">
                         <div className="first" data-tag="myInfo">
-                            <span>nickname</span>
+                            <span data-tag="myInfo">nickname</span>
                             <div className="icon icon-level level">2</div>
                         </div>
                         <div className="second" data-tag="myInfo">全球最大的中文搜索引擎</div>
@@ -116,6 +120,7 @@ class My extends Component {
 My.propTypes = {
     headerAction: PropTypes.object.isRequired,
     footerAction: PropTypes.object.isRequired,
+    recordAction: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
     store: PropTypes.object.isRequired
 };

@@ -72,9 +72,9 @@ class EditArticle extends Component {
         tip = this.tip;
     }
     componentWillUnmount() {
-        const { recordOriginal } = this.props.recordAction;
+        const { recordOrigin } = this.props.recordAction;
         window.removeEventListener('resize', this.reSize, false);
-        recordOriginal('editarticle');
+        recordOrigin('editarticle');
     }
     getsr() {
         const selection = window.getSelection ? window.getSelection() : document.selection;

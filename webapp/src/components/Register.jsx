@@ -20,6 +20,10 @@ class Register extends Component {
         updateFooter({ type: 'none' });
         this.init();
     }
+    componentWillUnmount() {
+        const { recordOrigin } = this.props.recordAction;
+        recordOrigin('photoalbum');
+    }
     init() {
         g = window.FaKoa;
     }
@@ -51,6 +55,7 @@ class Register extends Component {
 Register.propTypes = {
     headerAction: PropTypes.object.isRequired,
     footerAction: PropTypes.object.isRequired,
+    recordAction: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };
 

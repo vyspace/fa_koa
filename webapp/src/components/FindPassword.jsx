@@ -20,6 +20,10 @@ class FindPassword extends Component {
         updateFooter({ type: 'none' });
         this.init();
     }
+    componentWillUnmount() {
+        const { recordOrigin } = this.props.recordAction;
+        recordOrigin('findpassword');
+    }
     init() {
         g = window.FaKoa;
     }
@@ -37,7 +41,7 @@ class FindPassword extends Component {
                         <input type="text" placeholder="邮箱地址" />
                     </li>
                     <li className="pd-t">
-                        <input type="button" className="func-btn" defaultValue="发送" />
+                        <input type="button" className="func-btn btn-disabled" defaultValue="发送" />
                     </li>
                 </ul>
             </div>
@@ -48,6 +52,7 @@ class FindPassword extends Component {
 FindPassword.propTypes = {
     headerAction: PropTypes.object.isRequired,
     footerAction: PropTypes.object.isRequired,
+    recordAction: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };
 

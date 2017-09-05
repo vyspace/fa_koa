@@ -6,8 +6,7 @@ import $ from 'zepto';
 import Card from './Card';
 import PhotoBrowser from './PhotoBrowser';
 
-let g,
-    _this;
+let _this;
 
 class CardList extends Component {
     componentWillMount() {
@@ -41,12 +40,11 @@ class CardList extends Component {
     }
     componentWillUnmount() {
         const { saveScrollTop } = this.props.homeAction,
-            { recordOriginal } = this.props.recordAction;
+            { recordOrigin } = this.props.recordAction;
         saveScrollTop(document.body.scrollTop);
-        recordOriginal('home');
+        recordOrigin('home');
     }
     init() {
-        g = window.FaKoa;
         _this = this;
     }
     eventHandler(e) {
@@ -131,9 +129,7 @@ class CardList extends Component {
             html = 'loadding';
         }
         else {
-            html = data.map((cell, index) => {
-                return <Card key={cell.id} data={cell} index={index} />;
-            });
+            html = data.map((cell, index) => <Card key={cell.id} data={cell} index={index} />);
         }
         return (<div ref={(c) => {
             this.eventLayer = c;

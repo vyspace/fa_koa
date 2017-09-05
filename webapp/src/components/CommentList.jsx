@@ -45,10 +45,10 @@ class CommentList extends Component {
     }
     componentWillUnmount() {
         const { saveScrollTop } = this.props.commentAction,
-            { recordOriginal } = this.props.recordAction;
+            { recordOrigin } = this.props.recordAction;
         clearTimeout(showTimer);
         saveScrollTop(document.body.scrollTop);
-        recordOriginal('comment');
+        recordOrigin('comment');
     }
     eventHandler(e) {
         e.stopPropagation();

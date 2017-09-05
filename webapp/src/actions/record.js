@@ -1,10 +1,10 @@
 'use strict';
 
-export const RECORD_ORIGINAL = 'RECORD_ORIGINAL';
+export const RECORD_ORIGIN = 'RECORD_ORIGIN';
 
-export function recordOriginal(payload) {
+export function recordOrigin(payload) {
     return {
-        type: RECORD_ORIGINAL,
+        type: RECORD_ORIGIN,
         payload
     };
 }

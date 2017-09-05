@@ -55,9 +55,7 @@ class Header extends Component {
         if(backHandler) {
             backHandler();
         }
-        else {
-            tHistory.goBack();
-        }
+        tHistory.goBack();
     }
     rBtnHandler() {
         const { rBtn } = this.props.store.header;
@@ -100,13 +98,13 @@ class Header extends Component {
         }
     }
     render() {
-        const { header } = this.props.store;
+        const { header, record } = this.props.store;
         let backBtn = <li className="item" />,
             optBtn = <li className="item" />,
             middle,
             tabArr;
-        if(header.isBack) {
-            backBtn = (<li className="item" data-tag="back">
+        if(header.isBack && record.origin) {
+            backBtn = (<li className="item item-left" data-tag="back">
                         <i className="icon-back" data-tag="back" />
                     </li>);
         }
@@ -119,7 +117,7 @@ class Header extends Component {
                 const cln = `icon ${header.rBtn.content}`;
                 cont = <i className={cln} data-tag="rbtn" />;
             }
-            optBtn = (<li className="item" data-tag="rbtn">{cont}</li>);
+            optBtn = (<li className="item item-right" data-tag="rbtn">{cont}</li>);
         }
         switch (header.type) {
         case 'home':

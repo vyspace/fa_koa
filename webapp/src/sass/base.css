@@ -62,23 +62,6 @@ a {
 #root {
   height: 100%; }
 
-.icon-back {
-  width: 2.2rem;
-  height: 2.2rem;
-  line-height: 2.2rem; }
-  .icon-back::before {
-    content: "";
-    display: inline-block;
-    width: 0.5rem;
-    height: 0.5rem;
-    vertical-align: middle;
-    border-left: 2px solid #000;
-    border-bottom: 2px solid #000;
-    -webkit-transform: rotate(45deg);
-    transform: rotate(45deg);
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box; }
-
 .comp-head {
   display: flex; }
   .comp-head .left {
@@ -116,15 +99,12 @@ a {
     width: 100%; }
 
 .level {
-  display: flex;
-  min-width: 1rem;
-  height: 0.9rem !important;
-  padding-left: .6rem;
-  padding-top: .2rem;
-  font-size: .6rem;
-  margin-left: 4px;
-  font-weight: 200;
-  font-style: italic; }
+  text-align: right;
+  margin-left: 5px;
+  line-height: 1;
+  padding: .3rem .16rem 0 0;
+  font-size: .5rem;
+  font-weight: bold; }
 
 .mar-b {
   margin-bottom: 0.4rem; }
@@ -199,12 +179,16 @@ a {
     border-radius: .9rem;
     background-color: #fff; }
   .input-group .btn-disabled {
-    border-color: #999;
+    border-color: #ccc;
     color: #999; }
   .input-group .bdr-b {
     border-bottom: 1px solid #eee; }
   .input-group .pd-t {
     padding-top: 2rem; }
+
+.c-ref {
+  color: #4579FB;
+  font-weight: bold; }
 
 .icon {
   display: block;
@@ -228,21 +212,9 @@ a {
 .icon-my {
   background-image: url(../img/my.png); }
 
-.icon-level-0 {
-  background-image: url(../img/level0.png);
-  color: #4ca36c; }
-
-.icon-level-1 {
-  background-image: url(../img/level1.png);
-  color: #1296db; }
-
-.icon-level-2 {
-  background-image: url(../img/level2.png);
-  color: #ffa829; }
-
-.icon-level-3 {
-  background-image: url(../img/level3.png);
-  color: #f00; }
+.icon-level {
+  background-image: url(../img/level.png);
+  color: #fff; }
 
 .icon-comment {
   background-image: url(../img/comment.png); }
@@ -289,6 +261,8 @@ a {
   background-image: url(../img/reply_fill.png); }
 .active .icon-my {
   background-image: url(../img/my_fill.png); }
+.active .icon-like {
+  background-image: url(../img/like_fill.png); }
 
 .header-view {
   height: 44px;
@@ -312,15 +286,17 @@ a {
   width: 100%;
   height: 44px;
   line-height: 44px;
-  display: flex;
-  text-align: center; }
+  display: flex; }
 
 .header .item {
   width: 44px;
   height: 44px;
   display: flex;
+  align-items: center;
   justify-content: center;
-  align-items: center; }
+  color: #4579FB;
+  font-size: 14px;
+  font-weight: bold; }
 .header .middle {
   flex: 1;
   font-size: 18px;
@@ -346,6 +322,22 @@ a {
     width: 100%; }
   .header .search-box .fill {
     width: 15px; }
+
+.icon-back {
+  width: 14px;
+  height: 44px; }
+  .icon-back::before {
+    content: "";
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    vertical-align: middle;
+    border-left: 2px solid #4579FB;
+    border-bottom: 2px solid #4579FB;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box; }
 
 .footer li {
   flex: 1;
@@ -1054,7 +1046,8 @@ a {
     text-align: center;
     display: flex;
     justify-content: center;
-    align-items: center; }
+    align-items: center;
+    font-weight: bold; }
     .pop-layer li .mar-r {
       margin-right: 15px; }
 
@@ -1072,10 +1065,10 @@ a {
   .comment-list .content {
     padding-left: 2.9rem; }
   .comment-list a {
-    color: #2caef1;
+    color: #4579FB;
     padding-right: 4px; }
     .comment-list a a:hover, .comment-list a a:focus {
-      color: #2caef1; }
+      color: #4579FB; }
 
 .reply-card {
   background-color: #fff;
@@ -1393,7 +1386,8 @@ a {
   display: flex;
   flex-direction: column;
   background-color: #fff;
-  align-items: center; }
+  align-items: center;
+  color: #999; }
 
 .about-list li {
   background-color: #fff;
@@ -1414,7 +1408,7 @@ a {
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        color: #2caef1; }
+        color: #4579FB; }
   .login .login-other {
     display: flex;
     padding-top: 2rem; }

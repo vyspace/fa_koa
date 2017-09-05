@@ -28,10 +28,10 @@ app.use(koaNunjucks({
         trimBlocks: true
     }
 }));
-// 配置漏油控制器
+// 配置路由控制器
 controller(router);
 // 配置路由
 app.use(router.routes()).use(router.allowedMethods());
 
-app.listen(3000);
+app.listen(serverConfig.port);
 console.log(`start-quick is starting at port ${serverConfig.port}`);

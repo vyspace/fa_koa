@@ -10,13 +10,13 @@ let g,
 class EditComment extends Component {
     componentWillMount() {
         const { store, history } = this.props,
-            action = this.props.store.record.original;
+            oAction = this.props.store.record.origin;
         restore(store);
         const { updateHeader } = this.props.headerAction,
             { updateFooter } = this.props.footerAction,
-            { type, nickname } = this.props.store[action].params;
+            { type, nickname } = this.props.store[oAction].params;
+        this.init();
         let tit = '评论';
-        tip = '写评论…';
         if(type === 'reply') {
             tit = '回复';
             tip = `回复@${nickname}…`;
@@ -35,7 +35,10 @@ class EditComment extends Component {
             }
         });
         updateFooter({ type: 'none' });
-        this.init();
+    }
+    componentWillUnmount() {
+        const { recordOrigin } = this.props.recordAction;
+        recordOrigin('editcomment');
     }
     init() {
         g = window.FaKoa;
@@ -72,6 +75,7 @@ class EditComment extends Component {
 EditComment.propTypes = {
     headerAction: PropTypes.object.isRequired,
     footerAction: PropTypes.object.isRequired,
+    recordAction: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
     store: PropTypes.object.isRequired
 };

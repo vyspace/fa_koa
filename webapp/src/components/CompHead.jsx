@@ -7,21 +7,13 @@ import { levelConvert } from '../utils/tools';
 class CompHead extends Component {
     render() {
         let profileImg = './img/avator.jpg',
-            rDiv = null,
-            levelDiv = null;
-        const { profile, nickname, level, subContent, rCont } = this.props;
+            rDiv = null;
+        const { profile, nickname, subContent, rCont } = this.props;
         if(profile !== '') {
             profileImg = profile;
         }
         if(rCont !== '') {
-            rDiv = <div className="cp-right" data-nickname={nickname}><div className="r-btn">{rCont}</div></div>
-        }
-        if(level) {
-            const lc = levelConvert(level);
-            if(lc) {
-                const cln = `icon ${lc} level`;
-                levelDiv = <div className={cln}>{level}</div>;
-            }
+            rDiv = <div className="cp-right" data-nickname={nickname}><div className="r-btn c-ref">{rCont}</div></div>;
         }
         return (
             <div className="comp-head">
@@ -31,7 +23,6 @@ class CompHead extends Component {
                 <div className="middle">
                     <div className="first">
                         <span>{nickname}</span>
-                        {levelDiv}
                     </div>
                     <div className="second">{subContent}</div>
                 </div>
@@ -44,7 +35,6 @@ class CompHead extends Component {
 CompHead.propTypes = {
     profile: PropTypes.string.isRequired,
     nickname: PropTypes.string.isRequired,
-    level: PropTypes.number.isRequired,
     subContent: PropTypes.string,
     rCont: PropTypes.string
 };

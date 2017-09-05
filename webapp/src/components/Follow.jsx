@@ -23,6 +23,10 @@ class Follow extends Component {
         getFollowData(1);
         this.init();
     }
+    componentWillUnmount() {
+        const { recordOrigin } = this.props.recordAction;
+        recordOrigin('follow');
+    }
     init() {
         g = window.FaKoa;
     }
@@ -37,7 +41,7 @@ class Follow extends Component {
             const lis = follow.data.map((cell, index) => {
                 _key = `fl${index}`;
                 return (<li key={_key} >
-                    <CompHead profile={cell.profile} nickname={cell.nickname} dateTime={cell.dateTime} />
+                    <CompHead profile={cell.profile} nickname={cell.nickname} subContent="新锐设计师" />
                 </li>);
             });
             html = <ul>{lis}</ul>;
@@ -60,6 +64,7 @@ Follow.propTypes = {
     headerAction: PropTypes.object.isRequired,
     footerAction: PropTypes.object.isRequired,
     followAction: PropTypes.object.isRequired,
+    recordAction: PropTypes.object.isRequired,
     store: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };

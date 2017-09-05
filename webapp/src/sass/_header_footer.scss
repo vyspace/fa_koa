@@ -22,7 +22,6 @@
   height: $hfHeight;
   line-height: $hfHeight;
   display: flex;
-  text-align: center;
 }
 
 .header {
@@ -30,8 +29,11 @@
     width: $hfHeight;
     height: $hfHeight;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    color: $refColor;
+    font-size: 14px;
+    font-weight: bold;
   }
   .middle {
     flex: 1;
@@ -64,6 +66,24 @@
     .fill {
       width: 15px;
     }
+  }
+}
+
+.icon-back {
+  width: 14px;
+  height: $hfHeight;
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    vertical-align: middle;
+    border-left: 2px solid $refColor;
+    border-bottom: 2px solid $refColor;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
   }
 }
 
@@ -113,4 +133,5 @@
     line-height: 40px;
   }
 }
+
 
