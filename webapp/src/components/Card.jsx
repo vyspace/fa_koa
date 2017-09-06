@@ -41,7 +41,7 @@ class Card extends Component {
                 <CompHead profile={data.profile} nickname={data.nickname} subContent={data.dateTime} />
             </li>
             {html}
-            <li key="c3"><CardAction numOfLikes={data.numOfLikes} numOfComments={data.numOfComments} numOfForwards={data.numOfForwards} commentOps={commentOps} /></li>
+            <li key="c3"><CardAction numOfLikes={data.numOfLikes} numOfComments={data.numOfComments} numOfForwards={data.numOfForwards} commentOps={commentOps} isLike={data.isLike} /></li>
         </ul>);
     }
 }

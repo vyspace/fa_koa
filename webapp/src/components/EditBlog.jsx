@@ -8,8 +8,8 @@ const insertLimit = 6;
 
 let g,
     _this,
-    addObj,
-    state;
+    state,
+    $addPhoto;
 
 class About extends Component {
     componentWillMount() {
@@ -33,9 +33,9 @@ class About extends Component {
         this.init();
     }
     componentDidMount() {
-        addObj = $(this.addPhoto);
         this.multiple.addEventListener('change', this.changeHandler, true);
         this.eventLayer.addEventListener('click', this.eventHandler, true);
+        this.initObj();
     }
     componentWillUnmount() {
         const { recordOrigin } = this.props.recordAction;
@@ -49,6 +49,9 @@ class About extends Component {
             limit: insertLimit,
             tagList: {}
         };
+    }
+    initObj() {
+        $addPhoto = $(this.addPhoto);
     }
     eventHandler(e) {
         e.stopPropagation();
@@ -83,7 +86,7 @@ class About extends Component {
                     const time = new Date().getTime();
                     state.tagList[time] = img.dir;
                     const html = `<li><div><img src=${img.src} alt="" data-tag="thumbnail" /><div class="del" data-tag="del" data-id="${time}"></div>X</div></div></div></li>`;
-                    addObj.before(html);
+                    $addPhoto.before(html);
                     if(Object.keys(state.tagList).length >= insertLimit) {
                         _this.addPhoto.style.display = 'none';
                     }

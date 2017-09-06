@@ -101,7 +101,7 @@ class PhotoAlbum extends Component {
           ref={(c) => {
               this.eventLayer = c;
           }}
-          className="pa-container"
+          className="photo-container"
           style={{ minHeight: g.bodyMinHeight }}
           id="paContainer"
         >{html}</div>);

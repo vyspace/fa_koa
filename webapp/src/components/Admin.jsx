@@ -18,11 +18,14 @@ class Admin extends Component {
             rBtn: null
         });
         updateFooter({ type: 'none' });
-        g = window.FaKoa;
+        this.init();
     }
     componentWillUnmount() {
         const { recordOrigin } = this.props.recordAction;
         recordOrigin('admin');
+    }
+    init() {
+        g = window.FaKoa;
     }
     render() {
         return (

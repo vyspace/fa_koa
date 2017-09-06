@@ -8,8 +8,8 @@ import Comment from './Comment';
 import { restore } from '../store/persistence';
 import { pageRedirect } from '../utils/tools';
 
-let showTimer = 0;
-let tData;
+let showTimer,
+    tData;
 
 class CommentList extends Component {
     componentWillMount() {
@@ -29,6 +29,7 @@ class CommentList extends Component {
             rBtn: null
         });
         updateFooter({ type: 'none' });
+        this.init();
         getCommentData();
     }
     componentDidMount() {
@@ -49,6 +50,10 @@ class CommentList extends Component {
         clearTimeout(showTimer);
         saveScrollTop(document.body.scrollTop);
         recordOrigin('comment');
+    }
+    init() {
+        showTimer = 0;
+        tData = null;
     }
     eventHandler(e) {
         e.stopPropagation();

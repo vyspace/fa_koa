@@ -255,6 +255,9 @@ a {
 .icon-about {
   background-image: url(../img/about.png); }
 
+.icon-myinfo {
+  background-image: url(../img/myinfo.png); }
+
 .active .icon-home {
   background-image: url(../img/home_fill.png); }
 .active .icon-reply {
@@ -1217,23 +1220,23 @@ a {
 
 .my-head {
   display: flex;
-  padding: .5rem;
+  padding: .8rem;
   background-color: #fff; }
   .my-head .left {
-    width: 3.5rem; }
+    width: 3rem; }
   .my-head .via {
     background-color: #f0f0f0;
-    width: 3.5rem;
-    height: 3.5rem;
-    border-radius: 1.75rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1.5rem;
     overflow: hidden; }
     .my-head .via img {
-      width: 3.5rem; }
+      width: 3rem; }
   .my-head .right {
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding-left: 0.5rem;
+    padding-left: 1rem;
     justify-content: center; }
     .my-head .right .first {
       display: flex;
@@ -1267,14 +1270,62 @@ a {
 .my-mar {
   margin-bottom: .4rem; }
 
-.pa-container {
-  background-color: #fff; }
+.my-home {
+  background-color: #fff;
+  padding: 1.2rem;
+  padding-bottom: 0; }
+  .my-home .info {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1.2rem; }
+  .my-home .left {
+    width: 3rem; }
+    .my-home .left .via {
+      background-color: #f0f0f0;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 1.5rem;
+      overflow: hidden; }
+    .my-home .left img {
+      width: 3rem; }
+  .my-home .right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-left: 0.8rem; }
+    .my-home .right .first {
+      display: flex; }
+    .my-home .right .second {
+      font-size: .6rem;
+      color: #999; }
+    .my-home .right .follow {
+      height: 1.1rem;
+      border-radius: .55rem;
+      color: #fff;
+      background: #64be26;
+      font-weight: bold;
+      margin-top: 1rem; }
+  .my-home .data {
+    display: flex;
+    color: #666;
+    padding: .5rem 0; }
+    .my-home .data li {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+      align-items: center; }
+    .my-home .data span {
+      padding-bottom: 4px; }
 
-.photo-album .time {
-  color: #999;
-  padding: .4rem; }
-.photo-album .pa-card li {
-  width: 25%; }
+.photo-container {
+  background-color: #fff;
+  padding: 0 .2rem; }
+  .photo-container .photo-album .time {
+    color: #999;
+    padding: .4rem 0; }
+  .photo-container .photo-album .pa-card li {
+    width: 25%; }
 
 .admin-box {
   background-color: #fff;

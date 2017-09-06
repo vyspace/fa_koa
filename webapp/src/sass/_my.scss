@@ -1,25 +1,26 @@
+$img-w: 3rem;
 .my-head {
   display: flex;
-  padding: .5rem;
+  padding: .8rem;
   background-color: #fff;
   .left {
-    width: 3.5rem;
+    width: $img-w;
   }
   .via {
     background-color: #f0f0f0;
-    width: 3.5rem;
-    height: 3.5rem;
-    border-radius: 1.75rem;
+    width: $img-w;
+    height: $img-w;
+    border-radius: $img-w / 2;
     overflow: hidden;
     img {
-      width: 3.5rem;
+      width: $img-w;
     }
   }
   .right {
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding-left: 0.5rem;
+    padding-left: 1rem;
     justify-content: center;
     .first {
       display: flex;
@@ -64,17 +65,78 @@
   margin-bottom: .4rem;
 }
 
-.pa-container {
+.my-home {
   background-color: #fff;
-}
-.photo-album {
-  .time {
-    color: $tipColor;
-    padding: .4rem;
+  padding: 1.2rem;
+  padding-bottom: 0;
+  .info {
+    display: flex;
+    border-bottom: $border;
+    padding-bottom: 1.2rem;
   }
-  .pa-card {
+  .left {
+    width: $img-w;
+    .via {
+      background-color: #f0f0f0;
+      width: $img-w;
+      height: $img-w;
+      border-radius: $img-w / 2;
+      overflow: hidden;
+    }
+    img {
+      width: $img-w;
+    }
+  }
+  .right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-left: 0.8rem;
+    .first {
+      display: flex;
+    }
+    .second {
+      font-size: .6rem;
+      color: #999;
+    }
+    .follow {
+      height: 1.1rem;
+      border-radius: .55rem;
+      color: #fff;
+      background: #64be26;
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+  }
+  .data {
+    display: flex;
+    color: #666;
+    padding: .5rem 0;
     li {
-      width: 25%;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+      align-items: center;
+    }
+    span {
+      padding-bottom: 4px;
+    }
+  }
+}
+
+.photo-container {
+  background-color: #fff;
+  padding: 0 .2rem;
+  .photo-album {
+    .time {
+      color: $tipColor;
+      padding: .4rem 0;
+    }
+    .pa-card {
+      li {
+        width: 25%;
+      }
     }
   }
 }

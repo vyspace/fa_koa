@@ -114,7 +114,7 @@ class Article extends Component {
             </div>);
             html = (<div>
                 <div className="article-box">{article}</div>
-                <div className="article-action"><CardAction numOfLikes={1000} numOfComments={1000} numOfForwards={1000} commentOps="评论" />
+                <div className="article-action"><CardAction numOfLikes={1000} numOfComments={1000} numOfForwards={1000} commentOps="评论" isLike={true} />
                 </div>
                 {comments}
             </div>);

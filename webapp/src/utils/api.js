@@ -51,12 +51,19 @@ export const getFollowList = (uid, resolve, reject) => {
         url: `${URL_ROOT}/testdata/follow`
     };
     request(params, resolve, reject);
-}
+};
 
 export const getShortUrl = (long, resolve, reject) => {
     const params = {
         url: `http://api.t.sina.com.cn/short_url/shorten.json?source=1052239900&url_long=${long}`
     };
     request(params, resolve, reject);
-}
+};
+
+export const getMyHomeData = (uid, resolve, reject) => {
+    const params = {
+        url: `${URL_ROOT}/testdata/myhome`
+    };
+    request(params, resolve, reject);
+};
 

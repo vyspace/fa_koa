@@ -8,7 +8,7 @@ import PhotoBrowser from './PhotoBrowser';
 
 let _this;
 
-class CardList extends Component {
+class Home extends Component {
     componentWillMount() {
         const { getHomeData } = this.props.homeAction,
             { updateHeader } = this.props.headerAction,
@@ -138,7 +138,7 @@ class CardList extends Component {
     }
 }
 
-CardList.propTypes = {
+Home.propTypes = {
     store: PropTypes.object.isRequired,
     homeAction: PropTypes.object.isRequired,
     headerAction: PropTypes.object.isRequired,
@@ -147,4 +147,4 @@ CardList.propTypes = {
     history: PropTypes.object.isRequired
 };
 
-export default CardList;
+export default Home;

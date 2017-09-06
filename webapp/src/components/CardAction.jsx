@@ -36,10 +36,14 @@ class CardAction extends Component {
         }
     }
     render() {
-        const { numOfLikes, numOfComments, numOfForwards, commentOps } = this.props;
-        let comment = [<i className="icon icon-comment" key="ca0" data-tag="comment" />, <span key="ca1" className="mar-l" data-tag="comment">{numOfComments}</span>];
+        const { isLike, numOfLikes, numOfComments, numOfForwards, commentOps } = this.props;
+        let comment = [<i className="icon icon-comment" key="ca0" data-tag="comment" />, <span key="ca1" className="mar-l" data-tag="comment">{numOfComments}</span>],
+            likeClass = 'end';
         if(commentOps !== '') {
             comment = [<i className="icon icon-edit" key="ca0" data-tag="comment" />, <span key="ca1" className="mar-l" data-tag="comment">{commentOps}</span>];
+        }
+        if(isLike) {
+            likeClass = 'end active';
         }
         return (
             <div
@@ -55,7 +59,7 @@ class CardAction extends Component {
                 <div className="center" data-tag="comment">
                     {comment}
                 </div>
-                <div className="end" data-tag="like">
+                <div className={likeClass} data-tag="like">
                     <i className="icon icon-like" data-tag="like" />
                     <span className="mar-l" data-tag="like">{numOfLikes}</span>
                 </div>
@@ -68,7 +72,8 @@ CardAction.propTypes = {
     numOfLikes: PropTypes.number.isRequired,
     numOfComments: PropTypes.number.isRequired,
     numOfForwards: PropTypes.number.isRequired,
-    commentOps: PropTypes.string.isRequired
+    commentOps: PropTypes.string.isRequired,
+    isLike: PropTypes.bool.isRequired
 };
 
 export default CardAction;

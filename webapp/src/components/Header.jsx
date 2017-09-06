@@ -9,16 +9,12 @@ const range = 10;
 let _this,
     scrollFlag,
     tempTag,
-    tabLis,
-    paContainer;
+    $tabLis,
+    $paContainer;
 
 class Header extends Component {
     componentWillMount() {
-        _this = this;
-        scrollFlag = true;
-        tempTag = '';
-        tabLis = null;
-        paContainer = null;
+        this.init();
     }
     componentDidMount() {
         this.eventLayer.addEventListener('click', this.eventHandler, true);
@@ -27,9 +23,16 @@ class Header extends Component {
     componentDidUpdate() {
         const { header } = this.props.store;
         if(header.type === 'photoalbum') {
-            tabLis = $(this.eventLayer).find('.middle').find('li');
-            paContainer = $('#paContainer');
+            $tabLis = $(this.eventLayer).find('.middle').find('li');
+            $paContainer = $('#paContainer');
         }
+    }
+    init() {
+        _this = this;
+        scrollFlag = true;
+        tempTag = '';
+        $tabLis = null;
+        $paContainer = null;
     }
     eventHandler(e) {
         e.stopPropagation();
@@ -66,17 +69,17 @@ class Header extends Component {
     tabHandler(t, tag) {
         if(tempTag !== tag) {
             tempTag = tag;
-            tabLis.removeClass('active');
+            $tabLis.removeClass('active');
             t.addClass('active');
             switch (tag) {
             case 'album':
-                if(paContainer) {
-                    paContainer.trigger('pa1');
+                if($paContainer) {
+                    $paContainer.trigger('pa1');
                 }
                 break;
             case 'profile':
-                if(paContainer) {
-                    paContainer.trigger('pa2');
+                if($paContainer) {
+                    $paContainer.trigger('pa2');
                 }
                 break;
             default:

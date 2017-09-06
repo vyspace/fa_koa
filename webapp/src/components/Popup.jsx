@@ -10,12 +10,16 @@ let _this,
 
 class Popup extends Component {
     componentWillMount() {
-        _this = this;
-        popType = '';
+        this.init();
     }
     componentDidMount() {
         this.eventLayer.addEventListener('click', this.eventHandler, false);
         $(this.eventLayer).on('show', this.showPopup);
+    }
+    init() {
+        _this = this;
+        popType = '';
+        history = null;
     }
     showPopup(e, type, tHistory) {
         e.stopPropagation();

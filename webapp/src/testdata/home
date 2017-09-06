@@ -42,6 +42,7 @@
             }
         ],
         "numOfLikes": 200,
+        "isLike": true,
         "numOfComments": 100,
         "numOfForwards": 300,
         "text": "Christina Photo by @FransLanting Wonderful color ! To let tourists get a better view，the bus drove slowly.What a beautiful town, let tourists get a better view，the bus drove tourists get a better view，the bus drove"
@@ -66,6 +67,7 @@
                 "h": 1077
             }],
         "numOfLikes": 230,
+        "isLike": false,
         "numOfComments": 102,
         "numOfForwards": 200,
         "text": "全局（公有）配置，bash shell执行时，不管是何种方式，都会读取此文件。"
@@ -81,6 +83,7 @@
         "title": "从埃及法老到摇摆的迪斯科 袜子到底经历了什么？",
         "photo": "./img/as1.jpg",
         "numOfLikes": 200,
+        "isLike": false,
         "numOfComments": 100,
         "numOfForwards": 300
     },
@@ -126,6 +129,7 @@
                 }
             ],
             "numOfLikes": 200,
+            "isLike": true,
             "numOfComments": 100,
             "numOfForwards": 300,
             "text": "Christina Photo by @FransLanting Wonderful color ! To let tourists get a better view，the bus drove slowly.What a beautiful town, let tourists get a better view，the bus drove tourists get a better view，the bus drove"
@@ -150,6 +154,7 @@
                     "h": 1077
                 }],
             "numOfLikes": 230,
+            "isLike": false,
             "numOfComments": 102,
             "numOfForwards": 200,
             "text": "全局（公有）配置，bash shell执行时，不管是何种方式，都会读取此文件。"
@@ -166,6 +171,7 @@
             "link": "http://www.gq.com.cn/fashion/news/news_19359c6facb4c91d.html",
             "photo": "http://img1.selfimg.com.cn/gq24640x/2017/08/18/1503020439_NC72wd.gif",
             "numOfLikes": 200,
+            "isLike": false,
             "numOfComments": 100,
             "numOfForwards": 300
         }

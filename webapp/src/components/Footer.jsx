@@ -5,66 +5,88 @@ import PropTypes from 'prop-types';
 import $ from 'zepto';
 
 let _this,
-    eventLayer,
     startX,
     startY,
     scrollFlag,
-    popupLayer,
-    fileUpload,
-    editBox;
+    isShow,
+    $eventLayer,
+    $popupLayer,
+    $fileUpload,
+    $editBox;
 
 class Footer extends Component {
     componentWillMount() {
-        _this = this;
-        scrollFlag = true;
+        this.init();
     }
     componentDidMount() {
         document.body.addEventListener('touchstart', this.startHandler, true);
         document.body.addEventListener('touchmove', this.moveHandler, true);
         document.body.addEventListener('touchend', this.endHandler, true);
         this.eventLayer.addEventListener('click', this.eventHandler, true);
-        eventLayer = $(this.eventLayer);
+        this.initObj();
     }
     componentDidUpdate() {
         const { footer } = this.props.store;
+        if(footer.type === 'none') {
+            isShow = false;
+        }
+        else {
+            isShow = true;
+        }
         switch(footer.type) {
         case 'base':
-            popupLayer = $('#popupLayer');
+            $popupLayer = $('#popupLayer');
             break;
         case 'editaricle':
-            fileUpload = $('#fileUpload');
-            editBox = $('#editBox');
+            $fileUpload = $('#fileUpload');
+            $editBox = $('#editBox');
             break;
         default:
             break;
         }
     }
+    init() {
+        _this = this;
+        startX = 0;
+        startY = 0;
+        scrollFlag = true;
+        isShow = true;
+    }
+    initObj() {
+        $eventLayer = $(this.eventLayer);
+    }
     startHandler(e) {
-        startY = e.touches[0].clientY;
-        startX = e.touches[0].clientX;
+        if(isShow) {
+            startY = e.touches[0].clientY;
+            startX = e.touches[0].clientX;
+        }
     }
     moveHandler(e) {
-        const ty = e.touches[0].clientY - startY,
-            tx = e.touches[0].clientX - startX;
-        if(Math.abs(ty) > Math.abs(tx) && ty > 0) {
-            if(scrollFlag) {
-                if(eventLayer.hasClass('footer-hidden')) {
-                    eventLayer.removeClass('footer-hidden');
+        if(isShow) {
+            const ty = e.touches[0].clientY - startY,
+                tx = e.touches[0].clientX - startX;
+            if(Math.abs(ty) > Math.abs(tx) && ty > 0) {
+                if(scrollFlag) {
+                    if($eventLayer.hasClass('footer-hidden')) {
+                        $eventLayer.removeClass('footer-hidden');
+                    }
+                    scrollFlag = false;
                 }
-                scrollFlag = false;
             }
-        }
-        if(Math.abs(ty) > Math.abs(tx) && ty < 0) {
-            if(scrollFlag && document.body.scrollTop > 10) {
-                if(!eventLayer.hasClass('footer-hidden')) {
-                    eventLayer.addClass('footer-hidden');
+            if(Math.abs(ty) > Math.abs(tx) && ty < 0) {
+                if(scrollFlag && document.body.scrollTop > 10) {
+                    if(!$eventLayer.hasClass('footer-hidden')) {
+                        $eventLayer.addClass('footer-hidden');
+                    }
+                    scrollFlag = false;
                 }
-                scrollFlag = false;
             }
         }
     }
     endHandler() {
-        scrollFlag = true;
+        if(isShow) {
+            scrollFlag = true;
+        }
     }
     eventHandler(e) {
         e.stopPropagation();
@@ -76,7 +98,7 @@ class Footer extends Component {
             tHistory.push('/');
             break;
         case 'create':
-            popupLayer.trigger('show', ['create', tHistory]);
+            $popupLayer.trigger('show', ['create', tHistory]);
             break;
         case 'reply':
             tHistory.push('reply');
@@ -85,13 +107,13 @@ class Footer extends Component {
             tHistory.push('my');
             break;
         case 'album':
-            if(fileUpload && fileUpload.length > 0) {
-                fileUpload.trigger('click');
+            if($fileUpload && $fileUpload.length > 0) {
+                $fileUpload.trigger('click');
             }
             break;
         case 'preview':
-            if(editBox && editBox.length > 0) {
-                editBox.triggerHandler('savePreviewData');
+            if($editBox && $editBox.length > 0) {
+                $editBox.triggerHandler('savePreviewData');
             }
             break;
         default:

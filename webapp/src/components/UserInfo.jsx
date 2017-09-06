@@ -20,12 +20,15 @@ class About extends Component {
             rBtn: null
         });
         updateFooter({ type: 'none' });
-        g = window.FaKoa;
-        _this = this;
+        this.init();
     }
     componentDidMount() {
         this.eventLayer.addEventListener('click', this.eventHandler, true);
         this.file.addEventListener('change', this.fileChange, true);
+    }
+    init() {
+        g = window.FaKoa;
+        _this = this;
     }
     eventHandler(e) {
         e.stopPropagation();

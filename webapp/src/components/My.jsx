@@ -50,6 +50,9 @@ class My extends Component {
         case 'myInfo':
             history.push('userinfo');
             break;
+        case 'myHome':
+            history.push('myhome');
+            break;
         case 'myPhotoAlbum':
             history.push('photoalbum');
             break;
@@ -75,7 +78,6 @@ class My extends Component {
               ref={(c) => {
                   this.eventLayer = c;
               }}
-              data-tag="aaa"
             >
                 <div className="my-head my-mar">
                     <div className="left">

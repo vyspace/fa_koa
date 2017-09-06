@@ -12,6 +12,7 @@ import EditArticle from '../containers/EditArticle';
 import EditLink from '../containers/EditLink';
 import My from '../containers/My';
 import Profile from '../containers/Profile';
+import MyHome from '../containers/MyHome';
 import PhotoAlbum from '../containers/PhotoAlbum';
 import Admin from '../containers/Admin';
 import About from '../containers/About';
@@ -36,6 +37,7 @@ export default
         <Route exact path="/editlink" component={EditLink} />
         <Route exact path="/my" component={My} />
         <Route exact path="/profile" component={Profile} />
+        <Route exact path="/myhome" component={MyHome} />
         <Route exact path="/photoalbum" component={PhotoAlbum} />
         <Route exact path="/admin" component={Admin} />
         <Route exact path="/about" component={About} />
