@@ -19,6 +19,10 @@ body, button, input, select, textarea {
 input, select, textarea {
   border: none; }
 
+input, textarea {
+  -webkit-user-select: text;
+  user-select: text; }
+
 body {
   background-color: #f0f0f0;
   color: #333;
@@ -55,6 +59,9 @@ a {
 .clearfix {
   overflow: hidden;
   zoom: 1; }
+
+.err-t {
+  color: #d81e06; }
 
 .article {
   color: #555; }
@@ -258,6 +265,12 @@ a {
 .icon-myinfo {
   background-image: url(../img/myinfo.png); }
 
+.icon-male {
+  background-image: url(../img/male.png); }
+
+.icon-female {
+  background-image: url(../img/female.png); }
+
 .active .icon-home {
   background-image: url(../img/home_fill.png); }
 .active .icon-reply {
@@ -367,19 +380,29 @@ a {
   height: 100%;
   padding: 4px 4px 0 4px;
   color: #fff;
+  -webkit-transform: translate3d(0, -44px, 0);
   transform: translate3d(0, -44px, 0);
   transition-duration: .2s;
   transition-timing-function: ease-in-out; }
   .toast .cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1.2;
     width: 100%;
     height: 100%;
     background-color: #000;
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-    border-radius: 8px;
+    border-radius: 6px;
     color: #fff;
     text-align: center;
-    line-height: 40px; }
+    line-height: 40px;
+    overflow: hidden;
+    font-weight: bold;
+    padding: 0 4px; }
+
+.show-toast {
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0); }
 
 .tab-header {
   display: flex;
@@ -1297,14 +1320,16 @@ a {
       display: flex; }
     .my-home .right .second {
       font-size: .6rem;
-      color: #999; }
+      color: #999;
+      word-wrap: break-word;
+      min-height: 1.3rem; }
     .my-home .right .follow {
-      height: 1.1rem;
-      border-radius: .55rem;
+      height: 1.2rem;
+      border-radius: .6rem;
       color: #fff;
       background: #64be26;
       font-weight: bold;
-      margin-top: 1rem; }
+      margin-top: .6rem; }
   .my-home .data {
     display: flex;
     color: #666;
@@ -1317,6 +1342,11 @@ a {
       align-items: center; }
     .my-home .data span {
       padding-bottom: 4px; }
+  .my-home .gender {
+    width: .8rem;
+    height: .8rem;
+    margin: .15rem 0 0 .2rem;
+    line-height: 1; }
 
 .photo-container {
   background-color: #fff;
@@ -1444,6 +1474,18 @@ a {
   background-color: #fff;
   margin: .4rem 0;
   padding: .4rem; }
+
+.basic-info .basic {
+  padding: 0 .5rem; }
+.basic-info .mar-b {
+  margin-bottom: .4rem; }
+.basic-info .box-info {
+  background: #f9f9f9;
+  border: 0;
+  min-height: 3rem;
+  padding: 5px;
+  align-items: flex-start;
+  overflow-y: scroll; }
 
 .login {
   background-color: #fff;

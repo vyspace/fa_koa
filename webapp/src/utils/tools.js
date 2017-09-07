@@ -90,6 +90,14 @@ export function isUrl(url) {
     }
 }
 
+export function isMail(str) {
+    return /^[A-Za-z0-9]+([-_.][A-Za-z0-9]+)*@([A-Za-z0-9]+[-.])+[A-Za-z0-9]{2,5}$/.test(str);
+}
+
+export function isPwd(str) {
+    return /^[a-zA-z0-9]{6,20}$/.test(str);
+}
+
 export function levelConvert(num) {
     if(num > 0 && num <= 5) {
         return 'icon-level-0';
@@ -107,4 +115,5 @@ export function levelConvert(num) {
         return '';
     }
 }
+
 

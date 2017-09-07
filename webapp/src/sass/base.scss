@@ -21,6 +21,10 @@ input, select, textarea {
   border: none;
 }
 
+input, textarea {
+  @include prefix(user-select, text);
+}
+
 body {
   background-color: $bgColor;
   color: $txtColor;
@@ -67,6 +71,10 @@ a {
 .clearfix{
   overflow: hidden;
   zoom: 1;
+}
+
+.err-t {
+  color: $errColor;
 }
 
 .article {
@@ -307,6 +315,12 @@ a {
 }
 .icon-myinfo {
   background-image: url(../img/myinfo.png);
+}
+.icon-male {
+  background-image: url(../img/male.png);
+}
+.icon-female {
+  background-image: url(../img/female.png);
 }
 
 .active {

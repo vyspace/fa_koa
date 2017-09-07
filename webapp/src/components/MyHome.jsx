@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Card from './Card';
 
+let _this;
+
 class MyHome extends Component {
     componentWillMount() {
         const { history } = this.props;
@@ -18,7 +20,30 @@ class MyHome extends Component {
             rBtn: null
         });
         updateFooter({ type: 'none' });
+        this.init();
         getMyHome();
+    }
+    componentDidMount() {
+        this.eventLayer.addEventListener('click', this.eventHandler, true);
+    }
+    init() {
+        _this = this;
+    }
+    eventHandler(e) {
+        e.stopPropagation();
+        const { history } = _this.props,
+            t = $(e.target),
+            tag = t.data('tag');
+        switch(tag) {
+        case 'basicInfo':
+            history.push('basicinfo');
+            break;
+        case 'photoAlbum':
+            history.push('photoalbum');
+            break;
+        default:
+            break;
+        }
     }
     render() {
         const { isFetching, data } = this.props.store.myhome;
@@ -27,7 +52,7 @@ class MyHome extends Component {
             html = 'loadding';
         }
         else {
-            const blogList = data.post.map((cell, index) => <Card key={cell.id} data={cell} index={index} />);
+            const blogList = data.postList.map((cell, index) => <Card key={cell.id} data={cell} index={index} />);
             html = (
                 <div>
                     <div className="my-home my-mar">
@@ -38,7 +63,8 @@ class MyHome extends Component {
                             <div className="right" data-tag="myInfo">
                                 <div className="first" data-tag="myInfo">
                                     <span data-tag="myInfo">{data.info.nickname}</span>
-                                    <div className="icon icon-level level">2</div>
+                                    <div className="icon icon-male gender" />
+                                    <div className="icon icon-level level">{data.info.level}</div>
                                 </div>
                                 <div className="second" data-tag="myInfo">{data.info.sign}</div>
                                 <input type="button" className="follow" value="关注" />
@@ -46,25 +72,25 @@ class MyHome extends Component {
                         </div>
                         <ul className="data">
                             <li>
-                                <span>123</span>
+                                <span>{data.info.posts}</span>
                                 <div>发布</div>
                             </li>
                             <li>
-                                <span>123</span>
+                                <span>{data.info.followers}</span>
                                 <div>粉丝</div>
                             </li>
                             <li>
-                                <span>123</span>
+                                <span>{data.info.following}</span>
                                 <div>关注</div>
                             </li>
                         </ul>
                     </div>
                     <ul className="my-list my-mar">
-                        <li className="bd-b" data-tag="myHome">
-                            <i className="icon icon-myinfo" data-tag="myHome" />
+                        <li className="bd-b" data-tag="basicInfo">
+                            <i className="icon icon-myinfo" data-tag="basicInfo" />
                             基本信息</li>
-                        <li className="bd-b" data-tag="myPhotoAlbum">
-                            <i className="icon icon-camera" data-tag="myPhotoAlbum" />
+                        <li className="bd-b" data-tag="photoAlbum">
+                            <i className="icon icon-camera" data-tag="photoAlbum" />
                             相册</li>
                     </ul>
                     {blogList}

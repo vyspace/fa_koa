@@ -6,9 +6,13 @@
             "id": 1,
             "profile": "",
             "nickname": "中华小当家",
-            "sign": "adasdfadfadfadfadsfasdfasdf"
+            "level": 2,
+            "sign": "adasdfadfadfadfadsfasdfasdf",
+            "posts": 234,
+            "followers": 456,
+            "following": 123
         },
-        "post": [{
+        "postList": [{
             "id": 1,
             "typeId": 1,
             "profile": "",

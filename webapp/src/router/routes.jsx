@@ -23,6 +23,7 @@ import Login from '../containers/Login';
 import Register from '../containers/Register';
 import FindPassword from '../containers/FindPassword';
 import Feedback from '../containers/Feedback';
+import BasicInfo from '../containers/BasicInfo';
 import NotFound from '../components/NotFound';
 
 export default
@@ -42,6 +43,7 @@ export default
         <Route exact path="/admin" component={Admin} />
         <Route exact path="/about" component={About} />
         <Route exact path="/userinfo" component={UserInfo} />
+        <Route exact path="/basicinfo" component={BasicInfo} />
         <Route exact path="/follow" component={Follow} />
         <Route exact path="/frame" component={Frame} />
         <Route exact path="/login" component={Login} />

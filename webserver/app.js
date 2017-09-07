@@ -33,5 +33,7 @@ controller(router);
 // 配置路由
 app.use(router.routes()).use(router.allowedMethods());
 
-app.listen(serverConfig.port);
-console.log(`start-quick is starting at port ${serverConfig.port}`);
+app.listen(serverConfig.port, () => {
+    console.log(`start-quick is starting at port ${serverConfig.port}`);
+});
+

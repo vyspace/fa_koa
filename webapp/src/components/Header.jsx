@@ -9,15 +9,21 @@ const range = 10;
 let _this,
     scrollFlag,
     tempTag,
+    toastTimer,
     $tabLis,
-    $paContainer;
+    $paContainer,
+    $toast,
+    $toastCont;
 
 class Header extends Component {
     componentWillMount() {
         this.init();
     }
     componentDidMount() {
+        $toast = $(this.toast);
+        $toastCont = $toast.find('div:first-child');
         this.eventLayer.addEventListener('click', this.eventHandler, true);
+        $toast.on('show', this.showToast);
         window.addEventListener('scroll', this.scrollHandler, true);
     }
     componentDidUpdate() {
@@ -31,8 +37,38 @@ class Header extends Component {
         _this = this;
         scrollFlag = true;
         tempTag = '';
+        toastTimer = 0;
         $tabLis = null;
         $paContainer = null;
+    }
+    showToast(e, msg) {
+        e.stopPropagation();
+        if(!$toast.hasClass('show-toast')) {
+            $toastCont.html(msg);
+            $toast.css({ display: 'block' });
+            setTimeout(() => {
+                $toast.addClass('show-toast');
+                toastTimer = setTimeout(() => {
+                    _this.closeToast();
+                }, 5000);
+            }, 16);
+        }
+        else if(msg !== $toastCont.html()) {
+            $toastCont.html(msg);
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                _this.closeToast();
+            }, 5000);
+        }
+    }
+    closeToast() {
+        if($toast.hasClass('show-toast')) {
+            clearTimeout(toastTimer);
+            $toast.removeClass('show-toast');
+            setTimeout(() => {
+                $toast.css({ display: 'none' });
+            }, 200);
+        }
     }
     eventHandler(e) {
         e.stopPropagation();
@@ -48,6 +84,9 @@ class Header extends Component {
         case 'album':
         case 'profile':
             _this.tabHandler(t, tag);
+            break;
+        case 'toast':
+            _this.closeToast();
             break;
         default:
             break;
@@ -100,13 +139,21 @@ class Header extends Component {
             scrollFlag = true;
         }
     }
+    judgeBack(history, origin) {
+        if(history && history.length > 0 && origin) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
     render() {
         const { header, record } = this.props.store;
         let backBtn = <li className="item" />,
             optBtn = <li className="item" />,
             middle,
             tabArr;
-        if(header.isBack && record.origin) {
+        if(header.isBack && _this.judgeBack(header.tHistory, record.origin)) {
             backBtn = (<li className="item item-left" data-tag="back">
                         <i className="icon-back" data-tag="back" />
                     </li>);
@@ -165,7 +212,14 @@ class Header extends Component {
                         {middle}
                         {optBtn}
                     </ul>
-                    <div className="toast" style={{ display: 'none' }}><div className="cont">这是一条提示信息！</div></div>
+                    <div
+                      ref={(c) => {
+                          this.toast = c;
+                      }}
+                      className="toast"
+                      id="toast"
+                      style={{ display: 'none' }}
+                    ><div className="cont" data-tag="toast">这是一条提示信息！</div></div>
                 </div>
 
             </div>

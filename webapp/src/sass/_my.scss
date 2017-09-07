@@ -98,14 +98,16 @@ $img-w: 3rem;
     .second {
       font-size: .6rem;
       color: #999;
+      word-wrap: break-word;
+      min-height: 1.3rem;
     }
     .follow {
-      height: 1.1rem;
-      border-radius: .55rem;
+      height: 1.2rem;
+      border-radius: .6rem;
       color: #fff;
       background: #64be26;
       font-weight: bold;
-      margin-top: 1rem;
+      margin-top: .6rem;
     }
   }
   .data {
@@ -122,6 +124,12 @@ $img-w: 3rem;
     span {
       padding-bottom: 4px;
     }
+  }
+  .gender {
+    width: .8rem;
+    height: .8rem;
+    margin: .15rem 0 0 .2rem;
+    line-height: 1;
   }
 }
 
@@ -287,5 +295,22 @@ $bdColor: solid 2px rgba(118, 222, 138, 0.9);
     background-color: #fff;
     margin: .4rem 0;
     padding: .4rem;
+  }
+}
+
+.basic-info {
+  .basic {
+    padding: 0 .5rem;
+  }
+  .mar-b {
+    margin-bottom: .4rem;
+  }
+  .box-info {
+    background: #f9f9f9;
+    border: 0;
+    min-height: 3rem;
+    padding: 5px;
+    align-items: flex-start;
+    overflow-y: scroll;
   }
 }

@@ -6,6 +6,8 @@ import { pageRedirect } from '../utils/tools';
 import { restore } from '../store/persistence';
 import PhotoBrowser from './PhotoBrowser';
 
+let _this;
+
 class My extends Component {
     componentWillMount() {
         const { history, store } = this.props;
@@ -23,22 +25,27 @@ class My extends Component {
             rBtn: null
         });
         updateFooter({ type: 'base', action: 'my', tHistory: history });
+        this.init();
     }
     componentDidMount() {
-        this.eventLayer.addEventListener('click', this.eventHandler.bind(this), true);
+        this.eventLayer.addEventListener('click', this.eventHandler, true);
     }
     componentWillUnmount() {
         const { recordOrigin } = this.props.recordAction;
         recordOrigin('my');
     }
+    init() {
+        _this = this;
+    }
     eventHandler(e) {
         e.stopPropagation();
-        const { history } = this.props;
-        const t = $(e.target),
+        const { history } = _this.props,
+            t = $(e.target),
             tag = t.data('tag');
+        let arr = null;
         switch(tag) {
         case 'myProfile':
-            const arr = [{
+            arr = [{
                 el: e.target,
                 msrc: './img/avator.jpg',
                 src: './img/avator.jpg',
