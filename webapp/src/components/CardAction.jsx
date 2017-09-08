@@ -13,26 +13,26 @@ class CardAction extends Component {
             tag = t.data('tag');
         let parent = null;
         switch (tag) {
-        case 'share':
-            e.stopPropagation();
-            alert('转发中');
-            break;
-        case 'like':
-            e.stopPropagation();
-            if(t[0].tagName !== 'DIV') {
-                parent = t.parent();
-            }
-            else {
-                parent = t;
-            }
-            if(!parent.hasClass('active')) {
-                parent.addClass('active');
-                const x = Number(parent.find('span').html());
-                parent.find('span').html(x + 1);
-            }
-            break;
-        default:
-            break;
+            case 'share':
+                e.stopPropagation();
+                alert('转发中');
+                break;
+            case 'like':
+                e.stopPropagation();
+                if(t[0].tagName !== 'DIV') {
+                    parent = t.parent();
+                }
+                else {
+                    parent = t;
+                }
+                if(!parent.hasClass('active')) {
+                    parent.addClass('active');
+                    const x = Number(parent.find('span').html());
+                    parent.find('span').html(x + 1);
+                }
+                break;
+            default:
+                break;
         }
     }
     render() {

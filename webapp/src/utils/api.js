@@ -67,3 +67,12 @@ export const getMyHomeData = (uid, resolve, reject) => {
     request(params, resolve, reject);
 };
 
+export const postLoginData = (obj, resolve, reject) => {
+    const params = {
+        url: 'http://localhost:3000/openapi/login',
+        method: 'POST',
+        body: JSON.stringify(obj)
+    };
+    request(params, resolve, reject);
+}
+

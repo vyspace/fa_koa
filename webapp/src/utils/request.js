@@ -21,14 +21,16 @@ export default function request(params, resolve, reject) {
     const defaults = {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'text/plain',
             Accept: 'application/json'
         },
         url: '',
-        body: undefined
+        mode: 'cors',
+        body: ''
     };
-    const { url, method, headers, body } = Object.assign({}, defaults, params);
+    const { url, method, mode, headers, body } = Object.assign({}, defaults, params);
     return fetch(url, {
+        mode,
         method,
         headers,
         body

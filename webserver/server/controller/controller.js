@@ -1,14 +1,20 @@
 'use strict';
 
-const login = require('../action/login'),
-    home = require('../action/home'),
-    mobile = require('../action/mobile');
+const Router = require('koa-router'),
+    api = require('../action/api'),
+    controller = new Router();
 
-function controller(router) {
-    router.use('/admin', login.routes(), login.allowedMethods());
-    router.use('/admin/home', home.routes(), home.allowedMethods());
-    router.use('', mobile.routes(), mobile.allowedMethods());
-    //router.use('/login', mobile.routes(), mobile.allowedMethods());
-}
+controller.get('/', async (ctx) => {
+    await ctx.render('mobile');
+}).get('/:action', async (ctx) => {
+    await ctx.render('mobile');
+}).all('/:action/:handler', async (ctx) => {
+    if(ctx.params.action === 'openapi') {
+        ctx.response.body = await api(ctx.params.handler);
+    }
+    else {
+        ctx.status = 404;
+    }
+});
 
 module.exports = controller;

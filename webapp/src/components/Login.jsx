@@ -59,17 +59,17 @@ class Login extends Component {
             t = $(e.target),
             tag = t.data('tag');
         switch (tag) {
-        case 'find':
-            history.push('findpassword');
-            break;
-        case 'submit':
-            _this.submitHandler();
-            break;
-        case 'input':
-            t.focus();
-            break;
-        default:
-            break;
+            case 'find':
+                history.push('findpassword');
+                break;
+            case 'submit':
+                _this.submitHandler();
+                break;
+            case 'input':
+                t.focus();
+                break;
+            default:
+                break;
         }
     }
     isNotEmpty() {
@@ -94,7 +94,8 @@ class Login extends Component {
         }
     }
     submitHandler() {
-        const { history } = this.props,
+        const { history } = _this.props,
+            { login } = this.props.loginAction,
             username = $username.val(),
             password = $password.val();
         _this.clearError();
@@ -107,7 +108,9 @@ class Login extends Component {
             $password.addClass('err-t');
         }
         else {
-            history.push('/');
+            console.log(123)
+            login({username:'test01', password:'12345'});
+            //history.push('/');
         }
     }
     render() {
@@ -168,6 +171,7 @@ Login.propTypes = {
     headerAction: PropTypes.object.isRequired,
     footerAction: PropTypes.object.isRequired,
     recordAction: PropTypes.object.isRequired,
+    loginAction: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };
 
