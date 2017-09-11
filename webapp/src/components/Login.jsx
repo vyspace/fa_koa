@@ -108,9 +108,16 @@ class Login extends Component {
             $password.addClass('err-t');
         }
         else {
-            console.log(123)
-            login({username:'test01', password:'12345'});
-            //history.push('/');
+            login({ username, password }, (json) => {
+                if(json.code !== 200) {
+                    $toast.trigger('show', json.msg);
+                }
+                else {
+                    history.push('/');
+                }
+            }, (err) => {
+                console.log(err);
+            });
         }
     }
     render() {

@@ -84,6 +84,7 @@ class Register extends Component {
     }
     submitHandler() {
         const { history } = this.props,
+            { register } = this.props.registerAction,
             username = $username.val(),
             password = $password.val();
         _this.clearError();
@@ -96,7 +97,16 @@ class Register extends Component {
             $password.addClass('err-t');
         }
         else {
-            history.push('/');
+            register({ username, password }, (json) => {
+                if(json.code !== 200) {
+                    $toast.trigger('show', json.msg);
+                }
+                else {
+                    history.push('/');
+                }
+            }, (err) => {
+                console.log(err);
+            });
         }
     }
     render() {
@@ -151,6 +161,7 @@ Register.propTypes = {
     headerAction: PropTypes.object.isRequired,
     footerAction: PropTypes.object.isRequired,
     recordAction: PropTypes.object.isRequired,
+    registerAction: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };
 

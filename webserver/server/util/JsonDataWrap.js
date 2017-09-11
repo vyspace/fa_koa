@@ -8,10 +8,17 @@ class JsonDataWrap {
             data: _data
         };
     }
-    static failure() {
+    static failure(_msg = 'Error') {
+        return {
+            code: 500,
+            msg: _msg,
+            data: null
+        };
+    }
+    static lost() {
         return {
             code: 404,
-            msg: 'ERROR',
+            msg: '找不到此链接！',
             data: null
         };
     }

@@ -8,7 +8,7 @@ class UserDao extends BaseDao {
     }
     async add(user) {
         const loadUser = await super.load('User.loadByName', user.username);
-        if(loadUser != null) {
+        if(loadUser !== null) {
             throw new Error(`${user.username} is exist`);
         }
         await super.add('User.add', user);

@@ -98,22 +98,3 @@ export function isPwd(str) {
     return /^[a-zA-z0-9]{6,20}$/.test(str);
 }
 
-export function levelConvert(num) {
-    if(num > 0 && num <= 5) {
-        return 'icon-level-0';
-    }
-    else if(num <= 10) {
-        return 'icon-level-1';
-    }
-    else if(num <= 15) {
-        return 'icon-level-2';
-    }
-    else if(num <= 20) {
-        return 'icon-level-3';
-    }
-    else {
-        return '';
-    }
-}
-
-

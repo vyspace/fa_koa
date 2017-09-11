@@ -1,6 +1,7 @@
 'use strict';
 
 const UserDao = require('../dao/UserDao'),
+    User = require('../model/User'),
     _userDao = Symbol('userDao');
 class UserService {
     constructor() {
@@ -10,8 +11,17 @@ class UserService {
         const user = await this[_userDao].loadByName(username);
         return user;
     }
-    register() {
-
+    async register(username, password) {
+        const user = new User();
+        user.username = username;
+        user.password = password;
+        try {
+            await this[_userDao].add(user);
+            return true;
+        }
+        catch(err) {
+            return err;
+        }
     }
 }
 

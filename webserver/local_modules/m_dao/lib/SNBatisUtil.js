@@ -35,7 +35,7 @@ class SNBatisUtil {
         }
     }
     static async closeSession(session) {
-        if(session){
+        if(session) {
             await session.release();
         }
     }

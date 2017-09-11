@@ -100,7 +100,7 @@ class BaseDao {
                 pager.totalRecord = totalRecord.count;
             }
         }
-        catch (err){
+        catch (err) {
             throw err;
         }
         finally {
@@ -113,11 +113,12 @@ class BaseDao {
             flag = false;
         try {
             session = await SNBatisUtil.createSession();
-            if(session){
+            if(session) {
                 flag = true;
             }
         }
         catch(err) {
+            console.log('数据库链接失败！');
             throw err;
         }
         finally {

@@ -10,12 +10,9 @@ router.post('/', async (ctx) => {
     const json = JSON.parse(ctx.request.body);
     if(json) {
         const service = new UserService(),
-            result = await service.login(json.username);
-        if(!result) {
-            data = JDW.failure('用户名不存在');
-        }
-        else if(result.password !== json.password) {
-            data = JDW.failure('用户名或密码错误');
+            result = await service.register(json.username);
+        if(result !== true) {
+            data = JDW.failure(result);
         }
         else {
             data = JDW.success({ username: json.username });
@@ -28,3 +25,4 @@ router.post('/', async (ctx) => {
 });
 
 module.exports = router;
+

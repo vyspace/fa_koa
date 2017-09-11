@@ -1,43 +1,25 @@
 'use strict';
 
-const storeTag = 'FA_PERSIST';
-const isStore = 'FA_IS_PERSIST';
-const pageParams = 'FA_PAGE_PARAMS';
-const editArticle = 'FA_EDIT_ARTICLE';
+const FA_PERSIST = 'FA_PERSIST';
+const FA_IS_PERSIST = 'FA_IS_PERSIST';
 
-export function saveStore(obj) {
+export function saveSession(obj) {
     const str = JSON.stringify(obj);
-    localStorage.setItem(storeTag, str);
-    sessionStorage.setItem(storeTag, isStore);
+    sessionStorage.setItem(FA_PERSIST, str);
+    sessionStorage.setItem(FA_IS_PERSIST, 'true');
 }
 
-function getStore() {
-    return JSON.parse(localStorage.getItem(storeTag));
+function getSession() {
+    return JSON.parse(sessionStorage.getItem(FA_PERSIST));
 }
 
 function isRefreshPage() {
-    return sessionStorage.getItem(storeTag) === isStore;
+    return sessionStorage.getItem(FA_IS_PERSIST) === 'true';
 }
 
 export function restore(store) {
     if(isRefreshPage()) {
-        Object.assign(store, getStore());
+        Object.assign(store, getSession());
     }
-}
-
-export function savePageParams(obj) {
-    sessionStorage.setItem(pageParams, JSON.stringify(obj));
-}
-
-export function getPageParams() {
-    return JSON.parse(sessionStorage.getItem(pageParams));
-}
-
-export function saveEditArticle(obj) {
-    localStorage.setItem(editArticle, JSON.stringify(obj));
-}
-
-export function getEditArticle() {
-    return JSON.parse(localStorage.getItem(editArticle));
 }
 

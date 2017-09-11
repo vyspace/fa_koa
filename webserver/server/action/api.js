@@ -3,18 +3,20 @@
 const JDW = require('../util/JsonDataWrap'),
     UserService = require('m_user').UserService;
 
+const login = async () => {
+    const u = ctx.request.body.username;
+    const service = new UserService(),
+        result = await service.login('test01');
+}
+
 const api = async (handler) => {
-    let service,
-        result,
-        data;
+    let data;
     switch (handler) {
         case 'resister':
             data = JDW.success(register);
             break;
         case 'login':
-            service = new UserService();
-            result = await service.login('test01');
-            data = await JDW.success(result);
+            data = JDW.success(login());
             break;
         default:
             data = JWD.failure();

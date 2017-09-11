@@ -8,6 +8,7 @@ const Koa = require('koa'),
     koaSession = require('koa-session2'),
     koaNunjucks = require('koa-nunjucks-2'),
     cors = require('koa-cors'),
+    mDao = require('m_dao'),
     serverConfig = require('./server-config.json'),
     controller = require('./server/controller/controller'),
     app = new Koa(),
@@ -22,6 +23,7 @@ app.use(koaStatic(path.join(__dirname, `${webContent}/static`)));
 app.use(koaSession({
     key: 'SESSION_ID'
 }));
+
 // 配置模版引擎
 app.use(koaNunjucks({
     path: path.join(__dirname, `${webContent}/views`),
@@ -36,10 +38,12 @@ app.use(cors());
 // 配置路由控制器
 app.use(controller.routes());
 
-app.listen(serverConfig.port, () => {
-    global.FAKOA = {
-        rootdir: __dirname
-    };
-    console.log(`start-quick is starting at port ${serverConfig.port}`);
-});
+if(mDao.test()) {
+    app.listen(serverConfig.port, () => {
+        global.FAKOA = {
+            rootdir: __dirname
+        };
+        console.log(`start-quick is starting at port ${serverConfig.port}`);
+    });
+}
 

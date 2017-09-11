@@ -26,7 +26,7 @@ export default function request(params, resolve, reject) {
         },
         url: '',
         mode: 'cors',
-        body: ''
+        body: undefined
     };
     const { url, method, mode, headers, body } = Object.assign({}, defaults, params);
     return fetch(url, {

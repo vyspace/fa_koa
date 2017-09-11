@@ -5,7 +5,7 @@
  import createHistory from 'history/createBrowserHistory';
  import FastClick from 'fastclick';
  import configureStore from './store/configureStore';
- import { saveStore } from './store/persistence';
+ import { saveSession } from './store/persistence';
  import Root from './containers/Root';
  import { isMobileBrowser } from './utils/tools';
 
@@ -13,7 +13,7 @@
      store = configureStore(),
      g = window.FaKoa;
 
- store.subscribe(() => saveStore(store.getState()));
+ store.subscribe(() => saveSession(store.getState()));
 
 // 添加assign方法
  if (typeof Object.assign !== 'function') {
