@@ -18,13 +18,13 @@ class CompHead extends Component {
         return (
             <div className="comp-head">
                 <div className="left">
-                  <div className="via"><img src={profileImg} alt="" /></div>
+                  <div className="via"><img src={profileImg} alt="" data-tag="chead" /></div>
                 </div>
-                <div className="middle">
-                    <div className="first">
+                <div className="middle" data-tag="chead">
+                    <div className="first" data-tag="chead">
                         <span>{nickname}</span>
                     </div>
-                    <div className="second">{subContent}</div>
+                    <div className="second" data-tag="chead">{subContent}</div>
                 </div>
                 {rDiv}
             </div>

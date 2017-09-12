@@ -2,6 +2,7 @@
 
 const FA_PERSIST = 'FA_PERSIST';
 const FA_IS_PERSIST = 'FA_IS_PERSIST';
+const FA_USER = 'FA_USER';
 
 export function saveSession(obj) {
     const str = JSON.stringify(obj);
@@ -23,3 +24,24 @@ export function restore(store) {
     }
 }
 
+export function getUser() {
+    return JSON.parse(localStorage.getItem(FA_USER));
+}
+
+export function testLogin() {
+    const user = getUser();
+    if(user) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+export function saveUser(user) {
+    const str = JSON.stringify(user);
+    localStorage.setItem(FA_USER, str);
+    if(testLogin()) {
+        window.FaKoa.isAuthenticated = true;
+    }
+}

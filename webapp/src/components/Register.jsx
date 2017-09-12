@@ -54,14 +54,14 @@ class Register extends Component {
         const t = $(e.target),
             tag = t.data('tag');
         switch (tag) {
-        case 'submit':
-            _this.submitHandler();
-            break;
-        case 'input':
-            t.focus();
-            break;
-        default:
-            break;
+            case 'submit':
+                _this.submitHandler();
+                break;
+            case 'input':
+                t.focus();
+                break;
+            default:
+                break;
         }
     }
     changeHandler() {

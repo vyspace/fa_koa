@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import $ from 'zepto';
 import { isMail, isPwd } from '../utils/tools';
+import { saveUser } from '../store/persistence';
 
 let g,
     _this,
@@ -113,7 +114,8 @@ class Login extends Component {
                     $toast.trigger('show', json.msg);
                 }
                 else {
-                    history.push('/');
+                    saveUser(json.data);
+                    history.goBack();
                 }
             }, (err) => {
                 console.log(err);

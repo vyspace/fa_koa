@@ -74,5 +74,14 @@ export const postLoginData = (obj, resolve, reject) => {
         body: JSON.stringify(obj)
     };
     request(params, resolve, reject);
-}
+};
+
+export const postRegisterData = (obj, resolve, reject) => {
+    const params = {
+        url: 'http://localhost:3000/openapi/register',
+        method: 'POST',
+        body: JSON.stringify(obj)
+    };
+    request(params, resolve, reject);
+};
 

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import $ from 'zepto';
 import Card from './Card';
 import PhotoBrowser from './PhotoBrowser';
+import { getUser } from '../store/persistence';
 
 let _this;
 
@@ -14,18 +15,22 @@ class Home extends Component {
             { updateHeader } = this.props.headerAction,
             { updateFooter } = this.props.footerAction,
             { history } = this.props;
-        updateHeader({
-            type: 'base',
-            title: 'FAKOA',
-            isBack: false,
-            rBtn: {
+        let _rBtn = null;
+        if(!getUser()) {
+            _rBtn = {
                 type: 'icon',
                 content: 'icon-login',
                 tag: '',
                 handler: () => {
                     history.push('login');
                 }
-            }
+            };
+        }
+        updateHeader({
+            type: 'base',
+            title: 'FAKOA',
+            isBack: false,
+            rBtn: _rBtn
         });
         updateFooter({ type: 'base', action: 'home', tHistory: history });
         getHomeData();
@@ -55,20 +60,23 @@ class Home extends Component {
             t = $(e.target),
             tag = t.data('tag');
         switch (tag) {
-        case 'thumbnail':
-            _this.thumbnail(t, data);
-            break;
-        case 'comment':
-            _this.comment(t, saveParams, history);
-            break;
-        case 'article':
-            _this.article(t, saveParams, history);
-            break;
-        case 'link':
-            _this.link(t, saveParams, history);
-            break;
-        default:
-            break;
+            case 'thumbnail':
+                _this.thumbnail(t, data);
+                break;
+            case 'comment':
+                _this.comment(t, saveParams, history);
+                break;
+            case 'article':
+                _this.article(t, saveParams, history);
+                break;
+            case 'link':
+                _this.link(t, saveParams, history);
+                break;
+            case 'chead':
+                history.push('myhome');
+                break;
+            default:
+                break;
         }
     }
     thumbnail(t, data) {

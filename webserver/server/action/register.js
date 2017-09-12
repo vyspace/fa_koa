@@ -10,9 +10,9 @@ router.post('/', async (ctx) => {
     const json = JSON.parse(ctx.request.body);
     if(json) {
         const service = new UserService(),
-            result = await service.register(json.username);
+            result = await service.register(json.username, json.password);
         if(result !== true) {
-            data = JDW.failure(result);
+            data = JDW.failure('用户名已存在！');
         }
         else {
             data = JDW.success({ username: json.username });

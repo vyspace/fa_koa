@@ -34,15 +34,15 @@ class Footer extends Component {
             isShow = true;
         }
         switch(footer.type) {
-        case 'base':
-            $popupLayer = $('#popupLayer');
-            break;
-        case 'editaricle':
-            $fileUpload = $('#fileUpload');
-            $editBox = $('#editBox');
-            break;
-        default:
-            break;
+            case 'base':
+                $popupLayer = $('#popupLayer');
+                break;
+            case 'editaricle':
+                $fileUpload = $('#fileUpload');
+                $editBox = $('#editBox');
+                break;
+            default:
+                break;
         }
     }
     init() {
@@ -93,31 +93,32 @@ class Footer extends Component {
         const { tHistory } = _this.props.store.footer,
             t = $(e.target),
             tag = t.data('tag');
+
         switch(tag) {
-        case 'home':
-            tHistory.push('/');
-            break;
-        case 'create':
-            $popupLayer.trigger('show', ['create', tHistory]);
-            break;
-        case 'reply':
-            tHistory.push('reply');
-            break;
-        case 'my':
-            tHistory.push('my');
-            break;
-        case 'album':
-            if($fileUpload && $fileUpload.length > 0) {
-                $fileUpload.trigger('click');
-            }
-            break;
-        case 'preview':
-            if($editBox && $editBox.length > 0) {
-                $editBox.triggerHandler('savePreviewData');
-            }
-            break;
-        default:
-            break;
+            case 'home':
+                tHistory.push('/');
+                break;
+            case 'create':
+                $popupLayer.trigger('show', ['create', tHistory]);
+                break;
+            case 'reply':
+                tHistory.push('reply');
+                break;
+            case 'my':
+                tHistory.push('my');
+                break;
+            case 'album':
+                if($fileUpload && $fileUpload.length > 0) {
+                    $fileUpload.trigger('click');
+                }
+                break;
+            case 'preview':
+                if($editBox && $editBox.length > 0) {
+                    $editBox.triggerHandler('savePreviewData');
+                }
+                break;
+            default:
+                break;
         }
     }
     render() {
@@ -125,33 +126,33 @@ class Footer extends Component {
             activeArr = [];
         let html;
         switch(footer.type) {
-        case 'none':
-            html = null;
-            break;
-        case 'editaricle':
-            html = (<ul className="footer">
+            case 'none':
+                html = null;
+                break;
+            case 'editaricle':
+                html = (<ul className="footer">
                 <li className="item-base">拍照</li>
                 <li className="item-base" data-tag="album">相册</li>
                 <li className="item-base">表情</li>
                 <li className="item-base" data-tag="preview">预览</li>
             </ul>);
-            break;
-        case 'base':
-        default:
-            switch (footer.action) {
-            case 'home':
-                activeArr[0] = true;
                 break;
-            case 'reply':
-                activeArr[2] = true;
-                break;
-            case 'my':
-                activeArr[3] = true;
-                break;
+            case 'base':
             default:
-                break;
-            }
-            html = (<ul className="footer footer-base">
+                switch (footer.action) {
+                    case 'home':
+                        activeArr[0] = true;
+                        break;
+                    case 'reply':
+                        activeArr[2] = true;
+                        break;
+                    case 'my':
+                        activeArr[3] = true;
+                        break;
+                    default:
+                        break;
+                }
+                html = (<ul className="footer footer-base">
                 <li className={activeArr[0] ? 'active' : ''} data-tag="home">
                     <i className="icon icon-home" data-tag="home" />
                 </li>
@@ -165,7 +166,7 @@ class Footer extends Component {
                     <i className="icon icon-my" data-tag="my" />
                 </li>
                 </ul>);
-            break;
+                break;
         }
         if(html) {
             return (<div
