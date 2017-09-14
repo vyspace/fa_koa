@@ -2,16 +2,15 @@
 
 const SNBatisUtil = require('./SNBatisUtil'),
     Pager = require('./Pager');
+
 class BaseDao {
     async add(tag, obj) {
         let session = null;
         try {
             session = await SNBatisUtil.createSession();
             await session.insert(tag, obj);
-            await session.commits();
         }
         catch (err) {
-            await SNBatisUtil.rollback(session);
             throw err;
         }
         finally {
@@ -23,10 +22,8 @@ class BaseDao {
         try {
             session = await SNBatisUtil.createSession();
             await session.delete(tag, obj);
-            await session.commits();
         }
-        catch (err){
-            await SNBatisUtil.rollback(session);
+        catch (err) {
             throw err;
         }
         finally {
@@ -38,10 +35,8 @@ class BaseDao {
         try {
             session = await SNBatisUtil.createSession();
             await session.update(tag, obj);
-            await session.commits();
         }
-        catch (err){
-            await SNBatisUtil.rollback(session);
+        catch (err) {
             throw err;
         }
         finally {
@@ -55,7 +50,7 @@ class BaseDao {
             session = await SNBatisUtil.createSession();
             data = await session.selectOne(tag, obj);
         }
-        catch (err){
+        catch (err) {
             throw err;
         }
         finally {
@@ -70,7 +65,7 @@ class BaseDao {
             session = await SNBatisUtil.createSession();
             list = await session.selectList(tag, obj);
         }
-        catch (err){
+        catch (err) {
             throw err;
         }
         finally {
@@ -109,13 +104,9 @@ class BaseDao {
         return pager;
     }
     static async test() {
-        let session = null,
-            flag = false;
+        let session = null;
         try {
             session = await SNBatisUtil.createSession();
-            if(session) {
-                flag = true;
-            }
         }
         catch(err) {
             console.log('数据库链接失败！');
@@ -124,7 +115,6 @@ class BaseDao {
         finally {
             await SNBatisUtil.closeSession(session);
         }
-        return flag;
     }
 }
 

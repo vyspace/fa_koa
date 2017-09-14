@@ -11,15 +11,20 @@ router.post('/', async (ctx) => {
     if(json) {
         const service = new UserService(),
             result = await service.register(json.username, json.password);
-        if(result !== true) {
-            data = JDW.failure('用户名已存在！');
-        }
-        else {
-            data = JDW.success({ username: json.username });
+        switch(result) {
+            case 1:
+                data = JDW.failure('用户名已存在！');
+                break;
+            case 2:
+                data = JDW.success({ username: json.username });
+                break;
+            default:
+                data = JDW.failure('注册失败，请稍后再试！');
+                break;
         }
     }
     else {
-        data = JDW.failure();
+        data = JDW.failure('注册失败，请稍后再试！');
     }
     ctx.response.body = data;
 });

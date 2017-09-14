@@ -102,7 +102,7 @@ class Register extends Component {
                     $toast.trigger('show', json.msg);
                 }
                 else {
-                    history.push('/');
+                    history.push('regfinish');
                 }
             }, (err) => {
                 console.log(err);

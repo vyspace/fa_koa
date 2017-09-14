@@ -21,6 +21,7 @@ import Follow from '../containers/Follow';
 import Frame from '../containers/Frame';
 import Login from '../containers/Login';
 import Register from '../containers/Register';
+import RegFinish from '../containers/RegFinish';
 import FindPassword from '../containers/FindPassword';
 import Feedback from '../containers/Feedback';
 import BasicInfo from '../containers/BasicInfo';
@@ -63,6 +64,7 @@ export default
         <PrivateRoute exact path="/frame" component={Frame} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
+        <Route exact path="/regfinish" component={RegFinish} />
         <Route exact path="/findpassword" component={FindPassword} />
         <PrivateRoute exact path="/feedback" component={Feedback} />
         <Route component={NotFound} />

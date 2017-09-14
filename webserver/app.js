@@ -38,12 +38,15 @@ app.use(cors());
 // 配置路由控制器
 app.use(controller.routes());
 
-if(mDao.test()) {
+mDao.test().then(() => {
     app.listen(serverConfig.port, () => {
         global.FAKOA = {
             rootdir: __dirname
         };
         console.log(`start-quick is starting at port ${serverConfig.port}`);
     });
-}
+}).catch((err) => {
+    console.log(err);
+    process.exit();
+});
 

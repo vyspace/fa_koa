@@ -8,8 +8,13 @@ class UserService {
         this[_userDao] = new UserDao();
     }
     async login(username) {
-        const user = await this[_userDao].loadByName(username);
-        return user;
+        try {
+            return await this[_userDao].loadByName(username);
+        }
+        catch(err) {
+            console.error(err);
+            return '';
+        }
     }
     async register(username, password) {
         const user = new User();
@@ -17,10 +22,16 @@ class UserService {
         user.password = password;
         try {
             await this[_userDao].add(user);
-            return true;
+            return 2;
         }
         catch(err) {
-            return err;
+            console.error(err);
+            if(err.message === '1') {
+                return 1;
+            }
+            else {
+                return 3;
+            }
         }
     }
 }

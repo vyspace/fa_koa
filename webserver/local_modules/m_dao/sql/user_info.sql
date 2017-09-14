@@ -1,9 +1,8 @@
-create table if not exists user_info (
-  id int not null primary key auto_increment,
-  name varchar(50) not null default '',
-  gender char(1) not null default '1',
-  phone varchar(50) not null default '',
-  profile varchar(255) not null default '',
-  birthday date not null default '1990-01-01'
-  status char(1) not null default '1'
-) default charset=utf8;
+
+insert into user_info (profile,nickname,gender,site,birthday,signature,phone,email,tag,level) values
+('http://img2.woyaogexing.com/2017/09/12/9de4466e3adb68a1!400x400_big.jpg',
+'美丽世界','0','上海','1990-12-01',
+'╰︶▔ ゛ 回忆搁浅双手摻夹的幸福  ||  ╰︶▔ ゛ 曾经演绎脸庞灿烂的笑容',
+'13000000001','hey@world.com','1',1);
+
+

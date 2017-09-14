@@ -268,6 +268,19 @@ $bdColor: solid 2px rgba(118, 222, 138, 0.9);
     left: 0;
     top: 0;
   }
+  .edit-area {
+    width: 100%;
+    resize: none;
+    height: 3.5rem;
+    border: none;
+    background-color: #f0f0f0;
+  }
+  .bd-0 {
+    border: 0
+  }
+  .pd-t2 {
+    padding-top: 2rem;
+  }
 }
 
 .follow {

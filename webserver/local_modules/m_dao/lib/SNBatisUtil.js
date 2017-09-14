@@ -6,7 +6,7 @@ const path = require('path'),
 let factory = null;
 class SNBatisUtil {
     constructor() {
-        throw new Error('SDaoUtil is a static class.');
+        throw new Error('SNBatisUtil is a static class.');
     }
     static [_static]() {
         if(!factory) {
@@ -28,11 +28,6 @@ class SNBatisUtil {
             throw err;
         }
         return session;
-    }
-    static async rollback(session) {
-        if(session) {
-            await session.rollbacks();
-        }
     }
     static async closeSession(session) {
         if(session) {

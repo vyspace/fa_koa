@@ -35,11 +35,11 @@ class About extends Component {
         const t = $(e.target),
             tag = t.data('tag');
         switch(tag) {
-        case 'profile':
-            $('#popupLayer').trigger('show', 'profile');
-            break;
-        default:
-            break;
+            case 'profile':
+                $('#popupLayer').trigger('show', 'profile');
+                break;
+            default:
+                break;
         }
     }
     fileChange(e) {
@@ -101,8 +101,11 @@ class About extends Component {
                     </li>
                     <li>
                         <div className="left">个性签名</div>
-                        <div className="right">
-                            <input type="text" defaultValue="to be or not to be" />
+                        <div className="right bd-0">
+                            <textarea
+                              className="edit-area"
+                              maxLength="150"
+                            />
                         </div>
                     </li>
                     <li>
