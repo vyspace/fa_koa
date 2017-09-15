@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import $ from 'zepto';
 import { imageInsert } from '../utils/tools';
 
 let g,
@@ -25,6 +26,11 @@ class About extends Component {
     componentDidMount() {
         this.eventLayer.addEventListener('click', this.eventHandler, true);
         this.file.addEventListener('change', this.fileChange, true);
+        this.gender.addEventListener('change', this.selectHandler, true);
+    }
+    componentWillUnmount() {
+        const { recordOrigin } = this.props.recordAction;
+        recordOrigin('userinfo');
     }
     init() {
         g = window.FaKoa;
@@ -53,6 +59,11 @@ class About extends Component {
             }
         };
         imageInsert(param);
+    }
+    selectHandler(e) {
+        e.stopPropagation();
+
+        alert(1)
     }
     render() {
         return (
@@ -86,9 +97,14 @@ class About extends Component {
                     <li>
                         <div className="left">性别</div>
                         <div className="right">
-                            <select defaultValue="female">
-                                <option defaultValue="female">女</option>
-                                <option defaultValue="male">男</option>
+                            <select
+                              ref={(c) => {
+                                  this.gender = c;
+                              }}
+                              defaultValue="0"
+                            >
+                                <option defaultValue="0">女</option>
+                                <option defaultValue="1">男</option>
                             </select>
                         </div>
 
@@ -123,6 +139,7 @@ class About extends Component {
 About.propTypes = {
     headerAction: PropTypes.object.isRequired,
     footerAction: PropTypes.object.isRequired,
+    recordAction: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };
 

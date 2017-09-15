@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isMail, isPwd } from '../utils/tools';
+import { savePageParam } from '../store/persistence';
 
 let g,
     _this,
@@ -83,10 +84,10 @@ class Register extends Component {
         }
     }
     submitHandler() {
-        const { history } = this.props,
-            { register } = this.props.registerAction,
-            username = $username.val(),
-            password = $password.val();
+        const { history } = _this.props,
+            { register } = _this.props.registerAction,
+            username = $.trim($username.val()),
+            password = $.trim($password.val());
         _this.clearError();
         if(!isMail(username)) {
             $toast.trigger('show', '请填写正确邮箱地址');
@@ -102,6 +103,7 @@ class Register extends Component {
                     $toast.trigger('show', json.msg);
                 }
                 else {
+                    savePageParam('regfinish', { username });
                     history.push('regfinish');
                 }
             }, (err) => {

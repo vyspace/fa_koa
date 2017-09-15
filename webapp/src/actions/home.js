@@ -5,7 +5,6 @@ import { getHomeList } from '../utils/api';
 export const HOME_GET = 'HOME_GET';
 export const HOME_GET_SUCCESS = 'HOME_GET_SUCCESS';
 export const HOME_GET_FAILURE = 'HOME_GET_FAILURE';
-export const HOME_PARAMS = 'HOME_PARAMS';
 export const HOME_SCROLL_TOP = 'HOME_SCROLL_TOP';
 
 function getHome() {
@@ -25,13 +24,6 @@ function getHomeFailure(err) {
     return {
         type: HOME_GET_FAILURE,
         payload: err
-    };
-}
-
-export function saveParams(payload) {
-    return {
-        type: HOME_PARAMS,
-        payload
     };
 }
 

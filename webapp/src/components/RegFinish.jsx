@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { getPageParam, saveUser } from '../store/persistence';
 
 let g,
     _this,
@@ -25,11 +26,12 @@ class FindPassword extends Component {
     componentDidMount() {
         this.eventLayer.addEventListener('click', this.eventHandler, true);
         this.nickname.addEventListener('input', this.changeHandler, true);
+        this.gender.addEventListener('change', this.selectHandler, true);
         this.initObj();
     }
     componentWillUnmount() {
         const { recordOrigin } = this.props.recordAction;
-        recordOrigin('findpassword');
+        recordOrigin('regfinish');
     }
     init() {
         g = window.FaKoa;
@@ -64,9 +66,33 @@ class FindPassword extends Component {
             $submit.addClass('btn-disabled').attr('disabled', true);
         }
     }
+    selectHandler(e) {
+        e.stopPropagation();
+        e.target[e.target.selectedIndex].selected = true;
+    }
     submitHandler() {
-        const { history } = this.props;
-        history.push('/');
+        const { history } = _this.props,
+            { regFinish } = _this.props.regFinishAction,
+            nickname = $.trim(_this.nickname.value),
+            gender = _this.gender.value,
+            signature = _this.signature.value,
+            paramObj = getPageParam('regfinish');
+        let username = '';
+
+        if(paramObj) {
+            username = paramObj.username;
+        }
+        regFinish({ username, nickname, gender, signature }, (json) => {
+            if(json.code !== 200) {
+                $toast.trigger('show', json.msg);
+            }
+            else {
+                saveUser(json.data);
+                history.push('/');
+            }
+        }, (err) => {
+            console.log(err);
+        });
     }
     render() {
         return (
@@ -92,9 +118,27 @@ class FindPassword extends Component {
                         </div>
                     </li>
                     <li>
+                        <div className="left">性别</div>
+                        <div className="right">
+                            <select
+                              ref={(c) => {
+                                  this.gender = c;
+                              }}
+                              defaultValue="0"
+                            >
+                                <option value="0">女</option>
+                                <option value="1">男</option>
+                            </select>
+                        </div>
+
+                    </li>
+                    <li>
                         <div className="left">个性签名</div>
                         <div className="right bd-0">
                             <textarea
+                              ref={(c) => {
+                                  this.signature = c;
+                              }}
                               className="edit-area"
                               maxLength="150"
                               placeholder="快来编辑签名，让大家了解你..."
@@ -124,6 +168,7 @@ FindPassword.propTypes = {
     headerAction: PropTypes.object.isRequired,
     footerAction: PropTypes.object.isRequired,
     recordAction: PropTypes.object.isRequired,
+    regFinishAction: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };
 

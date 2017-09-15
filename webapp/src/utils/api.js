@@ -85,3 +85,20 @@ export const postRegisterData = (obj, resolve, reject) => {
     request(params, resolve, reject);
 };
 
+export const postRegFinishData = (obj, resolve, reject) => {
+    const params = {
+        url: 'http://localhost:3000/openapi/regfinish',
+        method: 'POST',
+        body: JSON.stringify(obj)
+    };
+    request(params, resolve, reject);
+};
+
+export const getMyInfoData = (username, resolve, reject) => {
+    const user = encodeURIComponent(username),
+        params = {
+            url: `http://localhost:3000/openapi/myinfo?username=${user}`
+        };
+    request(params, resolve, reject);
+};
+

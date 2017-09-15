@@ -2,26 +2,43 @@
 
 const BaseDao = require('m_dao');
 class UserDao extends BaseDao {
-    async loadByName(username) {
+    async loginByName(username) {
         try {
-            return await super.load('User.loadByName', username);
+            return await super.load('User.loginByName', username);
         }
         catch(err) {
             throw err;
         }
     }
-    async add(user) {
+    async addUser(user) {
         try {
-            const loadUser = await super.load('User.loadByName', user.username);
+            const loadUser = await super.load('User.userExist', user.username);
             if(loadUser !== null) {
                 throw new Error('1');
             }
-            await super.add('User.add', user);
+            await super.add('User.addUser', user);
         }
         catch (err) {
             throw err;
         }
     }
+    async updateUserSimpleInfo(userInfo) {
+        try {
+            await super.add('User.updateUserSimpleInfo', userInfo);
+        }
+        catch (err) {
+            throw err;
+        }
+    }
+    async loadMyInfo(username) {
+        try {
+            return await super.load('User.loadMyInfo', username);
+        }
+        catch(err) {
+            throw err;
+        }
+    }
+
     async delete(id) {
         await super.delete('User.delete', id);
     }

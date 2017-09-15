@@ -1,6 +1,7 @@
 'use strict';
 
 const Router = require('koa-router'),
+    md5 = require('md5'),
     UserService = require('m_user').UserService,
     JDW = require('../util/JsonDataWrap'),
     router = new Router();
@@ -10,7 +11,8 @@ router.post('/', async (ctx) => {
     const json = JSON.parse(ctx.request.body);
     if(json) {
         const service = new UserService(),
-            result = await service.login(json.username);
+            user = json.username.trim(),
+            result = await service.login(user);
         if(result === '') {
             data = JDW.failure('登陆失败，请稍后再试！');
         }
@@ -18,11 +20,14 @@ router.post('/', async (ctx) => {
             data = JDW.failure('用户名不存在');
         }
         if(result) {
-            if(result.password !== json.password) {
+            const pwd = json.password.trim();
+            if(result.password !== pwd) {
                 data = JDW.failure('用户名或密码错误');
             }
             else {
-                data = JDW.success({ username: json.username });
+                const timestmp = new Date().getTime(),
+                    _token = md5(user + timestmp);
+                data = JDW.success({ username: user, nickname: result.nickname, token: _token });
             }
         }
     }

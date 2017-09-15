@@ -5,7 +5,7 @@ create table user (
     username varchar(50) not null default '',
     password varchar(50) not null default '',
     profile varchar(255) default '',
-    nickname varchar(50) not null default 'default',
+    nickname varchar(50) not null default '',
     gender char(1) not null default '0',
     site varchar(50) default '',
     birthday date,

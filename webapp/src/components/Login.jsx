@@ -97,8 +97,8 @@ class Login extends Component {
     submitHandler() {
         const { history } = _this.props,
             { login } = this.props.loginAction,
-            username = $username.val(),
-            password = $password.val();
+            username = $.trim($username.val()),
+            password = $.trim($password.val());
         _this.clearError();
         if(!isMail(username)) {
             $toast.trigger('show', '请填写正确邮箱地址');
@@ -112,6 +112,9 @@ class Login extends Component {
             login({ username, password }, (json) => {
                 if(json.code !== 200) {
                     $toast.trigger('show', json.msg);
+                }
+                else if(!json.data.nickname) {
+                    history.push('regfinish');
                 }
                 else {
                     saveUser(json.data);

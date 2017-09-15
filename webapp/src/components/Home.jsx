@@ -47,6 +47,7 @@ class Home extends Component {
         const { saveScrollTop } = this.props.homeAction,
             { recordOrigin } = this.props.recordAction;
         saveScrollTop(document.body.scrollTop);
+        document.body.scrollTop = 0;
         recordOrigin('home');
     }
     init() {

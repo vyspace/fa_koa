@@ -1,16 +1,25 @@
 {
-  "add": {
+  "userExist": {
+    "parameterType": "string",
+    "sql": "select id from user where username=#{username}"
+  },
+  "loginByName": {
+    "parameterType": "string",
+    "sql": "select username,nickname,password from user where username=#{username}"
+  },
+  "addUser": {
     "parameterType": "object",
     "sql": "insert into user (username,password,email) values (#{username},#{password},#{username})"
   },
-  "loadById": {
-    "parameterType": "number",
-    "sql": "select * from user where id=#{id}"
+  "updateUserSimpleInfo": {
+    "parameterType": "object",
+    "sql": "update user set nickname=#{nickname},gender=#{gender},signature=#{signature} where username=#{username}"
   },
-  "loadByName": {
+  "loadMyInfo": {
     "parameterType": "string",
-    "sql": "select * from user where username like #{username}"
+    "sql": "select profile,nickname,level,signature from user where username=#{username}"
   },
+
   "update": {
     "parameterType": "object",
     "sql": "update user set username=#{username}, password=#{password} where id=#{id}"

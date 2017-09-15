@@ -7,6 +7,7 @@ import record from './record';
 import home from './home';
 import comment from './comment';
 import reply from './reply';
+import my from './my';
 import article from './article';
 import editarticle from './editarticle';
 import photoalbum from './photoalbum';
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
     home,
     comment,
     reply,
+    my,
     article,
     editarticle,
     photoalbum,

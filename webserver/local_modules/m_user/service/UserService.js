@@ -2,6 +2,7 @@
 
 const UserDao = require('../dao/UserDao'),
     User = require('../model/User'),
+    UserInfo = require('../model/UserInfo'),
     _userDao = Symbol('userDao');
 class UserService {
     constructor() {
@@ -9,7 +10,7 @@ class UserService {
     }
     async login(username) {
         try {
-            return await this[_userDao].loadByName(username);
+            return await this[_userDao].loginByName(username);
         }
         catch(err) {
             console.error(err);
@@ -21,7 +22,7 @@ class UserService {
         user.username = username;
         user.password = password;
         try {
-            await this[_userDao].add(user);
+            await this[_userDao].addUser(user);
             return 2;
         }
         catch(err) {
@@ -33,6 +34,32 @@ class UserService {
                 return 3;
             }
         }
+    }
+    async regFinish(username, nickname, gender, signature) {
+        const userInfo = new UserInfo();
+        userInfo.nickname = nickname;
+        userInfo.gender = gender;
+        userInfo.signature = signature;
+        userInfo.username = username;
+        let result = false;
+        try {
+            await this[_userDao].updateUserSimpleInfo(userInfo);
+            result = true;
+        }
+        catch(err) {
+            console.error(err);
+        }
+        return result;
+    }
+    async myInfo(username) {
+        let result = null;
+        try {
+            result = this[_userDao].loadMyInfo(username);
+        }
+        catch(err) {
+            console.error(err);
+        }
+        return result;
     }
 }
 

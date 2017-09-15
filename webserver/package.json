@@ -30,7 +30,9 @@
     "m_nbatis": "file:local_modules/m_nbatis",
     "m_user": "file:local_modules/m_user",
     "m_util": "file:local_modules/m_util",
-    "mysql": "^2.13.0"
+    "md5": "^2.2.1",
+    "mysql": "^2.13.0",
+    "querystring": "^0.2.0"
   },
   "devDependencies": {
     "chai": "^4.0.2",

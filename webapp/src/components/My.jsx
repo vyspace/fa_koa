@@ -3,15 +3,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { pageRedirect } from '../utils/tools';
-import { restore } from '../store/persistence';
 import PhotoBrowser from './PhotoBrowser';
+import { delUser } from '../store/persistence';
 
-let _this;
+let g,
+    _this;
 
 class My extends Component {
     componentWillMount() {
-        const { history, store } = this.props;
-        restore(store);
+        const { history, store } = this.props,
+            { getMyInfo } = this.props.myAction;
         if(pageRedirect(store.record, history)) {
             return;
         }
@@ -26,6 +27,7 @@ class My extends Component {
         });
         updateFooter({ type: 'base', action: 'my', tHistory: history });
         this.init();
+        getMyInfo(g.username);
     }
     componentDidMount() {
         this.eventLayer.addEventListener('click', this.eventHandler, true);
@@ -35,6 +37,7 @@ class My extends Component {
         recordOrigin('my');
     }
     init() {
+        g = window.FaKoa;
         _this = this;
     }
     eventHandler(e) {
@@ -44,58 +47,67 @@ class My extends Component {
             tag = t.data('tag');
         let arr = null;
         switch(tag) {
-        case 'myProfile':
-            arr = [{
-                el: e.target,
-                msrc: './img/avator.jpg',
-                src: './img/avator.jpg',
-                w: 200,
-                h: 200
-            }];
-            PhotoBrowser.init(arr, 0);
-            break;
-        case 'myInfo':
-            history.push('userinfo');
-            break;
-        case 'myHome':
-            history.push('myhome');
-            break;
-        case 'myPhotoAlbum':
-            history.push('photoalbum');
-            break;
-        case 'myFollow':
-            history.push('follow');
-            break;
-        case 'myAdmin':
-            history.push('admin');
-            break;
-        case 'myFeedback':
-            history.push('feedback');
-            break;
-        case 'myAbout':
-            history.push('about');
-            break;
-        default:
-            break;
+            case 'myProfile':
+                arr = [{
+                    el: e.target,
+                    msrc: './img/avator.jpg',
+                    src: './img/avator.jpg',
+                    w: 200,
+                    h: 200
+                }];
+                PhotoBrowser.init(arr, 0);
+                break;
+            case 'myInfo':
+                history.push('userinfo');
+                break;
+            case 'myHome':
+                history.push('myhome');
+                break;
+            case 'myPhotoAlbum':
+                history.push('photoalbum');
+                break;
+            case 'myFollow':
+                history.push('follow');
+                break;
+            case 'myAdmin':
+                history.push('admin');
+                break;
+            case 'myFeedback':
+                history.push('feedback');
+                break;
+            case 'myAbout':
+                history.push('about');
+                break;
+            case 'myLogout':
+                delUser();
+                history.push('/');
+                break;
+            default:
+                break;
         }
     }
     render() {
-        return (
-            <div
-              ref={(c) => {
-                  this.eventLayer = c;
-              }}
-            >
+        const { isFetching, data } = this.props.store.my;
+        let html;
+        if (isFetching) {
+            html = 'loadding';
+        }
+        else {
+            let imgUrl = data.profile;
+            if(!data.profile) {
+                imgUrl = './img/avator.jpg';
+            }
+            html = (<div>
                 <div className="my-head my-mar">
                     <div className="left">
-                        <div className="via"><img src="./img/avator.jpg" alt="" data-tag="myProfile" /></div>
+                        <div className="via"><img src={imgUrl} alt="" data-tag="myProfile" /></div>
                     </div>
                     <div className="right" data-tag="myInfo">
                         <div className="first" data-tag="myInfo">
-                            <span data-tag="myInfo">nickname</span>
-                            <div className="icon icon-level level">2</div>
+                            <span data-tag="myInfo">{data.nickname}</span>
+                            <div className="icon icon-level level">{data.level}</div>
                         </div>
-                        <div className="second" data-tag="myInfo">全球最大的中文搜索引擎</div>
+                        <div className="second" data-tag="myInfo">{data.signature}</div>
                     </div>
                 </div>
                 <ul className="my-list my-mar">
@@ -120,8 +132,15 @@ class My extends Component {
                         <i className="icon icon-about" data-tag="myAbout" />
                         关于</li>
                 </ul>
-                <div className="my-btn" data-tag="mySignOut">退出</div>
-            </div>
+                <div className="my-btn" data-tag="myLogout">退出</div>
+            </div>);
+        }
+        return (
+            <div
+              ref={(c) => {
+                  this.eventLayer = c;
+              }}
+            >{html}</div>
         );
     }
 }
@@ -130,6 +149,7 @@ My.propTypes = {
     headerAction: PropTypes.object.isRequired,
     footerAction: PropTypes.object.isRequired,
     recordAction: PropTypes.object.isRequired,
+    myAction: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
     store: PropTypes.object.isRequired
 };

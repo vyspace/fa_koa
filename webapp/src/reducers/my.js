@@ -1,23 +1,19 @@
 'use strict';
 
-import { HOME_GET, HOME_GET_SUCCESS, HOME_GET_FAILURE, HOME_SCROLL_TOP } from '../actions/home';
+import { MY_GET, MY_GET_SUCCESS, HMY_GET_FAILURE } from '../actions/my';
 
 export default function home(state = {
-    isFetching: true,
-    scrollTop: 0
-}, action) {
+    isFetching: true}, action) {
     switch(action.type) {
-        case HOME_GET_SUCCESS:
+        case MY_GET_SUCCESS:
             return Object.assign({}, state, { isFetching: false }, action.payload);
-        case HOME_GET_FAILURE:
+        case HMY_GET_FAILURE:
             return Object.assign({}, state, { isFetching: false }, action.payload);
-        case HOME_SCROLL_TOP:
-            state.scrollTop = action.payload;
-            return state;
-        case HOME_GET:
+        case MY_GET:
             state.isFetching = true;
             return state;
         default:
             return state;
     }
 }
+
