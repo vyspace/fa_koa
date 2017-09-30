@@ -10,7 +10,8 @@ export default function home(state = {
         case HOME_GET_SUCCESS:
             return Object.assign({}, state, { isFetching: false }, action.payload);
         case HOME_GET_FAILURE:
-            return Object.assign({}, state, { isFetching: false }, action.payload);
+            state.isFetching = false;
+            return state;
         case HOME_SCROLL_TOP:
             state.scrollTop = action.payload;
             return state;

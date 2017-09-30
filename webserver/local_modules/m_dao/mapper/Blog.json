@@ -1,0 +1,20 @@
+{
+  "originalPager": {
+    "parameterType": "object",
+    "dynamic": true,
+    "sql": "select * from original_blog <%if({{sort}}) return 'order by ${sort} ${order}'%> <%if({{pageSize}}) return 'limit #{pageOffset}, #{pageSize}'%>"
+  },
+  "originalCount": {
+    "parameterType": "",
+    "sql": "select count(*) from original_blog"
+  },
+  "spiderPager": {
+    "parameterType": "object",
+    "dynamic": true,
+    "sql": "select * from spider_blog <%if({{sort}}) return 'order by ${sort} ${order}'%> <%if({{pageSize}}) return 'limit #{pageOffset}, #{pageSize}'%>"
+  },
+  "spiderCount": {
+    "parameterType": "",
+    "sql": "select count(*) from spider_blog"
+  }
+}

@@ -1,6 +1,6 @@
 'use strict';
 
-import { getHomeList } from '../utils/api';
+import { getHomeData } from '../utils/api';
 
 export const HOME_GET = 'HOME_GET';
 export const HOME_GET_SUCCESS = 'HOME_GET_SUCCESS';
@@ -34,9 +34,9 @@ export function saveScrollTop(payload) {
     };
 }
 
-export function getHomeData() {
+export function getHomeList() {
     return (dispatch) => {
-        getHomeList((json) => {
+        getHomeData((json) => {
             dispatch(getHomeSuccess(json));
         }, (err) => {
             dispatch(getHomeFailure(err));

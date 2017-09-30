@@ -7,14 +7,15 @@ export default function home(state = {
     scrollTop: 0
 }, action) {
     switch(action.type) {
-    case MY_HOME_GET_SUCCESS:
-        return Object.assign({}, state, { isFetching: false }, action.payload);
-    case MY_HOME_GET_FAILURE:
-        return Object.assign({}, state, { isFetching: false }, action.payload);
-    case MY_HOME_GET:
-        state.isFetching = true;
-        return state;
-    default:
-        return state;
+        case MY_HOME_GET_SUCCESS:
+            return Object.assign({}, state, { isFetching: false }, action.payload);
+        case MY_HOME_GET_FAILURE:
+            state.isFetching = false;
+            return state;
+        case MY_HOME_GET:
+            state.isFetching = true;
+            return state;
+        default:
+            return state;
     }
 }

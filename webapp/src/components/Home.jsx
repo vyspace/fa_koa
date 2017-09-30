@@ -11,7 +11,7 @@ let _this;
 
 class Home extends Component {
     componentWillMount() {
-        const { getHomeData } = this.props.homeAction,
+        const { getHomeList } = this.props.homeAction,
             { updateHeader } = this.props.headerAction,
             { updateFooter } = this.props.footerAction,
             { history } = this.props;
@@ -33,7 +33,7 @@ class Home extends Component {
             rBtn: _rBtn
         });
         updateFooter({ type: 'base', action: 'home', tHistory: history });
-        getHomeData();
+        getHomeList();
         this.init();
     }
     componentDidMount() {

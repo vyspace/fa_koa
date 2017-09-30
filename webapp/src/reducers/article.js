@@ -7,7 +7,8 @@ export default function article(state = { isFetching: true }, action) {
         case ARTICLE_GET_SUCCESS:
             return Object.assign({}, state, { isFetching: false }, action.payload);
         case ARTICLE_GET_FAILURE:
-            return Object.assign({}, state, { isFetching: false }, action.payload);
+            state.isFetching = false;
+            return state;
         case ARTICLE_GET:
             state.isFetching = true;
             return state;

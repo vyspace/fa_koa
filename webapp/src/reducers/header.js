@@ -14,10 +14,10 @@ export default function header(state = {
     }
 }, action) {
     switch(action.type) {
-    case HEADER_UPDATE:
-        return Object.assign({}, state, action.payload);
-    default:
-        return state;
+        case HEADER_UPDATE:
+            return Object.assign({}, state, action.payload);
+        default:
+            return state;
     }
 }
 

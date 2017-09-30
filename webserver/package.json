@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/vyspace/fa_koa#readme",
   "dependencies": {
+    "knuth-shuffle": "^1.0.1",
     "koa": "^2.2.0",
     "koa-body": "^2.3.0",
     "koa-bodyparser": "^3.2.0",

@@ -8,7 +8,8 @@ export default function home(state = {
         case MY_GET_SUCCESS:
             return Object.assign({}, state, { isFetching: false }, action.payload);
         case HMY_GET_FAILURE:
-            return Object.assign({}, state, { isFetching: false }, action.payload);
+            state.isFetching = false;
+            return state;
         case MY_GET:
             state.isFetching = true;
             return state;

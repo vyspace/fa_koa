@@ -42,9 +42,11 @@ class UserDao extends BaseDao {
     async delete(id) {
         await super.delete('User.delete', id);
     }
+
     async update(user) {
         await super.update('User.update', user);
     }
+
     async page() {
         const params = {
             pageOffset: 0,
