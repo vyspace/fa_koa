@@ -11,7 +11,7 @@ class Reply extends Component {
     componentWillMount() {
         const { updateHeader } = this.props.headerAction,
             { updateFooter } = this.props.footerAction,
-            { getReplyData } = this.props.replyAction,
+            { getReplyList } = this.props.replyAction,
             { history } = this.props;
         updateHeader({
             type: 'base',
@@ -21,7 +21,7 @@ class Reply extends Component {
             rBtn: null
         });
         updateFooter({ type: 'base', action: 'reply', tHistory: history });
-        getReplyData(1);
+        getReplyList(1);
         this.init();
     }
     componentDidMount() {
@@ -38,7 +38,7 @@ class Reply extends Component {
     }
     eventHandler(e) {
         const { history } = _this.props,
-            { saveParams } = _this.props.replyAction;
+            { savePageParams } = _this.props.replyAction;
         e.stopPropagation();
         const t = $(e.target);
         if(e.target.className === 'cp-right' || t.parents('.cp-right').length > 0) {
@@ -52,7 +52,7 @@ class Reply extends Component {
                 workId: el.data('fid'),
                 nickname: el.data('nickname')
             };
-            saveParams(params);
+            savePageParams(params);
             history.push('/editcomment');
         }
     }

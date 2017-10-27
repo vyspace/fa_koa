@@ -17,18 +17,19 @@ class Card extends Component {
     }
     render() {
         const { data, index, commentOps } = this.props,
-            html = [];
-        if(data.typeId === 1) {
-            html.push(<li key="c1" className="mar-b"><SpeedDial photos={data.photos} /></li>);
+            html = [],
+            photos = JSON.parse(data.photos);
+        if(data.type === '1') {
+            html.push(<li key="c1" className="mar-b"><SpeedDial photos={photos} /></li>);
             html.push(<CardText key="c2" text={data.text} />);
         }
-        if(data.typeId === 2) {
-            html.push(<li key="c1" className="mar-b title" data-tag="article" data-aid={data.articleId}>{data.title}</li>);
-            html.push(<li key="c2" className="mar-b"><SinglePhoto photo={data.photo} aid={data.articleId} browser={false} tag="article" /></li>);
+        if(data.type === '2') {
+            html.push(<li key="c1" className="mar-b title" data-tag="article" data-aid={data.articleId}>{data.text}</li>);
+            html.push(<li key="c2" className="mar-b"><SinglePhoto photo={photos[0].src} aid={data.articleId} browser={false} tag="article" /></li>);
         }
-        if(data.typeId === 3) {
-            html.push(<li key="c1" className="mar-b title" data-tag="link" data-aid={data.articleId} data-link={data.link}>{data.title}</li>);
-            html.push(<li key="c2" className="mar-b"><SinglePhoto photo={data.photo} aid={data.articleId} browser={false} tag="link" link={data.link} /></li>);
+        if(data.type === '3') {
+            html.push(<li key="c1" className="mar-b title" data-tag="link" data-aid={data.articleId} data-link={data.link}>{data.text}</li>);
+            html.push(<li key="c2" className="mar-b"><SinglePhoto photo={photos[0].src} aid={data.articleId} browser={false} tag="link" link={data.link} /></li>);
         }
         return (<ul
           ref={(c) => {
@@ -38,7 +39,7 @@ class Card extends Component {
           data-index={index}
         >
             <li className="mar-b">
-                <CompHead profile={data.profile} nickname={data.nickname} subContent={data.dateTime} />
+                <CompHead profile={data.profile} nickname={data.nickname} userId={data.userId} subContent={data.createTime} />
             </li>
             {html}
             <li key="c3"><CardAction numOfLikes={data.numOfLikes} numOfComments={data.numOfComments} numOfForwards={data.numOfForwards} commentOps={commentOps} isLike={data.isLike} /></li>

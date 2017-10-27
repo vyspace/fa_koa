@@ -58,11 +58,11 @@ class About extends Component {
         const t = $(e.target),
             tag = t.data('tag');
         switch (tag) {
-        case 'del':
-            _this.delImage(t);
-            break;
-        default:
-            break;
+            case 'del':
+                _this.delImage(t);
+                break;
+            default:
+                break;
         }
     }
     delImage(t) {

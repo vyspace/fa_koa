@@ -6,12 +6,6 @@ export const PHOTO_ALBUM_GET = 'PHOTO_ALBUM_GET';
 export const PHOTO_ALBUM_GET_SUCCESS = 'PHOTO_ALBUM_GET_SUCCESS';
 export const PHOTO_ALBUM_GET_FAILURE = 'PHOTO_ALBUM_GET_FAILURE';
 
-function getPhotoAlbum() {
-    return {
-        type: PHOTO_ALBUM_GET
-    };
-}
-
 function getPhotoAlbumSuccess(json) {
     return {
         type: PHOTO_ALBUM_GET_SUCCESS,
@@ -22,13 +16,16 @@ function getPhotoAlbumSuccess(json) {
 function getPhotoAlbumFailure(err) {
     return {
         type: PHOTO_ALBUM_GET_FAILURE,
-        payload: err
+        payload: {
+            statusCode: err.statusCode,
+            msg: err.msg,
+            data: null
+        }
     };
 }
 
 export function getPhotoData(uid) {
     return (dispatch) => {
-        dispatch(getPhotoAlbum());
         getPhotoAlbumData(uid, (json) => {
             dispatch(getPhotoAlbumSuccess(json));
         }, (err) => {

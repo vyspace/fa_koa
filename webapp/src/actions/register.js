@@ -2,7 +2,7 @@
 
 import { postRegisterData } from '../utils/api';
 
-export function register(obj, success, failure) {
+export function postRegister(obj, success, failure) {
     return () => {
         postRegisterData(obj, (json) => {
             success(json);

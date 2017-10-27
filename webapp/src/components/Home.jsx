@@ -5,7 +5,9 @@ import PropTypes from 'prop-types';
 import $ from 'zepto';
 import Card from './Card';
 import PhotoBrowser from './PhotoBrowser';
-import { getUser } from '../store/persistence';
+import SingleMsg from './SingleMsg';
+import { getUser, restore } from '../store/persistence';
+import { getScrollTop, setScrollTop, getCompHeadUID } from '../utils/tools';
 
 let _this;
 
@@ -14,8 +16,9 @@ class Home extends Component {
         const { getHomeList } = this.props.homeAction,
             { updateHeader } = this.props.headerAction,
             { updateFooter } = this.props.footerAction,
-            { history } = this.props;
+            { history, store } = this.props;
         let _rBtn = null;
+        restore(store);
         if(!getUser()) {
             _rBtn = {
                 type: 'icon',
@@ -33,21 +36,20 @@ class Home extends Component {
             rBtn: _rBtn
         });
         updateFooter({ type: 'base', action: 'home', tHistory: history });
-        getHomeList();
         this.init();
+        getHomeList(1);
     }
     componentDidMount() {
         this.eventLayer.addEventListener('click', this.eventHandler.bind(this), false);
     }
     componentDidUpdate() {
         const { scrollTop } = this.props.store.home;
-        document.body.scrollTop = scrollTop;
+        setScrollTop(scrollTop);
     }
     componentWillUnmount() {
         const { saveScrollTop } = this.props.homeAction,
             { recordOrigin } = this.props.recordAction;
-        saveScrollTop(document.body.scrollTop);
-        document.body.scrollTop = 0;
+        saveScrollTop(getScrollTop());
         recordOrigin('home');
     }
     init() {
@@ -57,7 +59,7 @@ class Home extends Component {
         e.stopPropagation();
         const { data } = this.props.store.home,
             { history } = this.props,
-            { saveParams } = this.props.homeAction,
+            { savePageParams } = this.props.homeAction,
             t = $(e.target),
             tag = t.data('tag');
         switch (tag) {
@@ -65,16 +67,16 @@ class Home extends Component {
                 _this.thumbnail(t, data);
                 break;
             case 'comment':
-                _this.comment(t, saveParams, history);
+                _this.comment(t, savePageParams, history);
                 break;
             case 'article':
-                _this.article(t, saveParams, history);
+                _this.article(t, savePageParams, history);
                 break;
             case 'link':
-                _this.link(t, saveParams, history);
+                _this.link(t, savePageParams, history);
                 break;
             case 'chead':
-                history.push('myhome');
+                history.push('myhome', getCompHeadUID(e));
                 break;
             default:
                 break;
@@ -94,31 +96,31 @@ class Home extends Component {
         }
         PhotoBrowser.init(photoArr, index);
     }
-    comment(t, saveParams, history) {
+    comment(t, savePageParams, history) {
         const ul = t.parents('.card-item'),
             rows = ul.data('index'),
             cTop = this.topCalc(ul.offset().top);
         const param = {
             rows, cTop
         };
-        saveParams(param);
+        savePageParams(param);
         history.push('/comment');
     }
-    article(t, saveParams, history) {
+    article(t, savePageParams, history) {
         const ul = t.parents('.card-item'),
             aid = t.data('aid'),
             cTop = this.topCalc(ul.offset().top);
         const param = {
             aid, cTop
         };
-        saveParams(param);
+        savePageParams(param);
         history.push('/article');
     }
-    link(t, saveParams, history) {
+    link(t, savePageParams, history) {
         const link = t.data('link'),
             param = { link };
-        saveParams(param);
-        history.push('frame');
+        savePageParams(param);
+        history.push('/frame');
     }
     topCalc(oTop) {
         let cTop = 0;
@@ -137,8 +139,11 @@ class Home extends Component {
         if (isFetching) {
             html = 'loadding';
         }
+        else if(data) {
+            html = data.dataList.map((cell, index) => <Card key={cell.id} data={cell} index={index} />);
+        }
         else {
-            html = data.map((cell, index) => <Card key={cell.id} data={cell} index={index} />);
+            html = <SingleMsg msg="网络原因，请稍后再试！" />;
         }
         return (<div ref={(c) => {
             this.eventLayer = c;

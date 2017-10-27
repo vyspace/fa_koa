@@ -30,9 +30,9 @@ class UserDao extends BaseDao {
             throw err;
         }
     }
-    async loadMyInfo(username) {
+    async loadMyInfo(userId) {
         try {
-            return await super.load('User.loadMyInfo', username);
+            return await super.load('User.loadMyInfo', userId);
         }
         catch(err) {
             throw err;

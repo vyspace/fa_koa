@@ -2,15 +2,8 @@
 
 import { getMyInfoData } from '../utils/api';
 
-export const MY_GET = 'MY_GET';
 export const MY_GET_SUCCESS = 'MY_GET_SUCCESS';
 export const MY_GET_FAILURE = 'MY_GET_FAILURE';
-
-function getMy() {
-    return {
-        type: MY_GET
-    };
-}
 
 function getMySuccess(json) {
     return {
@@ -22,13 +15,17 @@ function getMySuccess(json) {
 function getMyFailure(err) {
     return {
         type: MY_GET_FAILURE,
-        payload: err
+        payload: {
+            statusCode: err.statusCode,
+            msg: err.msg,
+            data: null
+        }
     };
 }
 
-export function getMyInfo(username) {
+export function getMyInfo(uid) {
     return (dispatch) => {
-        getMyInfoData(username, (json) => {
+        getMyInfoData(uid, (json) => {
             dispatch(getMySuccess(json));
         }, (err) => {
             dispatch(getMyFailure(err));

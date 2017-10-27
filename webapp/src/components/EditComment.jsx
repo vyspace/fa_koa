@@ -9,13 +9,13 @@ let g,
 
 class EditComment extends Component {
     componentWillMount() {
-        const { store, history } = this.props,
-            oAction = this.props.store.record.origin;
-        restore(store);
-        const { updateHeader } = this.props.headerAction,
-            { updateFooter } = this.props.footerAction,
-            { type, nickname } = this.props.store[oAction].params;
         this.init();
+        const { history, store } = this.props;
+        restore(store);
+        const oAction = store.record.origin,
+            { updateHeader } = this.props.headerAction,
+            { updateFooter } = this.props.footerAction,
+            { type, nickname } = store[oAction].pageParams;
         let tit = '评论';
         if(type === 'reply') {
             tit = '回复';

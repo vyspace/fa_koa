@@ -10,7 +10,7 @@ class Follow extends Component {
     componentWillMount() {
         const { updateHeader } = this.props.headerAction,
             { updateFooter } = this.props.footerAction,
-            { getFollowData } = this.props.followAction,
+            { getFollowList } = this.props.followAction,
             { history } = this.props;
         updateHeader({
             type: 'base',
@@ -20,7 +20,7 @@ class Follow extends Component {
             rBtn: null
         });
         updateFooter({ type: 'none' });
-        getFollowData(1);
+        getFollowList(1);
         this.init();
     }
     componentWillUnmount() {
@@ -31,20 +31,23 @@ class Follow extends Component {
         g = window.FaKoa;
     }
     render() {
-        const { follow } = this.props.store;
+        const { isFetching, data } = this.props.store.follow;
         let html;
-        if (follow.isFetching) {
+        if (isFetching) {
             html = 'loadding';
         }
-        else {
+        else if(data) {
             let _key = '';
-            const lis = follow.data.map((cell, index) => {
+            const lis = data.map((cell, index) => {
                 _key = `fl${index}`;
                 return (<li key={_key} >
                     <CompHead profile={cell.profile} nickname={cell.nickname} subContent="新锐设计师" />
                 </li>);
             });
             html = <ul>{lis}</ul>;
+        }
+        else {
+            html = '网络原因，请稍后再试！';
         }
         return (
             <div

@@ -35,9 +35,18 @@ class CardAction extends Component {
                 break;
         }
     }
+    dieTausendstel(num) {
+        const str = num.toString();
+        if(num.length <= 4) {
+            return str;
+        }
+        else {
+            return str.replace(/^(\d+)(\d)(\d{3})$/, '$1.$2万');
+        }
+    }
     render() {
         const { isLike, numOfLikes, numOfComments, numOfForwards, commentOps } = this.props;
-        let comment = [<i className="icon icon-comment" key="ca0" data-tag="comment" />, <span key="ca1" className="mar-l" data-tag="comment">{numOfComments}</span>],
+        let comment = [<i className="icon icon-comment" key="ca0" data-tag="comment" />, <span key="ca1" className="mar-l" data-tag="comment">{this.dieTausendstel(numOfComments)}</span>],
             likeClass = 'end';
         if(commentOps !== '') {
             comment = [<i className="icon icon-edit" key="ca0" data-tag="comment" />, <span key="ca1" className="mar-l" data-tag="comment">{commentOps}</span>];
@@ -54,14 +63,14 @@ class CardAction extends Component {
             >
                 <div data-tag="share">
                     <i className="icon icon-share" data-tag="share" />
-                    <span className="mar-l" data-tag="share">{numOfForwards}</span>
+                    <span className="mar-l" data-tag="share">{this.dieTausendstel(numOfForwards)}</span>
                 </div>
                 <div className="center" data-tag="comment">
                     {comment}
                 </div>
                 <div className={likeClass} data-tag="like">
                     <i className="icon icon-like" data-tag="like" />
-                    <span className="mar-l" data-tag="like">{numOfLikes}</span>
+                    <span className="mar-l" data-tag="like">{this.dieTausendstel(numOfLikes)}</span>
                 </div>
             </div>
         );
@@ -73,7 +82,11 @@ CardAction.propTypes = {
     numOfComments: PropTypes.number.isRequired,
     numOfForwards: PropTypes.number.isRequired,
     commentOps: PropTypes.string.isRequired,
-    isLike: PropTypes.bool.isRequired
+    isLike: PropTypes.number
+};
+
+CardAction.defaultProps = {
+    isLike: 0
 };
 
 export default CardAction;

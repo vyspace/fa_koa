@@ -28,7 +28,7 @@ class Frame extends Component {
         g = window.FaKoa;
     }
     render() {
-        const { link } = this.props.store.home.params;
+        const { link } = this.props.store.home.pageParams;
         return (
             <iframe className="frame" title="link" style={{ minHeight: g.bodyMinHeight }} src={link} />
         );

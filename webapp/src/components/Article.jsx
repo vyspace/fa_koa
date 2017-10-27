@@ -17,7 +17,7 @@ class Article extends Component {
         const { store } = this.props;
         restore(store);
         const oa = store.record.origin,
-            { getArtData, getPreviewData } = this.props.articleAction,
+            { getArticle, getPreviewData } = this.props.articleAction,
             { updateHeader } = this.props.headerAction,
             { updateFooter } = this.props.footerAction,
             { history } = this.props;
@@ -33,8 +33,8 @@ class Article extends Component {
             getPreviewData();
         }
         else {
-            const { aid } = this.props.store[oa].params;
-            getArtData(aid);
+            const { aid } = this.props.store[oa].pageParams;
+            getArticle(aid);
         }
         this.init();
     }

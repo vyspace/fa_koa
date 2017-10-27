@@ -7,11 +7,6 @@ export const ARTICLE_GET_SUCCESS = 'ARTICLE_GET_SUCCESS';
 export const ARTICLE_GET_FAILURE = 'ARTICLE_GET_FAILURE';
 export const PREVIEW_GET = 'PREVIEW_GET';
 
-export function getArticle() {
-    return {
-        type: ARTICLE_GET
-    };
-}
 
 function getArticleSuccess(json) {
     return {
@@ -23,13 +18,16 @@ function getArticleSuccess(json) {
 function getArticleFailure(err) {
     return {
         type: ARTICLE_GET_FAILURE,
-        payload: err
+        payload: {
+            statusCode: err.statusCode,
+            msg: err.msg,
+            data: null
+        }
     };
 }
 
-export function getArtData(aid) {
+export function getArticle(aid) {
     return (dispatch) => {
-        dispatch(getArticle());
         getArticleData(aid, (json) => {
             dispatch(getArticleSuccess(json));
         }, (err) => {

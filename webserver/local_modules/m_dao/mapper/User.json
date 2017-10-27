@@ -5,7 +5,7 @@
   },
   "loginByName": {
     "parameterType": "string",
-    "sql": "select username,nickname,password from user where username=#{username}"
+    "sql": "select id,username,nickname,password from user where username=#{username}"
   },
   "addUser": {
     "parameterType": "object",
@@ -16,25 +16,7 @@
     "sql": "update user set nickname=#{nickname},gender=#{gender},signature=#{signature} where username=#{username}"
   },
   "loadMyInfo": {
-    "parameterType": "string",
-    "sql": "select profile,nickname,level,signature from user where username=#{username}"
-  },
-
-  "update": {
-    "parameterType": "object",
-    "sql": "update user set username=#{username}, password=#{password} where id=#{id}"
-  },
-  "delete": {
     "parameterType": "number",
-    "sql": "delete from user where id=#{id}"
-  },
-  "page": {
-    "parameterType": "object",
-    "dynamic": true,
-    "sql": "select * from user <%if({{username}}) return 'where username like #{username}'%> <%if({{sort}}) return 'order by ${sort} ${order}'%> <%if({{pageSize}}) return 'limit #{pageOffset}, #{pageSize}'%>"
-  },
-  "listCount": {
-    "parameterType": "",
-    "sql": "select count(*) from user"
+    "sql": "select profile,nickname,level,signature from user where id=#{id}"
   }
 }

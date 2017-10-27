@@ -1,18 +1,11 @@
 'use strict';
 
-import { getCommentList } from '../utils/api';
+import { getCommentData } from '../utils/api';
 
-export const COMMENT_GET = 'COMMENT_GET';
 export const COMMENT_GET_SUCCESS = 'COMMENT_GET_SUCCESS';
 export const COMMENT_GET_FAILURE = 'COMMENT_GET_FAILURE';
 export const COMMENT_SCROLL_TOP = 'COMMENT_SCROLL_TOP';
-export const COMMENT_PARAMS = 'COMMENT_PARAMS';
-
-function getComment() {
-    return {
-        type: COMMENT_GET
-    };
-}
+export const COMMENT_PAGE_PARAMS = 'COMMENT_PAGE_PARAMS';
 
 function getCommentSuccess(json) {
     return {
@@ -24,7 +17,11 @@ function getCommentSuccess(json) {
 function getCommentFailure(err) {
     return {
         type: COMMENT_GET_FAILURE,
-        payload: err
+        payload: {
+            statusCode: err.statusCode,
+            msg: err.msg,
+            data: null
+        }
     };
 }
 
@@ -35,17 +32,16 @@ export function saveScrollTop(payload) {
     };
 }
 
-export function saveParams(payload) {
+export function savePageParams(payload) {
     return {
-        type: COMMENT_PARAMS,
+        type: COMMENT_PAGE_PARAMS,
         payload
     };
 }
 
-export function getCommentData() {
+export function getCommentList() {
     return (dispatch) => {
-        dispatch(getComment());
-        getCommentList((json) => {
+        getCommentData((json) => {
             dispatch(getCommentSuccess(json));
         }, (err) => {
             dispatch(getCommentFailure(err));

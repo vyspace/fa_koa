@@ -5,10 +5,9 @@ import { render } from 'react-dom';
 import createHistory from 'history/createBrowserHistory';
 import FastClick from 'fastclick';
 import configureStore from './store/configureStore';
-import { saveSession } from './store/persistence';
 import Root from './containers/Root';
 import { isMobileBrowser } from './utils/tools';
-import { testLogin } from './store/persistence';
+import { saveSession, testLogin } from './store/persistence';
 
 const browserHistory = createHistory(),
     store = configureStore(),

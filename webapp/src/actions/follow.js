@@ -1,16 +1,9 @@
 'use strict';
 
-import { getFollowList } from '../utils/api';
+import { getFollowData } from '../utils/api';
 
-export const FOLLOW_GET = 'FOLLOW_GET';
 export const FOLLOW_GET_SUCCESS = 'FOLLOW_GET_SUCCESS';
 export const FOLLOW_GET_FAILURE = 'FOLLOW_GET_FAILURE';
-
-function getFollow() {
-    return {
-        type: FOLLOW_GET
-    };
-}
 
 function getFollowSuccess(json) {
     return {
@@ -22,14 +15,17 @@ function getFollowSuccess(json) {
 function getFollowFailure(err) {
     return {
         type: FOLLOW_GET_FAILURE,
-        payload: err
+        payload: {
+            statusCode: err.statusCode,
+            msg: err.msg,
+            data: null
+        }
     };
 }
 
-export function getFollowData() {
+export function getFollowList(uid) {
     return (dispatch) => {
-        dispatch(getFollow());
-        getFollowList((json) => {
+        getFollowData(uid, (json) => {
             dispatch(getFollowSuccess(json));
         }, (err) => {
             dispatch(getFollowFailure(err));

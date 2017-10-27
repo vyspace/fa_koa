@@ -3,13 +3,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Card from './Card';
+import { levelHandler } from '../utils/tools';
 
-let _this;
+let g,
+    _this;
 
 class MyHome extends Component {
     componentWillMount() {
-        const { history } = this.props;
-        const { updateHeader } = this.props.headerAction,
+        const { history, location } = this.props,
+            { updateHeader } = this.props.headerAction,
             { updateFooter } = this.props.footerAction,
             { getMyHome } = this.props.myHomeAction;
         updateHeader({
@@ -21,12 +23,13 @@ class MyHome extends Component {
         });
         updateFooter({ type: 'none' });
         this.init();
-        getMyHome();
+        getMyHome(location.state);
     }
     componentDidMount() {
         this.eventLayer.addEventListener('click', this.eventHandler, true);
     }
     init() {
+        g = window.FaKoa;
         _this = this;
     }
     eventHandler(e) {
@@ -35,14 +38,14 @@ class MyHome extends Component {
             t = $(e.target),
             tag = t.data('tag');
         switch(tag) {
-        case 'basicInfo':
-            history.push('basicinfo');
-            break;
-        case 'photoAlbum':
-            history.push('photoalbum');
-            break;
-        default:
-            break;
+            case 'basicInfo':
+                history.push('basicinfo');
+                break;
+            case 'photoAlbum':
+                history.push('photoalbum');
+                break;
+            default:
+                break;
         }
     }
     render() {
@@ -51,8 +54,9 @@ class MyHome extends Component {
         if (isFetching) {
             html = 'loadding';
         }
-        else {
-            const blogList = data.postList.map((cell, index) => <Card key={cell.id} data={cell} index={index} />);
+        else if(data) {
+            const blogList = data.postList.map((cell, index) => <Card key={cell.id} data={cell} index={index} />),
+                levelClass = levelHandler(data.info.level);
             html = (
                 <div>
                     <div className="my-home my-mar">
@@ -64,7 +68,7 @@ class MyHome extends Component {
                                 <div className="first" data-tag="myInfo">
                                     <span data-tag="myInfo">{data.info.nickname}</span>
                                     <div className="icon icon-male gender" />
-                                    <div className="icon icon-level level">{data.info.level}</div>
+                                    <div className={levelClass}>{data.info.level}</div>
                                 </div>
                                 <div className="second" data-tag="myInfo">{data.info.sign}</div>
                                 <input type="button" className="follow" value="关注" />
@@ -97,6 +101,9 @@ class MyHome extends Component {
                 </div>
             );
         }
+        else {
+            html = '网络原因，请稍后再试！';
+        }
         return (
             <div ref={(c) => {
                 this.eventLayer = c;
@@ -108,6 +115,7 @@ class MyHome extends Component {
 
 MyHome.propTypes = {
     history: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
     store: PropTypes.object.isRequired,
     headerAction: PropTypes.object.isRequired,
     footerAction: PropTypes.object.isRequired,

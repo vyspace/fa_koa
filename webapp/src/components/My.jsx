@@ -2,9 +2,10 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { pageRedirect } from '../utils/tools';
 import PhotoBrowser from './PhotoBrowser';
-import { delUser } from '../store/persistence';
+import SingleMsg from './SingleMsg';
+import { pageRedirect, levelHandler } from '../utils/tools';
+import { removeUser } from '../store/persistence';
 
 let g,
     _this;
@@ -27,7 +28,7 @@ class My extends Component {
         });
         updateFooter({ type: 'base', action: 'my', tHistory: history });
         this.init();
-        getMyInfo(g.username);
+        getMyInfo(g.uid);
     }
     componentDidMount() {
         this.eventLayer.addEventListener('click', this.eventHandler, true);
@@ -61,7 +62,7 @@ class My extends Component {
                 history.push('userinfo');
                 break;
             case 'myHome':
-                history.push('myhome');
+                history.push('myhome', g.uid);
                 break;
             case 'myPhotoAlbum':
                 history.push('photoalbum');
@@ -79,7 +80,7 @@ class My extends Component {
                 history.push('about');
                 break;
             case 'myLogout':
-                delUser();
+                removeUser();
                 history.push('/');
                 break;
             default:
@@ -92,11 +93,12 @@ class My extends Component {
         if (isFetching) {
             html = 'loadding';
         }
-        else {
+        else if(data) {
             let imgUrl = data.profile;
             if(!data.profile) {
                 imgUrl = './img/avator.jpg';
             }
+            const levelClass = levelHandler(data.level);
             html = (<div>
                 <div className="my-head my-mar">
                     <div className="left">
@@ -105,7 +107,7 @@ class My extends Component {
                     <div className="right" data-tag="myInfo">
                         <div className="first" data-tag="myInfo">
                             <span data-tag="myInfo">{data.nickname}</span>
-                            <div className="icon icon-level level">{data.level}</div>
+                            <div className={levelClass}>{data.level}</div>
                         </div>
                         <div className="second" data-tag="myInfo">{data.signature}</div>
                     </div>
@@ -134,6 +136,9 @@ class My extends Component {
                 </ul>
                 <div className="my-btn" data-tag="myLogout">退出</div>
             </div>);
+        }
+        else {
+            html = <SingleMsg msg="网络原因，请稍后再试！" />;
         }
         return (
             <div

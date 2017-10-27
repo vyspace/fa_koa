@@ -51,10 +51,10 @@ class UserService {
         }
         return result;
     }
-    async myInfo(username) {
+    async myInfo(userId) {
         let result = null;
         try {
-            result = this[_userDao].loadMyInfo(username);
+            result = this[_userDao].loadMyInfo(userId);
         }
         catch(err) {
             console.error(err);

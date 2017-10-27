@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import $ from 'zepto';
 import Tab from './Tab';
+import { getScrollTop } from '../utils/tools';
 
 const range = 10;
 let _this,
@@ -75,29 +76,31 @@ class Header extends Component {
         const t = $(e.target),
             tag = t.data('tag');
         switch (tag) {
-        case 'back':
-            _this.backHandler();
-            break;
-        case 'rbtn':
-            _this.rBtnHandler();
-            break;
-        case 'album':
-        case 'profile':
-            _this.tabHandler(t, tag);
-            break;
-        case 'toast':
-            _this.closeToast();
-            break;
-        default:
-            break;
+            case 'back':
+                _this.backHandler();
+                break;
+            case 'rbtn':
+                _this.rBtnHandler();
+                break;
+            case 'album':
+            case 'profile':
+                _this.tabHandler(t, tag);
+                break;
+            case 'toast':
+                _this.closeToast();
+                break;
+            default:
+                break;
         }
     }
     backHandler() {
-        const { backHandler, tHistory } = this.props.store.header;
-        if(backHandler) {
-            backHandler();
+        const { beforeBack, tHistory } = this.props.store.header;
+        if(beforeBack) {
+            beforeBack();
         }
-        tHistory.goBack();
+        else {
+            tHistory.goBack();
+        }
     }
     rBtnHandler() {
         const { rBtn } = this.props.store.header;
@@ -111,24 +114,24 @@ class Header extends Component {
             $tabLis.removeClass('active');
             t.addClass('active');
             switch (tag) {
-            case 'album':
-                if($paContainer) {
-                    $paContainer.trigger('pa1');
-                }
-                break;
-            case 'profile':
-                if($paContainer) {
-                    $paContainer.trigger('pa2');
-                }
-                break;
-            default:
-                break;
+                case 'album':
+                    if($paContainer) {
+                        $paContainer.trigger('pa1');
+                    }
+                    break;
+                case 'profile':
+                    if($paContainer) {
+                        $paContainer.trigger('pa2');
+                    }
+                    break;
+                default:
+                    break;
             }
         }
     }
     scrollHandler(e) {
         e.stopPropagation();
-        if(document.body.scrollTop >= range) {
+        if(getScrollTop() >= range) {
             if(scrollFlag) {
                 _this.eventLayer.classList.add('bdb');
                 scrollFlag = false;
@@ -139,21 +142,13 @@ class Header extends Component {
             scrollFlag = true;
         }
     }
-    judgeBack(history, origin) {
-        if(history && history.length > 0 && origin) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
     render() {
-        const { header, record } = this.props.store;
+        const { header } = this.props.store;
         let backBtn = <li className="item" />,
             optBtn = <li className="item" />,
             middle,
             tabArr;
-        if(header.isBack && _this.judgeBack(header.tHistory, record.origin)) {
+        if(header.isBack) {
             backBtn = (<li className="item item-left" data-tag="back">
                         <i className="icon-back" data-tag="back" />
                     </li>);
@@ -170,34 +165,34 @@ class Header extends Component {
             optBtn = (<li className="item item-right" data-tag="rbtn">{cont}</li>);
         }
         switch (header.type) {
-        case 'home':
-            middle = <li className="middle"><h1 className="shimmer">{header.title}</h1></li>;
-            break;
-        case 'photoalbum':
-            tabArr = [{
-                tag: 'album',
-                value: '相册'
-            }, {
-                tag: 'profile',
-                value: '头像'
-            }];
-            middle = (<li className="middle">
-                <Tab data={tabArr} />
-            </li>);
-            break;
-        case 'search':
-            middle = (<li className="f-item middle search">
-                <div className="search-box">
-                    <div className="icon-box" />
-                    <div className="input-box"><input type="text" placeholder="请输入..." /></div>
-                    <div className="fill" />
-                </div>
-            </li>);
-            break;
-        case 'base':
-        default:
-            middle = <li className="middle">{header.title}</li>;
-            break;
+            case 'home':
+                middle = <li className="middle"><h1 className="shimmer">{header.title}</h1></li>;
+                break;
+            case 'photoalbum':
+                tabArr = [{
+                    tag: 'album',
+                    value: '相册'
+                }, {
+                    tag: 'profile',
+                    value: '头像'
+                }];
+                middle = (<li className="middle">
+                    <Tab data={tabArr} />
+                </li>);
+                break;
+            case 'search':
+                middle = (<li className="f-item middle search">
+                    <div className="search-box">
+                        <div className="icon-box" />
+                        <div className="input-box"><input type="text" placeholder="请输入..." /></div>
+                        <div className="fill" />
+                    </div>
+                </li>);
+                break;
+            case 'base':
+            default:
+                middle = <li className="middle">{header.title}</li>;
+                break;
         }
         return (
             <div className="header-view">

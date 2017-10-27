@@ -8,6 +8,7 @@
   "mappers": {
     "UserAdmin": "./mapper/UserAdmin.json",
     "User": "./mapper/User.json",
-    "UserInfo": "./mapper/UserInfo.json"
+    "UserInfo": "./mapper/UserInfo.json",
+    "Blog": "./mapper/Blog.json"
   }
 }

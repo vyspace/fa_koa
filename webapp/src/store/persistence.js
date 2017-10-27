@@ -1,14 +1,15 @@
 'use strict';
 
 const FA_PERSIST = 'FA_PERSIST';
-const FA_IS_PERSIST = 'FA_IS_PERSIST';
 const FA_USER = 'FA_USER';
-const FA_PAGE_PARAM = 'FA_PAGE_PARAM';
+
+/**
+  * sessionStorage 刷新时存在，关闭页面时消失
+  */
 
 export function saveSession(obj) {
     const str = JSON.stringify(obj);
     sessionStorage.setItem(FA_PERSIST, str);
-    sessionStorage.setItem(FA_IS_PERSIST, 'true');
 }
 
 function getSession() {
@@ -22,7 +23,7 @@ function getSession() {
 }
 
 function isRefreshPage() {
-    return sessionStorage.getItem(FA_IS_PERSIST) === 'true';
+    return sessionStorage.getItem(FA_PERSIST) !== '';
 }
 
 export function restore(store) {
@@ -38,11 +39,11 @@ export function getUser() {
 export function testLogin() {
     const user = getUser();
     if(user) {
-        window.FaKoa.username = user.username;
+        window.FaKoa.uid = user.id;
         return true;
     }
     else {
-        window.FaKoa.username = '';
+        window.FaKoa.uid = -1;
         return false;
     }
 }
@@ -55,25 +56,7 @@ export function saveUser(user) {
     }
 }
 
-export function delUser() {
+export function removeUser() {
     localStorage.removeItem(FA_USER);
     window.FaKoa.isAuthenticated = testLogin();
-}
-
-export function savePageParam(targetAction, json) {
-    const obj = {};
-    obj[targetAction] = json;
-    const str = JSON.stringify(obj);
-    sessionStorage.setItem(FA_PAGE_PARAM, str);
-}
-
-export function getPageParam(action) {
-    const str = sessionStorage.getItem(FA_PAGE_PARAM);
-    if(str) {
-        const json = JSON.parse(str);
-        return json[action];
-    }
-    else {
-        return null;
-    }
 }

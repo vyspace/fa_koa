@@ -109,9 +109,14 @@ a {
   text-align: right;
   margin-left: 5px;
   line-height: 1;
-  padding: .3rem .16rem 0 0;
   font-size: .5rem;
   font-weight: bold; }
+
+.level-1 {
+  padding: .3rem 0.16rem 0 0; }
+
+.level-2 {
+  padding: .3rem 0 0 0; }
 
 .mar-b {
   margin-bottom: 0.4rem; }
@@ -196,6 +201,15 @@ a {
 .c-ref {
   color: #4579FB;
   font-weight: bold; }
+
+.single-msg {
+  padding-top: 1rem;
+  text-align: center;
+  color: #999; }
+  .single-msg .link {
+    padding-left: 10px;
+    color: #4579FB;
+    text-decoration: underline; }
 
 .icon {
   display: block;
@@ -1349,8 +1363,7 @@ a {
     line-height: 1; }
 
 .photo-container {
-  background-color: #fff;
-  padding: 0 .2rem; }
+  background-color: #fff; }
   .photo-container .photo-album .time {
     color: #999;
     padding: .4rem 0; }

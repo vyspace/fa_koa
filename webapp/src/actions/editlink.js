@@ -2,15 +2,8 @@
 
 import { getShortUrl } from '../utils/api';
 
-export const EDIT_LINK__GET = 'EDIT_LINK__GET';
 export const EDIT_LINK_SHORT_SUCCESS = 'EDIT_LINK_SHORT_SUCCESS';
 export const EDIT_LINK_SHORT_FAILURE = 'EDIT_LINK_SHORT_FAILURE';
-
-export function getArticle() {
-    return {
-        type: EDIT_LINK__GET
-    };
-}
 
 function getShortSuccess(json) {
     return {
@@ -22,7 +15,11 @@ function getShortSuccess(json) {
 function getShortFailure(err) {
     return {
         type: EDIT_LINK_SHORT_FAILURE,
-        payload: err
+        payload: {
+            statusCode: err.statusCode,
+            msg: err.msg,
+            data: null
+        }
     };
 }
 

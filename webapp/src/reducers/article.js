@@ -1,17 +1,12 @@
 'use strict';
 
-import { ARTICLE_GET, ARTICLE_GET_SUCCESS, ARTICLE_GET_FAILURE, PREVIEW_GET } from '../actions/article';
+import { ARTICLE_GET_SUCCESS, ARTICLE_GET_FAILURE, PREVIEW_GET } from '../actions/article';
 
 export default function article(state = { isFetching: true }, action) {
     switch(action.type) {
         case ARTICLE_GET_SUCCESS:
-            return Object.assign({}, state, { isFetching: false }, action.payload);
         case ARTICLE_GET_FAILURE:
-            state.isFetching = false;
-            return state;
-        case ARTICLE_GET:
-            state.isFetching = true;
-            return state;
+            return Object.assign({}, state, { isFetching: false }, action.payload);
         case PREVIEW_GET:
             state.isFetching = false;
             return state;

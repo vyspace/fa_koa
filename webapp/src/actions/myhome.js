@@ -2,15 +2,8 @@
 
 import { getMyHomeData } from '../utils/api';
 
-export const MY_HOME_GET = 'MY_HOME_GET';
 export const MY_HOME_GET_SUCCESS = 'MY_HOME_GET_SUCCESS';
 export const MY_HOME_GET_FAILURE = 'MY_HOME_GET_FAILURE';
-
-function getMyHome() {
-    return {
-        type: MY_HOME_GET
-    };
-}
 
 function getMyHomeSuccess(json) {
     return {
@@ -22,13 +15,17 @@ function getMyHomeSuccess(json) {
 function getMyHomeFailure(err) {
     return {
         type: MY_HOME_GET_FAILURE,
-        payload: err
+        payload: {
+            statusCode: err.statusCode,
+            msg: err.msg,
+            data: null
+        }
     };
 }
 
-export function getMyHome() {
+export function getMyHome(userId) {
     return (dispatch) => {
-        getMyHomeData((json) => {
+        getMyHomeData(userId, (json) => {
             dispatch(getMyHomeSuccess(json));
         }, (err) => {
             dispatch(getMyHomeFailure(err));

@@ -22,6 +22,7 @@ class Login extends Component {
             type: 'base',
             title: '登陆',
             isBack: true,
+            beforeBack: null,
             tHistory: history,
             rBtn: {
                 type: 'txt',
@@ -114,7 +115,7 @@ class Login extends Component {
                     $toast.trigger('show', json.msg);
                 }
                 else if(!json.data.nickname) {
-                    history.push('regfinish');
+                    history.push('regfinish', username);
                 }
                 else {
                     saveUser(json.data);

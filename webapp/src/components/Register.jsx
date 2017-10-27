@@ -3,7 +3,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isMail, isPwd } from '../utils/tools';
-import { savePageParam } from '../store/persistence';
 
 let g,
     _this,
@@ -85,7 +84,7 @@ class Register extends Component {
     }
     submitHandler() {
         const { history } = _this.props,
-            { register } = _this.props.registerAction,
+            { postRegister } = _this.props.registerAction,
             username = $.trim($username.val()),
             password = $.trim($password.val());
         _this.clearError();
@@ -98,13 +97,12 @@ class Register extends Component {
             $password.addClass('err-t');
         }
         else {
-            register({ username, password }, (json) => {
+            postRegister({ username, password }, (json) => {
                 if(json.code !== 200) {
                     $toast.trigger('show', json.msg);
                 }
                 else {
-                    savePageParam('regfinish', { username });
-                    history.push('regfinish');
+                    history.push('/regfinish', username);
                 }
             }, (err) => {
                 console.log(err);

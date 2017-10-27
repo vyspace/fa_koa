@@ -1,7 +1,7 @@
 'use strict';
 
 const Router = require('koa-router'),
-    querystring = require('querystring'),
+    queryString = require('querystring'),
     UserService = require('m_user').UserService,
     JDW = require('../util/JsonDataWrap'),
     router = new Router();
@@ -10,10 +10,9 @@ router.get('/', async (ctx) => {
     let data = null;
     const query = ctx.request.querystring;
     if(query) {
-        const json = querystring.parse(decodeURIComponent(query)),
+        const json = queryString.parse(query),
             service = new UserService(),
-            user = json.username.trim(),
-            result = await service.myInfo(user);
+            result = await service.myInfo(json.uid);
         if(!result) {
             data = JDW.failure('获取失败，请稍后再试！');
         }

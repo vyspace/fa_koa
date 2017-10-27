@@ -1,18 +1,11 @@
 'use strict';
 
-import { getReplyList } from '../utils/api';
+import { getReplyData } from '../utils/api';
 
-export const REPLY_GET = 'REPLY_GET';
 export const REPLY_GET_SUCCESS = 'REPLY_GET_SUCCESS';
 export const REPLY_GET_FAILURE = 'REPLY_GET_FAILURE';
 export const REPLY_SCROLL_TOP = 'COMMENT_SCROLL_TOP';
-export const REPLY_PARAMS = 'REPLY_PARAMS';
-
-export function getReply() {
-    return {
-        type: REPLY_GET
-    };
-}
+export const REPLY_PAGE_PARAMS = 'REPLY_PAGE_PARAMS';
 
 function getReplySuccess(json) {
     return {
@@ -24,7 +17,11 @@ function getReplySuccess(json) {
 function getReplyFailure(err) {
     return {
         type: REPLY_GET_FAILURE,
-        payload: err
+        payload: {
+            statusCode: err.statusCode,
+            msg: err.msg,
+            data: null
+        }
     };
 }
 
@@ -35,17 +32,16 @@ export function saveScrollTop(payload) {
     };
 }
 
-export function saveParams(payload) {
+export function savePageParams(payload) {
     return {
-        type: REPLY_PARAMS,
+        type: REPLY_PAGE_PARAMS,
         payload
     };
 }
 
-export function getReplyData(uid) {
+export function getReplyList(uid) {
     return (dispatch) => {
-        dispatch(getReply());
-        getReplyList(uid, (json) => {
+        getReplyData(uid, (json) => {
             dispatch(getReplySuccess(json));
         }, (err) => {
             dispatch(getReplyFailure(err));

@@ -139,9 +139,14 @@ a {
   text-align: right;
   margin-left: 5px;
   line-height: 1;
-  padding: .3rem .16rem 0 0;
   font-size: .5rem;
   font-weight: bold;
+}
+.level-1 {
+  padding: .3rem 0.16rem 0 0;
+}
+.level-2 {
+  padding: .3rem 0 0 0;
 }
 
 .mar-b {
@@ -245,6 +250,17 @@ a {
 .c-ref {
   color: $refColor;
   font-weight: bold;
+}
+
+.single-msg {
+  padding-top: 1rem;
+  text-align: center;
+  color: $tipColor;
+  .link {
+    padding-left: 10px;
+    color: $refColor;
+    text-decoration: underline;
+  }
 }
 
 .icon {

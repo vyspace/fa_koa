@@ -2,10 +2,11 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getPageParam, saveUser } from '../store/persistence';
+import { saveUser } from '../store/persistence';
 
 let g,
     _this,
+    username,
     $submit;
 
 class FindPassword extends Component {
@@ -17,7 +18,11 @@ class FindPassword extends Component {
             type: 'base',
             title: '信息填写',
             isBack: true,
-            tHistory: history,
+            beforeBack: () => {
+                if(confirm('你确定要退出？')) {
+                    history.goBack();
+                }
+            },
             rBtn: null
         });
         updateFooter({ type: 'none' });
@@ -36,6 +41,7 @@ class FindPassword extends Component {
     init() {
         g = window.FaKoa;
         _this = this;
+        username = this.props.location.state;
     }
     initObj() {
         $submit = $(_this.submit);
@@ -75,13 +81,7 @@ class FindPassword extends Component {
             { regFinish } = _this.props.regFinishAction,
             nickname = $.trim(_this.nickname.value),
             gender = _this.gender.value,
-            signature = _this.signature.value,
-            paramObj = getPageParam('regfinish');
-        let username = '';
-
-        if(paramObj) {
-            username = paramObj.username;
-        }
+            signature = _this.signature.value;
         regFinish({ username, nickname, gender, signature }, (json) => {
             if(json.code !== 200) {
                 $toast.trigger('show', json.msg);
@@ -168,6 +168,7 @@ FindPassword.propTypes = {
     headerAction: PropTypes.object.isRequired,
     footerAction: PropTypes.object.isRequired,
     recordAction: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
     regFinishAction: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };

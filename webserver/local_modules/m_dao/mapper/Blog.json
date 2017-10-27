@@ -1,20 +1,11 @@
 {
-  "originalPager": {
+  "pager": {
     "parameterType": "object",
     "dynamic": true,
-    "sql": "select * from original_blog <%if({{sort}}) return 'order by ${sort} ${order}'%> <%if({{pageSize}}) return 'limit #{pageOffset}, #{pageSize}'%>"
+    "sql": "select t_blog.id,t_blog.type,t_blog.user_id as userId,user.profile,user.nickname,t_blog.create_time as createTime,t_blog.article_id as articleId,t_blog.link,t_blog.photos,t_blog.num_of_likes as numOfLikes,t_blog.num_of_comments as numOfComments,t_blog.num_of_forwards as numOfForwards,t_blog.text from (select * from <%if({{rows}}) return '(select * from blog limit 0,{{rows}}) as temp'; else return 'blog'%> <%if({{pageSize}}) return 'limit #{pageOffset},#{pageSize}'%>) as t_blog left join user on t_blog.user_id=user.id <%if({{sort}}) return 'order by ${sort} ${order}'%>;"
   },
-  "originalCount": {
+  "count": {
     "parameterType": "",
-    "sql": "select count(*) from original_blog"
-  },
-  "spiderPager": {
-    "parameterType": "object",
-    "dynamic": true,
-    "sql": "select * from spider_blog <%if({{sort}}) return 'order by ${sort} ${order}'%> <%if({{pageSize}}) return 'limit #{pageOffset}, #{pageSize}'%>"
-  },
-  "spiderCount": {
-    "parameterType": "",
-    "sql": "select count(*) from spider_blog"
+    "sql": "select count(*) as count from blog"
   }
 }

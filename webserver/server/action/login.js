@@ -27,7 +27,7 @@ router.post('/', async (ctx) => {
             else {
                 const timestmp = new Date().getTime(),
                     _token = md5(user + timestmp);
-                data = JDW.success({ username: user, nickname: result.nickname, token: _token });
+                data = JDW.success({ id: result.id, username: user, nickname: result.nickname, token: _token });
             }
         }
     }

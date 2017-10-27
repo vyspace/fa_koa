@@ -55,10 +55,10 @@ class EditLink extends Component {
                     },
                     dataType: 'jsonp',
                     jsonpCallback: 'callback',
-                    success(data, xx) {
+                    success(data) {
                         alert(data.name);
                     },
-                    error(data, xx) {
+                    error() {
                         alert('fail');
                     }
                 });

@@ -9,10 +9,14 @@ router.post('/', async (ctx) => {
     const json = JSON.parse(ctx.request.body);
     if(json) {
         const service = new UserService(),
-            user = json.username.trim(),
-            nick = json.nickname.trim(),
-            gender = json.gender.trim(),
-            result = await service.regFinish(user, nick, gender, json.signature);
+            { username, nickname, gender, signature } = json;
+        let user = '',
+            nick = '',
+            _gender = '';
+        user = username && username.trim();
+        nick = nickname && nickname.trim();
+        _gender = gender && gender.trim();
+        const result = await service.regFinish(user, nick, _gender, signature);
         if(!result) {
             data = JDW.failure('提交失败，请稍后再试！');
         }

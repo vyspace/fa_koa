@@ -4,14 +4,14 @@ import request from './request';
 
 const URL_ROOT = '' || `${location.protocol}//${location.host}`;
 
-export const getHomeData = (resolve, reject) => {
+export const getHomeData = (idx, resolve, reject) => {
     const params = {
-        url: `${URL_ROOT}/testdata/home`
+        url: `http://localhost:3000/openapi/home?idx=${idx}&rows=3`
     };
     request(params, resolve, reject);
 };
 
-export const getCommentList = (resolve, reject) => {
+export const getCommentData = (resolve, reject) => {
     const params = {
         url: `${URL_ROOT}/testdata/comment`
     };
@@ -25,7 +25,7 @@ export const getArticleData = (aid, resolve, reject) => {
     request(params, resolve, reject);
 };
 
-export const getReplyList = (uid, resolve, reject) => {
+export const getReplyData = (uid, resolve, reject) => {
     const params = {
         url: `${URL_ROOT}/testdata/replylist`
     };
@@ -46,7 +46,7 @@ export const getProfileAlbumData = (uid, resolve, reject) => {
     request(params, resolve, reject);
 };
 
-export const getFollowList = (uid, resolve, reject) => {
+export const getFollowData = (uid, resolve, reject) => {
     const params = {
         url: `${URL_ROOT}/testdata/follow`
     };
@@ -94,11 +94,10 @@ export const postRegFinishData = (obj, resolve, reject) => {
     request(params, resolve, reject);
 };
 
-export const getMyInfoData = (username, resolve, reject) => {
-    const user = encodeURIComponent(username),
-        params = {
-            url: `http://localhost:3000/openapi/myinfo?username=${user}`
-        };
+export const getMyInfoData = (uid, resolve, reject) => {
+    const params = {
+        url: `http://localhost:3000/openapi/myinfo?uid=${uid}`
+    };
     request(params, resolve, reject);
 };
 

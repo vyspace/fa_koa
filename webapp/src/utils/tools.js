@@ -7,6 +7,15 @@ export function isMobileBrowser() {
     return /(iphone|ios|android|mini|mobile|mobi|Nokia|Symbian|iPod|iPad|Windows\s+Phone|MQQBrowser|wp7|wp8|UCBrowser7|UCWEB|360\s+Aphone\s+Browser|AppleWebKit)/i.test(ua);
 }
 
+export function getScrollTop() {
+    return document.documentElement.scrollTop || document.body.scrollTop;
+}
+
+export function setScrollTop(val) {
+    document.documentElement.scrollTop = val;
+    document.body.scrollTop = val;
+}
+
 export function pageRedirect(record, history) {
     let flag = false;
     if(!record) {
@@ -96,5 +105,26 @@ export function isMail(str) {
 
 export function isPwd(str) {
     return /^[a-zA-z0-9]{6,20}$/.test(str);
+}
+
+export function getCompHeadUID(e) {
+    const t = $(e.target);
+    if(t.hasClass('comp-head')) {
+        return t.data('uid');
+    }
+    else {
+        const cHead = t.parents('.comp-head');
+        return cHead.data('uid');
+    }
+}
+
+export function levelHandler(level) {
+    const str = level.toString();
+    if(str.length < 2) {
+        return 'icon icon-level level level-1';
+    }
+    else {
+        return 'icon icon-level level level-2';
+    }
 }
 

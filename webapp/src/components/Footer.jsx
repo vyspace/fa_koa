@@ -3,9 +3,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import $ from 'zepto';
+import { getScrollTop } from '../utils/tools';
 
 let _this,
-    startX,
     startY,
     scrollFlag,
     isShow,
@@ -19,10 +19,8 @@ class Footer extends Component {
         this.init();
     }
     componentDidMount() {
-        document.body.addEventListener('touchstart', this.startHandler, true);
-        document.body.addEventListener('touchmove', this.moveHandler, true);
-        document.body.addEventListener('touchend', this.endHandler, true);
         this.eventLayer.addEventListener('click', this.eventHandler, true);
+        window.addEventListener('scroll', this.scrollHandler, true);
         this.initObj();
     }
     componentDidUpdate() {
@@ -47,7 +45,6 @@ class Footer extends Component {
     }
     init() {
         _this = this;
-        startX = 0;
         startY = 0;
         scrollFlag = true;
         isShow = true;
@@ -55,37 +52,25 @@ class Footer extends Component {
     initObj() {
         $eventLayer = $(this.eventLayer);
     }
-    startHandler(e) {
-        if(isShow) {
-            startY = e.touches[0].clientY;
-            startX = e.touches[0].clientX;
-        }
-    }
-    moveHandler(e) {
-        if(isShow) {
-            const ty = e.touches[0].clientY - startY,
-                tx = e.touches[0].clientX - startX;
-            if(Math.abs(ty) > Math.abs(tx) && ty > 0) {
-                if(scrollFlag) {
-                    if($eventLayer.hasClass('footer-hidden')) {
-                        $eventLayer.removeClass('footer-hidden');
-                    }
-                    scrollFlag = false;
-                }
-            }
-            if(Math.abs(ty) > Math.abs(tx) && ty < 0) {
-                if(scrollFlag && document.body.scrollTop > 10) {
+    scrollHandler(e) {
+        e.stopPropagation();
+        if(isShow && scrollFlag) {
+            startY = getScrollTop();
+            scrollFlag = false;
+            setTimeout(() => {
+                const y = getScrollTop();
+                if(y > startY) {
                     if(!$eventLayer.hasClass('footer-hidden')) {
                         $eventLayer.addClass('footer-hidden');
                     }
-                    scrollFlag = false;
                 }
-            }
-        }
-    }
-    endHandler() {
-        if(isShow) {
-            scrollFlag = true;
+                else if(y < startY) {
+                    if($eventLayer.hasClass('footer-hidden')) {
+                        $eventLayer.removeClass('footer-hidden');
+                    }
+                }
+                scrollFlag = true;
+            }, 500);
         }
     }
     eventHandler(e) {
