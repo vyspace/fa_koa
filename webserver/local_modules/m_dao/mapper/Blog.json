@@ -7,5 +7,9 @@
   "count": {
     "parameterType": "",
     "sql": "select count(*) as count from blog"
+  },
+  "likeList": {
+    "parameterType": "number",
+    "sql": "select blog_id as blogId from user_like where user_id=#{user_id}"
   }
 }

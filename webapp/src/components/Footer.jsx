@@ -54,18 +54,26 @@ class Footer extends Component {
     }
     scrollHandler(e) {
         e.stopPropagation();
+        let timer1 = 0;
+        let timer2 = 0;
         if(isShow && scrollFlag) {
             startY = getScrollTop();
             scrollFlag = false;
-            setTimeout(() => {
+            timer1 = setTimeout(() => {
+                clearTimeout(timer1);
+                clearTimeout(timer2);
                 const y = getScrollTop();
                 if(y > startY) {
                     if(!$eventLayer.hasClass('footer-hidden')) {
                         $eventLayer.addClass('footer-hidden');
+                        timer2 = setTimeout(() => {
+                            $eventLayer.css({ display: 'none' });
+                        }, 100);
                     }
                 }
                 else if(y < startY) {
                     if($eventLayer.hasClass('footer-hidden')) {
+                        $eventLayer.css({ display: '' });
                         $eventLayer.removeClass('footer-hidden');
                     }
                 }

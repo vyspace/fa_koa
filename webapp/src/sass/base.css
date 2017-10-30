@@ -1017,6 +1017,11 @@ a {
   .interaction .mar-l {
     margin-left: 4px; }
 
+.pager-tip {
+  text-align: center;
+  color: #999;
+  padding: .4rem 0; }
+
 .shimmer {
   font-size: 18px;
   font-weight: 600;

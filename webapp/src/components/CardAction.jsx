@@ -82,11 +82,11 @@ CardAction.propTypes = {
     numOfComments: PropTypes.number.isRequired,
     numOfForwards: PropTypes.number.isRequired,
     commentOps: PropTypes.string.isRequired,
-    isLike: PropTypes.number
+    isLike: PropTypes.bool
 };
 
 CardAction.defaultProps = {
-    isLike: 0
+    isLike: false
 };
 
 export default CardAction;

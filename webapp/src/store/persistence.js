@@ -22,13 +22,10 @@ function getSession() {
     }
 }
 
-function isRefreshPage() {
-    return sessionStorage.getItem(FA_PERSIST) !== '';
-}
-
 export function restore(store) {
-    if(isRefreshPage()) {
-        Object.assign(store, getSession());
+    const session = getSession();
+    if(session) {
+        Object.assign(store, session);
     }
 }
 

@@ -1,6 +1,6 @@
 'use strict';
 
-import { HOME_GET_SUCCESS, HOME_GET_FAILURE, HOME_SCROLL_TOP, HOME_PAGE_PARAMS } from '../actions/home';
+import { HOME_GET_SUCCESS, HOME_GET_FAILURE, HOME_SCROLL_TOP, HOME_PAGE_PARAMS, HOME_UPDATE_SUCCESS } from '../actions/home';
 
 export default function home(state = {
     isFetching: true,
@@ -15,6 +15,9 @@ export default function home(state = {
             return state;
         case HOME_PAGE_PARAMS:
             state.pageParams = action.payload;
+            return state;
+        case HOME_UPDATE_SUCCESS:
+            state.data.dataList = state.data.dataList.concat(action.payload.data.dataList);
             return state;
         default:
             return state;

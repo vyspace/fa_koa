@@ -4,9 +4,16 @@ import request from './request';
 
 const URL_ROOT = '' || `${location.protocol}//${location.host}`;
 
-export const getHomeData = (idx, resolve, reject) => {
+export const getHomeData = (obj, resolve, reject) => {
+    let paramStr = `idx=${obj.idx}`;
+    if(obj.uid) {
+        paramStr = `${paramStr}&uid=${obj.uid}`;
+    }
+    if(obj.rows) {
+        paramStr = `${paramStr}&rows=${obj.rows}`;
+    }
     const params = {
-        url: `http://localhost:3000/openapi/home?idx=${idx}&rows=3`
+        url: `http://localhost:3000/openapi/home?${paramStr}`
     };
     request(params, resolve, reject);
 };

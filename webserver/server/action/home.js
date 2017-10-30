@@ -13,8 +13,11 @@ router.get('/', async (ctx) => {
     if(query) {
         const json = queryString.parse(query),
             service = new BlogService(),
-            rows = Number(json.rows),
-            result = await service.homePager(json.idx, rows);
+            uid = json.uid && Number(json.uid),
+            oid = json.oid && Number(json.oid),
+            idx = json.idx && Number(json.idx),
+            rows = json.rows && Number(json.rows),
+            result = await service.homePager(uid, idx, rows);
         if(!result) {
             data = JDW.failure('获取失败，请稍后再试！');
         }

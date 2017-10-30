@@ -84,7 +84,6 @@ class BaseDao {
         Object.assign(target, params, obj);
         const pager = new Pager();
         try {
-            pager.pageOffset = target.pageOffset;
             pager.pageSize = target.pageSize;
             session = await SNBatisUtil.createSession();
             list = await session.selectList(tag, target);

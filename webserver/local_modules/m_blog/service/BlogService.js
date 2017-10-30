@@ -7,11 +7,11 @@ class BlogService {
     constructor() {
         this[_blogDao] = new BlogDao();
     }
-    async homePager(pageIndex, rows) {
-        const pager = await this[_blogDao].pager(undefined, pageIndex, rows);
+    async homePager(uid, pageIndex, rows) {
+        const pager = await this[_blogDao].pager(uid, undefined, pageIndex, rows);
         return pager;
     }
-    async myHomePager(uid, pageIndex) {
+    async myHomePager(uid, oid, pageIndex) {
         const pager = await this[_userDao].pager(uid, pageIndex);
         return pager;
     }
