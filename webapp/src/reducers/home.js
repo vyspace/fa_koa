@@ -1,12 +1,16 @@
 'use strict';
 
-import { HOME_GET_SUCCESS, HOME_GET_FAILURE, HOME_SCROLL_TOP, HOME_PAGE_PARAMS, HOME_UPDATE_SUCCESS } from '../actions/home';
+import { HOME_GET_START, HOME_GET_SUCCESS, HOME_GET_FAILURE, HOME_SCROLL_TOP, HOME_PAGE_PARAMS, HOME_UPDATE_SUCCESS, HOME_SAVE_PAGE_INDEX } from '../actions/home';
 
 export default function home(state = {
     isFetching: true,
-    scrollTop: 0
+    scrollTop: 0,
+    pageIndex: 1
 }, action) {
     switch(action.type) {
+        case HOME_GET_START:
+            state.isFetching = true;
+            return state;
         case HOME_GET_SUCCESS:
         case HOME_GET_FAILURE:
             return Object.assign({}, state, { isFetching: false }, action.payload);
@@ -18,6 +22,9 @@ export default function home(state = {
             return state;
         case HOME_UPDATE_SUCCESS:
             state.data.dataList = state.data.dataList.concat(action.payload.data.dataList);
+            return state;
+        case HOME_SAVE_PAGE_INDEX:
+            state.pageIndex = action.payload;
             return state;
         default:
             return state;

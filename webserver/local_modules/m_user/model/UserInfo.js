@@ -14,7 +14,7 @@ const _id = Symbol('id'),
     _createTime = Symbol('createTime');
 class UserInfo {
     constructor(id = 0, username = '', nickname = '', profile = '', gender = '0', site = '',
-                phone = '', birthday = '', signature='', tag = '1', level = 1, createTime = '') {
+                phone = '', birthday = '', signature = '', tag = '1', level = 1, createTime = '') {
         this[_id] = id;
         this[_username] = username;
         this[_nickname] = nickname;

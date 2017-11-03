@@ -128,3 +128,13 @@ export function levelHandler(level) {
     }
 }
 
+export function dieTausendstel(num) {
+    const str = num.toString();
+    if(num.length <= 4) {
+        return str;
+    }
+    else {
+        return str.replace(/^(\d+)(\d)(\d{3})$/, '$1.$2万');
+    }
+}
+

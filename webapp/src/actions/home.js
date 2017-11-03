@@ -2,11 +2,19 @@
 
 import { getHomeData } from '../utils/api';
 
+export const HOME_GET_START = 'HOME_GET_START';
 export const HOME_GET_SUCCESS = 'HOME_GET_SUCCESS';
 export const HOME_GET_FAILURE = 'HOME_GET_FAILURE';
 export const HOME_SCROLL_TOP = 'HOME_SCROLL_TOP';
 export const HOME_PAGE_PARAMS = 'HOME_PAGE_PARAMS';
 export const HOME_UPDATE_SUCCESS = 'HOME_UPDATE_SUCCESS';
+export const HOME_SAVE_PAGE_INDEX = 'HOME_SAVE_PAGE_INDEX';
+
+function getHomeStart() {
+    return {
+        type: HOME_GET_START
+    };
+}
 
 function getHomeSuccess(json) {
     return {
@@ -49,6 +57,7 @@ export function savePageParams(payload) {
 
 export function getHomeList(obj) {
     return (dispatch) => {
+        dispatch(getHomeStart());
         getHomeData(obj, (json) => {
             dispatch(getHomeSuccess(json));
         }, (err) => {
@@ -68,4 +77,9 @@ export function updateHomeList(obj, success, failure) {
     };
 }
 
-
+export function saveHomePageIndex(payload) {
+    return {
+        type: HOME_SAVE_PAGE_INDEX,
+        payload
+    };
+}

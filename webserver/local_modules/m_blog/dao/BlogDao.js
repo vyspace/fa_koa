@@ -63,17 +63,27 @@ class BlogDao extends BaseDao {
         page.totalRecord = totalRecord;
         if(uid) {
             const likeList = await super.list('Blog.likeList', uid);
-            for(let i = 0; i < page.dataList.length; i += 1) {
-                const data = page.dataList[i];
-                for(let j = 0; j < likeList.length; j += 1) {
-                    if(data.id === likeList[j].blogId) {
-                        data.isLike = true;
-                        break;
+            if(likeList) {
+                for(let i = 0; i < page.dataList.length; i += 1) {
+                    const data = page.dataList[i];
+                    for(let j = 0; j < likeList.length; j += 1) {
+                        if(data.id === likeList[j].blogId) {
+                            data.isLike = true;
+                            break;
+                        }
                     }
                 }
             }
         }
         return page;
+    }
+    async loadNumOfLikes(blogId) {
+        try {
+            return await super.load('Blog.loadNumOfLikes', blogId);
+        }
+        catch (err) {
+            throw err;
+        }
     }
 }
 

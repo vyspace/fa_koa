@@ -3,7 +3,12 @@
 import request from './request';
 
 const URL_ROOT = '' || `${location.protocol}//${location.host}`;
-
+/**
+ * 主页接口
+ * @param obj uid用户ID，idx页号，rows截止第一次获取数据总数
+ * @param resolve
+ * @param reject
+ */
 export const getHomeData = (obj, resolve, reject) => {
     let paramStr = `idx=${obj.idx}`;
     if(obj.uid) {
@@ -14,6 +19,20 @@ export const getHomeData = (obj, resolve, reject) => {
     }
     const params = {
         url: `http://localhost:3000/openapi/home?${paramStr}`
+    };
+    request(params, resolve, reject);
+};
+/**
+ * 点赞接口
+ * @param obj uid用户ID，bid博客ID
+ * @param resolve
+ * @param reject
+ */
+export const postLikeData = (obj, resolve, reject) => {
+    const params = {
+        url: 'http://localhost:3000/openapi/like',
+        method: 'POST',
+        body: JSON.stringify(obj)
     };
     request(params, resolve, reject);
 };

@@ -11,5 +11,9 @@
   "likeList": {
     "parameterType": "number",
     "sql": "select blog_id as blogId from user_like where user_id=#{user_id}"
+  },
+  "loadNumOfLikes": {
+    "parameterType": "number",
+    "sql": "select num_of_likes as numOfLikes from blog where id=#{blogId}"
   }
 }

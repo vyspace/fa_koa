@@ -105,7 +105,7 @@ class Register extends Component {
                     history.push('/regfinish', username);
                 }
             }, (err) => {
-                console.log(err);
+                console.error(err);
             });
         }
     }

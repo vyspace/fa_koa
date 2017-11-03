@@ -61,6 +61,18 @@ class UserService {
         }
         return result;
     }
+    async updateLike(userId, blogId, numOfLikes) {
+        let result = false;
+        const params = { userId, blogId, numOfLikes };
+        try {
+            await this[_userDao].updateLike(params);
+            result = true;
+        }
+        catch(err) {
+            console.error(err);
+        }
+        return result;
+    }
 }
 
 module.exports = UserService;

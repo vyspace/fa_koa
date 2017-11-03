@@ -8,8 +8,24 @@ class BlogService {
         this[_blogDao] = new BlogDao();
     }
     async homePager(uid, pageIndex, rows) {
-        const pager = await this[_blogDao].pager(uid, undefined, pageIndex, rows);
+        let pager = null;
+        try {
+            pager = await this[_blogDao].pager(uid, undefined, pageIndex, rows);
+        }
+        catch (err) {
+            console.error(err);
+        }
         return pager;
+    }
+    async getNumOfLikes(blogId) {
+        let num = null;
+        try {
+            num = await this[_blogDao].loadNumOfLikes(blogId);
+        }
+        catch (err) {
+            console.error(err);
+        }
+        return num;
     }
     async myHomePager(uid, oid, pageIndex) {
         const pager = await this[_userDao].pager(uid, pageIndex);

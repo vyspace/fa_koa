@@ -9,16 +9,17 @@ import SingleMsg from './SingleMsg';
 import { restore } from '../store/persistence';
 import { getScrollTop, setScrollTop, getCompHeadUID } from '../utils/tools';
 
-let showTimer,
-    tData,
-    _this;
+let g,
+    _this,
+    showTimer,
+    tData;
 
 class CommentList extends Component {
     componentWillMount() {
         const { history, store } = this.props,
-            { getCommentList } = this.props.commentAction,
             { updateHeader } = this.props.headerAction,
-            { updateFooter } = this.props.footerAction;
+            { updateFooter } = this.props.footerAction,
+            { getCommentList } = this.props.commentAction;
         restore(store);
         updateHeader({
             type: 'base',
@@ -58,17 +59,20 @@ class CommentList extends Component {
         recordOrigin('comment');
     }
     init() {
+        g = window.FaKoa;
         showTimer = 0;
-        tData = null;
         _this = this;
+        tData = null;
     }
     eventHandler(e) {
-        e.stopPropagation();
         const { history } = _this.props,
             { savePageParams } = _this.props.commentAction,
             { home } = _this.props.store,
             t = $(e.target),
             tag = t.data('tag');
+        if(!tag || tag !== 'like') {
+            e.stopPropagation();
+        }
         if(tag === 'thumbnail') {
             const ul = t.parents('.card-item'),
                 rows = home.pageParams.rows,
@@ -92,6 +96,18 @@ class CommentList extends Component {
             savePageParams(params);
             history.push('/editcomment');
         }
+        if (tag === 'article') {
+            const aid = t.data('aid'),
+                cTop = 0;
+            const param = {
+                aid, cTop
+            };
+            savePageParams(param);
+            history.push('/article');
+        }
+        if(tag === 'chead' && t.parents('.comment').length <= 0) {
+            history.push('myhome', getCompHeadUID(e));
+        }
         if(e.target.className === 'comment' || t.parents('.comment').length > 0) {
             let el = t;
             if(e.target.className !== 'comment') {
@@ -105,18 +121,6 @@ class CommentList extends Component {
             };
             savePageParams(params);
             history.push('/editcomment');
-        }
-        if (tag === 'article') {
-            const aid = t.data('aid'),
-                cTop = 0;
-            const param = {
-                aid, cTop
-            };
-            savePageParams(param);
-            history.push('/article');
-        }
-        if(tag === 'chead' && t.parents('.comment').length <= 0) {
-            history.push('myhome', getCompHeadUID(e));
         }
     }
     cardMove(t) {

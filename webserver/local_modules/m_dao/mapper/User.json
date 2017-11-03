@@ -18,5 +18,9 @@
   "loadMyInfo": {
     "parameterType": "number",
     "sql": "select profile,nickname,level,signature from user where id=#{id}"
+  },
+  "updateLike": {
+    "parameterType": "object",
+    "sql": "insert into user_like (user_id,blog_id) values (#{userId},#{blogId});update blog set num_of_likes=#{numOfLikes} where id=#{blogId}"
   }
 }
