@@ -37,9 +37,9 @@ export const postLikeData = (obj, resolve, reject) => {
     request(params, resolve, reject);
 };
 
-export const getCommentData = (resolve, reject) => {
+export const getCommentData = (obj, resolve, reject) => {
     const params = {
-        url: `${URL_ROOT}/testdata/comment`
+        url: `http://localhost:3000/openapi/comment?bid=${obj.bid}&idx=${obj.idx}`
     };
     request(params, resolve, reject);
 };

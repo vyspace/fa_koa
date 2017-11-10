@@ -32,9 +32,6 @@ class Popup extends Component {
                         <i class="icon icon-photo mar-r" data-tag="blog"></i>
                         <span data-tag="blog">图片</span>
                     </li>
-                    <li data-tag="article">
-                        <i class="icon icon-article mar-r" data-tag="article"></i>
-                        <span data-tag="article">文章</span>
                     <li data-tag="link">
                         <i class="icon icon-link mar-r" data-tag="link"></i>
                         <span data-tag="link">外链</span>
@@ -73,26 +70,21 @@ class Popup extends Component {
         const t = $(e.target),
             tag = t.data('tag');
         switch(tag) {
-        case 'blog':
-            _this.closePopup(() => {
-                history.push('editblog');
-            });
-            break;
-        case 'article':
-            _this.closePopup(() => {
-                history.push('editarticle');
-            });
-            break;
-        case 'link':
-            _this.closePopup(() => {
-                history.push('editlink');
-            });
-            break;
-        case 'cancel':
-            _this.closePopup();
-            break;
-        default:
-            break;
+            case 'blog':
+                _this.closePopup(() => {
+                    history.push('editblog');
+                });
+                break;
+            case 'link':
+                _this.closePopup(() => {
+                    history.push('editlink');
+                });
+                break;
+            case 'cancel':
+                _this.closePopup();
+                break;
+            default:
+                break;
         }
     }
     render() {

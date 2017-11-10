@@ -18,7 +18,7 @@ class BlogDao extends BaseDao {
             pageOffset = 0,  // 行偏移
             pageSize = 3;  // 每页记录数
         if(!rows) {
-            const countObj = await super.load('Blog.count');
+            const countObj = await super.load('Blog.blogCount');
             totalRecord = countObj.count;
         }
         else {
@@ -29,12 +29,7 @@ class BlogDao extends BaseDao {
             totalPage = Math.ceil(totalRecord / pageSize);
             descPageIndex = (totalPage + 1) - pageIndex;
             if(descPageIndex <= 0) {
-                return {
-                    dataList: [],
-                    totalPage,
-                    totalRecord,
-                    pageIndex
-                };
+                return this.defaultPager(totalRecord, totalPage, pageIndex);
             }
             pageOffset = (descPageIndex - 1) * pageSize;
             if(pageOffset >= pageSize) {
@@ -48,6 +43,9 @@ class BlogDao extends BaseDao {
                 }
             }
         }
+        else {
+            return this.defaultPager(totalRecord, totalPage, pageIndex);
+        }
         const params = {
             rows,
             pageOffset,
@@ -58,7 +56,7 @@ class BlogDao extends BaseDao {
         if(oid) {
             params.oid = oid;
         }
-        const page = await super.pager('Blog.pager', params);
+        const page = await super.pager('Blog.blogPager', params);
         page.totalPage = totalPage;
         page.totalRecord = totalRecord;
         if(uid) {
@@ -84,6 +82,14 @@ class BlogDao extends BaseDao {
         catch (err) {
             throw err;
         }
+    }
+    defaultPager(totalRecord, totalPage, pageIndex) {
+        return {
+            dataList: [],
+            totalPage,
+            totalRecord,
+            pageIndex
+        };
     }
 }
 

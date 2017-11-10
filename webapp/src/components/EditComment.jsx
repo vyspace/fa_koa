@@ -4,26 +4,18 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { restore } from '../store/persistence';
 
-let g,
-    tip;
+let g;
 
 class EditComment extends Component {
     componentWillMount() {
         this.init();
         const { history, store } = this.props;
         restore(store);
-        const oAction = store.record.origin,
-            { updateHeader } = this.props.headerAction,
-            { updateFooter } = this.props.footerAction,
-            { type, nickname } = store[oAction].pageParams;
-        let tit = '评论';
-        if(type === 'reply') {
-            tit = '回复';
-            tip = `回复@${nickname}…`;
-        }
+        const { updateHeader } = this.props.headerAction,
+            { updateFooter } = this.props.footerAction;
         updateHeader({
             type: 'base',
-            title: tit,
+            title: '编辑留言',
             isBack: true,
             tHistory: history,
             rBtn: {
@@ -42,7 +34,6 @@ class EditComment extends Component {
     }
     init() {
         g = window.FaKoa;
-        tip = '写评论…';
     }
     send() {
         const { history } = this.props;
@@ -63,7 +54,7 @@ class EditComment extends Component {
                   }}
                   className="edit-ta"
                   maxLength="150"
-                  placeholder={tip}
+                  placeholder="写留言..."
                 />
                 <div className="edit-tip">字数限制：150</div>
             </div>

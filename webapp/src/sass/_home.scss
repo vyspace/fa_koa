@@ -32,9 +32,10 @@
 }
 
 .pager-tip {
+  height: $hfHeight;
+  line-height: $hfHeight;
   text-align: center;
   color: $tipColor;
-  padding: .4rem 0;
 }
 
 .shimmer {

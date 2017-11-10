@@ -6,6 +6,7 @@ export const COMMENT_GET_SUCCESS = 'COMMENT_GET_SUCCESS';
 export const COMMENT_GET_FAILURE = 'COMMENT_GET_FAILURE';
 export const COMMENT_SCROLL_TOP = 'COMMENT_SCROLL_TOP';
 export const COMMENT_PAGE_PARAMS = 'COMMENT_PAGE_PARAMS';
+export const COMMENT_UPDATE_SUCCESS = 'COMMENT_UPDATE_SUCCESS';
 
 function getCommentSuccess(json) {
     return {
@@ -39,12 +40,22 @@ export function savePageParams(payload) {
     };
 }
 
-export function getCommentList() {
+export function getCommentList(obj) {
     return (dispatch) => {
-        getCommentData((json) => {
+        getCommentData(obj, (json) => {
             dispatch(getCommentSuccess(json));
         }, (err) => {
             dispatch(getCommentFailure(err));
+        });
+    };
+}
+
+export function updateCommentList(obj, success, failure) {
+    return () => {
+        getCommentData(obj, (json) => {
+            success(json);
+        }, (err) => {
+            failure(err);
         });
     };
 }

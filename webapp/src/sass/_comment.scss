@@ -1,9 +1,14 @@
 .comment-list {
-  background-color: #fff;
-  margin-top: 8px;
+  .comment-tip {
+    color: $tipColor;
+    text-align: center;
+    padding: .8rem 0 .4rem 0;
+  }
+  .first {
+    color: $tipColor;
+  }
   .comment {
-    padding: .4rem;
-    border-bottom: 1px solid $bgColor;
+    padding: .5rem .4rem;
   }
   .content {
     padding-left: 2.9rem;

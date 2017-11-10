@@ -1,10 +1,10 @@
 {
-  "pager": {
+  "blogPager": {
     "parameterType": "object",
     "dynamic": true,
     "sql": "select t_blog.id,t_blog.type,t_blog.user_id as userId,user.profile,user.nickname,t_blog.create_time as createTime,t_blog.article_id as articleId,t_blog.link,t_blog.photos,t_blog.num_of_likes as numOfLikes,t_blog.num_of_comments as numOfComments,t_blog.num_of_forwards as numOfForwards,t_blog.text from (select * from <%if({{rows}}) return '(select * from blog limit 0,{{rows}}) as temp'; else return 'blog'%> <%if({{pageSize}}) return 'limit #{pageOffset},#{pageSize}'%>) as t_blog left join user on t_blog.user_id=user.id <%if({{sort}}) return 'order by ${sort} ${order}'%>;"
   },
-  "count": {
+  "blogCount": {
     "parameterType": "",
     "sql": "select count(*) as count from blog"
   },
@@ -15,5 +15,14 @@
   "loadNumOfLikes": {
     "parameterType": "number",
     "sql": "select num_of_likes as numOfLikes from blog where id=#{blogId}"
+  },
+  "commentPager": {
+    "parameterType": "object",
+    "dynamic": true,
+    "sql": "select t_comment.id,t_comment.blog_id as blogId,t_comment.user_id as userId,user.profile,user.nickname,t_comment.content,t_comment.create_time as createTime from (select * from comment where blog_id=#{blogId} <%if({{pageSize}}) return 'limit #{pageOffset},#{pageSize}'%>) as t_comment left join user on t_comment.user_id=user.id"
+  },
+  "commentCount": {
+    "parameterType": "",
+    "sql": "select count(*) as count from comment"
   }
 }

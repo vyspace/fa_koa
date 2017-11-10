@@ -9,6 +9,8 @@ export const HOME_SCROLL_TOP = 'HOME_SCROLL_TOP';
 export const HOME_PAGE_PARAMS = 'HOME_PAGE_PARAMS';
 export const HOME_UPDATE_SUCCESS = 'HOME_UPDATE_SUCCESS';
 export const HOME_SAVE_PAGE_INDEX = 'HOME_SAVE_PAGE_INDEX';
+export const HOME_SAVE_DATA_TIP = 'HOME_SAVE_DATA_TIP';
+export const HOME_SAVE_TIP_TEXT = 'HOME_SAVE_TIP_TEXT';
 
 function getHomeStart() {
     return {
@@ -80,6 +82,20 @@ export function updateHomeList(obj, success, failure) {
 export function saveHomePageIndex(payload) {
     return {
         type: HOME_SAVE_PAGE_INDEX,
+        payload
+    };
+}
+
+export function saveDataTip(payload) {
+    return {
+        type: HOME_SAVE_DATA_TIP,
+        payload
+    };
+}
+
+export function saveTipText(payload) {
+    return {
+        type: HOME_SAVE_TIP_TEXT,
         payload
     };
 }

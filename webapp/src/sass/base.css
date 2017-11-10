@@ -1018,9 +1018,10 @@ a {
     margin-left: 4px; }
 
 .pager-tip {
+  height: 44px;
+  line-height: 44px;
   text-align: center;
-  color: #999;
-  padding: .4rem 0; }
+  color: #999; }
 
 .shimmer {
   font-size: 18px;
@@ -1101,19 +1102,21 @@ a {
   .pop-show ul {
     transform: translate3d(0, 0, 0); }
 
-.comment-list {
-  background-color: #fff;
-  margin-top: 8px; }
-  .comment-list .comment {
-    padding: .4rem;
-    border-bottom: 1px solid #f0f0f0; }
-  .comment-list .content {
-    padding-left: 2.9rem; }
-  .comment-list a {
-    color: #4579FB;
-    padding-right: 4px; }
-    .comment-list a a:hover, .comment-list a a:focus {
-      color: #4579FB; }
+.comment-list .comment-tip {
+  color: #999;
+  text-align: center;
+  padding: .8rem 0 .4rem 0; }
+.comment-list .first {
+  color: #999; }
+.comment-list .comment {
+  padding: .5rem .4rem; }
+.comment-list .content {
+  padding-left: 2.9rem; }
+.comment-list a {
+  color: #4579FB;
+  padding-right: 4px; }
+  .comment-list a a:hover, .comment-list a a:focus {
+    color: #4579FB; }
 
 .reply-card {
   background-color: #fff;

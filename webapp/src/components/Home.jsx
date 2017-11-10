@@ -7,29 +7,30 @@ import $ from 'zepto';
 import Card from './Card';
 import PhotoBrowser from './PhotoBrowser';
 import SingleMsg from './SingleMsg';
-import { getUser, restore } from '../store/persistence';
+import { getUser } from '../store/persistence';
 import { getScrollTop, setScrollTop, getCompHeadUID } from '../utils/tools';
 
 let g,
     _this,
-    dataRender,
+    fromAction, // 检测是第一进入还是从其它页面切换回来
+    autoScroll, // 避免页面切换回来时触发分页滚动事件
+    loadDataTip, // 滚动分切触发并拉取数据时，阻止多次触发改事件
+    bodyDiffHeight, // body滚动条高度与body本身高度差
+    cIndex, // Card Index临时累计
     $body,
-    $tipLayer,
-    loadDataTip,
-    bodyScrollHeight,
-    bodyDiffHeight,
-    totalPage,
-    totalRecord,
-    cIndex;
+    $tipLayer;
 
 class Home extends Component {
     componentWillMount() {
         const { history, store } = this.props,
             { updateHeader } = this.props.headerAction,
             { updateFooter } = this.props.footerAction,
-            { getHomeList } = this.props.homeAction;
+            { getHomeList, saveHomePageIndex } = this.props.homeAction;
         let _rBtn = null;
-        restore(store);
+        fromAction = store.record.origin;
+        if(!fromAction) {
+            loadDataTip = store.home.dataTip;
+        }
         if(!getUser()) {
             _rBtn = {
                 type: 'icon',
@@ -48,18 +49,26 @@ class Home extends Component {
         });
         updateFooter({ type: 'base', action: 'home', tHistory: history });
         this.init();
-        if(g.isFresh) {
-            getHomeList({ uid: g.uid, idx: store.home.pageIndex });
-            g.isFresh = false;
+        if(!fromAction) {
+            getHomeList({ uid: g.uid, idx: 1 });
+            saveHomePageIndex(1);
         }
     }
-    componentDidMount() {alert(2)
+    componentDidMount() {
+        const { scrollTop } = this.props.store.home;
+        if(scrollTop === 0) {
+            autoScroll = false;
+        }
+        else {
+            autoScroll = true;
+            this.initObj();
+        }
         this.eventLayer.addEventListener('click', this.eventHandler, true);
         window.addEventListener('scroll', this.scrollHandler, true);
     }
     shouldComponentUpdate(props) {
-        const { home } = props.store;
-        if(!home.isFetching && home.data) {
+        const { isFetching, data } = props.store.home;
+        if(!fromAction && !isFetching && data) {
             return true;
         }
         else {
@@ -67,12 +76,7 @@ class Home extends Component {
         }
     }
     componentDidUpdate() {
-        const { scrollTop } = this.props.store.home;
-        if(dataRender) {
-            setScrollTop(scrollTop);
-            this.initObj();
-            dataRender = false;
-        }
+        this.initObj();
     }
     componentWillUnmount() {
         const { recordOrigin } = this.props.recordAction,
@@ -84,11 +88,8 @@ class Home extends Component {
     init() {
         g = window.FaKoa;
         _this = this;
-        dataRender = false;
-        loadDataTip = true;
-        totalRecord = 0;
-        totalPage = 0;
         cIndex = 0;
+        loadDataTip = true;
     }
     initObj() {
         $body = $(document.body);
@@ -176,26 +177,34 @@ class Home extends Component {
         return cTop;
     }
     calcDiffHeight() {
-        bodyScrollHeight = $body.get(0).scrollHeight;
-        return bodyScrollHeight - $body.height();
+        return $body.get(0).scrollHeight - $body.height();
+    }
+    saveTip(str) {
+        $tipLayer.html(str);
+        _this.props.homeAction.saveTipText(str);
     }
     scrollHandler(e) {
         e.stopPropagation();
+        if(autoScroll) {
+            autoScroll = false;
+            return;
+        }
         if(loadDataTip && getScrollTop() / bodyDiffHeight >= 0.95) {
+            const { store, homeAction } = _this.props,
+                { data, pageIndex } = store.home;
             loadDataTip = false;
+            homeAction.saveDataTip(false);
             setTimeout(() => {
-                const { store, homeAction } = _this.props;
-                $tipLayer.html('正在加载数据...').css({ display: '' });
-                setScrollTop(bodyScrollHeight);
-                let pagerNumber = store.home.pageIndex;
-                if(pagerNumber <= totalPage) {
+                _this.saveTip('正在加载数据...');
+                let pagerNumber = pageIndex;
+                if(pagerNumber <= data.totalPage) {
                     pagerNumber += 1;
                     homeAction.saveHomePageIndex(pagerNumber);
                 }
                 const param = {
                     uid: g.uid,
                     idx: pagerNumber,
-                    rows: totalRecord
+                    rows: data.totalRecord
                 };
                 _this.props.homeAction.updateHomeList(param, (json) => {
                     const { dataList } = json.data;
@@ -209,24 +218,25 @@ class Home extends Component {
                         cIndex = idx;
                         ReactDOM.render(<div>{html}</div>, _div, () => {
                             setTimeout(() => {
-                                $tipLayer.css({ display: 'none' });
-                                $tipLayer.before($(_div.firstChild).children());
+                                _this.saveTip('');
+                                $(_this.tipLayer).before($(_div.firstChild).children());
                                 bodyDiffHeight = _this.calcDiffHeight();
                                 loadDataTip = true;
+                                homeAction.saveDataTip(true);
                             }, 500);
                         });
                     }
                     else {
-                        $tipLayer.html('数据已全部加载');
+                        _this.saveTip('数据已全部加载');
                     }
                 }, () => {
-                    $tipLayer.html('数据出错，请刷新页面 !');
+                    _this.saveTip('数据出错，请刷新页面 !');
                 });
             }, 1000);
         }
     }
-    render() {alert(33)
-        const { isFetching, data } = this.props.store.home;
+    render() {
+        const { isFetching, data, tipText } = this.props.store.home;
         let html;
         if (isFetching) {
             html = 'loadding';
@@ -236,17 +246,13 @@ class Home extends Component {
                 cIndex = index;
                 return <Card key={cell.id} data={cell} index={index} />;
             });
-            totalRecord = data.totalRecord;
-            totalPage = data.totalPage;
             html.push(<div
               ref={(c) => {
                   this.tipLayer = c;
               }}
               key="tip"
               className="pager-tip"
-              style={{ display: 'none' }}
-            />);
-            dataRender = true;
+            >{tipText}</div>);
         }
         else {
             html = <SingleMsg msg="网络原因，请稍后再试！" />;

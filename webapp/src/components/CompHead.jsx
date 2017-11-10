@@ -49,7 +49,7 @@ class CompHead extends Component {
                 </div>
                 <div className="middle" data-tag="chead">
                     <div className="first" data-tag="chead">
-                        <span>{nickname}</span>
+                        <span data-tag="chead">{nickname}</span>
                     </div>
                     { subContent ? <div className="second" data-tag="chead">{this.timeHandler(subContent)}</div> : '' }
                 </div>

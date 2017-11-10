@@ -1,18 +1,27 @@
 'use strict';
 
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import Card from './Card';
 import PhotoBrowser from './PhotoBrowser';
 import Comment from './Comment';
-import SingleMsg from './SingleMsg';
 import { restore } from '../store/persistence';
 import { getScrollTop, setScrollTop, getCompHeadUID } from '../utils/tools';
 
 let g,
     _this,
+    fromAction,
     showTimer,
-    tData;
+    tData,
+    loadDataTip,
+    tipText,
+    bodyDiffHeight,
+    pageIndex,
+    cIndex,
+    $body,
+    $tipLayer,
+    $commentList;
 
 class CommentList extends Component {
     componentWillMount() {
@@ -20,49 +29,73 @@ class CommentList extends Component {
             { updateHeader } = this.props.headerAction,
             { updateFooter } = this.props.footerAction,
             { getCommentList } = this.props.commentAction;
-        restore(store);
+        fromAction = store.record.origin;
+        if(!fromAction) {
+            restore(store);
+        }
         updateHeader({
             type: 'base',
-            title: '评论列表',
+            title: '留言列表',
             isBack: true,
             tHistory: history,
             rBtn: null
         });
         updateFooter({ type: 'none' });
         this.init();
-        getCommentList();
+        const { data, pageParams } = store.home;
+        if(data && pageParams) {
+            tData = data.dataList[pageParams.rows];
+            if(!fromAction || history.action === 'PUSH') {
+                const params = {
+                    bid: tData.id,
+                    idx: pageIndex
+                };
+                getCommentList(params);
+            }
+        }
     }
     componentDidMount() {
-        if(this.eventLayer) {
-            this.eventLayer.addEventListener('click', this.eventHandler, true);
+        this.eventLayer.addEventListener('click', this.eventHandler, true);
+        window.addEventListener('scroll', this.scrollHandler, true);
+    }
+    shouldComponentUpdate(props) {
+        const { comment } = props.store;
+        if(!comment.isFetching && comment.data) {
+            return true;
+        }
+        else {
+            return false;
         }
     }
     componentDidUpdate() {
-        const { action } = this.props.history,
-            { scrollTop } = this.props.store.comment;
         this.showList();
         setTimeout(() => {
-            if(action === 'POP') {
-                setScrollTop(scrollTop);
-            }
-            else {
-                setScrollTop(0);
-            }
+            setScrollTop(0);
+            _this.initObj();
         }, 200);
     }
     componentWillUnmount() {
-        const { saveScrollTop } = this.props.commentAction,
-            { recordOrigin } = this.props.recordAction;
+        const { recordOrigin } = this.props.recordAction;
         clearTimeout(showTimer);
-        saveScrollTop(getScrollTop());
-        setScrollTop(0);
+        window.removeEventListener('scroll', this.scrollHandler, true);
         recordOrigin('comment');
+        setScrollTop(0);
     }
     init() {
         g = window.FaKoa;
         showTimer = 0;
         _this = this;
         tData = null;
+        loadDataTip = true;
+        tipText = '';
+        cIndex = 0;
+        pageIndex = 1;
+    }
+    initObj() {
+        $body = $(document.body);
+        $tipLayer = $(this.tipLayer);
+        $commentList = $(this.commentList);
+        bodyDiffHeight = this.calcDiffHeight();
     }
     eventHandler(e) {
         const { history } = _this.props,
@@ -73,7 +106,7 @@ class CommentList extends Component {
         if(!tag || tag !== 'like') {
             e.stopPropagation();
         }
-        if(tag === 'thumbnail') {
+        if(tag === '') {
             const ul = t.parents('.card-item'),
                 rows = home.pageParams.rows,
                 imgs = ul.find('img'),
@@ -105,22 +138,50 @@ class CommentList extends Component {
             savePageParams(param);
             history.push('/article');
         }
-        if(tag === 'chead' && t.parents('.comment').length <= 0) {
+        if(tag === 'chead') {
             history.push('myhome', getCompHeadUID(e));
         }
-        if(e.target.className === 'comment' || t.parents('.comment').length > 0) {
-            let el = t;
-            if(e.target.className !== 'comment') {
-                el = t.parents('.comment');
-            }
-            const params = {
-                type: 'reply',
-                userId: el.data('uid'),
-                workId: el.data('id'),
-                nickname: el.data('nickname')
-            };
-            savePageParams(params);
-            history.push('/editcomment');
+    }
+    scrollHandler(e) {
+        e.stopPropagation();
+        if(loadDataTip && getScrollTop() / bodyDiffHeight >= 0.95) {
+            const { data } = _this.props.store.comment;
+            loadDataTip = false;
+            setTimeout(() => {
+                $tipLayer.html('正在加载数据...');
+                if(pageIndex <= data.totalPage) {
+                    pageIndex += 1;
+                }
+                const param = {
+                    bid: tData.id,
+                    idx: pageIndex
+                };
+                _this.props.commentAction.updateCommentList(param, (json) => {
+                    const { dataList } = json.data;
+                    if(dataList && dataList.length > 0) {
+                        let idx = 0;
+                        const html = dataList.map((cell, index) => {
+                                idx = cIndex + index + 1;
+                                return <Comment key={cell.id} data={cell} index={index} />;
+                            }),
+                            _div = document.createElement('div');
+                        cIndex = idx;
+                        ReactDOM.render(<div>{html}</div>, _div, () => {
+                            setTimeout(() => {
+                                $tipLayer.html('');
+                                $commentList.append($(_div.firstChild).children());
+                                bodyDiffHeight = _this.calcDiffHeight();
+                                loadDataTip = true;
+                            }, 500);
+                        });
+                    }
+                    else {
+                        $tipLayer.html('数据已全部加载');
+                    }
+                }, () => {
+                    $tipLayer.html('数据出错，请刷新页面 !');
+                });
+            }, 1000);
         }
     }
     cardMove(t) {
@@ -135,28 +196,24 @@ class CommentList extends Component {
             }
         }, 100);
     }
+    calcDiffHeight() {
+        return $body.get(0).scrollHeight - $body.height();
+    }
     render() {
-        const { history, store } = this.props,
-            { data, pageParams } = store.home,
-            comment = store.comment;
-        if(store.record.original === '') {
-            return null;
-        }
-        if(data && pageParams) {
-            tData = data.dataList[pageParams.rows];
-        }
-        let html = null;
-        if(!tData) {
-            html = <SingleMsg msg="请从主页进入" link="/" linkText="跳到主页" />;
+        const { isFetching, data } = this.props.store.comment,
+            { history, store } = this.props,
+            { pageParams } = store.home;
+        let html = '';
+        if(isFetching) {
+            html = 'loadding';
         }
         else {
-            let vDom = null,
-                css = { marginBottom: 0 },
+            let vDom,
+                css,
+                cTop;
+            if(data.dataList && data.dataList.length > 0) {
+                css = { marginBottom: 0 };
                 cTop = 0;
-            if(comment.isFetching) {
-                vDom = 'loading';
-            }
-            else if(comment.data) {
                 vDom = (<div
                   ref={(c) => {
                       this.commentList = c;
@@ -164,23 +221,35 @@ class CommentList extends Component {
                   className="comment-list"
                   style={{ display: 'none' }}
                 >
+                    <div className="comment-tip">精选留言</div>
                     {
-                        comment.data.map((cell, index) => (<Comment key={cell.id} data={cell} index={index} />))
+                        data.dataList.map((cell, index) => {
+                            cIndex = index;
+                            return <Comment key={cell.id} data={cell} index={index} />;
+                        })
                     }
                 </div>);
+                if(history.action === 'PUSH') {
+                    cTop = pageParams.cTop;
+                }
+                if(pageParams.cTop !== 0) {
+                    css = Object.assign(css, { transitionDuration: '.1s', transitionTimingFunction: 'ease-in-out', transform: `translate3d(0, ${cTop}px, 0)` });
+                }
             }
             else {
-                vDom = <SingleMsg msg="网络原因，请稍后再试！" />;
-            }
-            if(history.action === 'PUSH') {
-                cTop = pageParams.cTop;
-            }
-            if(pageParams.cTop !== 0) {
-                css = Object.assign(css, { transitionDuration: '.1s', transitionTimingFunction: 'ease-in-out', transform: `translate3d(0, ${cTop}px, 0)` });
+                vDom = '';
+                loadDataTip = false;
             }
             html = (<div>
-                <Card data={tData} cssStyle={css} index={0} animation={this.cardMove} commentOps={'评论'} />
+                <Card data={tData} cssStyle={css} index={0} animation={this.cardMove} commentOps={'留言'} />
                 {vDom}
+                <div
+                  ref={(c) => {
+                      this.tipLayer = c;
+                  }}
+                  key="tip"
+                  className="pager-tip"
+                >{tipText}</div>
             </div>);
         }
         return (
