@@ -27,6 +27,17 @@ class BlogService {
         }
         return num;
     }
+    async postComment(params) {
+        let flag = true;
+        try {
+            await this[_blogDao].addComment(params);
+        }
+        catch (err) {
+            flag = false;
+            console.error(err);
+        }
+        return flag;
+    }
     async myHomePager(uid, oid, pageIndex) {
         const pager = await this[_userDao].pager(uid, pageIndex);
         return pager;

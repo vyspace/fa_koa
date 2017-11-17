@@ -167,6 +167,7 @@ class Footer extends Component {
                   this.eventLayer = c;
               }}
               className="footer-container"
+              style={{ display: 'block' }}
             >
                 {html}
             </div>);

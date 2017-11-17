@@ -79,7 +79,6 @@ class CommentList extends Component {
         clearTimeout(showTimer);
         window.removeEventListener('scroll', this.scrollHandler, true);
         recordOrigin('comment');
-        setScrollTop(0);
     }
     init() {
         g = window.FaKoa;
@@ -122,9 +121,7 @@ class CommentList extends Component {
         }
         if(tag === 'comment') {
             const params = {
-                type: 'comment',
-                userId: tData.userId,
-                workId: tData.id
+                blogId: tData.id
             };
             savePageParams(params);
             history.push('/editcomment');

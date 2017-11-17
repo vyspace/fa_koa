@@ -8,12 +8,11 @@ import Card from './Card';
 import PhotoBrowser from './PhotoBrowser';
 import SingleMsg from './SingleMsg';
 import { getUser } from '../store/persistence';
-import { getScrollTop, setScrollTop, getCompHeadUID } from '../utils/tools';
+import { getCompHeadUID, getScrollTop } from '../utils/tools';
 
 let g,
     _this,
-    fromAction, // 检测是第一进入还是从其它页面切换回来
-    autoScroll, // 避免页面切换回来时触发分页滚动事件
+    pageIndex,
     loadDataTip, // 滚动分切触发并拉取数据时，阻止多次触发改事件
     bodyDiffHeight, // body滚动条高度与body本身高度差
     cIndex, // Card Index临时累计
@@ -22,15 +21,11 @@ let g,
 
 class Home extends Component {
     componentWillMount() {
-        const { history, store } = this.props,
+        const { history } = this.props,
             { updateHeader } = this.props.headerAction,
             { updateFooter } = this.props.footerAction,
-            { getHomeList, saveHomePageIndex } = this.props.homeAction;
+            { getHomeList } = this.props.homeAction;
         let _rBtn = null;
-        fromAction = store.record.origin;
-        if(!fromAction) {
-            loadDataTip = store.home.dataTip;
-        }
         if(!getUser()) {
             _rBtn = {
                 type: 'icon',
@@ -49,26 +44,15 @@ class Home extends Component {
         });
         updateFooter({ type: 'base', action: 'home', tHistory: history });
         this.init();
-        if(!fromAction) {
-            getHomeList({ uid: g.uid, idx: 1 });
-            saveHomePageIndex(1);
-        }
+        getHomeList({ uid: g.uid, idx: pageIndex });
     }
     componentDidMount() {
-        const { scrollTop } = this.props.store.home;
-        if(scrollTop === 0) {
-            autoScroll = false;
-        }
-        else {
-            autoScroll = true;
-            this.initObj();
-        }
         this.eventLayer.addEventListener('click', this.eventHandler, true);
         window.addEventListener('scroll', this.scrollHandler, true);
     }
     shouldComponentUpdate(props) {
         const { isFetching, data } = props.store.home;
-        if(!fromAction && !isFetching && data) {
+        if(!isFetching && data) {
             return true;
         }
         else {
@@ -79,15 +63,14 @@ class Home extends Component {
         this.initObj();
     }
     componentWillUnmount() {
-        const { recordOrigin } = this.props.recordAction,
-            { saveScrollTop } = this.props.homeAction;
-        saveScrollTop(getScrollTop());
+        const { recordOrigin } = this.props.recordAction;
         window.removeEventListener('scroll', this.scrollHandler, true);
         recordOrigin('home');
     }
     init() {
         g = window.FaKoa;
         _this = this;
+        pageIndex = 1;
         cIndex = 0;
         loadDataTip = true;
     }
@@ -185,25 +168,20 @@ class Home extends Component {
     }
     scrollHandler(e) {
         e.stopPropagation();
-        if(autoScroll) {
-            autoScroll = false;
-            return;
-        }
         if(loadDataTip && getScrollTop() / bodyDiffHeight >= 0.95) {
             const { store, homeAction } = _this.props,
-                { data, pageIndex } = store.home;
+                { data } = store.home;
             loadDataTip = false;
             homeAction.saveDataTip(false);
             setTimeout(() => {
                 _this.saveTip('正在加载数据...');
-                let pagerNumber = pageIndex;
-                if(pagerNumber <= data.totalPage) {
-                    pagerNumber += 1;
-                    homeAction.saveHomePageIndex(pagerNumber);
+                if(pageIndex <= data.totalPage) {
+                    pageIndex += 1;
+                    homeAction.saveHomePageIndex(pageIndex);
                 }
                 const param = {
                     uid: g.uid,
-                    idx: pagerNumber,
+                    idx: pageIndex,
                     rows: data.totalRecord
                 };
                 _this.props.homeAction.updateHomeList(param, (json) => {

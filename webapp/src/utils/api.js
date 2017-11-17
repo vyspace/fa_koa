@@ -36,10 +36,29 @@ export const postLikeData = (obj, resolve, reject) => {
     };
     request(params, resolve, reject);
 };
-
+/**
+ * 用户评论列表接口
+ * @param obj 包含bid：blogId，idx：pageIndex
+ * @param resolve
+ * @param reject
+ */
 export const getCommentData = (obj, resolve, reject) => {
     const params = {
         url: `http://localhost:3000/openapi/comment?bid=${obj.bid}&idx=${obj.idx}`
+    };
+    request(params, resolve, reject);
+};
+/**
+ * 用户发送评论
+ * @param obj 包含bid：blogId，uid：UserId
+ * @param resolve
+ * @param reject
+ */
+export const postEditCommentData = (obj, resolve, reject) => {
+    const params = {
+        url: 'http://localhost:3000/openapi/editcomment',
+        method: 'POST',
+        body: JSON.stringify(obj)
     };
     request(params, resolve, reject);
 };

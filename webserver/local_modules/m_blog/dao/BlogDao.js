@@ -83,6 +83,14 @@ class BlogDao extends BaseDao {
             throw err;
         }
     }
+    async addComment(params) {
+        try {
+            return await super.add('Blog.addComment', params);
+        }
+        catch (err) {
+            throw err;
+        }
+    }
     defaultPager(totalRecord, totalPage, pageIndex) {
         return {
             dataList: [],

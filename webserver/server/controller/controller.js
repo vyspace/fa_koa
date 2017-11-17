@@ -9,6 +9,7 @@ const Router = require('koa-router'),
     myinfo = require('../action/myinfo'),
     like = require('../action/like'),
     comment = require('../action/comment'),
+    editcomment = require('../action/editcomment'),
     controller = new Router();
 
 controller.use('/:action', spa.routes(), spa.allowedMethods());
@@ -19,6 +20,7 @@ controller.use('/openapi/regfinish', regfinish.routes(), regfinish.allowedMethod
 controller.use('/openapi/myinfo', myinfo.routes(), myinfo.allowedMethods());
 controller.use('/openapi/like', like.routes(), like.allowedMethods());
 controller.use('/openapi/comment', comment.routes(), comment.allowedMethods());
+controller.use('/openapi/editcomment', editcomment.routes(), editcomment.allowedMethods());
 
 controller.get('/', async (ctx) => {
     await ctx.render('spa');

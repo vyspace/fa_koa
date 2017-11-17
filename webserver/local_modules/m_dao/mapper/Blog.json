@@ -24,5 +24,9 @@
   "commentCount": {
     "parameterType": "",
     "sql": "select count(*) as count from comment"
+  },
+  "addComment": {
+    "parameterType": "object",
+    "sql": "insert into comment (blog_id,user_id,content) values (#{bid},#{uid},#{content});"
   }
 }
