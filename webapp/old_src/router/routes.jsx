@@ -2,31 +2,30 @@
 
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import Home from '../containers/Home';
-// import Comment from '../containers/Comment';
-// import EidtComment from '../containers/EditComment';
-// import Article from '../containers/Article';
-// import Reply from '../containers/Reply';
-// import EditBlog from '../containers/EditBlog';
-// import EditArticle from '../containers/EditArticle';
-// import EditLink from '../containers/EditLink';
-// import My from '../containers/My';
-// import Profile from '../containers/Profile';
-// import MyHome from '../containers/MyHome';
-// import PhotoAlbum from '../containers/PhotoAlbum';
-// import Admin from '../containers/Admin';
-// import About from '../containers/About';
-// import UserInfo from '../containers/UserInfo';
-// import Follow from '../containers/Follow';
-// import Frame from '../containers/Frame';
-// import Login from '../containers/Login';
-// import Register from '../containers/Register';
-// import RegFinish from '../containers/RegFinish';
-// import FindPassword from '../containers/FindPassword';
-// import Feedback from '../containers/Feedback';
-// import BasicInfo from '../containers/BasicInfo';
-// import NotFound from '../components/NotFound';
+import Comment from '../containers/Comment';
+import EidtComment from '../containers/EditComment';
+import Article from '../containers/Article';
+import Reply from '../containers/Reply';
+import EditBlog from '../containers/EditBlog';
+import EditArticle from '../containers/EditArticle';
+import EditLink from '../containers/EditLink';
+import My from '../containers/My';
+import Profile from '../containers/Profile';
+import MyHome from '../containers/MyHome';
+import PhotoAlbum from '../containers/PhotoAlbum';
+import Admin from '../containers/Admin';
+import About from '../containers/About';
+import UserInfo from '../containers/UserInfo';
+import Follow from '../containers/Follow';
+import Frame from '../containers/Frame';
+import Login from '../containers/Login';
+import Register from '../containers/Register';
+import RegFinish from '../containers/RegFinish';
+import FindPassword from '../containers/FindPassword';
+import Feedback from '../containers/Feedback';
+import BasicInfo from '../containers/BasicInfo';
+import NotFound from '../components/NotFound';
 
 const PrivateRoute = ({ component: Component}) => (
     <Route render={props => (
@@ -42,11 +41,6 @@ const PrivateRoute = ({ component: Component}) => (
     )}
     />
 );
-
-PrivateRoute.propTypes = {
-    component: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired
-};
 
 export default
     <Switch>

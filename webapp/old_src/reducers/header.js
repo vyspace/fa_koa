@@ -1,6 +1,6 @@
 'use strict';
 
-import { HEADER_UPDATE } from '../actions/headera';
+import { HEADER_UPDATE } from '../actions/header';
 
 export default function header(state = {
     type: 'base',

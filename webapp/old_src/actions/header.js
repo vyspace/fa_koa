@@ -8,3 +8,4 @@ export function updateHeader(payload) {
         payload
     };
 }
+

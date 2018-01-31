@@ -1,4 +1,3 @@
-
 'use strict';
 
 export const FOOTER_UPDATE = 'FOOTER_UPDATE';

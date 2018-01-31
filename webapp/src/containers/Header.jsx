@@ -2,8 +2,25 @@
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Header from '../components/Header';
-import * as HeaderActions from '../actions/header';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import * as HeaderActions from '../actions/headera';
+
+class Header extends Component {
+    componentWillMount() {
+    }
+    render() {
+        const { header } = this.props.store;
+
+        return (
+            <div className="header-view" />
+        );
+    }
+}
+
+Header.propTypes = {
+    store: PropTypes.object.isRequired
+};
 
 function mapStateToProps(store) {
     return {

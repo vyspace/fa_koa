@@ -7,7 +7,7 @@ import FastClick from 'fastclick';
 import configureStore from './store/configureStore';
 import Root from './containers/Root';
 import { isMobileBrowser } from './utils/tools';
-// import { saveSession, testLogin } from './store/persistence';
+import { saveSession, testLogin } from './store/persistence';
 
 const browserHistory = createHistory(),
     store = configureStore(),
@@ -59,9 +59,9 @@ if(isMobileBrowser()) {
 FastClick.attach(document.body);
 
 // 初始化bodyMinHeight
-g.bodyMinHeight = `${window.innerHeight - 60}px`;
+g.bodyMinHeight = `${window.innerHeight - 44}px`;
 
-// g.isAuthenticated = testLogin();
+g.isAuthenticated = testLogin();
 
 render(
 <Root store={store} history={browserHistory} />,

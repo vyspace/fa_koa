@@ -1,6 +1,6 @@
 'use strict';
 
-import { FOOTER_UPDATE } from '../actions/footer1';
+import { FOOTER_UPDATE } from '../actions/footer';
 
 export default function footer(state = {
     type: 'home'

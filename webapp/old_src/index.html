@@ -31,13 +31,9 @@
 
           // 全局对象声明
           win.FaKoa = Object.seal({
+              history: null,
               fontSize: fSize,
-              isMobile: false,
-              bodyMinHeight: 0,
-              uploadSize: 2 * 1048576,
-              multiFile: null,
-              isAuthenticated: false,
-              uid: '', //userId
+              isMobile: false
           });
       })(document, window);
   </script>
