@@ -59,7 +59,7 @@ if(isMobileBrowser()) {
 FastClick.attach(document.body);
 
 // 初始化bodyMinHeight
-g.bodyMinHeight = `${window.innerHeight - 60}px`;
+g.bodyMinHeight = `${window.innerHeight - (g.fontSize * 2.51)}px`;
 
 // g.isAuthenticated = testLogin();
 

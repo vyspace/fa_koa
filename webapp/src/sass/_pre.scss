@@ -1,0 +1,82 @@
+* {
+  @include prefix(box-sizing, border-box);
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-text-size-adjust: none;
+  -webkit-font-smoothing: antialiased;
+}
+html, body {
+  height: 100%;
+}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, hr, button, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  margin: 0;
+  padding: 0;
+}
+body, button, input, select, textarea {
+  font: 400 .7rem/1.5 -apple-system, Helvetica, STHeiTi, Arial, "Lucida Grande", Verdana, "Microsoft YaHei", hei;
+  outline: none;
+}
+
+input, select, textarea {
+  border: none;
+}
+
+input, textarea {
+  @include prefix(user-select, text);
+}
+
+ul {
+  li {
+    list-style: none;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: $txtColor;
+  &:hover, &:focus {
+    color: $txtColor;
+  }
+}
+
+img {
+  margin: 0;
+  display: block;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.fcm {
+  @include prefix(justify-content, center);
+  @include prefix(align-items, center)
+}
+
+.fc {
+  @include prefix(justify-content, center);
+}
+
+.fm {
+  @include prefix(align-items, center);
+}
+
+.flex {
+  @include surfix(display, flex);
+}
+
+.f1 {
+  @include prefix(flex, 1);
+}
+
+body {
+  background-color: $bgColor;
+  color: $txtColor;
+  min-width: $minWidth;
+  max-width: $maxWidth;
+  overflow-x: hidden;
+  margin: 0 auto;
+}

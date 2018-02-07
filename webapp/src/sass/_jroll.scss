@@ -1,0 +1,22 @@
+.jroll-wrapper {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.scroller {
+  margin: 0;
+  padding: 0;
+  transition-timing-function: ease-in-out;
+}
+.jroll-infinite-tip {
+  height: 44px;
+  line-height: 44px;
+  text-align: center;
+  color: $tipColor;
+}
+.jroll-infinite-page {
+  padding: 0 5px;
+}
+.jroll-ybar {
+  right: 0!important;
+}

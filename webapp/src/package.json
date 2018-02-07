@@ -1,4 +1,4 @@
- {
+{
   "name": "src",
   "version": "1.0.0",
   "description": "",
@@ -23,6 +23,7 @@
     "clean-webpack-plugin": "^0.1.16",
     "css-loader": "^0.28.4",
     "extract-text-webpack-plugin": "^2.1.2",
+    "file-loader": "^1.1.6",
     "html-webpack-plugin": "^2.29.0",
     "less-loader": "^4.0.4",
     "node-sass": "^4.5.3",
@@ -37,6 +38,9 @@
     "fastclick": "^1.0.6",
     "history": "^4.6.3",
     "isomorphic-fetch": "^2.2.1",
+    "jroll": "^2.6.0",
+    "jroll-infinite": "^2.2.0",
+    "jroll-lite": "^2.4.11",
     "photoswipe": "^4.1.2",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",

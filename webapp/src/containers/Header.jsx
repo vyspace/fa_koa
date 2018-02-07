@@ -4,16 +4,15 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import * as HeaderActions from '../actions/headera';
+import HomeHeader from '../components/HomeHeader';
+import * as HeaderActions from '../actions/header';
 
 class Header extends Component {
-    componentWillMount() {
-    }
     render() {
-        const { header } = this.props.store;
-
         return (
-            <div className="header-view" />
+            <div className="header-view">
+                <HomeHeader />
+            </div>
         );
     }
 }

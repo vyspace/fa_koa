@@ -57,8 +57,12 @@ module.exports = {
         rules: [
             {
                 test: /\.(png|jpg|gif)$/,
-                use: ['url-loader?limit=8192']
+                use: ['url-loader?limit=1024&name=img/[name].[ext]&outputPath=css/']
             },
+            // {
+            //     test: /\.(png|jpg|gif)$/,
+            //     use: ['file-loader?name=img/[name].[ext]&context=./img']
+            // },
             {
                 test: /\.scss$/,
                 use: ExtractTextPlugin.extract({

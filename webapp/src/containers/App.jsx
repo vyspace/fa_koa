@@ -10,9 +10,7 @@ class App extends Component {
         return (
             <div>
                 <Header />
-                <div className="body-view" id="bodyView">
-                    {routes}
-                </div>
+                {routes}
                 <Footer />
             </div>
         );

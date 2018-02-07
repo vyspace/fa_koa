@@ -12,7 +12,7 @@ class Footer extends Component {
     }
 }
 
-Header.propTypes = {
+Footer.propTypes = {
     store: PropTypes.object.isRequired
 };
 
