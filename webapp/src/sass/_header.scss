@@ -25,6 +25,11 @@
   }
   .left {
     width: 3rem;
+    @extend .flex;
+  }
+  .br-radius {
+    border-bottom-right-radius: .5rem;
+    background-color: $faColor;
   }
   .middle {
     @extend .f1;
@@ -40,19 +45,37 @@
     height: $hHeight;
     cursor: pointer;
   }
-  $hamColor: #eee;
-  .hamburger {
+
+  .icon-back {
+    width: $icnWidth;
+    height: $icnWidth;
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 6px;
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-left: $icnHeight solid $icnColor;
+      border-bottom: $icnHeight solid $icnColor;
+      @include prefix(transform, rotate(45deg));
+      @include prefix(box-sizing, border-box);
+    }
+  }
+  .icon-hamburger {
     display: block;
     position: relative;
-    background-color: $hamColor;
-    height: 2px;
-    width: 20px;
+    background-color: $icnColor;
+    height: $icnHeight;
+    width: $icnWidth;
     @include prefix(transition, background-color .1s);
     &::before, &::after {
       content: "";
-      background: $hamColor;
-      height: 2px;
-      width: 20px;
+      background: $icnColor;
+      height:  $icnHeight;
+      width: $icnWidth;
       position: absolute;
       left: 0;
       @include prefix(transform-origin, center center);

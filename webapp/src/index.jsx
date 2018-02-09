@@ -13,7 +13,8 @@ const browserHistory = createHistory(),
     store = configureStore(),
     g = window.FaKoa;
 
-store.subscribe(() => saveSession(store.getState()));
+// 每次访问state保存一次store， 刷新页面 可保证store不丢失
+// store.subscribe(() => saveSession(store.getState()));
 
 // 添加assign方法
 if (typeof Object.assign !== 'function') {

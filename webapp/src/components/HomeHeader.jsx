@@ -46,7 +46,7 @@ class HomeHeader extends Component {
                     <div className="left" />
                     <div className="middle fm" id="redd">Home</div>
                     <div className="right fcm" data-tag="nav">
-                        <i className="hamburger" data-tag="nav" />
+                        <i className="icon-hamburger" data-tag="nav" />
                     </div>
                 </div>
             </div>

@@ -5,13 +5,26 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import HomeHeader from '../components/HomeHeader';
+import BaseHeader from '../components/BaseHeader';
 import * as HeaderActions from '../actions/header';
 
 class Header extends Component {
     render() {
+        const { header } = this.props.store;
+        let html;
+        switch (header.type) {
+            case 'home':
+                html = <HomeHeader />;
+                break;
+            case 'base':
+                html = <BaseHeader data={header} />;
+                break;
+            default:
+                break;
+        }
         return (
             <div className="header-view">
-                <HomeHeader />
+                {html}
             </div>
         );
     }

@@ -7,8 +7,6 @@ import PropTypes from 'prop-types';
 import JRoll from 'jroll';
 import HomeCard from '../components/HomeCard';
 import HomeMask from '../components/HomeMask';
-import * as HomeActions from '../actions/home';
-import * as FooterActions from '../actions/footer';
 import * as HeaderActions from '../actions/header';
 require('jroll-infinite');
 
@@ -17,11 +15,22 @@ const g = window.FaKoa,
     BodyHeight = `${window.innerHeight - HeadHeight}px`,
     HomePadding = `${g.fontSize * 0.75}px`;
 
+let _this;
+
 class Home extends Component {
     componentWillMount() {
+        const { updateHeader } = this.props.headerAction;
         this.init();
+        updateHeader({
+            type: 'home',
+            title: 'FAKOA',
+            isBack: false,
+            backHandler: null,
+            rBtn: null
+        });
     }
     componentDidMount() {
+        this.init();
         const roll = new JRoll('#wrapper', { scrollBarY: true });
         roll.infinite({
             total: 2,
@@ -47,16 +56,17 @@ class Home extends Component {
         this.eventLayer.addEventListener('click', this.eventHandler, true);
     }
     init() {
-
+        _this = this;
     }
     eventHandler(e) {
         e.stopPropagation();
-        const t = $(e.target);
-        const tag = t.data('tag'),
+        const { history } = _this.props,
+            t = $(e.target),
+            tag = t.data('tag'),
             cid = t.data('cid');
         switch(tag) {
             case 'content':
-                alert(cid);
+                history.push('content', cid);
                 break;
             default:
                 break;
@@ -147,27 +157,17 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-    store: PropTypes.object.isRequired,
-    homeAction: PropTypes.object.isRequired,
-    headerAction: PropTypes.object.isRequired,
-    footerAction: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired
+    headerAction: PropTypes.object.isRequired
 };
 
 function mapStateToProps(store) {
-    return {
-        store
-    };
+    return store;
 }
 
 function mapDispatchToProps(dispatch) {
-    const headerAction = bindActionCreators(HeaderActions, dispatch),
-        footerAction = bindActionCreators(FooterActions, dispatch),
-        homeAction = bindActionCreators(HomeActions, dispatch);
+    const headerAction = bindActionCreators(HeaderActions, dispatch);
     return {
-        headerAction,
-        footerAction,
-        homeAction
+        headerAction
     };
 }
 

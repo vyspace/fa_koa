@@ -3,15 +3,11 @@
 import { HEADER_UPDATE } from '../actions/header';
 
 export default function header(state = {
-    type: 'base',
-    title: 'Header',
+    type: 'home',
+    title: 'Home',
     isBack: false,
-    backHandler: null,
-    rBtn: {
-        type: 'txt',
-        content: '',
-        handler: null
-    }
+    theHistory: null,
+    rBtn: null
 }, action) {
     switch(action.type) {
         case HEADER_UPDATE:
