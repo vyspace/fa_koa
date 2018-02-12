@@ -11,19 +11,22 @@ import * as HeaderActions from '../actions/header';
 class Header extends Component {
     render() {
         const { header } = this.props.store;
+        let viewHeight;
         let html;
         switch (header.type) {
             case 'home':
                 html = <HomeHeader />;
+                viewHeight = '3rem';
                 break;
             case 'base':
                 html = <BaseHeader data={header} />;
+                viewHeight = '2.51rem';
                 break;
             default:
                 break;
         }
         return (
-            <div className="header-view">
+            <div className="header-view" style={{ height: viewHeight }}>
                 {html}
             </div>
         );
@@ -35,9 +38,7 @@ Header.propTypes = {
 };
 
 function mapStateToProps(store) {
-    return {
-        store
-    };
+    return { store };
 }
 
 function mapDispatchToProps(dispatch) {

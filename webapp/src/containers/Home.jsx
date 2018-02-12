@@ -59,7 +59,6 @@ class Home extends Component {
         _this = this;
     }
     eventHandler(e) {
-        e.stopPropagation();
         const { history } = _this.props,
             t = $(e.target),
             tag = t.data('tag'),
@@ -106,6 +105,7 @@ class Home extends Component {
         parms.success(data);
     }
     render() {
+        const { history } = _this.props;
         const data = [{
             id: 1,
             title: '这是题目哈哈哈这是题目哈哈哈',
@@ -135,9 +135,7 @@ class Home extends Component {
             title: '这是题目哈哈哈这是题目哈哈哈',
             src: 'http://7qna1s.com1.z0.glb.clouddn.com/6.jpg'
         }];
-        const user = {
-            nickname: 'aaa'
-        };
+        const user = null;
         const html = data.map(cell => <HomeCard key={cell.id} data={cell} />);
         return (<div
           ref={(c) => {
@@ -151,7 +149,7 @@ class Home extends Component {
                 <section className="jroll-infinite-page">{html}</section>
                 <div className="jroll-infinite-tip">已加载全部内容</div>
             </div>
-            <HomeMask data={user} />
+            <HomeMask data={user} history={history} />
         </div>);
     }
 }
@@ -161,7 +159,7 @@ Home.propTypes = {
 };
 
 function mapStateToProps(store) {
-    return store;
+    return { store };
 }
 
 function mapDispatchToProps(dispatch) {

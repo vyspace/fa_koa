@@ -22,6 +22,9 @@ class BaseHeader extends Component {
             case 'back':
                 _this.backHandler();
                 break;
+            case 'opt':
+                alert('操作')
+                break;
             default:
                 break;
         }
@@ -39,35 +42,33 @@ class BaseHeader extends Component {
         const { data } = this.props;
         let backBtn,
             backTag = '',
-            optBtn;
+            optBtn,
+            optTag = '';
         if(data.isBack) {
             backTag = 'back';
             backBtn = <i className="icon-back" data-tag="back" />;
         }
         if(data.rBtn) {
-            let cont;
+            optTag = 'opt';
             if(data.rBtn.type === 'txt') {
-                cont = header.rBtn.content;
+                optBtn = data.rBtn.content;
             }
-            if(data.rBtn.type === 'icon') {
-                const cln = `icon ${header.rBtn.content}`;
-                cont = <i className={cln} data-tag="rbtn" />;
-            }
-            optBtn = (<li className="item item-right" data-tag="rbtn">{cont}</li>);
+        }
+        else {
+            optTag = 'nav';
+            optBtn = <i className="icon-hamburger" data-tag="nav" />;
         }
         return (
             <div
               ref={(c) => {
                   this.eventLayer = c;
               }}
-              className="home-header-container"
+              className="header-container base-header"
             >
                 <div className="header">
                     <div className="left fcm br-radius" data-tag={backTag}>{backBtn}</div>
                     <div className="middle fm">{data.title}</div>
-                    <div className="right fcm" data-tag="nav">
-                        <i className="icon-hamburger" data-tag="nav" />
-                    </div>
+                    <div className="right fcm" data-tag={optTag}>{optBtn}</div>
                 </div>
             </div>
         );

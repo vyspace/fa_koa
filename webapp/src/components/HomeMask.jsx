@@ -4,7 +4,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import $ from 'zepto';
 
+let _this;
+
 class HomeMask extends Component {
+    componentWillMount() {
+        _this = this;
+    }
     componentDidMount() {
         this.eventLayer.addEventListener('click', this.eventHandler, true);
     }
@@ -12,6 +17,7 @@ class HomeMask extends Component {
         e.stopPropagation();
         const t = $(e.target);
         const tag = t.data('tag');
+        const { history } = _this.props;
         switch(tag) {
             case 'input':
                 t.focus();
@@ -20,10 +26,10 @@ class HomeMask extends Component {
                 alert('正在搜索...');
                 break;
             case 'register':
-                alert('register...');
+                history.push('register');
                 break;
             case 'login':
-                alert('login...');
+                history.push('login');
                 break;
             default:
                 break;
@@ -57,6 +63,7 @@ class HomeMask extends Component {
 }
 
 HomeMask.propTypes = {
+    history: PropTypes.object.isRequired,
     data: PropTypes.object
 };
 HomeMask.defaultProps = {

@@ -43,6 +43,10 @@ img {
   display: block;
 }
 
+.clr {
+  clear: both;
+}
+
 .fl {
   float: left;
 }
@@ -64,6 +68,11 @@ img {
   @include prefix(align-items, center);
 }
 
+.fem {
+  @include prefix(justify-content, flex-end);
+  @include prefix(align-items, center)
+}
+
 .flex {
   @include surfix(display, flex);
 }
@@ -79,4 +88,19 @@ body {
   max-width: $maxWidth;
   overflow-x: hidden;
   margin: 0 auto;
+}
+
+.icon {
+  display: block;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+}
+.icn-like {
+  background-image: url(../img/like.png);
+}
+.icn-liked {
+  background-image: url(../img/liked.png);
 }

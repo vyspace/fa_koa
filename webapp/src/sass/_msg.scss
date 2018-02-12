@@ -1,0 +1,33 @@
+.msg-board {
+  padding: 0 10px;
+  .title {
+    padding: 1rem 0;
+    text-align: center;
+    color: $tipColor;
+  }
+}
+.msg-item {
+  @extend .flex;
+  padding-bottom: 20px;
+  .profile {
+    width: 40px;
+    img {
+      width: 40px;
+      height: 40px;
+      border-radius: 3px;
+    }
+  }
+  .info {
+    @extend .f1;
+    @extend .flex;
+    @include prefix(flex-direction, column);
+    padding-left: 10px;
+    .name {
+      color: #666;
+    }
+    .time {
+      color: #aaa;
+      font-size: 12px;
+    }
+  }
+}

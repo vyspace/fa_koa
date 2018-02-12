@@ -39,7 +39,7 @@ class HomeHeader extends Component {
               ref={(c) => {
                   this.eventLayer = c;
               }}
-              className="home-header-container"
+              className="header-container home-header"
             >
                 <img src="../img/logo_1.png" className="logo" alt="logo" title="首页" />
                 <div className="header">

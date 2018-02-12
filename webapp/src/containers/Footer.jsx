@@ -13,13 +13,11 @@ class Footer extends Component {
 }
 
 Footer.propTypes = {
-    store: PropTypes.object.isRequired
+
 };
 
 function mapStateToProps(store) {
-    return {
-        store
-    };
+    return { store };
 }
 
 function mapDispatchToProps(dispatch) {
