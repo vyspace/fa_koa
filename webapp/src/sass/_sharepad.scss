@@ -1,0 +1,24 @@
+$padHeight: 126px;
+.share-pad {
+  background-color: #fff;
+  width: 100%;
+  position: fixed;
+  bottom: -$padHeight;
+  z-index: $zIndex2;
+  border-top: $border;
+  height: $padHeight;
+  @extend .flex;
+  @extend .fm;
+  li {
+    @extend .f1;
+    @extend .flex;
+    @extend .fc;
+  }
+  img {
+    width: 65px;
+    height: 65px;
+  }
+}
+.share-pad-show {
+  bottom: 0;
+}

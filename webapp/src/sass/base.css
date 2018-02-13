@@ -51,11 +51,11 @@ img {
   -webkit-align-items: center;
   align-items: center; }
 
-.fc {
+.fc, .about li, .share-pad li {
   -webkit-justify-content: center;
   justify-content: center; }
 
-.fm {
+.fm, .share-pad {
   -webkit-align-items: center;
   align-items: center; }
 
@@ -65,11 +65,11 @@ img {
   -webkit-align-items: center;
   align-items: center; }
 
-.flex, .header-container .header, .header-container .left, .header-container .middle, .header-container .right, .home-mask .search-form, .long-text .operate, .long-text .operate div, .msg-item, .msg-item .info, .login, .login-box .link div {
+.flex, .header-container .header, .header-container .left, .header-container .middle, .header-container .right, .home-mask .search-form, .long-text .operate, .long-text .operate div, .msg-item, .msg-item .info, .login-box .link div, .msg-box, .about li, .share-pad, .share-pad li {
   display: -webkit-flex;
   display: flex; }
 
-.f1, .header-container .middle, .home-mask .search-field, .long-text .operate div, .msg-item .info {
+.f1, .header-container .middle, .home-mask .search-field, .long-text .operate div, .msg-item .info, .share-pad li {
   -webkit-flex: 1;
   flex: 1; }
 
@@ -95,6 +95,12 @@ body {
 .icn-liked {
   background-image: url(../img/liked.png); }
 
+.icn-share {
+  background-image: url(../img/share.png); }
+
+.icn-send {
+  background-image: url(../img/send.png); }
+
 .header-view {
   user-focus: none;
   -webkit-user-select: none;
@@ -107,8 +113,7 @@ body {
   width: 100%;
   min-width: 320px;
   max-width: 960px;
-  background-color: transparent;
-  z-index: 960; }
+  background-color: transparent; }
   .header-container .logo {
     width: 3rem;
     height: 3rem;
@@ -150,7 +155,7 @@ body {
       transform: rotate(45deg);
       -webkit-box-sizing: border-box;
       box-sizing: border-box; }
-  .header-container .icon-hamburger {
+  .header-container .icn-hamburger {
     display: block;
     position: relative;
     background-color: #eee;
@@ -158,7 +163,7 @@ body {
     width: 20px;
     -webkit-transition: background-color 0.1s;
     transition: background-color 0.1s; }
-    .header-container .icon-hamburger::before, .header-container .icon-hamburger::after {
+    .header-container .icn-hamburger::before, .header-container .icn-hamburger::after {
       content: "";
       background: #eee;
       height: 2px;
@@ -169,18 +174,18 @@ body {
       transform-origin: center center;
       -webkit-transition: -webkit-transform .3s,background-color .2s,-webkit-transform .3s;
       transition: transform .3s,background-color .2s,-webkit-transform .3s; }
-    .header-container .icon-hamburger::before {
+    .header-container .icn-hamburger::before {
       top: -6px; }
-    .header-container .icon-hamburger::after {
+    .header-container .icn-hamburger::after {
       bottom: -6px; }
-  .header-container .nav-open .hamburger {
+  .header-container .nav-open .icn-hamburger {
     background: transparent; }
-    .header-container .nav-open .hamburger::before, .header-container .nav-open .hamburger::after {
+    .header-container .nav-open .icn-hamburger::before, .header-container .nav-open .icn-hamburger::after {
       background-color: #c00; }
-    .header-container .nav-open .hamburger::before {
+    .header-container .nav-open .icn-hamburger::before {
       -webkit-transform: translateY(6px) rotate(-45deg);
       transform: translateY(6px) rotate(-45deg); }
-    .header-container .nav-open .hamburger::after {
+    .header-container .nav-open .icn-hamburger::after {
       -webkit-transform: translateY(-6px) rotate(45deg);
       transform: translateY(-6px) rotate(45deg); }
 
@@ -226,7 +231,7 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     background-size: 30%;
-    background-color: #f1f1f1;
+    background-color: #ededed;
     overflow: hidden; }
   .home-card .title {
     position: absolute;
@@ -241,7 +246,7 @@ body {
     width: 100%;
     height: 100%;
     vertical-align: top;
-    color: #f1f1f1;
+    color: #ededed;
     -webkit-object-fit: cover;
     object-fit: cover; }
 
@@ -252,8 +257,8 @@ body {
   top: 0;
   left: 0;
   background-color: rgba(12, 12, 12, 0.93);
-  z-index: 960;
-  overflow: hidden;
+  z-index: 999;
+  overflow-y: auto;
   display: none; }
   .home-mask .search-form {
     width: 100%;
@@ -280,7 +285,7 @@ body {
     padding: .25rem 1rem 0 1rem; }
     .home-mask .list li {
       margin-bottom: 10px;
-      padding: 0.75rem 0; }
+      padding: 10px 0; }
     .home-mask .list .user-info {
       color: #666;
       font-style: oblique; }
@@ -298,6 +303,9 @@ body {
     .long-text .operate .rfc {
       color: #4579FB; }
     .long-text .operate .middle {
+      color: #999; }
+    .long-text .operate .like-num {
+      padding-left: 3px;
       color: #999; }
 
 .msg-board {
@@ -334,7 +342,7 @@ body {
     height: 2.1rem;
     border: 0; }
   .login-box .text {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #eee;
     margin-bottom: 20px; }
     .login-box .text input {
       padding: 0 10px; }
@@ -352,8 +360,63 @@ body {
       width: 3.5rem;
       color: #4579FB; }
 
-.edit-msg textarea {
+.msg-box {
   width: 100%;
-  padding: 5px; }
+  -webkit-flex-direction: column;
+  flex-direction: column; }
+  .msg-box .area {
+    border-bottom: 1px solid #eee; }
+    .msg-box .area textarea {
+      width: 100%;
+      height: 100%;
+      padding: 10px;
+      border: 0;
+      resize: none;
+      overflow-y: auto; }
+  .msg-box .tip {
+    text-align: right;
+    padding: 4px 10px;
+    font-size: 12px;
+    color: #999; }
+
+.about {
+  width: 100%;
+  padding: 0 30px; }
+  .about .logo {
+    width: 100px;
+    height: 50px;
+    background-color: #ededed; }
+  .about .txid {
+    text-indent: 1.4rem; }
+  .about .pd5 {
+    padding-bottom: 5px; }
+  .about .pd20 {
+    padding-bottom: 20px; }
+
+.share-pad {
+  background-color: #fff;
+  width: 100%;
+  position: fixed;
+  bottom: -126px;
+  z-index: 960;
+  border-top: 1px solid #eee;
+  height: 126px; }
+  .share-pad img {
+    width: 65px;
+    height: 65px; }
+
+.share-pad-show {
+  bottom: 0; }
+
+@media all and (orientation: portrait) {
+  .potr-mid {
+    position: relative;
+    top: -1.2rem; }
+
+  .msg-box-height {
+    height: 50%; } }
+@media all and (orientation: landscape) {
+  .msg-box-height {
+    height: 100%; } }
 
 /*# sourceMappingURL=base.css.map */

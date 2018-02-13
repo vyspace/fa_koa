@@ -23,7 +23,7 @@ class BaseHeader extends Component {
                 _this.backHandler();
                 break;
             case 'opt':
-                alert('操作')
+                alert('操作');
                 break;
             default:
                 break;
@@ -52,6 +52,10 @@ class BaseHeader extends Component {
             optTag = 'opt';
             if(data.rBtn.type === 'txt') {
                 optBtn = data.rBtn.content;
+            }
+            if(data.rBtn.type === 'icon') {
+                const cln = `icon ${data.rBtn.content}`;
+                optBtn = <i className={cln} data-tag="opt" />;
             }
         }
         else {

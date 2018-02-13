@@ -48,10 +48,10 @@ class Register extends Component {
           ref={(c) => {
               this.eventLayer = c;
           }}
-          className="login fcm"
+          className="flex fcm"
           style={{ height: g.bodyMinHeight }}
         >
-            <ul className="login-box">
+            <ul className="login-box potr-mid">
                 <li className="text"><input type="text" placeholder="邮箱" data-tag="text" /></li>
                 <li className="text"><input type="text" placeholder="密码" data-tag="text" /></li>
                 <li className="text"><input type="text" placeholder="确认密码" data-tag="text" /></li>

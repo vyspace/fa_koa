@@ -54,10 +54,10 @@ class Login extends Component {
           ref={(c) => {
               this.eventLayer = c;
           }}
-          className="login fcm"
+          className="flex fcm"
           style={{ height: g.bodyMinHeight }}
         >
-            <ul className="login-box">
+            <ul className="login-box potr-mid">
                 <li className="text"><input type="text" placeholder="邮箱" data-tag="text" /></li>
                 <li className="text"><input type="text" placeholder="密码" data-tag="text" /></li>
                 <li className="btn"><input type="button" value="确定" data-tag="btn" /></li>

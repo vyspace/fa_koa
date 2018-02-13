@@ -1,6 +1,3 @@
-.login {
-  @extend .flex;
-}
 .login-box {
   width: 100%;
   padding: 0 10px;
@@ -11,7 +8,7 @@
     border: 0;
   }
   .text {
-    border-bottom: 1px solid #ddd;
+    border-bottom: $border;
     margin-bottom: 20px;
     input {
       padding: 0 10px;

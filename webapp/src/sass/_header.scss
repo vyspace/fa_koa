@@ -2,7 +2,7 @@
   user-focus: none;
   @include prefix(user-select, none);
   position: relative;
-  z-index: $zIndex2;
+  z-index: $zIndex1;
 }
 .header-container {
   position: fixed;
@@ -10,7 +10,6 @@
   min-width: $minWidth;
   max-width: $maxWidth;
   background-color: transparent;
-  z-index: $zIndex1;
   .logo {
     width: 3rem;
     height: 3rem;
@@ -64,7 +63,7 @@
       @include prefix(box-sizing, border-box);
     }
   }
-  .icon-hamburger {
+  .icn-hamburger {
     display: block;
     position: relative;
     background-color: $icnColor;
@@ -90,7 +89,7 @@
     }
   }
   .nav-open {
-    .hamburger {
+    .icn-hamburger {
       background: transparent;
       &::before, &::after {
         background-color: #c00;

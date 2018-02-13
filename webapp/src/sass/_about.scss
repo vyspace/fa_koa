@@ -1,0 +1,22 @@
+.about {
+  width: 100%;
+  padding: 0 30px;
+  li {
+    @extend .flex;
+    @extend .fc;
+  }
+  .logo {
+    width: 100px;
+    height: 50px;
+    background-color: $imgColor;
+  }
+  .txid {
+    text-indent: 1.4rem;
+  }
+  .pd5 {
+    padding-bottom: 5px;
+  }
+  .pd20 {
+    padding-bottom: 20px;
+  }
+}

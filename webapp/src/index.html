@@ -33,10 +33,12 @@
           win.FaKoa = Object.seal({
               fontSize: fSize,
               isMobile: false,
+              headerHeight: 0,
+              bodyWidth: 0,
               bodyMinHeight: 0,
               uploadSize: 2 * 1048576,
               multiFile: null,
-              isAuthenticated: false,
+              isAuthenticated: true,
               uid: '', //userId
           });
       })(document, window);

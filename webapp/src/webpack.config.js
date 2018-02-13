@@ -57,7 +57,7 @@ module.exports = {
         rules: [
             {
                 test: /\.(png|jpg|gif)$/,
-                use: ['url-loader?limit=1024&name=img/[name].[ext]&outputPath=css/']
+                use: ['url-loader?limit=2048&name=img/[name].[ext]&outputPath=css/']
             },
             // {
             //     test: /\.(png|jpg|gif)$/,

@@ -8,6 +8,7 @@ import JRoll from 'jroll';
 import LongText from '../components/LongText';
 import * as HeaderActions from '../actions/header';
 import MsgBoard from '../components/MsgBoard';
+import SharePad from '../components/SharePad';
 require('jroll-infinite');
 
 const g = window.FaKoa;
@@ -18,10 +19,16 @@ class Content extends Component {
             { updateHeader } = this.props.headerAction;
         updateHeader({
             type: 'base',
-            title: 'Content',
+            title: 'Article',
             isBack: true,
             theHistory: history,
-            rBtn: null
+            rBtn: {
+                type: 'icon',
+                content: 'icn-share',
+                handler: () => {
+                    this.send();
+                }
+            }
         });
     }
     componentDidMount() {
@@ -68,6 +75,7 @@ class Content extends Component {
                 </section>
                 <div className="jroll-infinite-tip">已加载全部内容</div>
             </div>
+            <SharePad />
         </div>);
     }
 }

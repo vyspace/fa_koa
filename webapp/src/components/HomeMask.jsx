@@ -25,11 +25,14 @@ class HomeMask extends Component {
             case 'sbtn':
                 alert('正在搜索...');
                 break;
+            case 'login':
+                history.push('login');
+                break;
             case 'register':
                 history.push('register');
                 break;
-            case 'login':
-                history.push('login');
+            case 'about':
+                history.push('about')
                 break;
             default:
                 break;
@@ -57,6 +60,7 @@ class HomeMask extends Component {
             <ul className="list">
                 {cont}
                 <li data-tag="register">注册</li>
+                <li data-tag="about">关于</li>
             </ul>
         </div>);
     }

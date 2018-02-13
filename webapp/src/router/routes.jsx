@@ -8,7 +8,8 @@ import Content from '../containers/Content';
 import Login from '../containers/Login';
 import Register from '../containers/Register';
 import ForgetPwd from '../containers/ForgetPwd';
-import WriteMsg from '../containers/EditMsg';
+import EditMsg from '../containers/EditMsg';
+import About from '../containers/About';
 
 const PrivateRoute = ({ component: Component }) => (
     <Route render={props => (
@@ -26,8 +27,13 @@ const PrivateRoute = ({ component: Component }) => (
 );
 
 PrivateRoute.propTypes = {
-    component: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired
+    component: PropTypes.func,
+    location: PropTypes.object
+};
+
+PrivateRoute.defaultProps = {
+    component: null,
+    location: null
 };
 
 export default
@@ -37,5 +43,6 @@ export default
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/forget" component={ForgetPwd} />
-        <Route exact path="/writemsg" component={WriteMsg} />
+        <PrivateRoute exact path="/editmsg" component={EditMsg} />
+        <Route exact path="/about" component={About} />
     </Switch>;

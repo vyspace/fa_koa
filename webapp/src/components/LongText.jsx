@@ -31,8 +31,8 @@ class LongText extends Component {
                 }
                 t.removeClass('icn-like').addClass('icn-liked');
                 break;
-            case 'write':
-                history.push('writemsg');
+            case 'edit':
+                history.push('editmsg');
                 break;
             default:
                 break;
@@ -49,10 +49,10 @@ class LongText extends Component {
             <div>this is a long text!!!</div>
             <div className="operate">
                 <div className="rfc" data-tag="like">
-                    <i className="icon icn-like" data-tag="like" /><span data-tag="like">1234</span>
+                    <i className="icon icn-like" data-tag="like" /><span className="like-num" data-tag="like">1234</span>
                 </div>
                 <div className="middle">阅读: 10000+</div>
-                <div className="rfc" data-tag="write">写留言</div>
+                <div className="rfc" data-tag="edit">写留言</div>
             </div>
         </div>);
     }

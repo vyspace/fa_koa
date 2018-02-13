@@ -8,22 +8,16 @@ import * as HeaderActions from '../actions/header';
 
 const g = window.FaKoa;
 
-class EditMsg extends Component {
+class About extends Component {
     componentWillMount() {
         const { history } = this.props,
             { updateHeader } = this.props.headerAction;
         updateHeader({
             type: 'base',
-            title: 'Edit Message',
+            title: 'About',
             isBack: true,
             theHistory: history,
-            rBtn: {
-                type: 'icon',
-                content: 'icn-send',
-                handler: () => {
-                    this.send();
-                }
-            }
+            rBtn: null
         });
     }
     render() {
@@ -31,17 +25,20 @@ class EditMsg extends Component {
           ref={(c) => {
               this.eventLayer = c;
           }}
+          className="flex fcm"
           style={{ height: g.bodyMinHeight }}
         >
-            <ul className="msg-box msg-box-height">
-                <li className="area f1"><textarea maxLength="150" placeholder="写留言..." /></li>
-                <li className="tip">留言字数: 150</li>
+            <ul className="about potr-mid">
+                <li className="pd5"><div className="logo" /></li>
+                <li className="pd20">TrendDiary - α 0.1.0</li>
+                <li className="pd5 txid">通过CSS3,我们能够创建动画,这可以在许多网页中取代动画图片、Flash 动画以及 JavaScript。CSS3 动画CSS3 @keyframes 规则 如需在 CSS3 中创建动画,您需要学习 </li>
+                <li>建议邮箱: aaa@xxx.com</li>
             </ul>
         </div>);
     }
 }
 
-EditMsg.propTypes = {
+About.propTypes = {
     history: PropTypes.object.isRequired,
     headerAction: PropTypes.object.isRequired
 };
@@ -56,4 +53,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditMsg);
+export default connect(mapStateToProps, mapDispatchToProps)(About);
