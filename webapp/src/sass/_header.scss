@@ -2,7 +2,7 @@
   user-focus: none;
   @include prefix(user-select, none);
   position: relative;
-  z-index: $zIndex1;
+  z-index: $zIndex2;
 }
 .header-container {
   position: fixed;

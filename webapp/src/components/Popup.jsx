@@ -6,12 +6,15 @@ import $ from 'zepto';
 
 let _this;
 
-class SharePad extends Component {
+class Popup extends Component {
     componentWillMount() {
-        _this = this;
+        this.init();
     }
     componentDidMount() {
         this.eventLayer.addEventListener('click', this.eventHandler, true);
+    }
+    init() {
+        _this = this;
     }
     eventHandler(e) {
         e.stopPropagation();
@@ -29,26 +32,20 @@ class SharePad extends Component {
         }
     }
     render() {
-        return (<ul
+        return (<div
           ref={(c) => {
               this.eventLayer = c;
           }}
-          className="share-pad roll-out"
-          id="sharePad"
+          className="popup-mask"
+          style={{ height: `${window.innerHeight}px` }}
         >
-            <li>
-                <img src="../img/wx.png" alt="微信" />
-            </li>
-            <li>
-                <img src="../img/wb.png" alt="新浪微博" />
-            </li>
-            <li />
-        </ul>);
+            zaa
+        </div>);
     }
 }
 
-SharePad.propTypes = {
+Popup.propTypes = {
 
 };
 
-export default SharePad;
+export default Popup;

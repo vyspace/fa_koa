@@ -1,0 +1,15 @@
+.popup-mask {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: $zIndex1;
+  @include prefix(animation, opacity-fade-in 0.5s cubic-bezier(0.680,0,0.265,1));
+  display: none;
+}
+.roll-out {
+  @include prefix(transition-property, bottom);
+  @include prefix(transition-duration, 0.2s);
+  @include prefix(transition-timing-function, ease-in);
+}

@@ -106,7 +106,7 @@ body {
   -webkit-user-select: none;
   user-select: none;
   position: relative;
-  z-index: 999; }
+  z-index: 990; }
 
 .header-container {
   position: fixed;
@@ -257,7 +257,7 @@ body {
   top: 0;
   left: 0;
   background-color: rgba(12, 12, 12, 0.93);
-  z-index: 999;
+  z-index: 980;
   overflow-y: auto;
   display: none; }
   .home-mask .search-form {
@@ -398,7 +398,7 @@ body {
   width: 100%;
   position: fixed;
   bottom: -126px;
-  z-index: 960;
+  z-index: 990;
   border-top: 1px solid #eee;
   height: 126px; }
   .share-pad img {
@@ -407,6 +407,25 @@ body {
 
 .share-pad-show {
   bottom: 0; }
+
+.popup-mask {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 999;
+  -webkit-animation: opacity-fade-in 0.5s cubic-bezier(0.68, 0, 0.265, 1);
+  animation: opacity-fade-in 0.5s cubic-bezier(0.68, 0, 0.265, 1);
+  display: none; }
+
+.roll-out {
+  -webkit-transition-property: bottom;
+  transition-property: bottom;
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease-in;
+  transition-timing-function: ease-in; }
 
 @media all and (orientation: portrait) {
   .potr-mid {
