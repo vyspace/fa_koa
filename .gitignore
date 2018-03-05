@@ -1,6 +1,13 @@
-#module folder
-node_modules/
+/*
+!/webapp
+/webapp/*
+!/webapp/src
+/webapp/src/*
+!/webapp/src/node_modules
+/webapp/src/node_modules/*
+!/webapp/src/node_modules/jroll-infinite
 
 #files
 .DS_Store
 .idea/*
+
